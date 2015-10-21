@@ -1,0 +1,16 @@
+PODS:
+  - Dodo (2.0.11)
+  - GPUImage (0.1.7)
+  - XLForm (3.0.2)
+
+DEPENDENCIES:
+  - Dodo (~> 2.0)
+  - GPUImage
+  - XLForm (~> 3.0.0)
+
+SPEC CHECKSUMS:
+  Dodo: fe9b894c3e8828f86154c8590d91d7f491160f2d
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
+
+COCOAPODS: 0.38.2

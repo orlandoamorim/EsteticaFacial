@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20114B263BE62C431AEF5332 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C73DDC933BB7E09C4EF935 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A611BC344AE002A306F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A601BC344AE002A306F /* ViewController.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
@@ -15,6 +16,21 @@
 		B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */; };
 		B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A761BC344AE002A306F /* EsteticaFacialTests.swift */; };
 		B81B4A821BC344AE002A306F /* EsteticaFacialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */; };
+		B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85392801BD5E64E000DCD91 /* PontoView.swift */; settings = {ASSET_TAGS = (); }; };
+		B85392851BD5EC52000DCD91 /* ponto_azul.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392831BD5EC52000DCD91 /* ponto_azul.png */; settings = {ASSET_TAGS = (); }; };
+		B85392861BD5EC52000DCD91 /* ponto_vermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392841BD5EC52000DCD91 /* ponto_vermelho.png */; settings = {ASSET_TAGS = (); }; };
+		B85392881BD61B03000DCD91 /* modelo_frontal.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392871BD61B03000DCD91 /* modelo_frontal.png */; settings = {ASSET_TAGS = (); }; };
+		B853928C1BD70AB5000DCD91 /* modelo_perfil.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928B1BD70AB5000DCD91 /* modelo_perfil.png */; settings = {ASSET_TAGS = (); }; };
+		B853928E1BD70E73000DCD91 /* modelo_nasal.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928D1BD70E73000DCD91 /* modelo_nasal.png */; settings = {ASSET_TAGS = (); }; };
+		B8F7E0C91BD2F5FA0053B948 /* MainNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */; settings = {ASSET_TAGS = (); }; };
+		B8F7E0CB1BD4242E0053B948 /* NovoPacienteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CC1BD429060053B948 /* CameraViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		B8F7E0DF1BD541590053B948 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0DE1BD541590053B948 /* CoreMedia.framework */; };
+		B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */; };
+		B8F7E0E31BD541670053B948 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E21BD541670053B948 /* OpenGLES.framework */; };
+		B8F7E0E51BD5416F0053B948 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E41BD5416F0053B948 /* AVFoundation.framework */; };
+		B8F7E0E71BD541760053B948 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E61BD541760053B948 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B81B4A601BC344AE002A306F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +66,23 @@
 		B81B4A7D1BC344AE002A306F /* EsteticaFacialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EsteticaFacialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsteticaFacialUITests.swift; sourceTree = "<group>"; };
 		B81B4A831BC344AE002A306F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizarPontosViewController.swift; sourceTree = "<group>"; };
+		B85392801BD5E64E000DCD91 /* PontoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PontoView.swift; sourceTree = "<group>"; };
+		B85392831BD5EC52000DCD91 /* ponto_azul.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ponto_azul.png; sourceTree = "<group>"; };
+		B85392841BD5EC52000DCD91 /* ponto_vermelho.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ponto_vermelho.png; sourceTree = "<group>"; };
+		B85392871BD61B03000DCD91 /* modelo_frontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modelo_frontal.png; sourceTree = "<group>"; };
+		B853928B1BD70AB5000DCD91 /* modelo_perfil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modelo_perfil.png; sourceTree = "<group>"; };
+		B853928D1BD70E73000DCD91 /* modelo_nasal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modelo_nasal.png; sourceTree = "<group>"; };
+		B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigation.swift; sourceTree = "<group>"; };
+		B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovoPacienteViewController.swift; sourceTree = "<group>"; };
+		B8F7E0CC1BD429060053B948 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		B8F7E0DE1BD541590053B948 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		B8F7E0E21BD541670053B948 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B8F7E0E41BD5416F0053B948 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B8F7E0E61BD541760053B948 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CFD6C7A820C7A4E269B5A0B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D5312EDD4DB79FA1D1AD1489 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +90,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F7E0E71BD541760053B948 /* QuartzCore.framework in Frameworks */,
+				B8F7E0E51BD5416F0053B948 /* AVFoundation.framework in Frameworks */,
+				B8F7E0E31BD541670053B948 /* OpenGLES.framework in Frameworks */,
+				B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */,
+				B8F7E0DF1BD541590053B948 /* CoreMedia.framework in Frameworks */,
+				20114B263BE62C431AEF5332 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,13 +116,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8F7E0E61BD541760053B948 /* QuartzCore.framework */,
+				B8F7E0E41BD5416F0053B948 /* AVFoundation.framework */,
+				B8F7E0E21BD541670053B948 /* OpenGLES.framework */,
+				B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */,
+				B8F7E0DE1BD541590053B948 /* CoreMedia.framework */,
+				68C73DDC933BB7E09C4EF935 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B81B4A521BC344AE002A306F = {
 			isa = PBXGroup;
 			children = (
+				B85392821BD5EC48000DCD91 /* Imagens */,
 				B81B4A5D1BC344AE002A306F /* EsteticaFacial */,
 				B81B4A751BC344AE002A306F /* EsteticaFacialTests */,
 				B81B4A801BC344AE002A306F /* EsteticaFacialUITests */,
 				B81B4A5C1BC344AE002A306F /* Products */,
+				5B6EEE5922A447A0B8B835E0 /* Frameworks */,
+				CAAB0C144E18054AFAB3A806 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +162,11 @@
 				B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */,
 				B81B4A6D1BC344AE002A306F /* Info.plist */,
 				B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */,
+				B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */,
+				B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */,
+				B8F7E0CC1BD429060053B948 /* CameraViewController.swift */,
+				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
+				B85392801BD5E64E000DCD91 /* PontoView.swift */,
 			);
 			path = EsteticaFacial;
 			sourceTree = "<group>";
@@ -128,6 +189,27 @@
 			path = EsteticaFacialUITests;
 			sourceTree = "<group>";
 		};
+		B85392821BD5EC48000DCD91 /* Imagens */ = {
+			isa = PBXGroup;
+			children = (
+				B85392831BD5EC52000DCD91 /* ponto_azul.png */,
+				B85392841BD5EC52000DCD91 /* ponto_vermelho.png */,
+				B85392871BD61B03000DCD91 /* modelo_frontal.png */,
+				B853928B1BD70AB5000DCD91 /* modelo_perfil.png */,
+				B853928D1BD70E73000DCD91 /* modelo_nasal.png */,
+			);
+			name = Imagens;
+			sourceTree = "<group>";
+		};
+		CAAB0C144E18054AFAB3A806 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CFD6C7A820C7A4E269B5A0B4 /* Pods.debug.xcconfig */,
+				D5312EDD4DB79FA1D1AD1489 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B81B4A861BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacial" */;
 			buildPhases = (
+				282EC8D51C74EAFA004DEDCE /* Check Pods Manifest.lock */,
 				B81B4A571BC344AE002A306F /* Sources */,
 				B81B4A581BC344AE002A306F /* Frameworks */,
 				B81B4A591BC344AE002A306F /* Resources */,
+				DA407DFC520B04A9F165474D /* Embed Pods Frameworks */,
+				439915DF394C62FF6759537D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,9 +316,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85392851BD5EC52000DCD91 /* ponto_azul.png in Resources */,
+				B853928E1BD70E73000DCD91 /* modelo_nasal.png in Resources */,
 				B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */,
+				B853928C1BD70AB5000DCD91 /* modelo_perfil.png in Resources */,
 				B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */,
 				B81B4A641BC344AE002A306F /* Main.storyboard in Resources */,
+				B85392881BD61B03000DCD91 /* modelo_frontal.png in Resources */,
+				B85392861BD5EC52000DCD91 /* ponto_vermelho.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,14 +343,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		282EC8D51C74EAFA004DEDCE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		439915DF394C62FF6759537D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA407DFC520B04A9F165474D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B81B4A571BC344AE002A306F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F7E0C91BD2F5FA0053B948 /* MainNavigation.swift in Sources */,
 				B81B4A611BC344AE002A306F /* ViewController.swift in Sources */,
 				B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */,
+				B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */,
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
+				B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */,
+				B8F7E0CB1BD4242E0053B948 /* NovoPacienteViewController.swift in Sources */,
+				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -398,6 +542,7 @@
 		};
 		B81B4A871BC344AE002A306F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFD6C7A820C7A4E269B5A0B4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
@@ -409,6 +554,7 @@
 		};
 		B81B4A881BC344AE002A306F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5312EDD4DB79FA1D1AD1489 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
@@ -485,6 +631,7 @@
 				B81B4A881BC344AE002A306F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B81B4A891BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacialTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +640,7 @@
 				B81B4A8B1BC344AE002A306F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B81B4A8C1BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacialUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +649,7 @@
 				B81B4A8E1BC344AE002A306F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
