@@ -20,7 +20,6 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     var ponto_escolhido_inicial : CGPoint = CGPointMake(0.0, 0.0)
     
     @IBOutlet weak var reconhecedor: UIGestureRecognizer!
-    @IBOutlet weak var view_conteudo: UIView!
     var imagem_view: UIImageView?
     var pontos_localizados : [String:CGPoint]?
     var imagem_cortada : UIImage?
@@ -29,7 +28,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.container_imagem.translatesAutoresizingMaskIntoConstraints = false
         self.iniciar_views()
        // self.scrollViewDidZoom(self.container_imagem)
         // Do any additional setup after loading the view.
@@ -38,6 +37,14 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("CONTAINER ZOOM SCALE: \(container_imagem.minimumZoomScale) | CONTAINER FRAME = \(self.container_imagem.frame)");
+        container_imagem.minimumZoomScale = self.container_imagem.contentSize.height/self.container_imagem.frame.size.height > self.container_imagem.contentSize.width/self.container_imagem.frame.size.width ? self.container_imagem.frame.size.height/self.container_imagem.contentSize.height : self.container_imagem.frame.size.width/self.container_imagem.contentSize.width
+        container_imagem.zoomScale = container_imagem.minimumZoomScale
+      //  self.conteudo_view.frame = CGRectMake(0, 0, (self.imagem_cortada?.size.width)!, (self.imagem_cortada?.size.height)!)
     }
     
 
@@ -53,35 +60,27 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     func iniciar_views(){
         
-        self.view_conteudo.frame = CGRectMake(0, 0, (imagem_cortada?.size)!.width, (imagem_cortada?.size)!.height)
-        self.container_imagem.contentSize = CGSizeMake(self.view_conteudo.frame.width, self.view_conteudo.frame.height)
+        self.container_imagem.contentSize = (self.imagem_cortada?.size)!
         
         self.imagem_view = UIImageView()
         self.imagem_view?.userInteractionEnabled = true
-        //self.imagem_view?.alpha = 0.4
         self.imagem_view?.addGestureRecognizer(reconhecedor)
-        self.imagem_view!.frame = self.view_conteudo.frame
+        self.imagem_view!.frame = CGRectMake(0, 0, (self.imagem_cortada?.size.width)!, (self.imagem_cortada?.size.height)!)
         self.imagem_view!.image = imagem_cortada
         
         
         self.container_imagem.addSubview(self.imagem_view!)
         self.inserir_pontos()
-        
-        
-        print("TAMANHO DO VIEW CONTEUDO \(self.view_conteudo.frame)")
       
-        
-        container_imagem.minimumZoomScale = 0.2
+        container_imagem.minimumZoomScale = self.container_imagem.contentSize.height/self.container_imagem.frame.size.height > self.container_imagem.contentSize.width/self.container_imagem.frame.size.width ? self.container_imagem.frame.size.height/self.container_imagem.contentSize.height : self.container_imagem.frame.size.width/self.container_imagem.contentSize.width
         container_imagem.maximumZoomScale = 2.0
-        container_imagem.zoomScale = (imagem_cortada?.size)!.width/container_imagem.frame.width
+        container_imagem.zoomScale = container_imagem.minimumZoomScale
         
         
-        print("TAMANHO DO SCROLL \(self.container_imagem)")
     }
     
     func inserir_pontos(){
         for (nome,local) in self.pontos_localizados!{
-            print("Nome do ponto: \(nome) | Local: \(local)")
             let p = PontoView()
             let l = local
             p.inicializar(nome , posicao: l)
@@ -103,7 +102,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     @IBAction func gerenciar_longo_toque(recognizer:UILongPressGestureRecognizer){
         let toque = recognizer.locationInView(recognizer.view)
-        print("REGIAO DO TOQUE: \(toque)");
+        
         if recognizer.state == UIGestureRecognizerState.Began{
             self.ponto_escolhido = LocalizarPontosViewController.menor_distancia_em_array(self.pontos_views, ponto: toque)
             toque_inicial = toque
@@ -117,10 +116,6 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
             self.ponto_escolhido?.local = (self.ponto_escolhido?.frame.origin)!
         }
         else if recognizer.state == UIGestureRecognizerState.Ended{
-//            toque_inicial = CGPointMake(0.0, 0.0)
-//            self.ponto_escolhido_inicial = CGPointMake(0.0, 0.0)
-//            self.ponto_escolhido = nil
-            print("\(self.ponto_escolhido?.local)| VIEW CONTEUDO \(self.view_conteudo.frame)")
             pontos_localizados?.updateValue((ponto_escolhido?.local)!, forKey:(ponto_escolhido?.nome)!)
         }
     }
@@ -146,31 +141,5 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.imagem_view
-    }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-//        var zoom_view = self.imagem_view
-//        var zvf = zoom_view?.frame
-//        if(zvf!.size.width < scrollView.bounds.size.width)
-//        {
-//            zvf = CGRectMake((scrollView.bounds.size.width - zvf!.size.width) / 2.0, (zvf?.origin.y)!, (zvf?.size.width)!, (zvf?.size.height)!)
-//        }
-//        else
-//        {
-//            zvf = CGRectMake(0.0, (zvf?.origin.y)!, (zvf?.size.width)!, (zvf?.size.height)!)
-//        }
-//        if(zvf!.size.height < scrollView.bounds.size.height)
-//        {
-//            zvf = CGRectMake((zvf?.origin.x)!, (scrollView.bounds.size.height - zvf!.size.height) / 2.0, (zvf?.size.width)!, (zvf?.size.height)!)
-//        }
-//        else
-//        {
-//            zvf = CGRectMake((zvf?.origin.x)!, 0.0, (zvf?.size.width)!, (zvf?.size.height)!)
-//        }
-//        print("\(zvf)")
-//        zoom_view!.frame = zvf!
-//        print("\(zoom_view?.frame)")
-        // NSLog(@"ZOOM %f %f %f",_scroll_imagem.minimumZoomScale,_scroll_imagem.maximumZoomScale,_scroll_imagem.zoomScale);
-       // NSLog(@"VALORES %f %f",zoomView.frame.size.width,zoomView.frame.size.height);
     }
 }

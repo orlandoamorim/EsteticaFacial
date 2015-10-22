@@ -39,6 +39,8 @@ class NovoPacienteViewController: UIViewController,NovoPacienteDelegate,UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         self.iniciar_dicionarios()
+        print("TAMANHO \(btn_imagem_frontal.frame)")
+        
         // Do any additional setup after loading the view.
     }
 

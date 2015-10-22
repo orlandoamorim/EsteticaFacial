@@ -56,7 +56,7 @@ class MainNavigation: UINavigationController,UITableViewDataSource {
         var etnia = cell?.viewWithTag(4) as? UILabel
         
         var data_foto = (pessoa.valueForKey("thumb_frontal") as? NSData)
-        print("DATA \(data_foto)");
+        
         if data_foto != nil{
             foto?.image = UIImage(data: data_foto!)!
            // print("FOTO \(foto)");

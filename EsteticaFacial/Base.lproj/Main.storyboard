@@ -412,23 +412,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6pQ-40-c7v">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-TG-Q69">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PPh-aK-9XV">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pQ-40-c7v">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
+                                        <connections>
+                                            <outlet property="delegate" destination="asl-qs-5Lg" id="Msd-RH-AUv"/>
+                                        </connections>
+                                    </scrollView>
                                 </subviews>
                                 <animations/>
-                                <connections>
-                                    <outlet property="delegate" destination="asl-qs-5Lg" id="Msd-RH-AUv"/>
-                                </connections>
-                            </scrollView>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="6pQ-40-c7v" secondAttribute="bottom" id="PaP-Fg-OHZ"/>
+                                    <constraint firstItem="6pQ-40-c7v" firstAttribute="top" secondItem="iPx-TG-Q69" secondAttribute="top" id="Sqk-hq-4Gm"/>
+                                    <constraint firstItem="6pQ-40-c7v" firstAttribute="leading" secondItem="iPx-TG-Q69" secondAttribute="leading" id="XhK-9f-dMD"/>
+                                    <constraint firstAttribute="trailing" secondItem="6pQ-40-c7v" secondAttribute="trailing" id="c4e-xR-Fwf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iPx-TG-Q69" firstAttribute="leading" secondItem="Ohf-SZ-KYI" secondAttribute="leadingMargin" constant="-20" id="1Gc-up-aSq"/>
+                            <constraint firstItem="iPx-TG-Q69" firstAttribute="top" secondItem="0PN-38-RHi" secondAttribute="bottom" id="Tlf-t7-y5E"/>
+                            <constraint firstItem="flS-l2-p4i" firstAttribute="top" secondItem="iPx-TG-Q69" secondAttribute="bottom" id="WDK-r9-puo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iPx-TG-Q69" secondAttribute="trailing" constant="-20" id="pg8-rP-f2j"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pontos" id="TmN-Da-um4">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KiQ-Xg-xMW">
@@ -446,7 +458,6 @@
                     <connections>
                         <outlet property="container_imagem" destination="6pQ-40-c7v" id="crB-SM-Atu"/>
                         <outlet property="reconhecedor" destination="TXb-U3-Fbx" id="y0Y-R7-POo"/>
-                        <outlet property="view_conteudo" destination="PPh-aK-9XV" id="F3a-E6-n3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-Iy-oDP" userLabel="First Responder" sceneMemberID="firstResponder"/>

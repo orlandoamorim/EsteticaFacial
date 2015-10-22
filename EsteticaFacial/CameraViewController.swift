@@ -101,6 +101,9 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         if segue.identifier == "segue_localizar" && self.imagem_capturada != nil{
             if let localizar = segue.destinationViewController as? LocalizarPontosViewController{
                 localizar.imagem_cortada = self.imagem_capturada.image
+                if self.dicionario==nil{
+                    print("dicionario eh nulo")
+                }
                 localizar.pontos_localizados = self.dicionario
                 localizar.delegate = self
             }
