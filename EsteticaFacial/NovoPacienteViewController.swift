@@ -10,10 +10,6 @@ import UIKit
 import CoreData
 import ImageIO
 
-protocol NovoPacienteDelegate{
-    func atribuir_imagem(imagem: UIImage, flag:Int)
-    func atribuir_marcacao(dic:[String:CGPoint], flag:Int)
-}
 
 class NovoPacienteViewController: UIViewController,NovoPacienteDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
     

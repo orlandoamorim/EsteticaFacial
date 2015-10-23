@@ -7,25 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */; };
+		183D2F551BD9EACB0033BDA3 /* AUPacienteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */; };
+		183D2F581BDA002B0033BDA3 /* Paciente+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F561BDA002B0033BDA3 /* Paciente+CoreDataProperties.swift */; };
+		183D2F591BDA002B0033BDA3 /* Paciente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F571BDA002B0033BDA3 /* Paciente.swift */; };
 		20114B263BE62C431AEF5332 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C73DDC933BB7E09C4EF935 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
-		B81B4A611BC344AE002A306F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A601BC344AE002A306F /* ViewController.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
 		B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */; };
 		B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A681BC344AE002A306F /* Assets.xcassets */; };
 		B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */; };
 		B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A761BC344AE002A306F /* EsteticaFacialTests.swift */; };
 		B81B4A821BC344AE002A306F /* EsteticaFacialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */; };
-		B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85392801BD5E64E000DCD91 /* PontoView.swift */; settings = {ASSET_TAGS = (); }; };
-		B85392851BD5EC52000DCD91 /* ponto_azul.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392831BD5EC52000DCD91 /* ponto_azul.png */; settings = {ASSET_TAGS = (); }; };
-		B85392861BD5EC52000DCD91 /* ponto_vermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392841BD5EC52000DCD91 /* ponto_vermelho.png */; settings = {ASSET_TAGS = (); }; };
-		B85392881BD61B03000DCD91 /* modelo_frontal.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392871BD61B03000DCD91 /* modelo_frontal.png */; settings = {ASSET_TAGS = (); }; };
-		B853928C1BD70AB5000DCD91 /* modelo_perfil.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928B1BD70AB5000DCD91 /* modelo_perfil.png */; settings = {ASSET_TAGS = (); }; };
-		B853928E1BD70E73000DCD91 /* modelo_nasal.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928D1BD70E73000DCD91 /* modelo_nasal.png */; settings = {ASSET_TAGS = (); }; };
-		B8F7E0C91BD2F5FA0053B948 /* MainNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */; settings = {ASSET_TAGS = (); }; };
-		B8F7E0CB1BD4242E0053B948 /* NovoPacienteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CC1BD429060053B948 /* CameraViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */; };
+		B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85392801BD5E64E000DCD91 /* PontoView.swift */; };
+		B85392851BD5EC52000DCD91 /* ponto_azul.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392831BD5EC52000DCD91 /* ponto_azul.png */; };
+		B85392861BD5EC52000DCD91 /* ponto_vermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392841BD5EC52000DCD91 /* ponto_vermelho.png */; };
+		B85392881BD61B03000DCD91 /* modelo_frontal.png in Resources */ = {isa = PBXBuildFile; fileRef = B85392871BD61B03000DCD91 /* modelo_frontal.png */; };
+		B853928C1BD70AB5000DCD91 /* modelo_perfil.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928B1BD70AB5000DCD91 /* modelo_perfil.png */; };
+		B853928E1BD70E73000DCD91 /* modelo_nasal.png in Resources */ = {isa = PBXBuildFile; fileRef = B853928D1BD70E73000DCD91 /* modelo_nasal.png */; };
+		B8F7E0C91BD2F5FA0053B948 /* MainNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */; };
+		B8F7E0CB1BD4242E0053B948 /* NovoPacienteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */; };
+		B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CC1BD429060053B948 /* CameraViewController.swift */; };
 		B8F7E0DF1BD541590053B948 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0DE1BD541590053B948 /* CoreMedia.framework */; };
 		B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */; };
 		B8F7E0E31BD541670053B948 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E21BD541670053B948 /* OpenGLES.framework */; };
@@ -51,10 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTableVC.swift; sourceTree = "<group>"; };
+		183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUPacienteVC.swift; sourceTree = "<group>"; };
+		183D2F561BDA002B0033BDA3 /* Paciente+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Paciente+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		183D2F571BDA002B0033BDA3 /* Paciente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paciente.swift; sourceTree = "<group>"; };
 		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B81B4A601BC344AE002A306F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B81B4A631BC344AE002A306F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B81B4A661BC344AE002A306F /* EsteticaFacial.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EsteticaFacial.xcdatamodel; sourceTree = "<group>"; };
 		B81B4A681BC344AE002A306F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +122,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183D2F4C1BD9E68D0033BDA3 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B81B4A5E1BC344AE002A306F /* AppDelegate.swift */,
+				B81B4A681BC344AE002A306F /* Assets.xcassets */,
+				B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */,
+				B81B4A6D1BC344AE002A306F /* Info.plist */,
+				183D2F531BD9E83D0033BDA3 /* CoreData */,
+			);
+			name = Other;
+			path = EsteticaFacial;
+			sourceTree = "<group>";
+		};
+		183D2F531BD9E83D0033BDA3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				183D2F561BDA002B0033BDA3 /* Paciente+CoreDataProperties.swift */,
+				183D2F571BDA002B0033BDA3 /* Paciente.swift */,
+				B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		183D2F5A1BDA08790033BDA3 /* Depreciated */ = {
+			isa = PBXGroup;
+			children = (
+				B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */,
+				B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */,
+			);
+			name = Depreciated;
+			sourceTree = "<group>";
+		};
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +172,7 @@
 			children = (
 				B85392821BD5EC48000DCD91 /* Imagens */,
 				B81B4A5D1BC344AE002A306F /* EsteticaFacial */,
+				183D2F4C1BD9E68D0033BDA3 /* Other */,
 				B81B4A751BC344AE002A306F /* EsteticaFacialTests */,
 				B81B4A801BC344AE002A306F /* EsteticaFacialUITests */,
 				B81B4A5C1BC344AE002A306F /* Products */,
@@ -155,18 +194,13 @@
 		B81B4A5D1BC344AE002A306F /* EsteticaFacial */ = {
 			isa = PBXGroup;
 			children = (
-				B81B4A5E1BC344AE002A306F /* AppDelegate.swift */,
-				B81B4A601BC344AE002A306F /* ViewController.swift */,
 				B81B4A621BC344AE002A306F /* Main.storyboard */,
-				B81B4A681BC344AE002A306F /* Assets.xcassets */,
-				B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */,
-				B81B4A6D1BC344AE002A306F /* Info.plist */,
-				B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */,
-				B8F7E0C81BD2F5FA0053B948 /* MainNavigation.swift */,
-				B8F7E0CA1BD4242E0053B948 /* NovoPacienteViewController.swift */,
+				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
+				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
 				B8F7E0CC1BD429060053B948 /* CameraViewController.swift */,
 				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
 				B85392801BD5E64E000DCD91 /* PontoView.swift */,
+				183D2F5A1BDA08790033BDA3 /* Depreciated */,
 			);
 			path = EsteticaFacial;
 			sourceTree = "<group>";
@@ -397,12 +431,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8F7E0C91BD2F5FA0053B948 /* MainNavigation.swift in Sources */,
-				B81B4A611BC344AE002A306F /* ViewController.swift in Sources */,
+				183D2F551BD9EACB0033BDA3 /* AUPacienteVC.swift in Sources */,
 				B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */,
 				B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */,
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
 				B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */,
+				183D2F581BDA002B0033BDA3 /* Paciente+CoreDataProperties.swift in Sources */,
+				183D2F591BDA002B0033BDA3 /* Paciente.swift in Sources */,
 				B8F7E0CB1BD4242E0053B948 /* NovoPacienteViewController.swift in Sources */,
+				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
 				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
