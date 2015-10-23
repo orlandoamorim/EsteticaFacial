@@ -21,7 +21,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     @IBOutlet weak var reconhecedor: UIGestureRecognizer!
     var imagem_view: UIImageView?
-    var pontos_localizados : [String:CGPoint]?
+    var pontos_localizados : [String:NSValue]?
     var imagem_cortada : UIImage?
 
     @IBOutlet weak var container_imagem: UIScrollView!
@@ -41,7 +41,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("CONTAINER ZOOM SCALE: \(container_imagem.minimumZoomScale) | CONTAINER FRAME = \(self.container_imagem.frame)");
+        
         container_imagem.minimumZoomScale = self.container_imagem.contentSize.height/self.container_imagem.frame.size.height > self.container_imagem.contentSize.width/self.container_imagem.frame.size.width ? self.container_imagem.frame.size.height/self.container_imagem.contentSize.height : self.container_imagem.frame.size.width/self.container_imagem.contentSize.width
         container_imagem.zoomScale = container_imagem.minimumZoomScale
       //  self.conteudo_view.frame = CGRectMake(0, 0, (self.imagem_cortada?.size.width)!, (self.imagem_cortada?.size.height)!)
@@ -83,7 +83,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
         for (nome,local) in self.pontos_localizados!{
             let p = PontoView()
             let l = local
-            p.inicializar(nome , posicao: l)
+            p.inicializar(nome , posicao: l.CGPointValue())
             
             self.imagem_view!.layer.addSublayer(p.layer)
             self.pontos_views.addObject(p)
@@ -116,7 +116,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
             self.ponto_escolhido?.local = (self.ponto_escolhido?.frame.origin)!
         }
         else if recognizer.state == UIGestureRecognizerState.Ended{
-            pontos_localizados?.updateValue((ponto_escolhido?.local)!, forKey:(ponto_escolhido?.nome)!)
+            pontos_localizados?.updateValue(NSValue(CGPoint:(ponto_escolhido?.local)!), forKey:(ponto_escolhido?.nome)!)
         }
     }
     

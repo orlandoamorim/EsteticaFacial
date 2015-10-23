@@ -11,7 +11,7 @@ import AVFoundation
 import GPUImage
 
 protocol CameraViewDelegate{
-    func marcar_pontos(dic : [String:CGPoint])
+    func marcar_pontos(dic : [String:NSValue])
 }
 
 class CameraViewController: UIViewController, CameraViewDelegate {
@@ -26,15 +26,16 @@ class CameraViewController: UIViewController, CameraViewDelegate {
     var sessao_captura: AVCaptureSession?
     var imagem_saida: AVCaptureStillImageOutput?
     var camada_preview: AVCaptureVideoPreviewLayer?
+    var imagem_recuperada: UIImage?
     
-    var dicionario: [String:CGPoint]?
+    var dicionario: [String:NSValue]?
     
     // Indica que foto (perspectiva) deve ser tirada
     var flag: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("FLAG = \(flag)")
         if flag == 0{
             self.imagem_guia.image = UIImage.init(named: "modelo_frontal")
         }
@@ -43,6 +44,10 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         }
         if flag == 2{
             self.imagem_guia.image = UIImage.init(named: "modelo_nasal")
+        }
+        
+        if self.imagem_recuperada != nil{
+            self.performSegueWithIdentifier("segue_localizar", sender: self);
         }
         // Do any additional setup after loading the view.
     }
@@ -100,9 +105,11 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "segue_localizar" && self.imagem_capturada != nil{
             if let localizar = segue.destinationViewController as? LocalizarPontosViewController{
-                localizar.imagem_cortada = self.imagem_capturada.image
-                if self.dicionario==nil{
-                    print("dicionario eh nulo")
+                if self.imagem_capturada.image != nil{
+                    localizar.imagem_cortada = self.imagem_capturada.image
+                }
+                else{
+                    localizar.imagem_cortada = self.imagem_recuperada
                 }
                 localizar.pontos_localizados = self.dicionario
                 localizar.delegate = self
@@ -128,7 +135,9 @@ class CameraViewController: UIViewController, CameraViewDelegate {
                 let height_crop = imagem.size.height*self.quadro_corte.frame.size.height/(self.camada_preview?.frame.height)!
                 
                 self.imagem_capturada.image = CameraViewController.cropToSquare(imagem, rect: CGRectMake(x_crop, y_crop, width_crop, height_crop))
+                print("DEBUGGING");
                 self.delegate!.atribuir_imagem(self.imagem_capturada.image!, flag: self.flag)
+                print("DEBUGGING");
             })
             
             
@@ -214,7 +223,7 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         return img
     }
     
-    func marcar_pontos(dic: [String : CGPoint]) {
+    func marcar_pontos(dic: [String : NSValue]) {
         delegate.atribuir_marcacao(dic, flag: flag)
         self.navigationController?.popViewControllerAnimated(true)
     }

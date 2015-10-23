@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EsteticaFacial/CameraViewController.swift"
-            timestampString = "467074603.000307"
+            timestampString = "467305085.867392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "CameraViewController"
             landmarkType = "3">
          </BreakpointContent>

@@ -24,9 +24,9 @@ class NovoPacienteViewController: UIViewController,NovoPacienteDelegate,UIPicker
     @IBOutlet weak var captura_etnia: UIPickerView!
     @IBOutlet weak var captura_data_nascimento: UIDatePicker!
     
-    var pontos_frontal : [String:CGPoint]?
-    var pontos_perfil : [String:CGPoint]?
-    var pontos_nasal : [String:CGPoint]?
+    var pontos_frontal : [String:NSValue]?
+    var pontos_perfil : [String:NSValue]?
+    var pontos_nasal : [String:NSValue]?
     
     var etnia_selecionada : String = "Caucasiano"
     let thumbnail_size : CGSize = CGSizeMake(70.0, 70.0)
@@ -91,7 +91,7 @@ class NovoPacienteViewController: UIViewController,NovoPacienteDelegate,UIPicker
         }
     }
     
-    func atribuir_marcacao(dic: [String : CGPoint], flag: Int) {
+    func atribuir_marcacao(dic: [String : NSValue], flag: Int) {
         if flag==0{
             self.pontos_frontal = dic
         }
@@ -157,54 +157,54 @@ class NovoPacienteViewController: UIViewController,NovoPacienteDelegate,UIPicker
     
     func iniciar_dicionarios(){
         self.pontos_frontal = [
-            "Triquio":CGPointMake(1005, 550),
-            "Arco_Esquerdo":CGPointMake(675, 770),
-            "Glabela":CGPointMake(988, 831),
-            "Arco_Direito":CGPointMake(1310, 770),
-            "Canto_Lateral_Esquerdo":CGPointMake(582, 936),
-            "Limbo_Lateral_Esquerdo":CGPointMake(692, 934),
-            "Canto_Medial_Esquerdo":CGPointMake(844, 934),
-            "Nasio":CGPointMake(990, 934),
-            "Canto_Medial_Direito":CGPointMake(1137, 934),
-            "Limbo_Lateral_Direito":CGPointMake(1291, 934),
-            "Canto_Lateral_Direito":CGPointMake(1386, 934),
-            "Orbitario_Esquerdo":CGPointMake(720, 1114),
-            "Orbitario_Direito":CGPointMake(1264, 1114),
-            "Asa_Nasal_Esquerda":CGPointMake(860, 1320),
-            "Asa_Nasal_Direita":CGPointMake(1117, 1320),
-            "Vermilion_Esquerda":CGPointMake(916, 1520),
-            "Vermilion_Direita":CGPointMake(1035, 1520),
-            "Fenda":CGPointMake(978, 1583),
-            "Labiomental_Crease":CGPointMake(976, 1720),
-            "Mento":CGPointMake(976, 1880)]
+            "Triquio":NSValue(CGPoint: CGPointMake(1005, 550)),
+            "Arco_Esquerdo":NSValue(CGPoint: CGPointMake(675, 770)),
+            "Glabela":NSValue(CGPoint: CGPointMake(988, 831)),
+            "Arco_Direito":NSValue(CGPoint: CGPointMake(1310, 770)),
+            "Canto_Lateral_Esquerdo":NSValue(CGPoint: CGPointMake(582, 936)),
+            "Limbo_Lateral_Esquerdo":NSValue(CGPoint: CGPointMake(692, 934)),
+            "Canto_Medial_Esquerdo":NSValue(CGPoint: CGPointMake(844, 934)),
+            "Nasio":NSValue(CGPoint: CGPointMake(990, 934)),
+            "Canto_Medial_Direito":NSValue(CGPoint: CGPointMake(1137, 934)),
+            "Limbo_Lateral_Direito":NSValue(CGPoint: CGPointMake(1291, 934)),
+            "Canto_Lateral_Direito":NSValue(CGPoint: CGPointMake(1386, 934)),
+            "Orbitario_Esquerdo":NSValue(CGPoint: CGPointMake(720, 1114)),
+            "Orbitario_Direito":NSValue(CGPoint: CGPointMake(1264, 1114)),
+            "Asa_Nasal_Esquerda":NSValue(CGPoint: CGPointMake(860, 1320)),
+            "Asa_Nasal_Direita":NSValue(CGPoint: CGPointMake(1117, 1320)),
+            "Vermilion_Esquerda":NSValue(CGPoint: CGPointMake(916, 1520)),
+            "Vermilion_Direita":NSValue(CGPoint: CGPointMake(1035, 1520)),
+            "Fenda":NSValue(CGPoint: CGPointMake(978, 1583)),
+            "Labiomental_Crease":NSValue(CGPoint: CGPointMake(976, 1720)),
+            "Mento":NSValue(CGPoint: CGPointMake(976, 1880))]
         
         self.pontos_perfil = [
-            "Triquio":CGPointMake(1394, 390),
-            "Glabela":CGPointMake(1557, 722),
-            "Nasio":CGPointMake(1510, 831),
-            "Rinio":CGPointMake(1579, 916),
-            "Ponta_Nariz":CGPointMake(1645, 1078),
-            "Columela":CGPointMake(1595, 1131),
-            "Subnasal":CGPointMake(1505, 1142),
-            "Labio_Superior":CGPointMake(1543, 1260),
-            "Fenda_Oral":CGPointMake(1512, 1308),
-            "Labio_Inferior":CGPointMake(1547, 1352),
-            "Supramental":CGPointMake(1491, 1434),
-            "Pogonio":CGPointMake(1520, 1542),
-            "Mento":CGPointMake(1455, 1677),
-            "Cervical":CGPointMake(1212, 1655),
-            "Tragion":CGPointMake(908, 997),
-            "Orbitario":CGPointMake(1425, 994)]
+            "Triquio":NSValue(CGPoint: CGPointMake(1394, 390)),
+            "Glabela":NSValue(CGPoint: CGPointMake(1557, 722)),
+            "Nasio":NSValue(CGPoint: CGPointMake(1510, 831)),
+            "Rinio":NSValue(CGPoint: CGPointMake(1579, 916)),
+            "Ponta_Nariz":NSValue(CGPoint: CGPointMake(1645, 1078)),
+            "Columela":NSValue(CGPoint: CGPointMake(1595, 1131)),
+            "Subnasal":NSValue(CGPoint: CGPointMake(1505, 1142)),
+            "Labio_Superior":NSValue(CGPoint: CGPointMake(1543, 1260)),
+            "Fenda_Oral":NSValue(CGPoint: CGPointMake(1512, 1308)),
+            "Labio_Inferior":NSValue(CGPoint: CGPointMake(1547, 1352)),
+            "Supramental":NSValue(CGPoint: CGPointMake(1491, 1434)),
+            "Pogonio":NSValue(CGPoint: CGPointMake(1520, 1542)),
+            "Mento":NSValue(CGPoint: CGPointMake(1455, 1677)),
+            "Cervical":NSValue(CGPoint: CGPointMake(1212, 1655)),
+            "Tragion":NSValue(CGPoint: CGPointMake(908, 997)),
+            "Orbitario":NSValue(CGPoint: CGPointMake(1425, 994))]
         
         self.pontos_nasal = [
-            "Ponto_Superior_Esquerdo":CGPointMake(700, 805),
-            "Ponto_Superior_Direito":CGPointMake(1207, 782),
-            "Ponto_Inferior_Esquerdo":CGPointMake(477, 1394),
-            "Ponto_Inferior_Direito":CGPointMake(1478, 1396),
-            "Asa_Esquerda":CGPointMake(146, 1285),
-            "Asa_Direita":CGPointMake(1740, 1337),
-            "Juncao_Esquerda":CGPointMake(200, 1588),
-            "Juncao_Direita":CGPointMake(1683, 1657)]
+            "Ponto_Superior_Esquerdo":NSValue(CGPoint: CGPointMake(700, 805)),
+            "Ponto_Superior_Direito":NSValue(CGPoint: CGPointMake(1207, 782)),
+            "Ponto_Inferior_Esquerdo":NSValue(CGPoint: CGPointMake(477, 1394)),
+            "Ponto_Inferior_Direito":NSValue(CGPoint: CGPointMake(1478, 1396)),
+            "Asa_Esquerda":NSValue(CGPoint: CGPointMake(146, 1285)),
+            "Asa_Direita":NSValue(CGPoint: CGPointMake(1740, 1337)),
+            "Juncao_Esquerda":NSValue(CGPoint: CGPointMake(200, 1588)),
+            "Juncao_Direita":NSValue(CGPoint: CGPointMake(1683, 1657))]
     }
     
     @IBAction func salvar_dados(sender: AnyObject) {

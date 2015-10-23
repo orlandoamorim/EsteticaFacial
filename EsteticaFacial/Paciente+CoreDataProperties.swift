@@ -20,7 +20,9 @@ extension Paciente {
     @NSManaged var img_perfil: NSData?
     @NSManaged var nascimento: NSDate?
     @NSManaged var nome: String?
-    @NSManaged var pontos: NSData?
+    @NSManaged var pontos_frontal: NSData?
+    @NSManaged var pontos_perfil: NSData?
+    @NSManaged var pontos_nasal: NSData?
     @NSManaged var relatorio: String?
     @NSManaged var sexo: String?
     @NSManaged var thumb_frontal: NSData?
