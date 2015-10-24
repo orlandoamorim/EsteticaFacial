@@ -14,21 +14,21 @@ import CoreData
 
 extension Paciente {
 
+    @NSManaged var data_adicao: NSDate?
     @NSManaged var etnia: String?
     @NSManaged var img_frontal: NSData?
     @NSManaged var img_nasal: NSData?
     @NSManaged var img_perfil: NSData?
     @NSManaged var nascimento: NSDate?
     @NSManaged var nome: String?
+    @NSManaged var notas: String?
     @NSManaged var pontos_frontal: NSData?
-    @NSManaged var pontos_perfil: NSData?
     @NSManaged var pontos_nasal: NSData?
+    @NSManaged var pontos_perfil: NSData?
     @NSManaged var relatorio: String?
     @NSManaged var sexo: String?
     @NSManaged var thumb_frontal: NSData?
     @NSManaged var thumb_nasal: NSData?
     @NSManaged var thumb_perfil: NSData?
-    @NSManaged var notas: String?
-    @NSManaged var data_adicao: NSDate?
 
 }

@@ -26,7 +26,11 @@ class PontoView: UIView {
     */
     
     func inicializar(nome: String, posicao:CGPoint){
-        self.nome = nome
+        
+        let primeiroNome = nome.characters.split{$0 == "_"}.map(String.init)
+                
+        self.nome =  primeiroNome[0]
+
         self.local = posicao
         self.nome_label.text = nome
         self.ponto_view.frame = CGRectMake(5.0, 5.0, 20.0, 20.0)

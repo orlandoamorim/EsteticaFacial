@@ -8,8 +8,8 @@
 
 import UIKit
 import XLForm
-import CoreData
 import ImageIO
+import Parse
 
 protocol NovoPacienteDelegate{
     func atribuir_imagem(imagem: UIImage, flag:Int)
@@ -20,10 +20,7 @@ protocol NovoPacienteDelegate{
 
 class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     
-    //CoreData
-    var ficha: Paciente!
-    var moContext: NSManagedObjectContext?
-    var entity: NSEntityDescription?
+    var parseObject:PFObject!
     
     //Verificador para saber se e Add ou Update
     var type:String = String()
@@ -91,7 +88,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         
         
         // Sexo
-        row = XLFormRowDescriptor(tag: Tags.Sexo.rawValue, rowType: XLFormRowDescriptorTypeSelectorActionSheet, title: "Sexo")
+        row = XLFormRowDescriptor(tag: Tags.Sexo.rawValue, rowType: XLFormRowDescriptorTypeSelectorPickerViewInline, title: "Sexo")
         row.selectorOptions = ["Masculino", "Feminino"]
         if sexoPaciente != "" {
             row.value = sexoPaciente
@@ -103,7 +100,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         section.addFormRow(row)
         
         // Etinia
-        row = XLFormRowDescriptor(tag: Tags.Etnia.rawValue, rowType: XLFormRowDescriptorTypeSelectorActionSheet, title: "Raca")
+        row = XLFormRowDescriptor(tag: Tags.Etnia.rawValue, rowType: XLFormRowDescriptorTypeSelectorPickerViewInline, title: "Raca")
         row.selectorOptions = ["Caucasiano","Negróide","Asiático"]
         if etniaPaciente != "" {
             row.value = etniaPaciente
@@ -117,10 +114,10 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         // Data Nascimento
         row = XLFormRowDescriptor(tag: Tags.DataNascimento.rawValue, rowType: XLFormRowDescriptorTypeDateInline, title: "Data de Nascimento:")
         row.cellConfig.setObject(NSDate(), forKey: "maximumDate")
+        row.cellConfig.setObject(UIFont(name: "AppleSDGothicNeo-Regular", size: 16)!, forKey: "textLabel.font")
         if dataNascimento != "" {
             row.value = dataNascimento
         }else{
-            print("OPA 4")
             row.value = NSDate()
         }
         row.required = true
@@ -149,44 +146,106 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         self.iniciar_dicionarios()
         print("TAMANHO \(btn_imagem_frontal.frame)")
         
-        if ficha != nil {
-            self.nomePaciente = ficha.nome!
-            self.sexoPaciente = ficha.sexo!
-            self.etniaPaciente = ficha.etnia!
-            self.dataNascimento = ficha.nascimento!
+        if parseObject != nil {
+                        
+            self.nomePaciente = parseObject.objectForKey("nome") as! String
+            self.sexoPaciente = parseObject.objectForKey("sexo") as! String
+            self.etniaPaciente = parseObject.objectForKey("etnia") as! String
+            self.dataNascimento = dataFormatter().dateFromString(parseObject.objectForKey("data_nascimento") as! String)!
             
-            if ficha.notas != nil {
-                self.notas = ficha.notas!
+            if let notas = parseObject.objectForKey("notas") as? String {
+                self.notas = notas
             }
             
-            if let imageData = ficha.img_frontal{
-                btn_imagem_frontal.setImage(UIImage(data: imageData), forState: UIControlState.Normal)
-            }else {
+            //IMG FRONTAL
+            if let img_frontal = parseObject.objectForKey("img_frontal") as? PFFile{
+                
+                img_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_frontal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |img_frontal| -> \(Float(progress))")
+                }
+                
+            }else{
                 btn_imagem_frontal.setImage(UIImage(named: "modelo_frontal"), forState: UIControlState.Normal)
             }
             
-            if let imageData = ficha.img_nasal{
-                btn_imagem_nasal.setImage(UIImage(data: imageData), forState: UIControlState.Normal)
-            }else {
-                btn_imagem_nasal.setImage(UIImage(named: "modelo_nasal"), forState: UIControlState.Normal)
-            }
-            
-            if let imageData = ficha.img_perfil{
-                btn_imagem_perfil.setImage(UIImage(data: imageData), forState: UIControlState.Normal)
-            }else {
+            //IMG PERFIL
+            if let img_perfil = parseObject.objectForKey("img_perfil") as? PFFile{
+                
+                img_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_perfil.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |img_perfil| -> \(Float(progress))")
+                }
+                
+            }else{
                 btn_imagem_perfil.setImage(UIImage(named: "modelo_perfil"), forState: UIControlState.Normal)
             }
             
-            if let dic_frontal = ficha.pontos_frontal{
-                self.pontos_frontal = NSKeyedUnarchiver.unarchiveObjectWithData(dic_frontal) as? [String : NSValue]
+            //IMG NASAL
+            if let img_nasal = parseObject.objectForKey("img_nasal") as? PFFile{
+                
+                img_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_nasal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |img_nasal| -> \(Float(progress))")
+                }
+                
+            }else{
+                btn_imagem_nasal.setImage(UIImage(named: "modelo_nasal"), forState: UIControlState.Normal)
             }
             
-            if let dic_perfil = ficha.pontos_perfil{
-                self.pontos_perfil = NSKeyedUnarchiver.unarchiveObjectWithData(dic_perfil) as? [String : NSValue]
+
+            
+            
+            //DIC FRONTAL
+            if let pontos_frontal = parseObject.objectForKey("pontos_frontal") as? PFFile{
+                
+                pontos_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.pontos_frontal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |pontos_frontal| -> \(Float(progress))")
+                }
             }
             
-            if let dic_nasal = ficha.pontos_nasal{
-                self.pontos_nasal = NSKeyedUnarchiver.unarchiveObjectWithData(dic_nasal) as? [String : NSValue]
+            //DIC PERFIL
+            if let pontos_perfil = parseObject.objectForKey("pontos_perfil") as? PFFile{
+                
+                pontos_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.pontos_perfil = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |pontos_perfil| -> \(Float(progress))")
+                }
+            }
+            
+            
+            //DIC NASAL
+            if let pontos_nasal = parseObject.objectForKey("pontos_nasal") as? PFFile{
+                
+                pontos_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.pontos_nasal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |pontos_nasal| -> \(Float(progress))")
+                }
             }
         }
         
@@ -248,138 +307,181 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     //MARK: - Salvando Ficha
     
     func add () {
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let moContext = appDelegate.managedObjectContext
-        
-        // Cria um managedObject pronto para ser inserido
-        let ficha = NSEntityDescription.insertNewObjectForEntityForName("Paciente", inManagedObjectContext: moContext) as! Paciente
+        self.parseObject = PFObject(className: "Paciente")
+        self.parseObject["username"] = PFUser.currentUser()!.username
+
         
         if let nome:String = form.formRowWithTag(Tags.Nome.rawValue)!.value as? String {
-            ficha.nome = nome
+            parseObject.setValue(nome, forKey: "nome")
         }
         if let sexo:String = form.formRowWithTag(Tags.Sexo.rawValue)!.value as? String {
-            ficha.sexo = sexo
+            parseObject.setValue(sexo, forKey: "sexo")
         }
         if let etnia:String = form.formRowWithTag(Tags.Etnia.rawValue)!.value as? String {
-            ficha.etnia = etnia
+            parseObject.setValue(etnia, forKey: "etnia")
         }
         if let dataNascimento:NSDate = form.formRowWithTag(Tags.DataNascimento.rawValue)!.value as? NSDate{
             
             let data = dataFormatter().stringFromDate(dataNascimento)
-            
-            ficha.nascimento = dataFormatter().dateFromString(data)
+            parseObject.setValue(data, forKey: "data_nascimento")
+
         }
         
         if let notas:String = form.formRowWithTag(Tags.Notas.rawValue)!.value as? String {
-            ficha.notas = notas
+            parseObject.setValue(notas, forKey: "notas")
+
         }
         
         //Imagens
         
         if btn_imagem_frontal.currentImage != nil{
             let thumb_frontal = self.criar_thumbnail((btn_imagem_frontal.currentImage)!)
-            ficha.thumb_frontal = UIImageJPEGRepresentation(thumb_frontal, 1.0)
-            ficha.img_frontal = UIImageJPEGRepresentation((btn_imagem_frontal.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_frontal, 1.0)!)!
+            let imageFileFrontal:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_frontal.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_frontal")
+            parseObject.setObject(imageFileFrontal, forKey: "img_frontal")
         }
         
         if btn_imagem_perfil.currentImage != nil{
             let thumb_perfil = self.criar_thumbnail((btn_imagem_perfil.currentImage)!)
-            ficha.thumb_perfil = UIImageJPEGRepresentation(thumb_perfil, 1.0)
-            ficha.img_perfil = UIImageJPEGRepresentation((btn_imagem_perfil.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_perfil, 1.0)!)!
+            let imageFilePerfil:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_perfil.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_perfil")
+            parseObject.setObject(imageFilePerfil, forKey: "img_perfil")
+
         }
         
         if btn_imagem_nasal.currentImage != nil{
             let thumb_nasal = self.criar_thumbnail((btn_imagem_nasal.currentImage)!)
-            ficha.thumb_nasal = UIImageJPEGRepresentation(thumb_nasal, 1.0)
-            ficha.img_nasal = UIImageJPEGRepresentation((btn_imagem_nasal.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_nasal, 1.0)!)!
+            let imageFileNasal:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_nasal.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_nasal")
+            parseObject.setObject(imageFileNasal, forKey: "img_nasal")
         }
         
         //Pontos
-        ficha.pontos_frontal = NSKeyedArchiver.archivedDataWithRootObject(pontos_frontal!)
-        ficha.pontos_perfil = NSKeyedArchiver.archivedDataWithRootObject(pontos_perfil!)
-        ficha.pontos_nasal = NSKeyedArchiver.archivedDataWithRootObject(pontos_nasal!)
     
-        dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-            do {
-                try moContext.save()
+        //pontos_frontal
+        let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
+        parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
+        
+        //pontos_perfil
+        let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
+        parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
+        
+        //pontos_nasal
+        let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
+        parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
+        
+        parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     
                 })
-            } catch {
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
             }
-        })
+        }
     }
     
     // MARK: - Update
     
     func update() {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let moContext = appDelegate.managedObjectContext
-        
-        
         if let nome:String = form.formRowWithTag(Tags.Nome.rawValue)!.value as? String {
-            ficha!.nome = nome
+            if nomePaciente != nome {
+                parseObject.setValue(nome, forKey: "nome")
+            }
         }
         if let sexo:String = form.formRowWithTag(Tags.Sexo.rawValue)!.value as? String {
-            ficha!.sexo = sexo
+            if sexoPaciente != sexo {
+                parseObject.setValue(sexo, forKey: "sexo")
+            }
         }
         if let etnia:String = form.formRowWithTag(Tags.Etnia.rawValue)!.value as? String {
-            ficha!.etnia = etnia
+            if etniaPaciente != etnia {
+                parseObject.setValue(etnia, forKey: "etnia")
+            }
         }
-        if let dataNascimento:NSDate = form.formRowWithTag(Tags.DataNascimento.rawValue)!.value as? NSDate{
+        if let dataNascimentoUpdate:NSDate = form.formRowWithTag(Tags.DataNascimento.rawValue)!.value as? NSDate{
+            let dataAntiga = dataFormatter().stringFromDate(dataNascimento)
+            let dataUpdate = dataFormatter().stringFromDate(dataNascimentoUpdate)
             
-            let data = dataFormatter().stringFromDate(dataNascimento)
+            if dataAntiga != dataUpdate {
+                parseObject.setValue(dataUpdate, forKey: "data_nascimento")
+            }
             
-            ficha!.nascimento = dataFormatter().dateFromString(data)!
         }
         
         if let notas:String = form.formRowWithTag(Tags.Notas.rawValue)!.value as? String {
-            ficha!.notas = notas
+            if self.notas != notas {
+                parseObject.setValue(notas, forKey: "notas")
+            }
         }
+
+        
+        /*
+            Add verificacao para saber se as imagens mudaram
+        */
         
         //Imagens
         
         if btn_imagem_frontal.currentImage != nil{
             let thumb_frontal = self.criar_thumbnail((btn_imagem_frontal.currentImage)!)
-            ficha.thumb_frontal = UIImageJPEGRepresentation(thumb_frontal, 1.0)
-            ficha.img_frontal = UIImageJPEGRepresentation((btn_imagem_frontal.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_frontal, 1.0)!)!
+            let imageFileFrontal:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_frontal.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_frontal")
+            parseObject.setObject(imageFileFrontal, forKey: "img_frontal")
         }
         
         if btn_imagem_perfil.currentImage != nil{
             let thumb_perfil = self.criar_thumbnail((btn_imagem_perfil.currentImage)!)
-            ficha.thumb_perfil = UIImageJPEGRepresentation(thumb_perfil, 1.0)
-            ficha.img_perfil = UIImageJPEGRepresentation((btn_imagem_perfil.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_perfil, 1.0)!)!
+            let imageFilePerfil:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_perfil.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_perfil")
+            parseObject.setObject(imageFilePerfil, forKey: "img_perfil")
+            
         }
         
         if btn_imagem_nasal.currentImage != nil{
             let thumb_nasal = self.criar_thumbnail((btn_imagem_nasal.currentImage)!)
-            ficha.thumb_nasal = UIImageJPEGRepresentation(thumb_nasal, 1.0)
-            ficha.img_nasal = UIImageJPEGRepresentation((btn_imagem_nasal.currentImage)!, 1.0)
+            
+            let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_nasal, 1.0)!)!
+            let imageFileNasal:PFFile = PFFile(data: UIImageJPEGRepresentation((btn_imagem_nasal.currentImage)!, 1.0)!)!
+            
+            parseObject.setObject(imageFileThumb, forKey: "thumb_nasal")
+            parseObject.setObject(imageFileNasal, forKey: "img_nasal")
         }
         
         //Pontos
-        ficha.pontos_frontal = NSKeyedArchiver.archivedDataWithRootObject(pontos_frontal!)
-        ficha.pontos_perfil = NSKeyedArchiver.archivedDataWithRootObject(pontos_perfil!)
-        ficha.pontos_nasal = NSKeyedArchiver.archivedDataWithRootObject(pontos_nasal!)
         
+        //pontos_frontal
+        let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
+        parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
         
-        dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-            do {
-                try moContext.save()
+        //pontos_perfil
+        let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
+        parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
+        
+        //pontos_nasal
+        let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
+        parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
+        
+        parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     
                 })
-            } catch {
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
             }
-        })
+        }
     }
     
     //MARK: - Helperph

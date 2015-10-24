@@ -9,26 +9,26 @@
 // Segue Name : AUSegue -> A mesma segue sera usada tanto para adicao como edicao de dados do usuario.
 
 import UIKit
-import CoreData
+import Parse
+import Dodo
+import SwiftyDrop
 
 class PacientesTableVC: UITableViewController {
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    var moContext: NSManagedObjectContext?
-    var entity: NSEntityDescription?
     var predicate:NSPredicate = NSPredicate()
-
-    var records:[AnyObject] = [AnyObject]()
+    
+    var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        moContext = appDelegate.managedObjectContext
-        entity = NSEntityDescription.entityForName("Paciente", inManagedObjectContext: moContext!)
+        
+        
+        self.view.dodo.topLayoutGuide = topLayoutGuide
+        self.view.dodo.bottomLayoutGuide = bottomLayoutGuide
+        
         
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
@@ -40,136 +40,175 @@ class PacientesTableVC: UITableViewController {
         // BarButtun Right
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-        
-        update()
+    
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        update()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (PFUser.currentUser() == nil) {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                self.presentViewController(viewController, animated: true, completion: nil)
+            })
+        }else{
+            let userName = PFUser.currentUser()?["username"] as? String
 
+            // BarButtun Left
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@\(userName!)", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+            update()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - CoreData
+    // MARK: - Parse
     
-    
-    func update() {
-        records.removeAll(keepCapacity: false)
-        //predicate = NSPredicate(format: "NOT (self IN %@)", argumentArray: ["etnia","img_frontal","img_perfil"])
-        //NSPredicate(format: "nome AND thumb_frontal AND sobrenome AND nascimento")
+    func update(){
+        self.recordsParse.removeAllObjects()
         
-        let fetchRequest = NSFetchRequest(entityName: "Paciente")
-        //fetchRequest.predicate = self.predicate
-        
-        do {
-            records = try moContext!.executeFetchRequest(fetchRequest)
-            // success ...
-        } catch let error as NSError {
-            // failure
-            print("Fetch failed: \(error.localizedDescription)")
+        let query = PFQuery(className:"Paciente")
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.orderByAscending("nome")
+        query.findObjectsInBackgroundWithBlock {
+            (objects:[PFObject]?, error:NSError?) -> Void in
+            if error == nil {
+                if let objects = objects {
+                    for object in objects {
+                        self.recordsParse.addObject(object)
+                    }
+                    
+                }
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            } else {
+                self.refreshControl?.endRefreshing()
+                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                print("Error: \(error!) \(error!.userInfo)")
+            }
         }
-        
-        
-        tableView.reloadData()
-        refreshControl?.endRefreshing()
     }
-
-
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if records.count > 0 {
-            return records.count
+        
+        if recordsParse.count > 0 {
+            return recordsParse.count
         }
         return 1
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PacientesCell", forIndexPath: indexPath)
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("PacientesCell", forIndexPath: indexPath) as! PacientesTVCell
         
-        if records.count == 0 {
-            cell.textLabel?.text = "Nome do Paciente"
-            cell.detailTextLabel?.text = "Idade do Paciente"
-            cell.imageView?.image = UIImage(named: "modelo_frontal")
+        if recordsParse.count == 0 {
+            cell.nomeLabel.text = "Nome do Paciente"
+            cell.dataNascimentoLabel.text = "Idade do Paciente"
+            cell.thumbImageView.image = UIImage(named: "modelo_frontal")
             
             return cell
         }
         
-        let paciente = records[indexPath.row] as! Paciente
-        // Configure the cell...
+        let cellDataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
         
-        if let imageData = paciente.thumb_frontal{
-            cell.imageView?.image = UIImage(data: imageData)
-        }else {
-            cell.imageView?.image = UIImage(named: "modelo_frontal")
+        let nome = cellDataParse.objectForKey("nome") as! String
+        let data_nascimento = dataFormatter().dateFromString(cellDataParse.objectForKey("data_nascimento") as! String)
+        
+        
+        cell.nomeLabel.text = nome
+        cell.dataNascimentoLabel.text = dataFormatter().stringFromDate(data_nascimento!)
+        
+        if let thumb_frontal = cellDataParse.objectForKey("thumb_frontal") as? PFFile{
+            
+            thumb_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                
+                if error == nil {
+                    cell.activityIndicator.stopAnimating()
+                    cell.thumbImageView.image  = UIImage(data: data!)!
+                }
+                
+                }) { (progress) -> Void in
+                    print(Float(progress))
+            }
+            
+        }else{
+            cell.activityIndicator.stopAnimating()
+            cell.thumbImageView.image = UIImage(named: "modelo_frontal")
         }
         
-        cell.textLabel?.text = paciente.nome!
-        cell.detailTextLabel?.text = dataFormatter().stringFromDate(paciente.nascimento!)
-
+        
         return cell
     }
-
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        self.performSegueWithIdentifier("AUSegue", sender: indexPath)
-
+        if recordsParse.count > 0 {
+            self.performSegueWithIdentifier("AUSegue", sender: indexPath)
+        }
+        
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
+        if recordsParse.count == 0 {
+            return UITableViewCellEditingStyle.None
+        }
+        return UITableViewCellEditingStyle.Delete
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         
-        let ficha = records[indexPath.row] as! Paciente
-        
-        let btnDeletar = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Apagar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
 
-            self.moContext!.deleteObject(ficha as NSManagedObject)
+        let btnDeletar = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Apagar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
-            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
-                do {
-                    try self.moContext!.save()
-                } catch {
-                    let nserror = error as NSError
-                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                    abort()
+            dataParse.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                if error == nil {
+                    Drop.down("Deletado com Sucesso", state: .Success)
+                    self.recordsParse.removeObjectAtIndex(indexPath.row)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }else{
+                    Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
                 }
             })
-            
-            self.update()
             
         })
         
         return [btnDeletar]
         
     }
-
     
-
+    
+    
     // MARK: - Add Call
     
     func add(button: UIBarButtonItem){
         self.performSegueWithIdentifier("AUSegue", sender: nil)
+    }
+    
+    func userScreen(button: UIBarButtonItem){
+        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -178,9 +217,9 @@ class PacientesTableVC: UITableViewController {
         let controller = nav.topViewController as! AUPacienteVC
         if let indexPath:NSIndexPath = sender as? NSIndexPath {
             controller.type = "Update"
-            print(indexPath.row)
-            controller.ficha = records[indexPath.row] as? Paciente
-            controller.moContext = moContext
+            
+            let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+            controller.parseObject = dataParse
         }else{
             controller.type = "Add"
         }
