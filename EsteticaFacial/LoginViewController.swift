@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import SwiftyDrop
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, VSReachability{
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -37,17 +38,25 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(sender: AnyObject) {
+        
+        if self.isConnectedToNetwork(){
+            logar()
+            
+        }else{
+            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
+        }
+        
+        
+    }
+    
+    func logar(){
         let username = self.usernameField.text
         let password = self.passwordField.text
         
         // Validate the text fields
-        if username!.characters.count < 5 {
-            SCLAlertView().showInfo("Verificação de Dados", subTitle: "Nome de usuario deve possuir mais  que 5 caracteres", closeButtonTitle: "OK")
-            
-        } else if password!.characters.count < 8 {
-            SCLAlertView().showInfo("Verificação de Dados", subTitle: "Senha deve possuir mais  que 8 caracteres", closeButtonTitle: "OK")
-            
-        } else {
+        if username!.characters.count < 5 || password!.characters.count < 8{
+            Drop.down("Nome de usuario ou senha incorretos.", state: DropState.Error)
+        }else {
             // Run a spinner to show a task in progress
             let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
             spinner.startAnimating()
@@ -59,8 +68,6 @@ class LoginViewController: UIViewController {
                 spinner.stopAnimating()
                 
                 if ((user) != nil) {
-                    SCLAlertView().showSuccess("Sucesso", subTitle: "Voce esta logado!", closeButtonTitle: "OK", duration: 3.0)
-                    
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PacientesTableVC")
                         self.presentViewController(viewController, animated: true, completion: nil)
@@ -71,6 +78,35 @@ class LoginViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    // MARK: - Dismiss no teclado
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.becomeFirstResponder()
+
+    }
+        
+    func textFieldDidBeginEditing(textField: UITextField) {
+        animateViewMoving(true, moveValue: 100)
+        UIApplication.sharedApplication().statusBarHidden = true
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        animateViewMoving(false, moveValue: 100)
+        UIApplication.sharedApplication().statusBarHidden = false
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
     }
 
 }

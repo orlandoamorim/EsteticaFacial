@@ -12,7 +12,7 @@ import UIKit
 import Parse
 import SwiftyDrop
 
-class PacientesTableVC: UITableViewController {
+class PacientesTableVC: UITableViewController,VSReachability {
     
     var predicate:NSPredicate = NSPredicate()
     
@@ -65,8 +65,24 @@ class PacientesTableVC: UITableViewController {
     // MARK: - Parse
     
     func update(){
-        self.recordsParse.removeAllObjects()
+
+        if self.isConnectedToNetwork(){
+            if recordsParse.count == 0 {
+                Drop.down("Baixando Dados", state: .Info)
+                
+                updateParse()
+            }
+        }else{
+            Drop.down("Sem conexão com a Internet", state: DropState.Warning)
+            self.refreshControl?.endRefreshing()
+        }
         
+        
+    }
+    
+    func updateParse() {
+        self.recordsParse.removeAllObjects()
+
         let query = PFQuery(className:"Paciente")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
         query.orderByAscending("nome")
@@ -79,6 +95,8 @@ class PacientesTableVC: UITableViewController {
                     }
                     
                 }
+                Drop.down("Dados baixados com sucesso!", state: DropState.Success)
+
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
             } else {
@@ -87,9 +105,8 @@ class PacientesTableVC: UITableViewController {
                 print("Error: \(error!) \(error!.userInfo)")
             }
         }
+    
     }
-    
-    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

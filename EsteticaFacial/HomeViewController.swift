@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import SwiftyDrop
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController,VSReachability{
     @IBOutlet weak var userNameLabel: UILabel!
 
     @IBOutlet weak var btnSair: UIButton!
@@ -30,14 +31,20 @@ class HomeViewController: UIViewController {
 
     
     @IBAction func logOutAction(sender: AnyObject){
+        if self.isConnectedToNetwork(){
+            // Send a request to log out a user
+            PFUser.logOut()
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                self.presentViewController(viewController, animated: true, completion: nil)
+            })
+            
+        }else{
+            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
+        }
         
-        // Send a request to log out a user
-        PFUser.logOut()
-        
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login") 
-            self.presentViewController(viewController, animated: true, completion: nil)
-        })
+
         
     }
 

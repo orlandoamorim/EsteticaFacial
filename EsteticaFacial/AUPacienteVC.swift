@@ -247,6 +247,9 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         print("Baixando |pontos_nasal| -> \(Float(progress))")
                 }
             }
+        }else {
+            self.parseObject = PFObject(className: "Paciente")
+
         }
         
 
@@ -307,7 +310,10 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     //MARK: - Salvando Ficha
     
     func add () {
-        self.parseObject = PFObject(className: "Paciente")
+        let alertView = SCLAlertView()
+        alertView.showCloseButton = false
+        alertView.showWait("Salvando", subTitle: "Aguarde...")
+        
         self.parseObject["username"] = PFUser.currentUser()!.username
 
         
@@ -380,10 +386,17 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
         
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success {
+            if error == nil {
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    alertView.hideView()
                     
+                    let alertView = SCLAlertView()
+                    alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                 })
+            }else {
+                alertView.hideView()
+                
+                alertView.showError("UFPI", subTitle: "Algum erro ocorreu ao salvar o arquivo. Informe o erro a equipe de desenvolvimento", closeButtonTitle: "OK")
             }
         }
     }

@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import SwiftyDrop
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, VSReachability {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -26,6 +27,15 @@ class SignUpViewController: UIViewController {
     
 
     @IBAction func signUpAction(sender: AnyObject) {
+        if self.isConnectedToNetwork(){
+            signUp()
+            
+        }else{
+            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
+        }
+    }
+    
+    func signUp(){
         
         let username = self.usernameField.text
         let password = self.passwordField.text
@@ -65,7 +75,7 @@ class SignUpViewController: UIViewController {
                     SCLAlertView().showSuccess("Sucesso", subTitle: "Cadastro realizado.", closeButtonTitle: "OK", duration: 3.0)
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PacientesTableVC") 
+                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PacientesTableVC")
                         self.presentViewController(viewController, animated: true, completion: nil)
                     })
                 }
@@ -73,14 +83,33 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Dismiss no teclado
+    override func canBecomeFirstResponder() -> Bool {
+        return true
     }
-    */
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.becomeFirstResponder()
+        
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        animateViewMoving(true, moveValue: 100)
+        UIApplication.sharedApplication().statusBarHidden = true
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        animateViewMoving(false, moveValue: 100)
+        UIApplication.sharedApplication().statusBarHidden = false
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
 
 }

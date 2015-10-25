@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EO8-by-FS0">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -702,26 +703,26 @@
                                             <action selector="passwordReset:" destination="Dej-bR-oLI" eventType="touchUpInside" id="3jJ-Vh-Cg3"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUf-vz-kE2">
-                                        <rect key="frame" x="59" y="19" width="152" height="58"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial UFPI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUf-vz-kE2">
+                                        <rect key="frame" x="30" y="18" width="211" height="58"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="152" id="nmQ-bU-StC"/>
+                                            <constraint firstAttribute="width" constant="211" id="nmQ-bU-StC"/>
                                             <constraint firstAttribute="height" constant="58" id="tQI-Yq-Jcd"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="27"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="yUf-vz-kE2" firstAttribute="top" secondItem="qgd-xW-D1l" secondAttribute="top" constant="19" id="2rH-rA-Z5q"/>
+                                    <constraint firstItem="yUf-vz-kE2" firstAttribute="top" secondItem="qgd-xW-D1l" secondAttribute="top" constant="18" id="2rH-rA-Z5q"/>
                                     <constraint firstItem="yUf-vz-kE2" firstAttribute="centerX" secondItem="dx6-fC-oAe" secondAttribute="centerX" constant="-0.5" id="5b5-sH-wtF"/>
                                     <constraint firstItem="zYP-Z4-OUo" firstAttribute="top" secondItem="dx6-fC-oAe" secondAttribute="bottom" constant="57" id="biY-Ff-Spi"/>
                                     <constraint firstAttribute="width" constant="270" id="mfs-Az-sXi"/>
                                     <constraint firstAttribute="centerX" secondItem="yUf-vz-kE2" secondAttribute="centerX" id="olC-6X-cbz"/>
                                     <constraint firstItem="zYP-Z4-OUo" firstAttribute="centerX" secondItem="dx6-fC-oAe" secondAttribute="centerX" constant="-0.5" id="twi-yx-hih"/>
-                                    <constraint firstItem="dx6-fC-oAe" firstAttribute="top" secondItem="yUf-vz-kE2" secondAttribute="bottom" constant="56" id="vAo-M9-HAj"/>
+                                    <constraint firstItem="dx6-fC-oAe" firstAttribute="top" secondItem="yUf-vz-kE2" secondAttribute="bottom" constant="57" id="vAo-M9-HAj"/>
                                     <constraint firstAttribute="height" constant="346" id="ziG-mF-oM2"/>
                                 </constraints>
                             </view>
@@ -774,9 +775,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbD-rj-xt6">
                                 <rect key="frame" x="165" y="127" width="270" height="346"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIU-nm-dmT">
-                                        <rect key="frame" x="59.5" y="20" width="151.5" height="57.5"/>
-                                        <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial UFPI" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIU-nm-dmT">
+                                        <rect key="frame" x="33" y="20" width="204.5" height="32.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="27"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -870,7 +871,7 @@
                                     <constraint firstAttribute="centerX" secondItem="QIU-nm-dmT" secondAttribute="centerX" id="Mmj-Qe-yhD"/>
                                     <constraint firstAttribute="centerX" secondItem="QIU-nm-dmT" secondAttribute="centerX" constant="-0.75" id="UpN-Jx-6a7"/>
                                     <constraint firstItem="0Ga-zd-D63" firstAttribute="top" secondItem="CiV-Z4-HnT" secondAttribute="bottom" constant="32" id="WOm-kF-scZ"/>
-                                    <constraint firstItem="wZf-Yd-G9e" firstAttribute="top" secondItem="QIU-nm-dmT" secondAttribute="bottom" constant="2" id="WrA-vj-zH8"/>
+                                    <constraint firstItem="wZf-Yd-G9e" firstAttribute="top" secondItem="QIU-nm-dmT" secondAttribute="bottom" constant="26.5" id="WrA-vj-zH8"/>
                                     <constraint firstItem="wZf-Yd-G9e" firstAttribute="centerX" secondItem="CiV-Z4-HnT" secondAttribute="centerX" id="ZLO-Pf-Zc1"/>
                                     <constraint firstItem="QIU-nm-dmT" firstAttribute="top" secondItem="SbD-rj-xt6" secondAttribute="top" constant="20" id="aQg-WB-278"/>
                                     <constraint firstItem="HcV-c6-JNa" firstAttribute="top" secondItem="0Ga-zd-D63" secondAttribute="bottom" constant="19" id="cdb-yf-2hd"/>
@@ -971,9 +972,9 @@
                                             <action selector="signUpAction:" destination="hoI-jO-CPx" eventType="touchUpInside" id="8Ie-OQ-UGa"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh9-NN-1ID">
-                                        <rect key="frame" x="59" y="14" width="152" height="58"/>
-                                        <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Analise Facial UFPI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh9-NN-1ID">
+                                        <rect key="frame" x="33" y="14" width="204.5" height="32.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="27"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -991,7 +992,7 @@
                                     <constraint firstItem="kxo-0d-ssq" firstAttribute="top" secondItem="wBG-h5-jgU" secondAttribute="bottom" constant="32" id="tlo-2r-7Yj"/>
                                     <constraint firstAttribute="height" constant="346" id="vfM-22-88R"/>
                                     <constraint firstItem="Fh9-NN-1ID" firstAttribute="top" secondItem="NUF-mJ-5vj" secondAttribute="top" constant="14" id="xbb-8f-Y47"/>
-                                    <constraint firstItem="efw-tC-hUf" firstAttribute="top" secondItem="Fh9-NN-1ID" secondAttribute="bottom" constant="8" id="z4o-DC-0QT"/>
+                                    <constraint firstItem="efw-tC-hUf" firstAttribute="top" secondItem="Fh9-NN-1ID" secondAttribute="bottom" constant="33.5" id="z4o-DC-0QT"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOW-sX-xRS">

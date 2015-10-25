@@ -3,12 +3,16 @@ PODS:
   - GPUImage (0.1.7)
   - Parse (1.9.1):
     - Bolts/Tasks (>= 1.4.0)
+  - ParseCrashReporting (1.9.1):
+    - Bolts/Tasks (>= 1.4.0)
+    - Parse (~> 1.9.1)
   - SwiftyDrop (2.0.0)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
   - GPUImage
   - Parse
+  - ParseCrashReporting
   - SwiftyDrop (~> 2.0)
   - XLForm (~> 3.0)
 
@@ -16,6 +20,7 @@ SPEC CHECKSUMS:
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
+  ParseCrashReporting: c5ea641e698d576f081f080dff06877ef831d30a
   SwiftyDrop: d94821084296482e717e0f4c07198a25f4a85140
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 

@@ -8,8 +8,10 @@
 
 import UIKit
 import Parse
+import SwiftyDrop
 
-class ResetPasswordViewController: UIViewController {
+
+class ResetPasswordViewController: UIViewController, VSReachability{
     @IBOutlet weak var emailField: UITextField!
 
     override func viewDidLoad() {
@@ -23,25 +25,58 @@ class ResetPasswordViewController: UIViewController {
     }
     
     @IBAction func passwordReset(sender: AnyObject) {
-        let email = self.emailField.text
-        let finalEmail = email!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        
-        // Send a request to reset a password
-        PFUser.requestPasswordResetForEmailInBackground(finalEmail)
-        
-        let alert = UIAlertController (title: "Password Reset", message: "An email containing information on how to reset your password has been sent to " + finalEmail + ".", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        if self.isConnectedToNetwork(){
+            reset()
+            
+        }else{
+            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
+        }
     }
+    
+    func reset () {
+        let email = self.emailField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        if email.characters.count >= 8 {
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+            PFUser.requestPasswordResetForEmailInBackground(email)
+        
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                SCLAlertView().showInfo("Atenção", subTitle: "Um email contendo infomação de como atualizar a senha foi enviada para \(email) .", closeButtonTitle: "OK")
+            })
+        }else {
+            Drop.down("Insira um email valido.", state: DropState.Info)
+        }
+        
+        
+    
     }
-    */
-
+    
+    // MARK: - Dismiss no teclado
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.becomeFirstResponder()
+        
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        animateViewMoving(true, moveValue: 300)
+        UIApplication.sharedApplication().statusBarHidden = true
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        animateViewMoving(false, moveValue: 300)
+        UIApplication.sharedApplication().statusBarHidden = false
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
 }

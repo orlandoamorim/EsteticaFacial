@@ -15,6 +15,7 @@
 		188654991BDC0A0F000190B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654951BDC0A0F000190B1 /* SignUpViewController.swift */; };
 		1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654961BDC0A0F000190B1 /* HomeViewController.swift */; };
 		1886549D1BDC0D8A000190B1 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886549C1BDC0D8A000190B1 /* SCLAlertView.swift */; };
+		18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */; };
 		18FAA1C91BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */; };
 		18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C81BDABCDC00EC3751 /* Paciente.swift */; };
 		20114B263BE62C431AEF5332 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C73DDC933BB7E09C4EF935 /* Pods.framework */; };
@@ -57,6 +58,7 @@
 		188654951BDC0A0F000190B1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		188654961BDC0A0F000190B1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1886549C1BDC0D8A000190B1 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
+		18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSReachability.swift; sourceTree = "<group>"; };
 		18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Paciente+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18FAA1C81BDABCDC00EC3751 /* Paciente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paciente.swift; sourceTree = "<group>"; };
 		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				B81B4A681BC344AE002A306F /* Assets.xcassets */,
 				B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */,
 				B81B4A6D1BC344AE002A306F /* Info.plist */,
+				18F6F1131BDD69E5008DA5B1 /* NetworkVerify */,
 				183D2F531BD9E83D0033BDA3 /* CoreData */,
 				1886549B1BDC0D6E000190B1 /* SCLAlertController */,
 			);
@@ -149,6 +152,14 @@
 				1886549C1BDC0D8A000190B1 /* SCLAlertView.swift */,
 			);
 			name = SCLAlertController;
+			sourceTree = "<group>";
+		};
+		18F6F1131BDD69E5008DA5B1 /* NetworkVerify */ = {
+			isa = PBXGroup;
+			children = (
+				18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */,
+			);
+			name = NetworkVerify;
 			sourceTree = "<group>";
 		};
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
@@ -415,6 +426,7 @@
 				18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */,
 				188654991BDC0A0F000190B1 /* SignUpViewController.swift in Sources */,
 				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
+				18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */,
 				1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */,
 				1886549D1BDC0D8A000190B1 /* SCLAlertView.swift in Sources */,
 				188654911BDBF430000190B1 /* PacientesTVCell.swift in Sources */,
