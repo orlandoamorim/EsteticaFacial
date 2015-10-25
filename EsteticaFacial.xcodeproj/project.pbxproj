@@ -186,8 +186,8 @@
 		B81B4A5D1BC344AE002A306F /* EsteticaFacial */ = {
 			isa = PBXGroup;
 			children = (
-				188654921BDC09FE000190B1 /* Login */,
 				B81B4A621BC344AE002A306F /* Main.storyboard */,
+				188654921BDC09FE000190B1 /* Login */,
 				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
 				188654901BDBF430000190B1 /* PacientesTVCell.swift */,
 				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
@@ -564,6 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.UFPI.EsteticaFacial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -577,6 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.UFPI.EsteticaFacial;
 				PRODUCT_NAME = "$(TARGET_NAME)";

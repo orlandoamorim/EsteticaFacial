@@ -741,10 +741,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="ais-tt-C8b"/>
+                                <exclude reference="AL8-DW-6Hm"/>
                                 <exclude reference="Emm-Pr-XN3"/>
                                 <exclude reference="X5Y-qJ-2jy"/>
-                                <exclude reference="AL8-DW-6Hm"/>
+                                <exclude reference="ais-tt-C8b"/>
                                 <exclude reference="v41-rj-xaG"/>
                                 <exclude reference="2c6-RK-U0p"/>
                             </mask>
@@ -886,17 +886,17 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="ZLO-Pf-Zc1"/>
+                                        <exclude reference="1iq-I9-9cs"/>
+                                        <exclude reference="Bqz-Zf-Nlv"/>
+                                        <exclude reference="HLq-nj-B4S"/>
+                                        <exclude reference="UpN-Jx-6a7"/>
+                                        <exclude reference="yJw-gd-K8N"/>
                                         <exclude reference="2rr-Bp-qTt"/>
                                         <exclude reference="HbP-Hg-tDP"/>
-                                        <exclude reference="yJw-gd-K8N"/>
-                                        <exclude reference="HLq-nj-B4S"/>
-                                        <exclude reference="1iq-I9-9cs"/>
-                                        <exclude reference="UpN-Jx-6a7"/>
-                                        <exclude reference="Bqz-Zf-Nlv"/>
+                                        <exclude reference="ZLO-Pf-Zc1"/>
                                         <exclude reference="xvY-N4-bJS"/>
-                                        <exclude reference="uDO-Hu-h9t"/>
                                         <exclude reference="B6q-ax-Z97"/>
+                                        <exclude reference="uDO-Hu-h9t"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1026,8 +1026,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Wvt-rQ-RdU"/>
                                 <exclude reference="9dK-Zs-M7S"/>
+                                <exclude reference="Wvt-rQ-RdU"/>
                                 <exclude reference="i4O-gC-Enp"/>
                                 <exclude reference="rTT-wZ-96H"/>
                             </mask>

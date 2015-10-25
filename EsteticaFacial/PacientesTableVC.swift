@@ -10,7 +10,6 @@
 
 import UIKit
 import Parse
-import Dodo
 import SwiftyDrop
 
 class PacientesTableVC: UITableViewController {
@@ -24,11 +23,6 @@ class PacientesTableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.view.dodo.topLayoutGuide = topLayoutGuide
-        self.view.dodo.bottomLayoutGuide = bottomLayoutGuide
-        
         
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
