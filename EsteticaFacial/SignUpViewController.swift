@@ -67,11 +67,12 @@ class SignUpViewController: UIViewController, VSReachability {
             newUser.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
                 
                 // Stop the spinner
-                spinner.stopAnimating()
                 if ((error) != nil) {
-                    SCLAlertView().showError("Erro", subTitle: "\(error)", closeButtonTitle: "OK")
+                    Drop.down("Verifique os dados inseridos.", state: DropState.Error)
                     
                 } else {
+                    spinner.stopAnimating()
+
                     SCLAlertView().showSuccess("Sucesso", subTitle: "Cadastro realizado.", closeButtonTitle: "OK", duration: 3.0)
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in

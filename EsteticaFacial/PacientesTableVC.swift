@@ -14,12 +14,8 @@ import SwiftyDrop
 
 class PacientesTableVC: UITableViewController,VSReachability {
     
-    var predicate:NSPredicate = NSPredicate()
-    
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
-    
-    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +27,6 @@ class PacientesTableVC: UITableViewController,VSReachability {
         //refreshControl.t = "Atualizar"
         self.refreshControl = refreshControl
         
-        // BarButtun Right
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-    
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,9 +42,15 @@ class PacientesTableVC: UITableViewController,VSReachability {
             })
         }else{
             let userName = PFUser.currentUser()?["username"] as? String
-
+            
+            // BarButtun Right
+            
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
+            
             // BarButtun Left
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@\(userName!)", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+            
+            update()
         }
     }
     
@@ -64,13 +62,11 @@ class PacientesTableVC: UITableViewController,VSReachability {
     // MARK: - Parse
     
     func update(){
-
+        
         if self.isConnectedToNetwork(){
-            if recordsParse.count == 0 {
-                Drop.down("Baixando Dados", state: .Info)
-                
-                updateParse()
-            }
+            Drop.down("Baixando Dados", state: .Info)
+            updateParse()
+            
         }else{
             Drop.down("Sem conexão com a Internet", state: DropState.Warning)
             self.refreshControl?.endRefreshing()
@@ -81,7 +77,7 @@ class PacientesTableVC: UITableViewController,VSReachability {
     
     func updateParse() {
         self.recordsParse.removeAllObjects()
-
+        
         let query = PFQuery(className:"Paciente")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
         query.orderByAscending("nome")
@@ -95,16 +91,15 @@ class PacientesTableVC: UITableViewController,VSReachability {
                     
                 }
                 Drop.down("Dados baixados com sucesso!", state: DropState.Success)
-
+                
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
             } else {
                 self.refreshControl?.endRefreshing()
                 Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                print("Error: \(error!) \(error!.userInfo)")
             }
         }
-    
+        
     }
     // MARK: - Table view data source
     
@@ -115,12 +110,12 @@ class PacientesTableVC: UITableViewController,VSReachability {
             self.tableView.backgroundView?.hidden = true
             return 1
         }
-
+        
         let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         
         messageLabel.text = "Nenhum dado de paciente disponivel. Por favor, puxe para baixo para atualizar. "
         messageLabel.textColor = UIColor.blackColor()
-        messageLabel.numberOfLines = 2
+        messageLabel.numberOfLines = 5
         messageLabel.textAlignment = NSTextAlignment.Center
         messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
         messageLabel.sizeToFit()
@@ -218,8 +213,8 @@ class PacientesTableVC: UITableViewController,VSReachability {
                 self.recordsParse.removeObjectAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }
-
-
+            
+            
             
             dataParse.deleteInBackgroundWithBlock({ (success, error) -> Void in
                 if error == nil {
