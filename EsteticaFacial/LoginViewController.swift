@@ -74,7 +74,7 @@ class LoginViewController: UIViewController, VSReachability{
                     })
                     
                 } else {
-                    SCLAlertView().showError("Erro", subTitle: "\(error)", closeButtonTitle: "OK")
+                    Drop.down("Nome de usuario ou senha incorretos.", state: DropState.Error)
                 }
             })
         }

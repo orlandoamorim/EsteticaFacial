@@ -53,7 +53,6 @@ class PacientesTableVC: UITableViewController,VSReachability {
 
             // BarButtun Left
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@\(userName!)", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
-            update()
         }
     }
     
@@ -110,8 +109,28 @@ class PacientesTableVC: UITableViewController,VSReachability {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        if recordsParse.count > 0 {
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            self.tableView.backgroundView?.hidden = true
+            return 1
+        }
+
+        let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        
+        messageLabel.text = "Nenhum dado de paciente disponivel. Por favor, puxe para baixo para atualizar. "
+        messageLabel.textColor = UIColor.blackColor()
+        messageLabel.numberOfLines = 2
+        messageLabel.textAlignment = NSTextAlignment.Center
+        messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+        messageLabel.sizeToFit()
+        
+        self.tableView.backgroundView = messageLabel
+        self.tableView.backgroundView?.hidden = false
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        return 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,7 +138,7 @@ class PacientesTableVC: UITableViewController,VSReachability {
         if recordsParse.count > 0 {
             return recordsParse.count
         }
-        return 1
+        return 0
     }
     
     
@@ -186,30 +205,31 @@ class PacientesTableVC: UITableViewController,VSReachability {
         return UITableViewCellEditingStyle.Delete
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        
-        
-        let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+            let nome = dataParse.objectForKey("nome") as! String
+            
+            Drop.down("Deletando ficha do paciente \(nome)", state: .Info)
+            if recordsParse.count == 1 {
+                self.recordsParse.removeObjectAtIndex(indexPath.row)
+                self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+            }else {
+                self.recordsParse.removeObjectAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
 
-        let btnDeletar = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Apagar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+
             
             dataParse.deleteInBackgroundWithBlock({ (success, error) -> Void in
                 if error == nil {
-                    Drop.down("Deletado com Sucesso", state: .Success)
-                    self.recordsParse.removeObjectAtIndex(indexPath.row)
-                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                    Drop.down("Ficha deletada com Sucesso.", state: .Success)
                 }else{
                     Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
                 }
             })
-            
-        })
-        
-        return [btnDeletar]
-        
+        }
     }
-    
-    
     
     // MARK: - Add Call
     
