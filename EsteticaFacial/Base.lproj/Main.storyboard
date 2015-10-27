@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EO8-by-FS0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aCj-p7-kO5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -19,38 +19,31 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PacientesCell" rowHeight="80" id="wWb-XI-QJy" customClass="PacientesTVCell" customModule="EsteticaFacial" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="63.5" id="YSg-xF-bYU"/>
-                                                <constraint firstAttribute="width" constant="63.5" id="nYL-wu-157"/>
+                                                <constraint firstAttribute="height" constant="64" id="Ilz-px-OBb"/>
+                                                <constraint firstAttribute="width" constant="64" id="mL0-JO-2qs"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
+                                            <rect key="frame" x="21" y="21" width="37" height="37"/>
+                                            <color key="color" red="0.0" green="0.24984693810325775" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
                                             <rect key="frame" x="79" y="41" width="513" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="ehr-MO-5Qq"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
-                                            <rect key="frame" x="21" y="21" width="37" height="37"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="37" id="Oct-rt-VTA"/>
-                                                <constraint firstAttribute="height" constant="37" id="WW8-zU-lxU"/>
-                                            </constraints>
-                                            <color key="color" red="0.0" green="0.24984693810325775" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                        </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
                                             <rect key="frame" x="79" y="8" width="513" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="RD0-Qq-HwC"/>
+                                                <constraint firstAttribute="height" constant="30" id="8hG-mQ-UFL"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -59,18 +52,19 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="bottom" secondItem="lNI-q9-8mZ" secondAttribute="bottomMargin" id="1wb-3M-fRL"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7.5" id="3Nv-ny-9vb"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="4zV-4y-gHJ"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" id="9gG-cR-Spg"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="top" secondItem="3U9-1i-aiV" secondAttribute="bottom" constant="-50" id="HIJ-68-AuD"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="JNb-IF-rut"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7.5" id="KUf-At-JcZ"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="UnI-Zi-Umq"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="Vki-Tk-oZR"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="TQg-aA-1Lj" secondAttribute="bottom" constant="0.5" id="jbf-6q-Z6W"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="-50" id="lqz-S7-Bq9"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="top" secondItem="N2z-pd-3pa" secondAttribute="bottom" constant="3" id="zIG-P4-jNr"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7" id="8RM-jn-7KK"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="AhO-Pp-pJu"/>
+                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="top" secondItem="N2z-pd-3pa" secondAttribute="top" id="CTf-14-r0y"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="21" id="OdP-8K-MS5"/>
+                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="centerY" secondItem="WJ7-MA-ZXz" secondAttribute="centerY" id="QUq-Ih-NIK"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="top" secondItem="N2z-pd-3pa" secondAttribute="bottom" constant="3" id="RJU-pK-Z0c"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="N2z-pd-3pa" secondAttribute="leading" id="XYY-aA-Ybg"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="bottom" secondItem="lNI-q9-8mZ" secondAttribute="bottomMargin" id="cor-UF-9wN"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="trailing" secondItem="N2z-pd-3pa" secondAttribute="trailing" id="fsb-r5-uEh"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="pwV-5D-fD1"/>
+                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="centerX" secondItem="WJ7-MA-ZXz" secondAttribute="centerX" id="sBR-16-hqX"/>
+                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" id="tlf-xL-LWa"/>
+                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="centerY" secondItem="lNI-q9-8mZ" secondAttribute="centerY" id="uqc-f2-W24"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -89,7 +83,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Pacientes" id="YeF-3Q-hZW"/>
                     <connections>
-                        <segue destination="rFl-TG-Dfu" kind="presentation" identifier="AUSegue" id="d3Y-0V-2WP"/>
+                        <segue destination="rFl-TG-Dfu" kind="showDetail" identifier="UpdateSegue" id="d3Y-0V-2WP"/>
+                        <segue destination="rFl-TG-Dfu" kind="presentation" identifier="AddSegue" id="wFd-Dn-OWh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0D-xu-mm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -210,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2250" y="518"/>
+            <point key="canvasLocation" x="1642" y="1270"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="RhF-pX-tOl">
@@ -325,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0V-Cr-2jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2941" y="518"/>
+            <point key="canvasLocation" x="2333" y="1270"/>
         </scene>
         <!--Pontos-->
         <scene sceneID="tDc-sS-FzT">
@@ -394,12 +389,12 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2941" y="1239"/>
+            <point key="canvasLocation" x="2333" y="1991"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Urn-A6-DYk">
             <objects>
-                <navigationController storyboardIdentifier="PacientesTableVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EO8-by-FS0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EO8-by-FS0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rpx-Rn-PSQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -414,6 +409,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xqn-AH-SwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="223" y="518"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="Abb-2S-AwS">
+            <objects>
+                <splitViewController storyboardIdentifier="PacientesTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aCj-p7-kO5" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="EO8-by-FS0" kind="relationship" relationship="masterViewController" id="bCU-mc-ioh"/>
+                        <segue destination="rFl-TG-Dfu" kind="relationship" relationship="detailViewController" id="gBZ-TC-cMO"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zjq-HQ-vMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-498" y="1275"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="64f-sF-hqR">
@@ -432,7 +440,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhg-Z3-vUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="518"/>
+            <point key="canvasLocation" x="803" y="1275"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="gt2-OE-OwJ">
@@ -548,7 +556,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlD-bV-PTU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oie-62-yWR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1215" y="-194"/>
+            <point key="canvasLocation" x="-1186" y="-194"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="XP0-3k-lUB">
@@ -705,7 +713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lph-38-3db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-527" y="-194"/>
+            <point key="canvasLocation" x="-498" y="-194"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="B1M-5e-riG">
@@ -925,12 +933,11 @@
                     <connections>
                         <outlet property="btnSair" destination="UTO-iR-GeR" id="bUE-Tj-njx"/>
                         <outlet property="userNameLabel" destination="Jsd-2G-4PL" id="1aF-e5-oee"/>
-                        <segue destination="EO8-by-FS0" kind="presentation" identifier="LogadoSegue" id="81w-K7-QaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsf-QH-gUb" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-527" y="518"/>
+            <point key="canvasLocation" x="-498" y="518"/>
         </scene>
     </scenes>
     <resources>
@@ -942,6 +949,7 @@
         <image name="user" width="126" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7A4-aF-F2x"/>
+        <segue reference="d3Y-0V-2WP"/>
+        <segue reference="edP-Kv-ZE1"/>
     </inferredMetricsTieBreakers>
 </document>

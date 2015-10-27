@@ -146,6 +146,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        
         self.iniciar_dicionarios()
         
         if parseObject != nil {
@@ -254,17 +255,19 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             }
         }else {
             self.parseObject = PFObject(className: "Paciente")
+            self.type = "Add"
+        
             
+            //BTN Cancelar
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed:")
         }
         
         
-        
-        //BTN Cancelar
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelPressed:")
+
         
         if type == "Add" {
             //BTN Salvar
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "verify:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "verify:")
         }else if type == "Update" {
             //BTN Update
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.Plain, target: self, action: "verify:")
@@ -278,6 +281,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     //MARK: - Pressionou o btn Cancelar
     
     func cancelPressed(button: UIBarButtonItem){
+        self.navigationController?.popViewControllerAnimated(true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -712,4 +716,15 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
     }
     
+//    //MARK: - Split View
+//    
+//    func splitViewController(splitController: UISplitViewController, willHideViewController viewController: UIViewController, withBarButtonItem barButtonItem: UIBarButtonItem, forPopoverController popoverController: UIPopoverController) {
+//        self.navigationItem.setLeftBarButtonItem(barButtonItem, animated: true)
+//    }
+//    
+//    func splitViewController(splitController: UISplitViewController, willShowViewController viewController: UIViewController, invalidatingBarButtonItem barButtonItem: UIBarButtonItem) {
+//        // Called when the view is shown again in the split view, invalidating the button and popover controller.
+//        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
+//    }
+//    
 }

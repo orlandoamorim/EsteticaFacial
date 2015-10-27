@@ -6,13 +6,14 @@
 //  Copyright © 2015 Ricardo Freitas. All rights reserved.
 //
 
-// Segue Name : AUSegue -> A mesma segue sera usada tanto para adicao como edicao de dados do usuario.
+// Segue Name : UpdateSegue -> Atualiza os dados.
+//              AddSegue    -> Add dados.
 
 import UIKit
 import Parse
 import SwiftyDrop
 
-class PacientesTableVC: UITableViewController,VSReachability {
+class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate {
     
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
@@ -20,13 +21,19 @@ class PacientesTableVC: UITableViewController,VSReachability {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Adição para funcionar melhor no iPad
+        self.splitViewController!.delegate = self
+        self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        
+
+        
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "update", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Puxe para Atualizar...")
         //refreshControl.t = "Atualizar"
         self.refreshControl = refreshControl
-        
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -187,10 +194,27 @@ class PacientesTableVC: UITableViewController,VSReachability {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if recordsParse.count > 0 {
-            self.performSegueWithIdentifier("AUSegue", sender: indexPath)
+            self.performSegueWithIdentifier("UpdateSegue", sender: indexPath)
         }
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "UpdateSegue" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let controller = nav.viewControllers[0] as! AUPacienteVC
+            if let indexPath:NSIndexPath = sender as? NSIndexPath {
+                controller.type = "Update"
+                
+                let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+                controller.parseObject = dataParse
+            }
+        }
+        
+
+    }
+    
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
@@ -229,28 +253,17 @@ class PacientesTableVC: UITableViewController,VSReachability {
     // MARK: - Add Call
     
     func add(button: UIBarButtonItem){
-        self.performSegueWithIdentifier("AUSegue", sender: nil)
+        self.performSegueWithIdentifier("AddSegue", sender: nil)
     }
+    
+    // MARK: - Mostra a tela com os dados do usuario (opcao de deslogar)
     
     func userScreen(button: UIBarButtonItem){
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Home")
         self.presentViewController(viewController, animated: true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let nav = segue.destinationViewController as! UINavigationController
-        let controller = nav.topViewController as! AUPacienteVC
-        if let indexPath:NSIndexPath = sender as? NSIndexPath {
-            controller.type = "Update"
-            
-            let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
-            controller.parseObject = dataParse
-        }else{
-            controller.type = "Add"
-        }
-    }
-    
+
     // MARK: - Formatador
     
     func dataFormatter() -> NSDateFormatter {
@@ -263,4 +276,12 @@ class PacientesTableVC: UITableViewController,VSReachability {
         return formatador
     }
     
+    // MARK: - UISplitViewControllerDelegate
+    //Adição para funcionar melhor no iPad
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
+        
+        return true
+        
+    }
+ 
 }
