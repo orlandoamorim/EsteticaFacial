@@ -34,13 +34,15 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         //refreshControl.t = "Atualizar"
         self.refreshControl = refreshControl
 
+        // BarButtun Right
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@usuario", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
+        
         if (PFUser.currentUser() == nil) {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
@@ -48,17 +50,18 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 self.presentViewController(viewController, animated: true, completion: nil)
             })
         }else{
-            let userName = PFUser.currentUser()?["username"] as? String
-            
-            // BarButtun Right
-            
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
+            let userName = PFUser.currentUser()!.username!
             
             // BarButtun Left
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@\(userName!)", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+            self.navigationItem.leftBarButtonItem?.title = "@\(userName)"
             
             update()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -200,16 +203,20 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        let nav = segue.destinationViewController as! UINavigationController
+        let controller = nav.viewControllers[0] as! AUPacienteVC
         if segue.identifier == "UpdateSegue" {
-            let nav = segue.destinationViewController as! UINavigationController
-            let controller = nav.viewControllers[0] as! AUPacienteVC
+
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
                 controller.type = "Update"
                 
                 let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
                 controller.parseObject = dataParse
             }
+        }else if segue.identifier == "AddSegue" {
+            controller.type = "Add"
+            
+        
         }
         
 

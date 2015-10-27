@@ -48,8 +48,4 @@ class HomeViewController: UIViewController,VSReachability{
         
     }
 
-    @IBAction func voltar(sender: UIButton) {
-        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PacientesTableVC")
-        self.presentViewController(viewController, animated: true, completion: nil)
-    }
 }

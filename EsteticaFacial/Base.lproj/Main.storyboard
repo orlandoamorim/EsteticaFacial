@@ -81,7 +81,9 @@
                             <outlet property="delegate" destination="ghm-n5-Tl9" id="kEo-F3-6wa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pacientes" id="YeF-3Q-hZW"/>
+                    <navigationItem key="navigationItem" title="Pacientes" id="YeF-3Q-hZW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jQt-O8-M5b"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="rFl-TG-Dfu" kind="showDetail" identifier="UpdateSegue" id="d3Y-0V-2WP"/>
                         <segue destination="rFl-TG-Dfu" kind="presentation" identifier="AddSegue" id="wFd-Dn-OWh"/>
@@ -200,6 +202,7 @@
                         <outlet property="btn_imagem_frontal" destination="GUG-4q-bmX" id="oHR-hP-ups"/>
                         <outlet property="btn_imagem_nasal" destination="O9s-Dx-hPg" id="qVW-KQ-5uV"/>
                         <outlet property="btn_imagem_perfil" destination="idu-Rb-pa4" id="Lzn-Kd-fP8"/>
+                        <outlet property="header" destination="Nn3-j9-kve" id="HA9-hW-8be"/>
                         <outlet property="tableView" destination="LMD-zm-wjM" id="ZEO-Wl-NEL"/>
                     </connections>
                 </viewController>
@@ -421,7 +424,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zjq-HQ-vMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-498" y="1275"/>
+            <point key="canvasLocation" x="-498" y="1225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="64f-sF-hqR">
@@ -918,7 +921,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="voltar:" destination="LNA-GT-9Lg" eventType="touchUpInside" id="POX-VK-RUw"/>
+                                    <segue destination="aCj-p7-kO5" kind="presentation" identifier="CloseSegue" id="fK2-NW-RCT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -931,7 +934,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnSair" destination="UTO-iR-GeR" id="bUE-Tj-njx"/>
                         <outlet property="userNameLabel" destination="Jsd-2G-4PL" id="1aF-e5-oee"/>
                     </connections>
                 </viewController>
@@ -949,7 +951,7 @@
         <image name="user" width="126" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d3Y-0V-2WP"/>
+        <segue reference="gBZ-TC-cMO"/>
         <segue reference="edP-Kv-ZE1"/>
     </inferredMetricsTieBreakers>
 </document>

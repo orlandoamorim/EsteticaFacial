@@ -30,6 +30,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     @IBOutlet weak var btn_imagem_perfil: UIButton!
     @IBOutlet weak var btn_imagem_nasal: UIButton!
     
+    @IBOutlet weak var header: UIView!
     
     var imagem_frontal:UIImage = UIImage()
     var imagem_perfil:UIImage = UIImage()
@@ -255,26 +256,47 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             }
         }else {
             self.parseObject = PFObject(className: "Paciente")
-            self.type = "Add"
-        
-            
-            //BTN Cancelar
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed:")
         }
         
         
 
         
         if type == "Add" {
+            //BTN Cancelar
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed:")
             //BTN Salvar
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "verify:")
+            initializeForm()
+
         }else if type == "Update" {
             //BTN Update
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.Plain, target: self, action: "verify:")
+            initializeForm()
+
+        }else {
+            let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            
+            messageLabel.text = "Clique em uma ficha para carregar os dados. "
+            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.numberOfLines = 5
+            messageLabel.textAlignment = NSTextAlignment.Center
+            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+            messageLabel.sizeToFit()
+            
+            self.tableView.backgroundView = messageLabel
+            self.tableView.backgroundView?.hidden = false
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+            self.header.hidden = true
+            self.form.removeFormSectionAtIndex(1)
+            self.form.removeFormSectionAtIndex(0)
+
+            self.tableView.reloadData()
+            self.title = "@UFPI"
         }
-        self.view.tintColor = UIColor(red: 76/255, green: 107/255, blue: 148/255, alpha: 1.0)
         
-        initializeForm()
+        
+        self.view.tintColor = UIColor(red: 76/255, green: 107/255, blue: 148/255, alpha: 1.0)
         
     }
     
