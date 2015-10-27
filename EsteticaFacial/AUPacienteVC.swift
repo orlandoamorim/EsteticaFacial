@@ -172,8 +172,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         print("Baixando |img_frontal| -> \(Float(progress))")
                 }
                 
-            }else{
-                btn_imagem_frontal.setImage(UIImage(named: "modelo_frontal"), forState: UIControlState.Normal)
             }
             
             //IMG PERFIL
@@ -190,8 +188,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         print("Baixando |img_perfil| -> \(Float(progress))")
                 }
                 
-            }else{
-                btn_imagem_perfil.setImage(UIImage(named: "modelo_perfil"), forState: UIControlState.Normal)
             }
             
             //IMG NASAL
@@ -208,8 +204,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         print("Baixando |img_nasal| -> \(Float(progress))")
                 }
                 
-            }else{
-                btn_imagem_nasal.setImage(UIImage(named: "modelo_nasal"), forState: UIControlState.Normal)
             }
             
             
