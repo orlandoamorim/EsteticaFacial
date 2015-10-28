@@ -400,8 +400,11 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 parseObject.setObject(imageFileFrontal, forKey: "img_frontal")
                 
                 //pontos_frontal
-                let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
-                parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
+                if self.pontos_frontal! != self.pontos_frontal_update! {
+                    print("pontos_frontal")
+                    let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
+                    parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
+                }
                 
                 
             }
@@ -418,8 +421,11 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 parseObject.setObject(imageFilePerfil, forKey: "img_perfil")
                 
                 //pontos_perfil
-                let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
-                parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
+                if self.pontos_perfil! != self.pontos_perfil_update! {
+                    print("pontos_perfil")
+                    let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
+                    parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
+                }
             }
             
         }
@@ -435,8 +441,11 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 parseObject.setObject(imageFileNasal, forKey: "img_nasal")
                 
                 //pontos_nasal
-                let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
-                parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
+                if self.pontos_nasal! != self.pontos_nasal_update! {
+                    print("pontos_nasal")
+                    let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
+                    parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
+                }
             }
         }
         
