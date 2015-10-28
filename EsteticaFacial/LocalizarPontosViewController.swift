@@ -97,7 +97,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
     
     @IBAction func confirmar(sender: AnyObject) {
         delegate.marcar_pontos(pontos_localizados!)
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     @IBAction func gerenciar_longo_toque(recognizer:UILongPressGestureRecognizer){

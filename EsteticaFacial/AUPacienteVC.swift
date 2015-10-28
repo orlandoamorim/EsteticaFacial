@@ -561,15 +561,14 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if error == nil {
-                self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                    alertView.hideView()
-                    
-                    let alertView = SCLAlertView()
-                    alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                })
-            }else {
                 alertView.hideView()
                 
+                let alertView = SCLAlertView()
+                alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                
+            }else {
+                alertView.hideView()
+                let alertView = SCLAlertView()
                 alertView.showError("UFPI", subTitle: "Algum erro ocorreu ao salvar o arquivo. Informe o erro a equipe de desenvolvimento", closeButtonTitle: "OK")
             }
         }
@@ -676,10 +675,8 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
         if segue.identifier == "segue_img_frontal"{
             if let camera = segue.destinationViewController as? CameraViewController{
                 camera.delegate = self
@@ -738,15 +735,4 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
     }
     
-//    //MARK: - Split View
-//    
-//    func splitViewController(splitController: UISplitViewController, willHideViewController viewController: UIViewController, withBarButtonItem barButtonItem: UIBarButtonItem, forPopoverController popoverController: UIPopoverController) {
-//        self.navigationItem.setLeftBarButtonItem(barButtonItem, animated: true)
-//    }
-//    
-//    func splitViewController(splitController: UISplitViewController, willShowViewController viewController: UIViewController, invalidatingBarButtonItem barButtonItem: UIBarButtonItem) {
-//        // Called when the view is shown again in the split view, invalidating the button and popover controller.
-//        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
-//    }
-//    
 }

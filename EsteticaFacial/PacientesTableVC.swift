@@ -18,6 +18,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     
+    var maxCount: Int = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,34 +83,49 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             Drop.down("Sem conexão com a Internet", state: DropState.Warning)
             self.refreshControl?.endRefreshing()
         }
-        
-        
     }
     
     func updateParse() {
-        self.recordsParse.removeAllObjects()
         
         let query = PFQuery(className:"Paciente")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        query.orderByAscending("nome")
-        query.findObjectsInBackgroundWithBlock {
-            (objects:[PFObject]?, error:NSError?) -> Void in
+        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
             if error == nil {
-                if let objects = objects {
-                    for object in objects {
-                        self.recordsParse.addObject(object)
-                    }
-                    
-                }
-                Drop.down("Dados baixados com sucesso!", state: DropState.Success)
+                self.maxCount = Int(count)
                 
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            } else {
+                if self.maxCount > self.recordsParse.count {
+                    self.recordsParse.removeAllObjects()
+                    
+                    query.orderByAscending("nome")
+                    query.findObjectsInBackgroundWithBlock {
+                        (objects:[PFObject]?, error:NSError?) -> Void in
+                        if error == nil {
+                            if let objects = objects {
+                                for object in objects {
+                                    self.recordsParse.addObject(object)
+                                }
+                                
+                            }
+                            Drop.down("Dados baixados com sucesso!", state: DropState.Success)
+                            
+                            self.tableView.reloadData()
+                            self.refreshControl?.endRefreshing()
+                        } else {
+                            self.refreshControl?.endRefreshing()
+                            Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                        }
+                    }
+                }else {
+                    Drop.down("Todas as fichas presente no servidor estao sendo apresentadas.", state: DropState.Info)
+                    
+                    self.refreshControl?.endRefreshing()
+                }
+            }else{
                 self.refreshControl?.endRefreshing()
                 Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
             }
         }
+
         
     }
     // MARK: - Table view data source
