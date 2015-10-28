@@ -37,6 +37,7 @@ class HomeViewController: UIViewController,VSReachability{
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                
                 self.presentViewController(viewController, animated: true, completion: nil)
             })
             

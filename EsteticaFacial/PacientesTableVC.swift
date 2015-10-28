@@ -15,6 +15,7 @@ import SwiftyDrop
 
 class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate {
     
+    
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     
@@ -27,7 +28,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         self.splitViewController!.delegate = self
         self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-
         
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
@@ -86,7 +86,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     }
     
     func updateParse() {
-        
+        maxCount = 0
         let query = PFQuery(className:"Paciente")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
         query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
@@ -229,6 +229,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 
                 let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
                 controller.parseObject = dataParse
+                
             }
         }else if segue.identifier == "AddSegue" {
             controller.type = "Add"
@@ -250,10 +251,17 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            //Criando um objeto do tipo NSNOtitcationCenter
+            
+            let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+            //ENVIANDO os dados por Object
+            centroDeNotificacao.postNotificationName("mostrarAviso", object: nil)
+            
             let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
             let nome = dataParse.objectForKey("nome") as! String
             
             Drop.down("Deletando ficha do paciente \(nome)", state: .Info)
+            
             if recordsParse.count == 1 {
                 self.recordsParse.removeObjectAtIndex(indexPath.row)
                 self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)

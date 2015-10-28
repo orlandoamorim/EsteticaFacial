@@ -147,6 +147,11 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        //Criando nosso Centro de Notificacao
+        let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        //Na linha abaixo ele fica observando quando o "DeletouFicha" for chamado  e quando isso acontece ele executa o metodo mostrarAviso
+        centroDeNotificacao.addObserver(self, selector: "mostrarAviso", name: "mostrarAviso", object: nil)
+        
         
         self.iniciar_dicionarios()
         
@@ -168,12 +173,29 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                     if error == nil {
                         self.btn_imagem_frontal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
                         self.imagem_frontal = UIImage(data: data!)!
+                        
+                        
+                        //DIC FRONTAL
+                        if let pontos_frontal = self.parseObject.objectForKey("pontos_frontal") as? PFFile{
+                            
+                            pontos_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                                if error == nil {
+                                    self.pontos_frontal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                    self.pontos_frontal_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                }
+                                
+                                }) { (progress) -> Void in
+                                    print("Baixando |pontos_frontal| -> \(Float(progress))")
+                            }
+                        }
                     }
                     
                     }) { (progress) -> Void in
                         print("Baixando |img_frontal| -> \(Float(progress))")
                 }
                 
+            }else{
+                self.imagem_frontal = UIImage(named: "modelo_frontal")!
             }
             
             //IMG PERFIL
@@ -184,12 +206,27 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         self.btn_imagem_perfil.setImage(UIImage(data: data!), forState: UIControlState.Normal)
                         self.imagem_perfil = UIImage(data: data!)!
                         
+                        //DIC PERFIL
+                        if let pontos_perfil = self.parseObject.objectForKey("pontos_perfil") as? PFFile{
+                            
+                            pontos_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                                if error == nil {
+                                    self.pontos_perfil = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                    self.pontos_perfil_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                }
+                                
+                                }) { (progress) -> Void in
+                                    print("Baixando |pontos_perfil| -> \(Float(progress))")
+                            }
+                        }
                     }
                     
                     }) { (progress) -> Void in
                         print("Baixando |img_perfil| -> \(Float(progress))")
                 }
                 
+            }else{
+                self.imagem_frontal = UIImage(named: "modelo_perfil")!
             }
             
             //IMG NASAL
@@ -200,60 +237,31 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                         self.btn_imagem_nasal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
                         self.imagem_nasal = UIImage(data: data!)!
                         
+                        //DIC NASAL
+                        if let pontos_nasal = self.parseObject.objectForKey("pontos_nasal") as? PFFile{
+                            
+                            pontos_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                                if error == nil {
+                                    self.pontos_nasal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                    
+                                    self.pontos_nasal_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
+                                }
+                                
+                                }) { (progress) -> Void in
+                                    print("Baixando |pontos_nasal| -> \(Float(progress))")
+                            }
+                        }
+                        
                     }
                     
                     }) { (progress) -> Void in
                         print("Baixando |img_nasal| -> \(Float(progress))")
                 }
                 
+            }else{
+                self.imagem_frontal = UIImage(named: "modelo_nasal")!
             }
             
-            
-            
-            
-            //DIC FRONTAL
-            if let pontos_frontal = parseObject.objectForKey("pontos_frontal") as? PFFile{
-                
-                pontos_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                    if error == nil {
-                        self.pontos_frontal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                        self.pontos_frontal_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                    }
-                    
-                    }) { (progress) -> Void in
-                        print("Baixando |pontos_frontal| -> \(Float(progress))")
-                }
-            }
-            
-            //DIC PERFIL
-            if let pontos_perfil = parseObject.objectForKey("pontos_perfil") as? PFFile{
-                
-                pontos_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                    if error == nil {
-                        self.pontos_perfil = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                        self.pontos_perfil_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                    }
-                    
-                    }) { (progress) -> Void in
-                        print("Baixando |pontos_perfil| -> \(Float(progress))")
-                }
-            }
-            
-            
-            //DIC NASAL
-            if let pontos_nasal = parseObject.objectForKey("pontos_nasal") as? PFFile{
-                
-                pontos_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                    if error == nil {
-                        self.pontos_nasal = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                        
-                        self.pontos_nasal_update = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue]
-                    }
-                    
-                    }) { (progress) -> Void in
-                        print("Baixando |pontos_nasal| -> \(Float(progress))")
-                }
-            }
         }else {
             self.parseObject = PFObject(className: "Paciente")
         }
@@ -274,25 +282,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             initializeForm()
 
         }else {
-            let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            
-            messageLabel.text = "Clique em uma ficha para carregar os dados. "
-            messageLabel.textColor = UIColor.blackColor()
-            messageLabel.numberOfLines = 5
-            messageLabel.textAlignment = NSTextAlignment.Center
-            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
-            messageLabel.sizeToFit()
-            
-            self.tableView.backgroundView = messageLabel
-            self.tableView.backgroundView?.hidden = false
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
-            self.header.hidden = true
-            self.form.removeFormSectionAtIndex(1)
-            self.form.removeFormSectionAtIndex(0)
-
-            self.tableView.reloadData()
-            self.title = "@UFPI"
+            mostrarAviso()
         }
         
         
@@ -305,6 +295,33 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     func cancelPressed(button: UIBarButtonItem){
         self.navigationController?.popViewControllerAnimated(true)
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - MostrarAviso Tela Sem Dados
+    
+    func mostrarAviso(){
+        let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        
+        messageLabel.text = "Clique em uma ficha para carregar os dados. "
+        messageLabel.textColor = UIColor.blackColor()
+        messageLabel.numberOfLines = 5
+        messageLabel.textAlignment = NSTextAlignment.Center
+        messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+        messageLabel.sizeToFit()
+        
+        self.tableView.backgroundView = messageLabel
+        self.tableView.backgroundView?.hidden = false
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        self.header.hidden = true
+        self.form.removeFormSectionAtIndex(1)
+        self.form.removeFormSectionAtIndex(0)
+        
+        self.navigationItem.rightBarButtonItem = nil
+        
+        self.tableView.reloadData()
+        self.title = "@UFPI"
+
     }
     
     //MARK: - Pressionou o btn Salvar
@@ -382,6 +399,10 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 parseObject.setObject(imageFileThumb, forKey: "thumb_frontal")
                 parseObject.setObject(imageFileFrontal, forKey: "img_frontal")
                 
+                //pontos_frontal
+                let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
+                parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
+                
                 
             }
         }
@@ -395,6 +416,10 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 
                 parseObject.setObject(imageFileThumb, forKey: "thumb_perfil")
                 parseObject.setObject(imageFilePerfil, forKey: "img_perfil")
+                
+                //pontos_perfil
+                let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
+                parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
             }
             
         }
@@ -408,22 +433,12 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 
                 parseObject.setObject(imageFileThumb, forKey: "thumb_nasal")
                 parseObject.setObject(imageFileNasal, forKey: "img_nasal")
+                
+                //pontos_nasal
+                let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
+                parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
             }
         }
-        
-        //Pontos
-        
-        //pontos_frontal
-        let pontos_frontal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_frontal!))!
-        parseObject.setObject(pontos_frontal, forKey: "pontos_frontal")
-        
-        //pontos_perfil
-        let pontos_perfil:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_perfil!))!
-        parseObject.setObject(pontos_perfil, forKey: "pontos_perfil")
-        
-        //pontos_nasal
-        let pontos_nasal:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(self.pontos_nasal!))!
-        parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
         
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if error == nil {
@@ -431,7 +446,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                     alertView.hideView()
                     
                     let alertView = SCLAlertView()
-                    alertView.showSuccess("UFPI", subTitle: "Dados atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                 })
             }else {
                 alertView.hideView()
@@ -493,7 +508,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         //Imagens
         
         if btn_imagem_frontal.currentImage != nil{
-            if self.imagem_frontal != btn_imagem_frontal.currentImage! {
+            if !self.imageIgual(self.imagem_frontal, image2: btn_imagem_frontal.currentImage!){
                 print("btn_imagem_frontal")
                 let thumb_frontal = self.criar_thumbnail((btn_imagem_frontal.currentImage)!)
                 
@@ -508,7 +523,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
         
         if btn_imagem_perfil.currentImage != nil{
-            if self.imagem_perfil != btn_imagem_perfil.currentImage! {
+            if !self.imageIgual(self.imagem_perfil, image2: btn_imagem_perfil.currentImage!) {
                 print("btn_imagem_perfil")
                 let thumb_perfil = self.criar_thumbnail((btn_imagem_perfil.currentImage)!)
                 
@@ -521,7 +536,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
         
         if btn_imagem_nasal.currentImage != nil{
-            if self.imagem_nasal != btn_imagem_nasal.currentImage! {
+            if !self.imageIgual(self.imagem_nasal, image2: btn_imagem_nasal.currentImage!){
                 print("btn_imagem_nasal")
                 let thumb_nasal = self.criar_thumbnail((btn_imagem_nasal.currentImage)!)
                 
@@ -561,11 +576,17 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if error == nil {
-                alertView.hideView()
-                
-                let alertView = SCLAlertView()
-                alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                
+                if success {
+                    alertView.hideView()
+                    
+                    let alertView = SCLAlertView()
+                    alertView.showSuccess("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                }else{
+                    alertView.hideView()
+                    let alertView = SCLAlertView()
+                    alertView.showError("UFPI", subTitle: "Algum erro ocorreu ao salvar o arquivo. Informe o erro a equipe de desenvolvimento", closeButtonTitle: "OK")
+                }
+
             }else {
                 alertView.hideView()
                 let alertView = SCLAlertView()
@@ -654,6 +675,10 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             "Asa_Direita":NSValue(CGPoint: CGPointMake(1740, 1337)),
             "Juncao_Esquerda":NSValue(CGPoint: CGPointMake(200, 1588)),
             "Juncao_Direita":NSValue(CGPoint: CGPointMake(1683, 1657))]
+        
+        self.pontos_frontal_update = pontos_frontal
+        self.pontos_nasal_update = pontos_nasal
+        self.pontos_perfil_update = pontos_perfil
     }
     
     // MARK: - Criar ThumbNail
@@ -733,6 +758,13 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         if flag==2{
             self.pontos_nasal = dic
         }
+    }
+    
+    func imageIgual(image1:UIImage, image2:UIImage)->Bool{
+        let imageData1:NSData = UIImageJPEGRepresentation(image1, 1.0)!
+        let imageData2:NSData = UIImageJPEGRepresentation(image2, 1.0)!
+        
+        return imageData1.isEqualToData(imageData2)
     }
     
 }
