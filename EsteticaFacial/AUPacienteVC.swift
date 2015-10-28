@@ -226,7 +226,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 }
                 
             }else{
-                self.imagem_frontal = UIImage(named: "modelo_perfil")!
+                self.imagem_perfil = UIImage(named: "modelo_perfil")!
             }
             
             //IMG NASAL
@@ -259,7 +259,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 }
                 
             }else{
-                self.imagem_frontal = UIImage(named: "modelo_nasal")!
+                self.imagem_nasal = UIImage(named: "modelo_nasal")!
             }
             
         }else {

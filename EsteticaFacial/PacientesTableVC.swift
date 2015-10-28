@@ -38,8 +38,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
 
         // BarButtun Right
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "@usuario", style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+        let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
+        let refreshBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refresh:")
+        
+        self.navigationItem.rightBarButtonItems = [addBtn, refreshBtn]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -52,10 +55,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 self.presentViewController(viewController, animated: true, completion: nil)
             })
         }else{
-            let userName = PFUser.currentUser()!.username!
-            
-            // BarButtun Left
-            self.navigationItem.leftBarButtonItem?.title = "@\(userName)"
             
             update()
         }
@@ -125,7 +124,44 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
             }
         }
+    }
+    
+    // MARK: - Add Call
+    
+    func refresh(button: UIBarButtonItem){
+        
+        if self.isConnectedToNetwork(){
+            Drop.down("Baixando Dados", state: .Info)
+            
+            
+            self.recordsParse.removeAllObjects()
+            
+            let query = PFQuery(className:"Paciente")
+            query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+            query.orderByAscending("nome")
+            query.findObjectsInBackgroundWithBlock {
+                (objects:[PFObject]?, error:NSError?) -> Void in
+                if error == nil {
+                    if let objects = objects {
+                        for object in objects {
+                            self.recordsParse.addObject(object)
+                        }
+                        self.maxCount = objects.count
+                    }
+                    Drop.down("Dados baixados com sucesso!", state: DropState.Success)
+                    
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                } else {
+                    self.refreshControl?.endRefreshing()
+                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                }
+            }
 
+            
+        }else{
+            Drop.down("Sem conexão com a Internet", state: DropState.Warning)
+        }
         
     }
     // MARK: - Table view data source
