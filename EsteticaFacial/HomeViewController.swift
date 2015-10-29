@@ -46,4 +46,14 @@ class HomeViewController: UIViewController,VSReachability{
         }  
     }
     
+    @IBAction func dismis(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    @IBAction func carregarImagemUsuario(sender: UITapGestureRecognizer) {
+        
+        
+    }
+    
+    
 }

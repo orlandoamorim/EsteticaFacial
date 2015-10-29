@@ -98,18 +98,18 @@
                             <outlet property="delegate" destination="ghm-n5-Tl9" id="kEo-F3-6wa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pacientes" id="YeF-3Q-hZW">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jQt-O8-M5b"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Pacientes" id="YeF-3Q-hZW"/>
                     <connections>
                         <outlet property="searchBar" destination="6Rc-94-EWa" id="WI8-Qu-lJG"/>
                         <segue destination="rFl-TG-Dfu" kind="showDetail" identifier="UpdateSegue" id="d3Y-0V-2WP"/>
                         <segue destination="rFl-TG-Dfu" kind="presentation" identifier="AddSegue" id="wFd-Dn-OWh"/>
+                        <segue destination="LNA-GT-9Lg" kind="presentation" identifier="UserSegue" id="Shw-ae-WCE"/>
+                        <segue destination="d3Y-PF-gsi" kind="presentation" identifier="SettingsSegue" id="iCp-X2-uQe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0D-xu-mm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="518"/>
+            <point key="canvasLocation" x="901" y="462"/>
         </scene>
         <!--PacienteVC-->
         <scene sceneID="2K7-eF-cgP">
@@ -422,7 +422,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xqn-AH-SwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223" y="518"/>
+            <point key="canvasLocation" x="223" y="462"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Abb-2S-AwS">
@@ -435,7 +435,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zjq-HQ-vMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-498" y="1264"/>
+            <point key="canvasLocation" x="-466" y="462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="64f-sF-hqR">
@@ -537,6 +537,11 @@
                                     <constraint firstItem="dx6-fC-oAe" firstAttribute="top" secondItem="yUf-vz-kE2" secondAttribute="bottom" constant="57" id="vAo-M9-HAj"/>
                                     <constraint firstAttribute="height" constant="346" id="ziG-mF-oM2"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.47058823529999999" green="0.7725490196" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -570,7 +575,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlD-bV-PTU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oie-62-yWR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1186" y="-194"/>
+            <point key="canvasLocation" x="3023" y="-506"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="XP0-3k-lUB">
@@ -697,6 +702,11 @@
                                     <constraint firstItem="QIU-nm-dmT" firstAttribute="centerX" secondItem="wZf-Yd-G9e" secondAttribute="centerX" constant="0.5" id="yJw-gd-K8N"/>
                                     <constraint firstItem="vKf-rK-smK" firstAttribute="top" secondItem="4p5-o6-xaO" secondAttribute="bottom" constant="-4" id="zJl-s7-0dx"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="1iq-I9-9cs"/>
@@ -727,7 +737,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lph-38-3db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-498" y="-194"/>
+            <point key="canvasLocation" x="2310" y="-931"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="B1M-5e-riG">
@@ -806,6 +816,11 @@
                                     <constraint firstItem="Fh9-NN-1ID" firstAttribute="top" secondItem="NUF-mJ-5vj" secondAttribute="top" constant="14" id="xbb-8f-Y47"/>
                                     <constraint firstItem="efw-tC-hUf" firstAttribute="top" secondItem="Fh9-NN-1ID" secondAttribute="bottom" constant="33.5" id="z4o-DC-0QT"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOW-sX-xRS">
                                 <rect key="frame" x="554" y="28" width="30" height="30"/>
@@ -855,7 +870,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MzO-EQ-hyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2hb-7U-lE7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="175" y="-194"/>
+            <point key="canvasLocation" x="3023" y="-1324"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="oW4-6w-Fmz">
@@ -884,10 +899,14 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="3hB-jL-lQY">
                                         <rect key="frame" x="75" y="34" width="120" height="120"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="0Ir-62-hS1"/>
                                             <constraint firstAttribute="width" constant="120" id="tF1-TV-co5"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Mt6-Ex-Uzf" appends="YES" id="bB4-5N-XzE"/>
+                                        </connections>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qf-jX-Py8">
                                         <rect key="frame" x="83" y="245" width="105" height="30"/>
@@ -918,7 +937,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="aCj-p7-kO5" kind="presentation" identifier="HideSegue" animates="NO" id="dEK-dn-zlf"/>
+                                            <action selector="dismis:" destination="LNA-GT-9Lg" eventType="touchUpInside" id="oXX-Ja-Qd3"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -954,8 +973,132 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsf-QH-gUb" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Mt6-Ex-Uzf">
+                    <connections>
+                        <action selector="carregarImagemUsuario:" destination="LNA-GT-9Lg" id="xQm-bX-qOa"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-498" y="518"/>
+            <point key="canvasLocation" x="1618" y="-931"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="bwG-v8-PRm">
+            <objects>
+                <viewController id="d3Y-PF-gsi" customClass="SettingsVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aOU-bt-iua"/>
+                        <viewControllerLayoutGuide type="bottom" id="zdW-9D-4gl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A5I-mh-HHn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrv-DO-KHX">
+                                <rect key="frame" x="165" y="127" width="270" height="346"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configurações" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1V-pQ-q6z">
+                                        <rect key="frame" x="53" y="8" width="165" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="27"/>
+                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar" translatesAutoresizingMaskIntoConstraints="NO" id="QIn-9J-HUr">
+                                        <rect key="frame" x="0.0" y="291" width="270" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="GXb-sT-nXA"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="270" id="L8j-0w-pHM"/>
+                                            <constraint firstAttribute="width" constant="270" id="icd-oT-fVD"/>
+                                            <constraint firstAttribute="height" constant="20" id="knr-NR-Zoo"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoP-ap-mRb">
+                                        <rect key="frame" x="8" y="305" width="254" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="254" id="XAT-lE-WTe"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="d93-AE-E4X"/>
+                                            <constraint firstAttribute="height" constant="33" id="ksn-pG-fi7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <state key="normal" title="Voltar">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sair:" destination="d3Y-PF-gsi" eventType="touchUpInside" id="lvM-Mg-wx7"/>
+                                        </connections>
+                                    </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DQ2-F9-4qk">
+                                        <rect key="frame" x="213" y="61" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cirurgiaRealizadaSwitch:" destination="d3Y-PF-gsi" eventType="valueChanged" id="8S4-TT-kjN"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apenas cirurgias realizadas?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N2-do-lOF">
+                                        <rect key="frame" x="8" y="61" width="197" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Xa7-35-iDN">
+                                        <rect key="frame" x="0.0" y="33" width="270" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="HDm-ub-bOV"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="eoP-ap-mRb" secondAttribute="centerX" id="444-6J-zxf"/>
+                                    <constraint firstAttribute="centerX" secondItem="R1V-pQ-q6z" secondAttribute="centerX" id="6TB-GJ-uh5"/>
+                                    <constraint firstAttribute="trailing" secondItem="DQ2-F9-4qk" secondAttribute="trailing" constant="8" id="7k9-LB-TQR"/>
+                                    <constraint firstItem="2N2-do-lOF" firstAttribute="top" secondItem="Xa7-35-iDN" secondAttribute="bottom" constant="8" id="9xO-iy-S3z"/>
+                                    <constraint firstItem="DQ2-F9-4qk" firstAttribute="leading" secondItem="2N2-do-lOF" secondAttribute="trailing" constant="8" id="B9Q-5I-oP2"/>
+                                    <constraint firstAttribute="centerX" secondItem="QIn-9J-HUr" secondAttribute="centerX" id="IV7-kL-ehs"/>
+                                    <constraint firstAttribute="centerY" secondItem="R1V-pQ-q6z" secondAttribute="centerY" id="JhB-vV-s4j"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xa7-35-iDN" secondAttribute="trailing" id="KLD-ON-w61"/>
+                                    <constraint firstItem="eoP-ap-mRb" firstAttribute="top" secondItem="QIn-9J-HUr" secondAttribute="bottom" constant="-6" id="Oay-uE-Fjs"/>
+                                    <constraint firstAttribute="width" constant="270" id="QhZ-BA-oKY"/>
+                                    <constraint firstAttribute="centerX" secondItem="R1V-pQ-q6z" secondAttribute="centerX" constant="-0.75" id="SEa-Qz-mk7"/>
+                                    <constraint firstItem="R1V-pQ-q6z" firstAttribute="top" secondItem="xrv-DO-KHX" secondAttribute="top" constant="20" id="UDf-EI-I9H"/>
+                                    <constraint firstItem="R1V-pQ-q6z" firstAttribute="top" secondItem="xrv-DO-KHX" secondAttribute="top" constant="8" id="ZUV-L2-Ur5"/>
+                                    <constraint firstAttribute="height" constant="346" id="cCv-rK-2Zh"/>
+                                    <constraint firstItem="Xa7-35-iDN" firstAttribute="leading" secondItem="xrv-DO-KHX" secondAttribute="leading" id="cr6-lm-aOH"/>
+                                    <constraint firstItem="Xa7-35-iDN" firstAttribute="top" secondItem="R1V-pQ-q6z" secondAttribute="bottom" constant="-8" id="euG-lI-UPB"/>
+                                    <constraint firstItem="eoP-ap-mRb" firstAttribute="top" secondItem="xrv-DO-KHX" secondAttribute="top" constant="305" id="jlP-fZ-wik"/>
+                                    <constraint firstItem="DQ2-F9-4qk" firstAttribute="top" secondItem="xrv-DO-KHX" secondAttribute="top" constant="61" id="lYr-Sg-TN6"/>
+                                    <constraint firstAttribute="centerX" secondItem="R1V-pQ-q6z" secondAttribute="centerX" constant="-0.5" id="llh-u3-yXv"/>
+                                    <constraint firstItem="DQ2-F9-4qk" firstAttribute="height" secondItem="2N2-do-lOF" secondAttribute="height" id="pZV-Kr-CQT"/>
+                                    <constraint firstItem="2N2-do-lOF" firstAttribute="leading" secondItem="xrv-DO-KHX" secondAttribute="leading" constant="8" id="xME-DO-wsw"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JhB-vV-s4j"/>
+                                        <exclude reference="SEa-Qz-mk7"/>
+                                        <exclude reference="UDf-EI-I9H"/>
+                                        <exclude reference="llh-u3-yXv"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="xrv-DO-KHX" secondAttribute="centerY" id="Aar-64-bP4"/>
+                            <constraint firstAttribute="centerX" secondItem="xrv-DO-KHX" secondAttribute="centerX" id="sfM-zm-NiF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="switchCR" destination="DQ2-F9-4qk" id="HjG-4T-DS9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WNc-Be-ZQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1618" y="-87"/>
         </scene>
     </scenes>
     <resources>
@@ -967,7 +1110,7 @@
         <image name="user" width="126" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wFd-Dn-OWh"/>
+        <segue reference="d3Y-0V-2WP"/>
         <segue reference="edP-Kv-ZE1"/>
     </inferredMetricsTieBreakers>
 </document>

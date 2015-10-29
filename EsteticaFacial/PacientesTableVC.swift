@@ -44,7 +44,12 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         
         self.navigationItem.rightBarButtonItems = [addBtn, refreshBtn]
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+        let userAcount = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
+        
+        let settings = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "settings:")
+        
+        self.navigationItem.leftBarButtonItems = [userAcount, settings]
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -322,10 +327,10 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nav = segue.destinationViewController as! UINavigationController
-        let controller = nav.viewControllers[0] as! AUPacienteVC
+
         if segue.identifier == "UpdateSegue" {
-            
+            let nav = segue.destinationViewController as! UINavigationController
+            let controller = nav.viewControllers[0] as! AUPacienteVC
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
                 controller.type = "Update"
                 
@@ -334,7 +339,12 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 
             }
         }else if segue.identifier == "AddSegue" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let controller = nav.viewControllers[0] as! AUPacienteVC
             controller.type = "Add"
+        }else if segue.identifier == "UserSegue" || segue.identifier == "SettingsSegue" {
+            let popoverViewController = segue.destinationViewController
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
         }
     }
     
@@ -389,9 +399,13 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     // MARK: - Mostra a tela com os dados do usuario (opcao de deslogar)
     
     func userScreen(button: UIBarButtonItem){
-        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Home")
-        viewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.performSegueWithIdentifier("UserSegue", sender: nil)
+    }
+    
+    // MARK: - Mostra a tela de configuração
+    
+    func settings(button: UIBarButtonItem){
+        self.performSegueWithIdentifier("SettingsSegue", sender: nil)
     }
     
 
