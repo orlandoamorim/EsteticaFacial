@@ -15,6 +15,7 @@ import SwiftyDrop
 
 class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
@@ -42,6 +43,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let refreshBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refresh:")
         
         self.navigationItem.rightBarButtonItems = [addBtn, refreshBtn]
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
     }
     
@@ -55,7 +57,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 self.presentViewController(viewController, animated: true, completion: nil)
             })
         }else{
+            //[yourScrollView(or tableView) setContentOffset:CGPointMake(0.0f, -60.0f)animated:YES];
+            tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: true)
+            //150
             
+            self.refreshControl?.beginRefreshing()
             update()
         }
     }
@@ -75,7 +81,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     func update(){
         
         if self.isConnectedToNetwork(){
-            Drop.down("Baixando Dados", state: .Info)
             updateParse()
             
         }else{
@@ -87,6 +92,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     func updateParse() {
         maxCount = 0
         let query = PFQuery(className:"Paciente")
+        print(PFUser.currentUser()!.username!)
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
         query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
             if error == nil {
@@ -105,23 +111,65 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                                 }
                                 
                             }
-                            Drop.down("Dados baixados com sucesso!", state: DropState.Success)
-                            
                             self.tableView.reloadData()
                             self.refreshControl?.endRefreshing()
                         } else {
                             self.refreshControl?.endRefreshing()
-                            Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                            
+                            let errorCode = error!.code
+                            
+                            switch errorCode {
+                            case 100:
+                                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                                break
+                            case 101:
+                                Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                                break
+                            case 209:
+                                // Send a request to log out a user
+                                PFUser.logOut()
+                                
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                                    
+                                    self.presentViewController(viewController, animated: true, completion: nil)
+                                })
+                                break
+                            default:
+                                break
+                            }
+
+
                         }
                     }
                 }else {
-                    Drop.down("Todas as fichas presente no servidor estao sendo apresentadas.", state: DropState.Info)
-                    
                     self.refreshControl?.endRefreshing()
                 }
             }else{
                 self.refreshControl?.endRefreshing()
-                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+
+                let errorCode = error!.code
+                
+                switch errorCode {
+                case 100:
+                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                    break
+                case 101:
+                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                    break
+                case 209:
+                    // Send a request to log out a user
+                    PFUser.logOut()
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                        
+                        self.presentViewController(viewController, animated: true, completion: nil)
+                    })
+                    break
+                default:
+                    break
+                }
             }
         }
     }
@@ -131,8 +179,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     func refresh(button: UIBarButtonItem){
         
         if self.isConnectedToNetwork(){
-            Drop.down("Baixando Dados", state: .Info)
-            
             
             self.recordsParse.removeAllObjects()
             
@@ -148,13 +194,33 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                         }
                         self.maxCount = objects.count
                     }
-                    Drop.down("Dados baixados com sucesso!", state: DropState.Success)
-                    
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
                 } else {
                     self.refreshControl?.endRefreshing()
-                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                    
+                    let errorCode = error!.code
+                    
+                    switch errorCode {
+                    case 100:
+                        Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                        break
+                    case 101:
+                        Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                        break
+                    case 209:
+                        // Send a request to log out a user
+                        PFUser.logOut()
+                        
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                            
+                            self.presentViewController(viewController, animated: true, completion: nil)
+                        })
+                        break
+                    default:
+                        break
+                    }
                 }
             }
 
@@ -259,7 +325,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let nav = segue.destinationViewController as! UINavigationController
         let controller = nav.viewControllers[0] as! AUPacienteVC
         if segue.identifier == "UpdateSegue" {
-
+            
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
                 controller.type = "Update"
                 
@@ -269,11 +335,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
         }else if segue.identifier == "AddSegue" {
             controller.type = "Add"
-            
-        
         }
-        
-
     }
     
     
@@ -328,6 +390,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     func userScreen(button: UIBarButtonItem){
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Home")
+        viewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
         self.presentViewController(viewController, animated: true, completion: nil)
     }
     
@@ -351,5 +414,4 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         return true
         
     }
- 
 }

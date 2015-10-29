@@ -43,10 +43,7 @@ class HomeViewController: UIViewController,VSReachability{
             
         }else{
             Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
-        }
-        
-
-        
+        }  
     }
-
+    
 }
