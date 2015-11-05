@@ -105,14 +105,15 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "segue_localizar" && self.imagem_capturada != nil{
             if let localizar = segue.destinationViewController as? LocalizarPontosViewController{
+                localizar.pontos_localizados = self.dicionario
+                localizar.delegate = self
                 if self.imagem_capturada.image != nil{
                     localizar.imagem_cortada = self.imagem_capturada.image
                 }
                 else{
                     localizar.imagem_cortada = self.imagem_recuperada
                 }
-                localizar.pontos_localizados = self.dicionario
-                localizar.delegate = self
+                
             }
         }
     }
@@ -127,100 +128,29 @@ class CameraViewController: UIViewController, CameraViewDelegate {
                 let dados_imagem = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample_buffer)
                 let fornecedor = CGDataProviderCreateWithCFData(dados_imagem)
                 let cgImageRef = CGImageCreateWithJPEGDataProvider(fornecedor, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                let imagem = CameraViewController.fixImageOrientation(UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right))
+                let imagem = TratamentoEntrada.corrigir_orientacao(UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right))
                 
                 let x_crop = imagem.size.width*self.quadro_corte.frame.origin.x/(self.camada_preview?.frame.width)!
                 let y_crop = imagem.size.height*self.quadro_corte.frame.origin.y/(self.camada_preview?.frame.height)!
                 let width_crop = imagem.size.width*self.quadro_corte.frame.size.width/(self.camada_preview?.frame.width)!
                 let height_crop = imagem.size.height*self.quadro_corte.frame.size.height/(self.camada_preview?.frame.height)!
                 
-                self.imagem_capturada.image = CameraViewController.cropToSquare(imagem, rect: CGRectMake(x_crop, y_crop, width_crop, height_crop))
-                print("DEBUGGING");
+                self.imagem_capturada.image = TratamentoEntrada.recortar_imagem(imagem, rect: CGRectMake(x_crop, y_crop, width_crop, height_crop))
                 self.delegate!.atribuir_imagem(self.imagem_capturada.image!, flag: self.flag)
-                print("DEBUGGING");
+                
+              //  self.imagem_capturada.image = TratamentoEntrada.resize_image(self.imagem_capturada.image!, scale_w: 0.2, scale_h: 0.2)
+                
+//                let canny = GPUImageCannyEdgeDetectionFilter()
+//                canny.lowerThreshold = 0.05
+//                canny.upperThreshold = 0.15
+//                
+//                let output = canny.imageByFilteringImage(self.imagem_capturada.image)
+//                self.imagem_capturada.image = output
+                
             })
             
             
         }
-    }
-    
-    // Funcao que recorta uma imagem de entrada
-    
-    static func cropToSquare(originalImage: UIImage, rect:CGRect) -> UIImage {
-        
-        let imageRef: CGImageRef =  CGImageCreateWithImageInRect(originalImage.CGImage, rect)!
-        
-        let newImage: UIImage = UIImage(CGImage: imageRef)
-        
-        print("width = \(newImage.size.width) | height = \(newImage.size.height)")
-        
-//        let mediana: GPUImageMedianFilter = GPUImageMedianFilter()
-//        mediana.forceProcessingAtSize(CGSizeMake(500, 500))
-//        
-//        let newImageGPU: UIImage = mediana.imageByFilteringImage(newImage)
-//        let newImageRef = CGImageCreateWithImageInRect(newImageGPU.CGImage, CGRectMake(0, 0, 500, 500))
-//        let newImageGPU2 = UIImage(CGImage: newImageRef!)
-        
-        return newImage
-    }
-
-    // Funcao que corrige problemas de orientacao da imagem original
-    
-    static func fixImageOrientation(src:UIImage)->UIImage {
-        
-        if src.imageOrientation == UIImageOrientation.Up {
-            return src
-        }
-        
-        var transform: CGAffineTransform = CGAffineTransformIdentity
-        
-        switch src.imageOrientation {
-        case UIImageOrientation.Down, UIImageOrientation.DownMirrored:
-            transform = CGAffineTransformTranslate(transform, src.size.width, src.size.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
-            break
-        case UIImageOrientation.Left, UIImageOrientation.LeftMirrored:
-            transform = CGAffineTransformTranslate(transform, src.size.width, 0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
-            break
-        case UIImageOrientation.Right, UIImageOrientation.RightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, src.size.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
-            break
-        case UIImageOrientation.Up, UIImageOrientation.UpMirrored:
-            break
-        }
-        
-        switch src.imageOrientation {
-        case UIImageOrientation.UpMirrored, UIImageOrientation.DownMirrored:
-            CGAffineTransformTranslate(transform, src.size.width, 0)
-            CGAffineTransformScale(transform, -1, 1)
-            break
-        case UIImageOrientation.LeftMirrored, UIImageOrientation.RightMirrored:
-            CGAffineTransformTranslate(transform, src.size.height, 0)
-            CGAffineTransformScale(transform, -1, 1)
-        case UIImageOrientation.Up, UIImageOrientation.Down, UIImageOrientation.Left, UIImageOrientation.Right:
-            break
-        }
-        
-        
-        let ctx:CGContextRef = CGBitmapContextCreate(nil, Int(src.size.width),Int(src.size.height), CGImageGetBitsPerComponent(src.CGImage), 0, CGImageGetColorSpace(src.CGImage), CGImageGetBitmapInfo(src.CGImage).rawValue)!
-        
-        CGContextConcatCTM(ctx, transform)
-        
-        switch src.imageOrientation {
-        case UIImageOrientation.Left, UIImageOrientation.LeftMirrored, UIImageOrientation.Right, UIImageOrientation.RightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0, 0, src.size.height, src.size.width), src.CGImage)
-            break
-        default:
-            CGContextDrawImage(ctx, CGRectMake(0, 0, src.size.width, src.size.height), src.CGImage)
-            break
-        }
-        
-        let cgimg:CGImageRef = CGBitmapContextCreateImage(ctx)!
-        let img:UIImage = UIImage(CGImage: cgimg)
-        
-        return img
     }
     
     func marcar_pontos(dic: [String : NSValue]) {

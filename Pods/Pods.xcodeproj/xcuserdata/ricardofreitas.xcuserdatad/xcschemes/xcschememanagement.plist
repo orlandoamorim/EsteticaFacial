@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Dodo.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -14,7 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Parse.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ParseCrashReporting.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyDrop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,7 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B129DDFEAE0FB832BEAF600F1BB1F9A</key>
+		<key>431C2879230F272742AE4BD4EDD68360</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5F474B1B716B8907AF0574952D22A733</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E42722A475F3CAFE22E71F61EC99C11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9ED5EF1D9E126B273BF756C85BDA0421</key>
+		<key>8D862C87401D011FB7A18996BB5ECFEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA09C9B57A35AA89B9659B4E3EC4233C</key>
+		<key>B5942214B3925648375EAAF7944DD174</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE77F7709CE931646C1ACF80CBD8D053</key>
 		<dict>
 			<key>primary</key>
 			<true/>
