@@ -49,11 +49,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let settings = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "settings:")
         
         self.navigationItem.leftBarButtonItems = [userAcount, settings]
-
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         if (PFUser.currentUser() == nil) {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -69,6 +64,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             self.refreshControl?.beginRefreshing()
             update()
         }
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(animated: Bool) {

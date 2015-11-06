@@ -181,6 +181,20 @@
 			name = SCLAlertController;
 			sourceTree = "<group>";
 		};
+		188D6A631BEAC20B00BF586F /* StoryBoard Class */ = {
+			isa = PBXGroup;
+			children = (
+				188654921BDC09FE000190B1 /* Login */,
+				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
+				188654901BDBF430000190B1 /* PacientesTVCell.swift */,
+				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
+				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
+				B85392801BD5E64E000DCD91 /* PontoView.swift */,
+				18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */,
+			);
+			name = "StoryBoard Class";
+			sourceTree = "<group>";
+		};
 		18F6F1131BDD69E5008DA5B1 /* NetworkVerify */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,15 +238,9 @@
 		B81B4A5D1BC344AE002A306F /* EsteticaFacial */ = {
 			isa = PBXGroup;
 			children = (
-				B829B8C51BE26881009909C0 /* CG */,
 				B81B4A621BC344AE002A306F /* Main.storyboard */,
-				188654921BDC09FE000190B1 /* Login */,
-				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
-				188654901BDBF430000190B1 /* PacientesTVCell.swift */,
-				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
-				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
-				B85392801BD5E64E000DCD91 /* PontoView.swift */,
-				18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */,
+				188D6A631BEAC20B00BF586F /* StoryBoard Class */,
+				B829B8C51BE26881009909C0 /* CG */,
 			);
 			path = EsteticaFacial;
 			sourceTree = "<group>";
@@ -354,6 +362,7 @@
 				TargetAttributes = {
 					B81B4A5A1BC344AE002A306F = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 85VCFG852X;
 					};
 					B81B4A711BC344AE002A306F = {
 						CreatedOnToolsVersion = 7.0.1;
