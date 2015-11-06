@@ -383,14 +383,13 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         
         if let notas:String = form.formRowWithTag(Tags.Notas.rawValue)!.value as? String {
             parseObject.setValue(notas, forKey: "notas")
-            
         }
         
         //Imagens
         
         if btn_imagem_frontal.currentImage != nil{
             
-            if self.btn_imagem_frontal.currentImage != UIImage(named: "modelo_frontal"){
+            if !self.imageIgual(self.btn_imagem_frontal.currentImage!, image2: UIImage(named: "modelo_frontal")!){
                 let thumb_frontal = self.criar_thumbnail((btn_imagem_frontal.currentImage)!)
                 
                 let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_frontal, 1.0)!)!
@@ -411,7 +410,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
         
         if btn_imagem_perfil.currentImage != nil{
-            if self.btn_imagem_perfil.currentImage != UIImage(named: "modelo_perfil"){
+            if !self.imageIgual(self.btn_imagem_perfil.currentImage!, image2: UIImage(named: "modelo_perfil")!){
                 let thumb_perfil = self.criar_thumbnail((btn_imagem_perfil.currentImage)!)
                 
                 let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_perfil, 1.0)!)!
@@ -431,7 +430,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }
         
         if btn_imagem_nasal.currentImage != nil{
-            if self.btn_imagem_nasal.currentImage != UIImage(named: "modelo_nasal"){
+            if !self.imageIgual(self.btn_imagem_nasal.currentImage!, image2: UIImage(named: "modelo_nasal")!){
                 let thumb_nasal = self.criar_thumbnail((btn_imagem_nasal.currentImage)!)
                 
                 let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_nasal, 1.0)!)!
@@ -508,11 +507,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 parseObject.setValue(notas, forKey: "notas")
             }
         }
-        
-        
-        /*
-        Add verificacao para saber se as imagens mudaram
-        */
         
         //Imagens
         
