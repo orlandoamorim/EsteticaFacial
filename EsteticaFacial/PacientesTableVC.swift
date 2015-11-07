@@ -38,11 +38,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         self.refreshControl = refreshControl
 
         // BarButtun Right
-        
-        let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-        let refreshBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refresh:")
-        
-        self.navigationItem.rightBarButtonItems = [addBtn, refreshBtn]
+                
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
         
         let userAcount = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
         
@@ -179,62 +176,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
     }
     
-    // MARK: - Add Call
-    
-    func refresh(button: UIBarButtonItem){
-        
-        if self.isConnectedToNetwork(){
-            
-            self.recordsParse.removeAllObjects()
-            
-            let query = PFQuery(className:"Paciente")
-            query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-            query.orderByAscending("nome")
-            query.findObjectsInBackgroundWithBlock {
-                (objects:[PFObject]?, error:NSError?) -> Void in
-                if error == nil {
-                    if let objects = objects {
-                        for object in objects {
-                            self.recordsParse.addObject(object)
-                        }
-                        self.maxCount = objects.count
-                    }
-                    self.tableView.reloadData()
-                    self.refreshControl?.endRefreshing()
-                } else {
-                    self.refreshControl?.endRefreshing()
-                    
-                    let errorCode = error!.code
-                    
-                    switch errorCode {
-                    case 100:
-                        Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                        break
-                    case 101:
-                        Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-                        break
-                    case 209:
-                        // Send a request to log out a user
-                        PFUser.logOut()
-                        
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                            
-                            self.presentViewController(viewController, animated: true, completion: nil)
-                        })
-                        break
-                    default:
-                        break
-                    }
-                }
-            }
-
-            
-        }else{
-            Drop.down("Sem conexão com a Internet", state: DropState.Warning)
-        }
-        
-    }
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

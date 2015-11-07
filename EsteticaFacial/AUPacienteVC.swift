@@ -304,7 +304,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurg
                 dic_plano_cirurgico.getDataInBackgroundWithBlock({ (data, error) -> Void in
                     if error == nil {
                         let dados = NSKeyedUnarchiver.unarchiveObjectWithData(data!)! as! [String:AnyObject]
-                        print(dados)
                         self.dicFormValuesAtual = self.convertAnyObjectToAny(dados)
                         self.dicFormValues = self.convertAnyObjectToAny(dados)
                     }
@@ -504,7 +503,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurg
         
         //dic_plano_cirurgico
         if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertAnyToAnyObject(dicFormValuesAtual)) {
-            print("Mudou Algo Add")
+            print("dic_plano_cirurgico")
 
             let dic_plano_cirurgico:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(convertAnyToAnyObject(self.dicFormValuesAtual)))!
             parseObject.setObject(dic_plano_cirurgico, forKey: "dic_plano_cirurgico")
@@ -641,7 +640,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurg
         
         //dic_plano_cirurgico
         if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertAnyToAnyObject(dicFormValuesAtual)) {
-            print("Mudou Algo Add")
+            print("dic_plano_cirurgico")
             
             let dic_plano_cirurgico:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(convertAnyToAnyObject(self.dicFormValuesAtual)))!
             parseObject.setObject(dic_plano_cirurgico, forKey: "dic_plano_cirurgico")
@@ -880,8 +879,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurg
                 anyObjectDict[key] = bool
             }
         }
-        print(anyObjectDict)
-        
         return anyObjectDict
     }
     
@@ -896,7 +893,6 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurg
                 anyToAnyDict[key] = bool
             }
         }
-        print(anyToAnyDict)
         
         return anyToAnyDict
     }

@@ -43,10 +43,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
     func formValues(){
 
         if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertFormAnyToAnyObject()) {
-            print("Mudou algo")
             delegate.alterarDic(form.values(includeHidden: false))
-        }else{
-            print("Tudo Igual")
         }
     }
     
