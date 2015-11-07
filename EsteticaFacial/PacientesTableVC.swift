@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 22/10/15.
-//  Copyright © 2015 Ricardo Freitas. All rights reserved.
+//  Copyright © 2015 UFPI. All rights reserved.
 //
 
 // Segue Name : UpdateSegue -> Atualiza os dados.

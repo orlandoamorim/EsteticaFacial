@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 23/10/15.
-//  Copyright © 2015 Ricardo Freitas. All rights reserved.
+//  Copyright © 2015 UFPI. All rights reserved.
 //
 
 import UIKit
@@ -16,9 +16,14 @@ protocol NovoPacienteDelegate{
     func atribuir_marcacao(dic:[String:NSValue], flag:Int)
 }
 
+protocol ProcedimentoCirurgico{
+
+    func alterarDic(dicFormValuesAtual:[String : Any?])
+}
+
 //AUPacienteVC => Adciconar e Atualizacao de Paciente
 
-class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
+class AUPacienteVC:XLFormViewController, NovoPacienteDelegate,ProcedimentoCirurgico  {
     
     var parseObject:PFObject!
     
@@ -52,12 +57,20 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
     var dataNascimento:NSDate = NSDate()
     var notas:String = String()
     
+    //Procedimentos Cirurgicos
+    var dicFormValues:[String : Any?] = [String : Any?]()
+    var dicFormValuesAtual:[String : Any?] = [String : Any?]()
+    
     private enum Tags : String {
         case Nome = "nome"
         case Etnia = "etnia"
-        case Sexo = "Sexo"
+        case Sexo = "sexo"
         case DataNascimento = "dataNascimento"
         case Notas = "notas"
+        case Procedimentos = "procedimentos"
+        case SwitchCirurgiaRealizada = "switchCirurgiaRealizada"
+        case CirurgiaRealizada = "cirurgiaRealizada"
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -129,6 +142,29 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         row.required = true
         section.addFormRow(row)
         
+        //---------------------------------
+
+        section = XLFormSectionDescriptor.formSectionWithTitle("Cirurgia")
+        form.addFormSection(section)
+        
+        // Procedimentos
+        row = XLFormRowDescriptor(tag: Tags.Procedimentos.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Plano Cirurgico")
+        row.action.formSegueIdenfifier = "ProcedimentosCirurgicosSegue"
+        section.addFormRow(row)
+        
+        //CirurgiaRealizada
+        row = XLFormRowDescriptor(tag: Tags.SwitchCirurgiaRealizada.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: "Cirurgia Realizada?")
+        row.value = false
+        section.addFormRow(row)
+        
+        // Dados Cirurgicos
+        row = XLFormRowDescriptor(tag: Tags.CirurgiaRealizada.rawValue, rowType:XLFormRowDescriptorTypeButton, title:"Dados Cirurgicos")
+        row.hidden = "$\(Tags.SwitchCirurgiaRealizada.rawValue) == 0"
+        row.action.formSegueIdenfifier = "ProcedimentosCirurgicosSegue"
+        section.addFormRow(row)
+        
+        //---------------------------------
+
         
         section = XLFormSectionDescriptor.formSectionWithTitle("Notas")
         form.addFormSection(section)
@@ -262,6 +298,23 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 self.imagem_nasal = UIImage(named: "modelo_nasal")!
             }
             
+            //DIC PLANO CIRURGICO
+            if let dic_plano_cirurgico = parseObject.objectForKey("dic_plano_cirurgico") as? PFFile{
+                
+                dic_plano_cirurgico.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        let dados = NSKeyedUnarchiver.unarchiveObjectWithData(data!)! as! [String:AnyObject]
+                        print(dados)
+                        self.dicFormValuesAtual = self.convertAnyObjectToAny(dados)
+                        self.dicFormValues = self.convertAnyObjectToAny(dados)
+                    }
+                    
+                    }) { (progress) -> Void in
+                        print("Baixando |dic_plano_cirurgico| -> \(Float(progress))")
+                }
+            }
+            
+            
         }else {
             self.parseObject = PFObject(className: "Paciente")
         }
@@ -279,6 +332,7 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         }else if type == "Update" {
             //BTN Update
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: UIBarButtonItemStyle.Plain, target: self, action: "verify:")
+
             initializeForm()
 
         }else {
@@ -448,6 +502,15 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             }
         }
         
+        //dic_plano_cirurgico
+        if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertAnyToAnyObject(dicFormValuesAtual)) {
+            print("Mudou Algo Add")
+
+            let dic_plano_cirurgico:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(convertAnyToAnyObject(self.dicFormValuesAtual)))!
+            parseObject.setObject(dic_plano_cirurgico, forKey: "dic_plano_cirurgico")
+        }
+        
+        
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if error == nil {
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -576,6 +639,14 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
             parseObject.setObject(pontos_nasal, forKey: "pontos_nasal")
         }
         
+        //dic_plano_cirurgico
+        if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertAnyToAnyObject(dicFormValuesAtual)) {
+            print("Mudou Algo Add")
+            
+            let dic_plano_cirurgico:PFFile = PFFile(data: NSKeyedArchiver.archivedDataWithRootObject(convertAnyToAnyObject(self.dicFormValuesAtual)))!
+            parseObject.setObject(dic_plano_cirurgico, forKey: "dic_plano_cirurgico")
+        }
+        
         
         parseObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if error == nil {
@@ -682,6 +753,11 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         self.pontos_frontal_update = pontos_frontal
         self.pontos_nasal_update = pontos_nasal
         self.pontos_perfil_update = pontos_perfil
+        
+        //Plano Cirurgico
+        self.dicFormValues = ["enxerto_de_sheen": "Tipo I Esmagado", "suturas": "Intradomal", "raiz": "Reducao Raspa", "fechada": false, "osso": "Raspa", "dorso": "Nao Tocado", "incisoes": "Inter", "transversa": "Nenhum Transversa", "aberta": true, "lateral": "Nenhum Lateral", "medial": "Nenhum Medial", "enxerto_de_ponta": "Tampao", "liberacao": "Resseccao Cefalica", "cartilagem": "Abaixada"]
+        
+        self.dicFormValuesAtual = self.dicFormValues
     }
     
     // MARK: - Criar ThumbNail
@@ -737,6 +813,13 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
                 }
             }
         }
+        
+        if segue.identifier == "ProcedimentosCirurgicosSegue"{
+            let controller = segue.destinationViewController as! ProcedimentosCirurgicosVC
+            
+            controller.delegate = self
+            controller.dicFormValues = convertAnyToAny(self.dicFormValuesAtual)
+        }
     }
     
     func atribuir_imagem(imagem: UIImage, flag: Int) {
@@ -769,5 +852,56 @@ class AUPacienteVC:XLFormViewController, NovoPacienteDelegate  {
         
         return imageData1.isEqualToData(imageData2)
     }
+    
+    //Aterado por Orlando /***TESTE***/
+    
+    func alterarDic(dicFormValuesAtual: [String : Any?]) {
+        self.dicFormValuesAtual = dicFormValuesAtual
+    }
+    
+    func convertAnyObjectToAny(anyObjectDict:[String: AnyObject]) -> [String: Any?] {
+        
+        var anyDict = [String: Any?]()
+        
+        for key in anyObjectDict.keys {
+            anyDict.updateValue(anyObjectDict[key], forKey: key)
+        }
+        return anyDict
+    }
+    
+    func convertAnyToAnyObject(anyDict:[String: Any?]) -> [String: AnyObject] {
+        
+        var anyObjectDict = [String: AnyObject]()
+        
+        for key in anyDict.keys {
+            if let string = anyDict[key]! as? String {
+                anyObjectDict[key] = string
+            }else if let bool = anyDict[key]! as? Bool {
+                anyObjectDict[key] = bool
+            }
+        }
+        print(anyObjectDict)
+        
+        return anyObjectDict
+    }
+    
+    func convertAnyToAny(anyDict:[String: Any?]) -> [String: Any] {
+        
+        var anyToAnyDict = [String: Any]()
+        
+        for key in anyDict.keys {
+            if let string = anyDict[key]! as? String {
+                anyToAnyDict[key] = string
+            }else if let bool = anyDict[key]! as? Bool {
+                anyToAnyDict[key] = bool
+            }
+        }
+        print(anyToAnyDict)
+        
+        return anyToAnyDict
+    }
+    
+    
+    
     
 }

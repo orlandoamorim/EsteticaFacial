@@ -116,6 +116,43 @@
             </objects>
             <point key="canvasLocation" x="901" y="462"/>
         </scene>
+        <!--Procedimentos CirurgicosVC-->
+        <scene sceneID="Sa0-SA-Owd">
+            <objects>
+                <viewController id="Yvc-G9-iAb" customClass="ProcedimentosCirurgicosVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i9X-T8-rIN"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Pq-8C-CqI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SNe-Fv-9vw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eSJ-OL-rzt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yvc-G9-iAb" id="HV4-QZ-aVg"/>
+                                    <outlet property="delegate" destination="Yvc-G9-iAb" id="0Hz-2k-7Et"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eSJ-OL-rzt" firstAttribute="bottom" secondItem="6Pq-8C-CqI" secondAttribute="top" id="8ll-zl-gFd"/>
+                            <constraint firstItem="eSJ-OL-rzt" firstAttribute="top" secondItem="SNe-Fv-9vw" secondAttribute="top" id="Off-X9-iK0"/>
+                            <constraint firstItem="eSJ-OL-rzt" firstAttribute="leading" secondItem="SNe-Fv-9vw" secondAttribute="leading" id="Y8V-um-Ydl"/>
+                            <constraint firstAttribute="trailing" secondItem="eSJ-OL-rzt" secondAttribute="trailing" id="zv6-e3-GQD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="eSJ-OL-rzt" id="bYF-p8-5zR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cDX-HH-ye9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1634" y="1967"/>
+        </scene>
         <!--PacienteVC-->
         <scene sceneID="2K7-eF-cgP">
             <objects>
@@ -221,6 +258,7 @@
                         <outlet property="btn_imagem_perfil" destination="idu-Rb-pa4" id="Lzn-Kd-fP8"/>
                         <outlet property="header" destination="Nn3-j9-kve" id="HA9-hW-8be"/>
                         <outlet property="tableView" destination="LMD-zm-wjM" id="ZEO-Wl-NEL"/>
+                        <segue destination="Yvc-G9-iAb" kind="show" identifier="ProcedimentosCirurgicosSegue" id="ftz-MN-d5H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1155,7 +1193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNc-Be-ZQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1618" y="-87"/>
+            <point key="canvasLocation" x="1618" y="-375"/>
         </scene>
     </scenes>
     <resources>
@@ -1167,7 +1205,7 @@
         <image name="user" width="126" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d3Y-0V-2WP"/>
         <segue reference="edP-Kv-ZE1"/>
+        <segue reference="d3Y-0V-2WP"/>
     </inferredMetricsTieBreakers>
 </document>
