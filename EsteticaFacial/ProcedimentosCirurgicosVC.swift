@@ -16,6 +16,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
 
     var dicFormValues:[String : Any] = [String : Any]()
     var dicFormValuesAtual:[String : Any] = [String : Any]()
+    var searchPlanoCirurgico:String = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -227,8 +228,10 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 anyObjectDict.updateValue(string, forKey: key)
             }else if let bool = anyDict[key]! as? Bool {
                 anyObjectDict.updateValue(bool, forKey: key)
+
             }
         }
+        
         return anyObjectDict
     }
     

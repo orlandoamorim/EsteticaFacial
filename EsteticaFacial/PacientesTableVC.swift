@@ -13,7 +13,7 @@ import UIKit
 import Parse
 import SwiftyDrop
 
-class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate {
+class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -365,8 +365,143 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     // MARK: - UISplitViewControllerDelegate
     //Adição para funcionar melhor no iPad
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
-        
         return true
-        
     }
+    
+    // MARK: - UISearch
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(true, animated: true)
+
+        self.recordsParse.removeAllObjects()
+        
+        let nome = PFQuery(className:"Paciente")
+        nome.whereKey("nome", containsString: searchBar.text)
+        
+        let sexo = PFQuery(className:"Paciente")
+        sexo.whereKey("sexo", containsString: searchBar.text)
+        
+        let etnia = PFQuery(className:"Paciente")
+        etnia.whereKey("etnia", containsString: searchBar.text)
+        
+        let data_nascimento = PFQuery(className:"Paciente")
+        data_nascimento.whereKey("data_nascimento", containsString: searchBar.text)
+        
+        let notas = PFQuery(className:"Paciente")
+        notas.whereKey("notas", containsString: searchBar.text)
+        
+        let query = PFQuery.orQueryWithSubqueries([nome, data_nascimento,notas])
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.findObjectsInBackgroundWithBlock {
+            (objects:[PFObject]?, error:NSError?) -> Void in
+            if error == nil {
+                if let objects = objects {
+                    for object in objects {
+                        self.recordsParse.addObject(object)
+                    }
+                    
+                }
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            } else {
+                self.refreshControl?.endRefreshing()
+                
+                let errorCode = error!.code
+                
+                switch errorCode {
+                case 100:
+                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                    break
+                case 101:
+                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                    break
+                case 209:
+                    // Send a request to log out a user
+                    PFUser.logOut()
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                        
+                        self.presentViewController(viewController, animated: true, completion: nil)
+                    })
+                    break
+                default:
+                    break
+                }
+            }
+        }
+
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        self.searchBar = searchBar
+        self.recordsParse.removeAllObjects()
+        self.update()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchBar.text)
+        self.recordsParse.removeAllObjects()
+        
+        let nome = PFQuery(className:"Paciente")
+        nome.whereKey("nome", containsString: searchText)
+        
+        let data_nascimento = PFQuery(className:"Paciente")
+        data_nascimento.whereKey("data_nascimento", containsString: searchText)
+        
+        let notas = PFQuery(className:"Paciente")
+        notas.whereKey("notas", containsString: searchText)
+        
+        let query = PFQuery.orQueryWithSubqueries([nome, data_nascimento,notas])
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.findObjectsInBackgroundWithBlock {
+            (objects:[PFObject]?, error:NSError?) -> Void in
+            if error == nil {
+                if let objects = objects {
+                    for object in objects {
+                        self.recordsParse.addObject(object)
+                    }
+                    
+                }
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            } else {
+                self.refreshControl?.endRefreshing()
+                
+                let errorCode = error!.code
+                
+                switch errorCode {
+                case 100:
+                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                    break
+                case 101:
+                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                    break
+                case 209:
+                    // Send a request to log out a user
+                    PFUser.logOut()
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                        
+                        self.presentViewController(viewController, animated: true, completion: nil)
+                    })
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    
 }
