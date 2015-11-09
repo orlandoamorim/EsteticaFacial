@@ -50,11 +50,11 @@ class LoginViewController: UIViewController, VSReachability{
     }
     
     func logar(){
-        let username = self.usernameField.text
+        let username = self.usernameField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let password = self.passwordField.text
         
         // Validate the text fields
-        if username!.characters.count < 5 || password!.characters.count < 8{
+        if username.characters.count < 5 || password!.characters.count < 8{
             Drop.down("Nome de usuario ou senha incorretos.", state: DropState.Error)
         }else {
             // Run a spinner to show a task in progress
@@ -62,7 +62,7 @@ class LoginViewController: UIViewController, VSReachability{
             spinner.startAnimating()
             
             // Send a request to login
-            PFUser.logInWithUsernameInBackground(username!, password: password!, block: { (user, error) -> Void in
+            PFUser.logInWithUsernameInBackground(username, password: password!, block: { (user, error) -> Void in
                 
                 // Stop the spinner
                 spinner.stopAnimating()

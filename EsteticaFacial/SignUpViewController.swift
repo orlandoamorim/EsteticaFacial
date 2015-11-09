@@ -37,13 +37,13 @@ class SignUpViewController: UIViewController, VSReachability {
     
     func signUp(){
         
-        let username = self.usernameField.text
+        let username = self.usernameField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let password = self.passwordField.text
         let email = self.emailField.text
         let finalEmail = email!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
         // Validate the text fields
-        if username!.characters.count < 5 {
+        if username.characters.count < 5 {
             SCLAlertView().showInfo("Verificação de Dados", subTitle: "Nome de usuario deve possuir mais  que 5 caracteres", closeButtonTitle: "OK")
             
         } else if password!.characters.count < 8 {
