@@ -28,11 +28,11 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PacientesCell" rowHeight="80" id="wWb-XI-QJy" customClass="PacientesTVCell" customModule="EsteticaFacial" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <animations/>
                                             <constraints>
@@ -40,7 +40,7 @@
                                                 <constraint firstAttribute="height" constant="63.5" id="mVr-0D-P3z"/>
                                             </constraints>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
                                             <rect key="frame" x="21" y="21" width="37" height="37"/>
                                             <animations/>
                                             <constraints>
@@ -49,7 +49,7 @@
                                             </constraints>
                                             <color key="color" red="0.0" green="0.24984693810325775" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
                                             <rect key="frame" x="79" y="41" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
@@ -59,7 +59,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
                                             <rect key="frame" x="79" y="8" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
@@ -153,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="1634" y="1967"/>
         </scene>
-        <!--PacienteVC-->
+        <!--FichaVC-->
         <scene sceneID="2K7-eF-cgP">
             <objects>
-                <viewController id="BDg-fg-0Yt" customClass="AUPacienteVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BDg-fg-0Yt" customClass="AUFichaVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bU9-Ah-ZIh"/>
                         <viewControllerLayoutGuide type="bottom" id="UFk-rF-G6X"/>
@@ -194,7 +194,7 @@
                                                         <segue destination="36e-T2-nDy" kind="show" identifier="segue_img_nasal" id="7A4-aF-F2x"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
+                                                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
                                                     <rect key="frame" x="208" y="8" width="186" height="114"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -237,28 +237,28 @@
                                     </constraints>
                                 </view>
                                 <connections>
-                                    <outlet property="dataSource" destination="BDg-fg-0Yt" id="nJK-gK-qRL"/>
-                                    <outlet property="delegate" destination="BDg-fg-0Yt" id="fVy-LH-r4G"/>
+                                    <outlet property="dataSource" destination="BDg-fg-0Yt" id="NI8-hw-uh6"/>
+                                    <outlet property="delegate" destination="BDg-fg-0Yt" id="sHj-Zs-PJH"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="LMD-zm-wjM" secondAttribute="trailing" id="GOQ-Tk-IWP"/>
-                            <constraint firstItem="LMD-zm-wjM" firstAttribute="leading" secondItem="ukg-0E-veX" secondAttribute="leading" id="LwD-9n-FQb"/>
-                            <constraint firstItem="LMD-zm-wjM" firstAttribute="bottom" secondItem="UFk-rF-G6X" secondAttribute="top" id="PhL-7j-mEn"/>
-                            <constraint firstItem="LMD-zm-wjM" firstAttribute="top" secondItem="ukg-0E-veX" secondAttribute="top" id="fx5-TO-4MY"/>
+                            <constraint firstItem="LMD-zm-wjM" firstAttribute="leading" secondItem="ukg-0E-veX" secondAttribute="leading" id="O0d-os-zEm"/>
+                            <constraint firstItem="LMD-zm-wjM" firstAttribute="top" secondItem="ukg-0E-veX" secondAttribute="top" id="Tpv-CY-m1Y"/>
+                            <constraint firstAttribute="trailing" secondItem="LMD-zm-wjM" secondAttribute="trailing" id="kX3-uJ-FQc"/>
+                            <constraint firstItem="LMD-zm-wjM" firstAttribute="bottom" secondItem="UFk-rF-G6X" secondAttribute="top" id="qqz-Fe-I1T"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SJu-0k-JxQ"/>
                     <connections>
-                        <outlet property="btn_imagem_frontal" destination="GUG-4q-bmX" id="oHR-hP-ups"/>
-                        <outlet property="btn_imagem_nasal" destination="O9s-Dx-hPg" id="qVW-KQ-5uV"/>
-                        <outlet property="btn_imagem_perfil" destination="idu-Rb-pa4" id="Lzn-Kd-fP8"/>
-                        <outlet property="header" destination="Nn3-j9-kve" id="HA9-hW-8be"/>
-                        <outlet property="tableView" destination="LMD-zm-wjM" id="ZEO-Wl-NEL"/>
-                        <segue destination="Yvc-G9-iAb" kind="show" identifier="ProcedimentosCirurgicosSegue" id="ftz-MN-d5H"/>
+                        <outlet property="btn_imagem_frontal" destination="GUG-4q-bmX" id="9DY-YR-fWA"/>
+                        <outlet property="btn_imagem_nasal" destination="O9s-Dx-hPg" id="MbA-IX-L3h"/>
+                        <outlet property="btn_imagem_perfil" destination="idu-Rb-pa4" id="Uo0-Jx-CW6"/>
+                        <outlet property="header" destination="Nn3-j9-kve" id="0V7-BB-jb2"/>
+                        <outlet property="tableView" destination="LMD-zm-wjM" id="ggF-cn-tEM"/>
+                        <segue destination="Yvc-G9-iAb" kind="show" identifier="ProcedimentosCirurgicosSegue" id="Whc-P1-aEK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -493,7 +493,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BDg-fg-0Yt" kind="relationship" relationship="rootViewController" id="EKo-ib-5dC"/>
+                        <segue destination="BDg-fg-0Yt" kind="relationship" relationship="rootViewController" id="FXU-6u-5bd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhg-Z3-vUb" userLabel="First Responder" sceneMemberID="firstResponder"/>

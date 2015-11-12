@@ -14,8 +14,8 @@ class ProcedimentosCirurgicosVC:FormViewController {
     
     var delegate: ProcedimentoCirurgico! = nil
 
-    var dicFormValues:[String : Any] = [String : Any]()
-    var dicFormValuesAtual:[String : Any] = [String : Any]()
+    var dicFormValues:[String : Any?] = [String : Any?]()
+    var dicFormValuesAtual:[String : Any?] = [String : Any?]()
     var searchPlanoCirurgico:String = String()
     
     override func viewDidLoad() {
@@ -42,6 +42,22 @@ class ProcedimentosCirurgicosVC:FormViewController {
     }
     
     func formValues(){
+        
+//        let aberta: CheckRow? = form.rowByTag("aberta")
+        
+//        if let fechada: CheckRow? = form.rowByTag("fechada") {
+//            print((fechada?.value)! as Bool)
+//        }
+        
+//        if let string = self.form.rowByTag("fechada_opcoes")?.baseValue as? String {
+//        
+//            print(string)
+//        }
+//        
+//        if let fechada = self.form.rowByTag("fechada")?.baseValue as? Bool {
+//            
+//            print(fechada)
+//        }
 
         if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertFormAnyToAnyObject()) {
             delegate.alterarDic(form.values(includeHidden: false))
@@ -78,8 +94,8 @@ class ProcedimentosCirurgicosVC:FormViewController {
             <<< PushRow<String>("fechada_opcoes") {
                 $0.hidden = "$fechada == false"
                 $0.title = "Tipo:"
+                $0.value = "Retrograda"
                 $0.options = ["Retrograda","Trans Cartilaginosa","Liberacao"]
-                //                $0.value = ""
                 $0.selectorTitle = "Tipo de Abordagem Fechada"
             }
     
@@ -235,7 +251,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
         return anyObjectDict
     }
     
-    func convertAnyToAnyObject(anyDict:[String: Any]) -> [String: AnyObject] {
+    func convertAnyToAnyObject(anyDict:[String: Any?]) -> [String: AnyObject] {
         
         var anyObjectDict = [String: AnyObject]()
         

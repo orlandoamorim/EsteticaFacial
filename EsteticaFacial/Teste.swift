@@ -93,3 +93,57 @@ import Foundation
 
 //            self.refreshControl?.beginRefreshing()
 //            self.tableView.setContentOffset(CGPointMake(0, self.tableView.contentOffset.y - (self.refreshControl?.frame.size.height)!), animated: true)
+
+
+//==============================================================================================
+
+
+//
+//        if let nome = self.form.rowByTag("nome")?.baseValue as? String {
+//            if type == "Adicionando" {
+//                parseObject["nome"] = nome
+//            }else if type == "Atualizando" {
+//
+//            }
+//        }else{
+//            alertView?.close()
+//            alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio nome nao foi preenchido", closeButtonTitle: "OK")
+//            return
+//        }
+//
+//        if let sexo = self.form.rowByTag("sexo")?.baseValue as? String {
+//            print(sexo)
+//        }else{
+//            alertView?.close()
+//            alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio sexo nao foi preenchido", closeButtonTitle: "OK")
+//            return
+//        }
+//
+//        if let etnia = self.form.rowByTag("etnia")?.baseValue as? String {
+//            print(etnia)
+//        }else{
+//            alertView?.close()
+//            alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio etnia nao foi preenchido", closeButtonTitle: "OK")
+//            return
+//        }
+//
+//        if let data_nascimento = self.form.rowByTag("data_nascimento")?.baseValue as? NSDate {
+//            print(data_nascimento)
+//        }else{
+//            alertView?.close()
+//            alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio data nascimento nao foi preenchido", closeButtonTitle: "OK")
+//            return
+//        }
+//
+//        if let email = self.form.rowByTag("email")?.baseValue as? String {
+//            print(email)
+//        }
+//
+//        if let telefone = self.form.rowByTag("telefone")?.baseValue as? String {
+//            print(telefone)
+//        }
+//
+//        if let cirurgia_realizada = self.form.rowByTag("cirurgia_realizada")?.baseValue as? Bool {
+//            print(cirurgia_realizada)
+//        }
+        

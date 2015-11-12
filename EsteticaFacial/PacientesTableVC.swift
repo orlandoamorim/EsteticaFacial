@@ -16,7 +16,8 @@ import SwiftyDrop
 class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     
@@ -104,6 +105,23 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                     self.recordsParse.removeAllObjects()
                     
                     query.orderByAscending("nome")
+                    //--
+                    // Do any additional setup after loading the view.
+                    if (self.userDefaults.valueForKey("switchCR") != nil) {
+                        let switchR = self.userDefaults.valueForKey("switchCR")
+                        
+                        if switchR as! String == "on" {
+                            query.whereKey("cirurgia_realizada", equalTo: true)
+                        }else if switchR as! String == "off" {
+                            query.whereKey("cirurgia_realizada", equalTo: false)
+                        }
+                    }else {
+                        query.whereKey("cirurgia_realizada", equalTo: false)
+
+                        self.userDefaults.setValue("off", forKey: "switchCR")
+                        self.userDefaults.synchronize()
+                    }
+                    //--
                     query.findObjectsInBackgroundWithBlock {
                         (objects:[PFObject]?, error:NSError?) -> Void in
                         if error == nil {
@@ -271,9 +289,9 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
 
         if segue.identifier == "UpdateSegue" {
             let nav = segue.destinationViewController as! UINavigationController
-            let controller = nav.viewControllers[0] as! AUPacienteVC
+            let controller = nav.viewControllers[0] as! AUFichaVC
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
-                controller.type = "Update"
+                controller.type = "Atualizando"
                 
                 let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
                 controller.parseObject = dataParse
@@ -281,8 +299,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
         }else if segue.identifier == "AddSegue" {
             let nav = segue.destinationViewController as! UINavigationController
-            let controller = nav.viewControllers[0] as! AUPacienteVC
-            controller.type = "Add"
+            let controller = nav.viewControllers[0] as! AUFichaVC
+            controller.type = "Adicionando"
         }else if segue.identifier == "UserSegue" || segue.identifier == "SettingsSegue" {
             let popoverViewController = segue.destinationViewController
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
@@ -304,7 +322,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             
             let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
             //ENVIANDO os dados por Object
-            centroDeNotificacao.postNotificationName("mostrarAviso", object: nil)
+            centroDeNotificacao.postNotificationName("noData", object: nil)
             
             let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
             let nome = dataParse.objectForKey("nome") as! String
