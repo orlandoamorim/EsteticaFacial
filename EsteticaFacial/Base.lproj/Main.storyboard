@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aCj-p7-kO5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aCj-p7-kO5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -28,11 +28,11 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PacientesCell" rowHeight="80" id="wWb-XI-QJy" customClass="PacientesTVCell" customModule="EsteticaFacial" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <animations/>
                                             <constraints>
@@ -40,7 +40,7 @@
                                                 <constraint firstAttribute="height" constant="63.5" id="mVr-0D-P3z"/>
                                             </constraints>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
                                             <rect key="frame" x="21" y="21" width="37" height="37"/>
                                             <animations/>
                                             <constraints>
@@ -49,7 +49,7 @@
                                             </constraints>
                                             <color key="color" red="0.0" green="0.24984693810325775" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-aA-1Lj">
                                             <rect key="frame" x="79" y="41" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
@@ -59,7 +59,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-pd-3pa">
                                             <rect key="frame" x="79" y="8" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
@@ -114,7 +114,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0D-xu-mm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="462"/>
+            <point key="canvasLocation" x="901" y="474"/>
         </scene>
         <!--Procedimentos CirurgicosVC-->
         <scene sceneID="Sa0-SA-Owd">
@@ -151,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDX-HH-ye9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="1967"/>
+            <point key="canvasLocation" x="1634" y="2035"/>
         </scene>
         <!--FichaVC-->
         <scene sceneID="2K7-eF-cgP">
@@ -194,7 +194,7 @@
                                                         <segue destination="36e-T2-nDy" kind="show" identifier="segue_img_nasal" id="7A4-aF-F2x"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
                                                     <rect key="frame" x="208" y="8" width="186" height="114"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,6 +259,7 @@
                         <outlet property="header" destination="Nn3-j9-kve" id="0V7-BB-jb2"/>
                         <outlet property="tableView" destination="LMD-zm-wjM" id="ggF-cn-tEM"/>
                         <segue destination="Yvc-G9-iAb" kind="show" identifier="ProcedimentosCirurgicosSegue" id="Whc-P1-aEK"/>
+                        <segue destination="asl-qs-5Lg" kind="show" identifier="SegueShowImage" id="x1z-yB-rsu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -447,7 +448,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2333" y="1967"/>
+            <point key="canvasLocation" x="2333" y="2035"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Urn-A6-DYk">
@@ -466,7 +467,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xqn-AH-SwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223" y="462"/>
+            <point key="canvasLocation" x="223" y="474"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Abb-2S-AwS">
@@ -479,7 +480,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zjq-HQ-vMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-466" y="462"/>
+            <point key="canvasLocation" x="-466" y="474"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="64f-sF-hqR">
@@ -1205,7 +1206,8 @@
         <image name="user" width="126" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="x1z-yB-rsu"/>
+        <segue reference="gBZ-TC-cMO"/>
         <segue reference="edP-Kv-ZE1"/>
-        <segue reference="d3Y-0V-2WP"/>
     </inferredMetricsTieBreakers>
 </document>

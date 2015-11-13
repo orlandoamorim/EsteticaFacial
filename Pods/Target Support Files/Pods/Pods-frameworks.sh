@@ -90,7 +90,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Parse.framework"
   install_framework "Pods/ParseCrashReporting.framework"
   install_framework "Pods/SwiftyDrop.framework"
-  install_framework "Pods/XLForm.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Bolts.framework"
@@ -99,5 +98,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Parse.framework"
   install_framework "Pods/ParseCrashReporting.framework"
   install_framework "Pods/SwiftyDrop.framework"
-  install_framework "Pods/XLForm.framework"
 fi

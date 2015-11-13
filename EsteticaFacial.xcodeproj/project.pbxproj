@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */; };
 		183D2F551BD9EACB0033BDA3 /* AUPacienteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */; };
+		1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */; };
 		1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */; };
 		1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */; };
 		188654911BDBF430000190B1 /* PacientesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654901BDBF430000190B1 /* PacientesTVCell.swift */; };
@@ -17,7 +18,7 @@
 		188654991BDC0A0F000190B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654951BDC0A0F000190B1 /* SignUpViewController.swift */; };
 		1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654961BDC0A0F000190B1 /* HomeViewController.swift */; };
 		188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D88AC1BF243490008F557 /* SCLAlertView.swift */; };
-		189B03041BF1964500A516F4 /* ParseHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* ParseHelpers.swift */; };
+		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
 		18ACC08C1BE1C35500A7CDAC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */; };
 		18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */; };
 		18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1161BDDE632008DA5B1 /* Teste.swift */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTableVC.swift; sourceTree = "<group>"; };
 		183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUPacienteVC.swift; sourceTree = "<group>"; };
+		1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConnection.swift; sourceTree = "<group>"; };
 		1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUFichaVC.swift; sourceTree = "<group>"; };
 		1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedimentosCirurgicosVC.swift; sourceTree = "<group>"; };
 		188654901BDBF430000190B1 /* PacientesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTVCell.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		188654961BDC0A0F000190B1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		188D88AC1BF243490008F557 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
-		189B03031BF1964500A516F4 /* ParseHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelpers.swift; sourceTree = "<group>"; };
+		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSReachability.swift; sourceTree = "<group>"; };
 		18F6F1161BDDE632008DA5B1 /* Teste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
@@ -169,17 +171,25 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		1863F3AD1BF52AD500C369D9 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
+			);
+			name = Deprecated;
+			sourceTree = "<group>";
+		};
 		1883EA601BF10814000F22A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
-				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
 				1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */,
 				1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */,
 				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
 				18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */,
 				189B03021BF195CE00A516F4 /* Helper */,
 				1883EA611BF1081D000F22A3 /* Cells */,
+				1863F3AD1BF52AD500C369D9 /* Deprecated */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -224,7 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				B85392801BD5E64E000DCD91 /* PontoView.swift */,
-				189B03031BF1964500A516F4 /* ParseHelpers.swift */,
+				189B03031BF1964500A516F4 /* Helpers.swift */,
+				1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -515,7 +526,8 @@
 				188654911BDBF430000190B1 /* PacientesTVCell.swift in Sources */,
 				188654971BDC0A0F000190B1 /* LoginViewController.swift in Sources */,
 				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
-				189B03041BF1964500A516F4 /* ParseHelpers.swift in Sources */,
+				189B03041BF1964500A516F4 /* Helpers.swift in Sources */,
+				1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */,
 				188654981BDC0A0F000190B1 /* ResetPasswordViewController.swift in Sources */,
 				B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */,
 				18ACC08C1BE1C35500A7CDAC /* SettingsVC.swift in Sources */,

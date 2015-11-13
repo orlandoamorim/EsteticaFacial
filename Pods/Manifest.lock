@@ -8,7 +8,6 @@ PODS:
     - Bolts/Tasks (>= 1.4.0)
     - Parse (~> 1.9.1)
   - SwiftyDrop (2.0.0)
-  - XLForm (3.0.2)
 
 DEPENDENCIES:
   - Eureka (~> 1.0)
@@ -16,7 +15,6 @@ DEPENDENCIES:
   - Parse
   - ParseCrashReporting
   - SwiftyDrop (~> 2.0)
-  - XLForm (~> 3.0)
 
 SPEC CHECKSUMS:
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
@@ -25,6 +23,5 @@ SPEC CHECKSUMS:
   Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
   ParseCrashReporting: c5ea641e698d576f081f080dff06877ef831d30a
   SwiftyDrop: d94821084296482e717e0f4c07198a25f4a85140
-  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.39.0

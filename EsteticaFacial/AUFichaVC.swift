@@ -31,24 +31,24 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
     @IBOutlet weak var btn_imagem_perfil: UIButton!
     @IBOutlet weak var btn_imagem_nasal: UIButton!
     
-    var imagem_frontal:UIImage = UIImage()
-    var imagem_perfil:UIImage = UIImage()
-    var imagem_nasal:UIImage = UIImage()
+    var imagemFrontalServidor:UIImage = UIImage()
+    var imagemPerfilServidor:UIImage = UIImage()
+    var imagemNasalServidor:UIImage = UIImage()
 
     
-    var pontos_frontal : [String:NSValue]?
-    var pontos_perfil : [String:NSValue]?
-    var pontos_nasal : [String:NSValue]?
+    var pontosFrontalServidor : [String:NSValue]?
+    var pontosPerfilServidor : [String:NSValue]?
+    var pontosNasalServidor : [String:NSValue]?
     
     //Verificadores para saber se os pontos foram atualizados pelo usuario
-    var pontos_frontal_update : [String:NSValue]?
-    var pontos_perfil_update : [String:NSValue]?
-    var pontos_nasal_update : [String:NSValue]?
+    var pontosFrontalAtual : [String:NSValue]?
+    var pontosPerfilAtual : [String:NSValue]?
+    var pontosNasalAtual : [String:NSValue]?
     
-    var formValuesAntigo:[String : Any?] = [String : Any?]()
+    var formValuesServidor:[String : Any?] = [String : Any?]()
 
     //Procedimentos Cirurgicos
-    var dicFormValues:[String : Any?] = [String : Any?]()
+    var dicFormValuesServidor:[String : Any?] = [String : Any?]()
     var dicFormValuesAtual:[String : Any?] = [String : Any?]()
     
     //--------------------
@@ -57,20 +57,20 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
         super.viewDidLoad()
         initializeForm()
 
-        let iniciar_dicionarios = ParseHelpers().iniciar_dicionarios()
+        let iniciar_dicionarios = Helpers.iniciar_dicionarios()
 
-        pontos_frontal = iniciar_dicionarios.0
-        pontos_frontal_update = iniciar_dicionarios.0
-        pontos_perfil = iniciar_dicionarios.1
-        pontos_perfil_update = iniciar_dicionarios.1
-        pontos_nasal = iniciar_dicionarios.2
-        pontos_nasal_update = iniciar_dicionarios.2
-        dicFormValues = iniciar_dicionarios.3
+        pontosFrontalServidor = iniciar_dicionarios.0
+        pontosFrontalAtual = iniciar_dicionarios.0
+        pontosPerfilServidor = iniciar_dicionarios.1
+        pontosPerfilAtual = iniciar_dicionarios.1
+        pontosNasalServidor = iniciar_dicionarios.2
+        pontosNasalAtual = iniciar_dicionarios.2
+        dicFormValuesServidor = iniciar_dicionarios.3
         dicFormValuesAtual = iniciar_dicionarios.3
         
-        self.imagem_frontal = UIImage(named: "modelo_frontal")!
-        self.imagem_perfil = UIImage(named: "modelo_perfil")!
-        self.imagem_nasal = UIImage(named: "modelo_nasal")!
+        self.imagemFrontalServidor = UIImage(named: "modelo_frontal")!
+        self.imagemPerfilServidor = UIImage(named: "modelo_perfil")!
+        self.imagemNasalServidor = UIImage(named: "modelo_nasal")!
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         centroDeNotificacao.addObserver(self, selector: "noData", name: "noData", object: nil)
@@ -83,54 +83,55 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
                         
         }else if type == "Atualizando" {
             
-            formValuesAntigo = ParseHelpers().getFromParse(parseObject, completion: { (dicFormValues) -> Void in
-                self.dicFormValues = dicFormValues
+            self.formValuesServidor = ParseConnection.getFromServer(parseObject, completion: { (dicFormValues) -> Void in
+                self.dicFormValuesServidor = dicFormValues
                 self.dicFormValuesAtual = dicFormValues
             })
             
-           form.setValues(formValuesAntigo)
+           form.setValues(self.formValuesServidor)
 
             self.tableView?.reloadData()
-
-            ParseHelpers().getFromParseImgFrontal(parseObject, completion: { (image) -> Void in
-                self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
-                self.imagem_frontal = image!
-                }, progressBlock: { (progress) -> Void in
-                    print("Baixando |ImgFrontal| -> \(progress!)")
+            
+            ParseConnection.getFromParseImgFrontal(parseObject
+                , resultBlockImage: { (image, error) -> Void in
+                    self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
+                    self.imagemFrontalServidor = image!
+                }, progressBlockImage: { (progress) -> Void in
+                    print("Baixando |Imgem Frontal| -> \(progress!)")
+                }, resultBlockPontos: { (pontos, error) -> Void in
+                    self.pontosFrontalServidor = pontos
+                    self.pontosFrontalAtual = pontos
+                }, progressBlockPontos: { (progress) -> Void in
+                    print("Baixando |Pontos Frontal| -> \(progress!)")
             })
             
-            ParseHelpers().getFromParseImgPerfil(parseObject, completion: { (image) -> Void in
+            
+            ParseConnection.getFromParseImgPerfil(parseObject
+                , resultBlockImage: { (image, error) -> Void in
                 self.btn_imagem_perfil.setImage(image, forState: UIControlState.Normal)
-                self.imagem_perfil = image!
-                }, progressBlock: { (progress) -> Void in
-                    print("Baixando |ImgPerfil| -> \(progress!)")
+                self.imagemPerfilServidor = image!
+                }, progressBlockImage: { (progress) -> Void in
+                    print("Baixando |Imgem Perfil| -> \(progress!)")
+                }, resultBlockPontos: { (pontos, error) -> Void in
+                    self.pontosPerfilServidor = pontos
+                    self.pontosPerfilAtual = pontos
+                }, progressBlockPontos: { (progress) -> Void in
+                    print("Baixando |Pontos Perfil| -> \(progress!)")
             })
             
-            ParseHelpers().getFromParseImgNasal(parseObject, completion: { (image) -> Void in
+            ParseConnection.getFromParseImgNasal(parseObject
+                , resultBlockImage: { (image, error) -> Void in
                 self.btn_imagem_nasal.setImage(image, forState: UIControlState.Normal)
-                self.imagem_nasal = image!
-                }, progressBlock: { (progress) -> Void in
-                    print("Baixando |ImgFrontal| -> \(progress!)")
+                self.imagemNasalServidor = image!
+                }, progressBlockImage: { (progress) -> Void in
+                    print("Baixando |Imgem Nasal| -> \(progress!)")
+                }, resultBlockPontos: { (pontos, error) -> Void in
+                    self.pontosNasalServidor = pontos
+                    self.pontosNasalAtual = pontos
+                }, progressBlockPontos: { (progress) -> Void in
+                    print("Baixando |Pontos Nasal| -> \(progress!)")
             })
-            
-            
-//            ParseHelpers().getFromParseThumbnailImgFrontal(parseObject, completion: { (image) -> Void in
-//                self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
-//                }, progressBlock: { (progress) -> Void in
-//                    print("Baixando |ThumbnailImgFrontal| -> \(progress)")
-//            })
-//            
-//            ParseHelpers().getFromParseThumbnailImgPerfil(parseObject, completion: { (image) -> Void in
-//                self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
-//                }, progressBlock: { (progress) -> Void in
-//                    print("Baixando |ThumbnailImgPerfil| -> \(progress)")
-//            })
-//            
-//            ParseHelpers().getFromParseThumbnailImgNasal(parseObject, completion: { (image) -> Void in
-//                self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
-//                }, progressBlock: { (progress) -> Void in
-//                    print("Baixando |ThumbnailImgNasal| -> \(progress)")
-//            })
+        
             
             self.title = "Atualizar Ficha"
 
@@ -153,7 +154,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
 
     func getFormValues(){
         alertView = SCLAlertView().showWait("\(type)...", subTitle: "Aguarde...", closeButtonTitle: "Cancelar", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-        let results = ParseHelpers().verifyFormValues(form.values(includeHidden: false))
+        let results = Helpers.verifyFormValues(form.values(includeHidden: false))
         
         if !results.0 {
             alertView?.close()
@@ -163,8 +164,17 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
         
         if type == "Adicionando" {
             
-            ParseHelpers().addFicha(form.values(includeHidden: false), dicFormValues: self.dicFormValues, dicFormValuesAtual: self.dicFormValuesAtual, imagemPerfil: self.imagem_perfil, imagemPerfilAtual: btn_imagem_perfil.currentImage, imagemFrontal: self.imagem_frontal, imagemFrontalAtual: btn_imagem_frontal.currentImage, imagemNasal: self.imagem_nasal, imagemNasalAtual: btn_imagem_nasal.currentImage, pontos_frontal: self.pontos_frontal, pontos_frontal_update: self.pontos_frontal_update, pontos_perfil:self.pontos_perfil, pontos_perfil_update: self.pontos_perfil_update, pontos_nasal: self.pontos_nasal, pontos_nasal_update: self.pontos_nasal_update, completion: { (success, error) -> Void in
-                if error == nil {
+            ParseConnection.adicionarFicha(form.values(includeHidden: false)
+                , dicFormValues: self.dicFormValuesAtual
+                , imagemPerfil: self.btn_imagem_perfil.currentImage
+                , imagemFrontal: self.btn_imagem_frontal.currentImage
+                , imagemNasal: self.btn_imagem_nasal.currentImage
+                , pontosFrontalAtual: self.pontosFrontalAtual
+                , pontosPerfilAtual: self.pontosPerfilAtual
+                , pontosNasalAtual: self.pontosNasalAtual
+                , completion: { (sucesso, erro) -> Void in
+                    
+                if erro == nil {
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         self.alertView?.close()
                         self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
@@ -175,18 +185,32 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
                 }
                 
             })
+
+            
+            
             return
         }else if type == "Atualizando" {
-            ParseHelpers().atualizaFicha(parseObject, formValuesAntigo: self.formValuesAntigo, formValuesAtual: form.values(includeHidden: false), dicFormValues: self.dicFormValues, dicFormValuesAtual: self.dicFormValuesAtual, imagemPerfil: self.imagem_perfil, imagemPerfilAtual: btn_imagem_perfil.currentImage, imagemFrontal: self.imagem_frontal, imagemFrontalAtual: btn_imagem_frontal.currentImage, imagemNasal: self.imagem_nasal, imagemNasalAtual: btn_imagem_nasal.currentImage, pontos_frontal: self.pontos_frontal, pontos_frontal_update: self.pontos_frontal_update, pontos_perfil:self.pontos_perfil, pontos_perfil_update: self.pontos_perfil_update, pontos_nasal: self.pontos_nasal, pontos_nasal_update: self.pontos_nasal_update, completion: { (success, error) -> Void in
-                if error == nil {
-                    self.alertView?.close()
-                    self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                }else {
-                    self.alertView?.close()
-                    self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                }
-                
+            ParseConnection.atualizarFicha(parseObject
+                , formValuesServidor: self.formValuesServidor, formValuesAtual: form.values(includeHidden: false)
+                , dicFormValuesServidor: self.dicFormValuesServidor, dicFormValuesAtual: self.dicFormValuesAtual
+                , imagemFrontalServidor: self.imagemFrontalServidor, imagemFrontalAtual: self.btn_imagem_frontal.currentImage
+                , imagemPerfilServidor: self.imagemPerfilServidor, imagemPerfilAtual: self.btn_imagem_perfil.currentImage
+                , imagemNasalServidor: self.imagemNasalServidor, imagemNasalAtual: self.btn_imagem_nasal.currentImage
+                , pontosFrontalServidor: self.pontosFrontalServidor, pontosFrontalAtual: self.pontosFrontalAtual
+                , pontosPerfilServidor: self.pontosPerfilServidor, pontosPerfilAtual: self.pontosPerfilAtual
+                , pontosNasalServidor: self.pontosNasalServidor, pontosNasalAtual: self.pontosNasalAtual
+                , completion: { (success, error) -> Void in
+                    
+                    if error == nil {
+                        self.alertView?.close()
+                        self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    }else {
+                        self.alertView?.close()
+                        self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    }
+                    
             })
+
             return
         }
 
@@ -345,13 +369,13 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
     //NovoPacienteDelegate
     func atribuir_marcacao(dic: [String : NSValue], flag: Int) {
         if flag==0{
-            self.pontos_frontal = dic
+            self.pontosFrontalAtual = dic
         }
         if flag==1{
-            self.pontos_perfil = dic
+            self.pontosPerfilAtual = dic
         }
         if flag==2{
-            self.pontos_nasal = dic
+            self.pontosNasalAtual = dic
         }
     }
     
@@ -365,7 +389,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             if let camera = segue.destinationViewController as? CameraViewController{
                 camera.delegate = self
                 camera.flag = 0
-                camera.dicionario = self.pontos_frontal
+                camera.dicionario = self.pontosFrontalAtual
                 if self.btn_imagem_frontal.currentImage != nil{
                     camera.imagem_recuperada = self.btn_imagem_frontal.currentImage
                 }
@@ -376,7 +400,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             if let camera = segue.destinationViewController as? CameraViewController{
                 camera.delegate = self
                 camera.flag = 1
-                camera.dicionario = self.pontos_perfil
+                camera.dicionario = self.pontosPerfilAtual
                 if self.btn_imagem_perfil.currentImage != nil{
                     camera.imagem_recuperada = self.btn_imagem_perfil.currentImage
                 }
@@ -387,7 +411,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             if let camera = segue.destinationViewController as? CameraViewController{
                 camera.delegate = self
                 camera.flag = 2
-                camera.dicionario = self.pontos_nasal
+                camera.dicionario = self.pontosNasalAtual
                 if self.btn_imagem_nasal.currentImage != nil{
                     camera.imagem_recuperada = self.btn_imagem_nasal.currentImage
                 }
