@@ -19,11 +19,14 @@
 		1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654961BDC0A0F000190B1 /* HomeViewController.swift */; };
 		188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D88AC1BF243490008F557 /* SCLAlertView.swift */; };
 		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
-		18ACC08C1BE1C35500A7CDAC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */; };
+		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
+		18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */; };
 		18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */; };
 		18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1161BDDE632008DA5B1 /* Teste.swift */; };
 		18FAA1C91BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */; };
 		18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C81BDABCDC00EC3751 /* Paciente.swift */; };
+		18FEC03D1BFC08E0008AA555 /* AjustesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */; };
+		18FEC0421BFC09DF008AA555 /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FEC0401BFC09DF008AA555 /* UserImage.xib */; };
 		20114B263BE62C431AEF5332 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C73DDC933BB7E09C4EF935 /* Pods.framework */; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
@@ -87,11 +90,14 @@
 		188D88AC1BF243490008F557 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostrarCirurgiasVC.swift; sourceTree = "<group>"; };
+		18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedColorButton.swift; sourceTree = "<group>"; };
 		18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSReachability.swift; sourceTree = "<group>"; };
 		18F6F1161BDDE632008DA5B1 /* Teste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
 		18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Paciente+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18FAA1C81BDABCDC00EC3751 /* Paciente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paciente.swift; sourceTree = "<group>"; };
+		18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AjustesVC.swift; sourceTree = "<group>"; };
+		18FEC0401BFC09DF008AA555 /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
 		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		1863F3AD1BF52AD500C369D9 /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
+				188654961BDC0A0F000190B1 /* HomeViewController.swift */,
 				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
 			);
 			name = Deprecated;
@@ -186,7 +193,7 @@
 				1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */,
 				1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */,
 				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
-				18ACC08B1BE1C35500A7CDAC /* SettingsVC.swift */,
+				18FEC0431BFC09EC008AA555 /* Configurações */,
 				189B03021BF195CE00A516F4 /* Helper */,
 				1883EA611BF1081D000F22A3 /* Cells */,
 				1863F3AD1BF52AD500C369D9 /* Deprecated */,
@@ -208,7 +215,6 @@
 				188654931BDC0A0F000190B1 /* LoginViewController.swift */,
 				188654941BDC0A0F000190B1 /* ResetPasswordViewController.swift */,
 				188654951BDC0A0F000190B1 /* SignUpViewController.swift */,
-				188654961BDC0A0F000190B1 /* HomeViewController.swift */,
 			);
 			name = Login/Register;
 			sourceTree = "<group>";
@@ -233,9 +239,11 @@
 		189B03021BF195CE00A516F4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				B85392801BD5E64E000DCD91 /* PontoView.swift */,
 				189B03031BF1964500A516F4 /* Helpers.swift */,
 				1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */,
+				18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */,
+				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
+				B85392801BD5E64E000DCD91 /* PontoView.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -246,6 +254,23 @@
 				18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */,
 			);
 			name = NetworkVerify;
+			sourceTree = "<group>";
+		};
+		18FEC0431BFC09EC008AA555 /* Configurações */ = {
+			isa = PBXGroup;
+			children = (
+				18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */,
+				18FEC0441BFC0A05008AA555 /* Header */,
+			);
+			name = "Configurações";
+			sourceTree = "<group>";
+		};
+		18FEC0441BFC0A05008AA555 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				18FEC0401BFC09DF008AA555 /* UserImage.xib */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
@@ -448,6 +473,7 @@
 				B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */,
 				B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */,
 				B81B4A641BC344AE002A306F /* Main.storyboard in Resources */,
+				18FEC0421BFC09DF008AA555 /* UserImage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +540,7 @@
 				B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */,
 				18FAA1C91BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift in Sources */,
 				18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */,
+				18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */,
 				B829B8C91BE26ACF009909C0 /* TecnicasPDI.swift in Sources */,
 				188654991BDC0A0F000190B1 /* SignUpViewController.swift in Sources */,
 				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
@@ -528,9 +555,10 @@
 				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
 				189B03041BF1964500A516F4 /* Helpers.swift in Sources */,
 				1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */,
+				18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */,
 				188654981BDC0A0F000190B1 /* ResetPasswordViewController.swift in Sources */,
 				B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */,
-				18ACC08C1BE1C35500A7CDAC /* SettingsVC.swift in Sources */,
+				18FEC03D1BFC08E0008AA555 /* AjustesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

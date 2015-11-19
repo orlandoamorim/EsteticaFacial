@@ -146,4 +146,15 @@ import Foundation
 //        if let cirurgia_realizada = self.form.rowByTag("cirurgia_realizada")?.baseValue as? Bool {
 //            print(cirurgia_realizada)
 //        }
+
+//
+//<<< ButtonRow("userName") { (row: ButtonRow) in
+//    row.title = "@\(PFUser.currentUser()!.username!.lowercaseString)"
+//    row.cellStyle = UITableViewCellStyle.Default
+//    row.presentationMode = .SegueName(segueName: "UserSegue", completionCallback: nil)
+//    }.cellSetup { cell, row in
+//        cell.imageView?.image = UIImage(named: "userFavi-32")
+//    }.cellUpdate {
+//        $0.cell.textLabel?.textAlignment = .Right
+//}
         

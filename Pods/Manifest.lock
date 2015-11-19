@@ -1,5 +1,5 @@
 PODS:
-  - Bolts/Tasks (1.4.0)
+  - Bolts/Tasks (1.5.0)
   - Eureka (1.2.0)
   - GPUImage (0.1.7)
   - Parse (1.9.1):
@@ -17,7 +17,7 @@ DEPENDENCIES:
   - SwiftyDrop (~> 2.0)
 
 SPEC CHECKSUMS:
-  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   Eureka: aa7059d2a30e1b206a581f0aabfcf903ece6beae
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b

@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 10/11/15.
-//  Copyright © 2015 UFPI. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit
@@ -271,6 +271,45 @@ class Helpers: NSObject{
         dicFormValues = ["enxerto_de_sheen": "Tipo I Esmagado", "suturas": "Intradomal", "raiz": "Reducao Raspa", "fechada": false, "osso": "Raspa", "dorso": "Nao Tocado", "incisoes": "Inter", "transversa": "Nenhum Transversa", "aberta": true, "lateral": "Nenhum Lateral", "medial": "Nenhum Medial", "enxerto_de_ponta": "Tampao", "liberacao": "Resseccao Cefalica", "cartilagem": "Abaixada"]
         
         return (pontos_frontal,pontos_perfil,pontos_nasal,dicFormValues)
+    }
+    
+    
+    static func dicAtoZ (formValues:NSMutableArray)-> [String : [AnyObject]]{
+        
+        var recordsHeader: [String] = [String]()
+        var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
+        
+        for i in formValues {
+            let parseObject:PFObject = i as! PFObject
+            let nome = parseObject.objectForKey("nome") as! String
+            
+
+            let char = nome.lowercaseString[nome.lowercaseString.startIndex]
+            
+            if recordsDicAtoZ[String(char)] != nil {
+                if !recordsHeader.contains(String(char)) {
+                    recordsHeader.append(String(char))
+                }
+                
+                var fichas = recordsDicAtoZ[String(char)]!
+                fichas.append(parseObject)
+                
+                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
+            }else {
+                if !recordsHeader.contains(String(char)) {
+                    recordsHeader.append(String(char))
+                }
+                
+                var fichas:[AnyObject] = [AnyObject]()
+                fichas.append(parseObject)
+                
+                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
+            }
+            
+        }
+        
+        return recordsDicAtoZ
+        
     }
     
 }

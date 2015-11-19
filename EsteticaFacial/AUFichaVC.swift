@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Eureka
+import SwiftyDrop
 
 protocol NovoPacienteDelegate{
     func atribuir_imagem(imagem: UIImage, flag:Int)
@@ -59,18 +60,19 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
 
         let iniciar_dicionarios = Helpers.iniciar_dicionarios()
 
-        pontosFrontalServidor = iniciar_dicionarios.0
-        pontosFrontalAtual = iniciar_dicionarios.0
-        pontosPerfilServidor = iniciar_dicionarios.1
-        pontosPerfilAtual = iniciar_dicionarios.1
-        pontosNasalServidor = iniciar_dicionarios.2
-        pontosNasalAtual = iniciar_dicionarios.2
-        dicFormValuesServidor = iniciar_dicionarios.3
-        dicFormValuesAtual = iniciar_dicionarios.3
+        pontosFrontalServidor = iniciar_dicionarios.pontos_frontal
+        pontosFrontalAtual = iniciar_dicionarios.pontos_frontal
+        pontosPerfilServidor = iniciar_dicionarios.pontos_perfil
+        pontosPerfilAtual = iniciar_dicionarios.pontos_perfil
+        pontosNasalServidor = iniciar_dicionarios.pontos_nasal
+        pontosNasalAtual = iniciar_dicionarios.pontos_nasal
+        dicFormValuesServidor = iniciar_dicionarios.dicFormValues
+        dicFormValuesAtual = iniciar_dicionarios.dicFormValues
         
         self.imagemFrontalServidor = UIImage(named: "modelo_frontal")!
         self.imagemPerfilServidor = UIImage(named: "modelo_perfil")!
         self.imagemNasalServidor = UIImage(named: "modelo_nasal")!
+        
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         centroDeNotificacao.addObserver(self, selector: "noData", name: "noData", object: nil)
@@ -93,41 +95,69 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             self.tableView?.reloadData()
             
             ParseConnection.getFromParseImgFrontal(parseObject
-                , resultBlockImage: { (image, error) -> Void in
-                    self.btn_imagem_frontal.setImage(image, forState: UIControlState.Normal)
-                    self.imagemFrontalServidor = image!
+                , resultBlockImage: { (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_frontal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                        self.imagemFrontalServidor = UIImage(data: data!)!
+                    }else{
+                        Drop.down("Erro ao baixar imagem frontal. Objeto nao encontrado.", state: .Error)
+                    }
                 }, progressBlockImage: { (progress) -> Void in
                     print("Baixando |Imgem Frontal| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
-                    self.pontosFrontalServidor = pontos
-                    self.pontosFrontalAtual = pontos
+                    if error == nil {
+                        self.pontosFrontalServidor = pontos
+                        self.pontosFrontalAtual = pontos
+                    }else{
+                        Drop.down("Erro ao baixar pontos frontal. Objeto nao encontrado.", state: .Error)
+                    }
+
                 }, progressBlockPontos: { (progress) -> Void in
                     print("Baixando |Pontos Frontal| -> \(progress!)")
             })
             
             
             ParseConnection.getFromParseImgPerfil(parseObject
-                , resultBlockImage: { (image, error) -> Void in
-                self.btn_imagem_perfil.setImage(image, forState: UIControlState.Normal)
-                self.imagemPerfilServidor = image!
+                , resultBlockImage: { (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_perfil.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                        self.imagemPerfilServidor = UIImage(data: data!)!
+                    }else{
+                        Drop.down("Erro ao baixar imagem perfil. Objeto nao encontrado.", state: .Error)
+                    }
                 }, progressBlockImage: { (progress) -> Void in
                     print("Baixando |Imgem Perfil| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
-                    self.pontosPerfilServidor = pontos
-                    self.pontosPerfilAtual = pontos
+                    if error == nil {
+                        self.pontosPerfilServidor = pontos
+                        self.pontosPerfilAtual = pontos
+                        print("TA DANDO MERADA")
+                    }else{
+                        Drop.down("Erro ao baixar pontos perfil. Objeto nao encontrado.", state: .Error)
+                    }
+
                 }, progressBlockPontos: { (progress) -> Void in
                     print("Baixando |Pontos Perfil| -> \(progress!)")
             })
             
             ParseConnection.getFromParseImgNasal(parseObject
-                , resultBlockImage: { (image, error) -> Void in
-                self.btn_imagem_nasal.setImage(image, forState: UIControlState.Normal)
-                self.imagemNasalServidor = image!
+                , resultBlockImage: { (data, error) -> Void in
+                    if error == nil {
+                        self.btn_imagem_nasal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                        self.imagemNasalServidor = UIImage(data: data!)!
+                    }else{
+                        Drop.down("Erro ao baixar imagem nasal. Objeto nao encontrado.", state: .Error)
+                    }
                 }, progressBlockImage: { (progress) -> Void in
                     print("Baixando |Imgem Nasal| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
-                    self.pontosNasalServidor = pontos
-                    self.pontosNasalAtual = pontos
+                    if error == nil {
+                        self.pontosNasalServidor = pontos
+                        self.pontosNasalAtual = pontos
+                    }else{
+                        Drop.down("Erro ao baixar pontos nasal. Objeto nao encontrado.", state: .Error)
+                    }
+
                 }, progressBlockPontos: { (progress) -> Void in
                     print("Baixando |Pontos Nasal| -> \(progress!)")
             })
@@ -190,6 +220,9 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             
             return
         }else if type == "Atualizando" {
+            
+
+            
             ParseConnection.atualizarFicha(parseObject
                 , formValuesServidor: self.formValuesServidor, formValuesAtual: form.values(includeHidden: false)
                 , dicFormValuesServidor: self.dicFormValuesServidor, dicFormValuesAtual: self.dicFormValuesAtual

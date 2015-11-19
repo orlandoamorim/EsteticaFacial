@@ -13,13 +13,16 @@ import UIKit
 import Parse
 import SwiftyDrop
 
-class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate, UISearchBarDelegate {
+class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControllerDelegate, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
+    @IBOutlet weak var pacientesPopBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     let userDefaults = NSUserDefaults.standardUserDefaults()
 
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
+    var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
+
     
     var maxCount: Int = Int()
     
@@ -41,12 +44,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         // BarButtun Right
                 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-        
-        let userAcount = UIBarButtonItem(image: UIImage(named: "user-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "userScreen:")
-        
-        let settings = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: "settings:")
-        
-        self.navigationItem.leftBarButtonItems = [userAcount, settings]
         
         if (PFUser.currentUser() == nil) {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -71,7 +68,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,31 +93,30 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let query = PFQuery(className:"Paciente")
         print(PFUser.currentUser()!.username!)
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        
+        //--
+        if (userDefaults.valueForKey("switchCT") != nil) {
+            let switchCT = userDefaults.valueForKey("switchCT")
+            
+            if switchCT as! String == "Realizadas" {
+                query.whereKey("cirurgia_realizada", equalTo: true)
+            }else if switchCT as! String == "Não Realizadas" {
+                query.whereKey("cirurgia_realizada", equalTo: false)
+            }else if switchCT as! String == "Todas" {
+            }
+        }else {
+            userDefaults.setValue("Todas", forKey: "switchCT")
+            userDefaults.synchronize()
+        }
+        //--
         query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
             if error == nil {
                 self.maxCount = Int(count)
                 
                 if self.maxCount > self.recordsParse.count {
                     self.recordsParse.removeAllObjects()
-                    
+                    self.recordsDicAtoZ.removeAll(keepCapacity: false)
                     query.orderByAscending("nome")
-                    //--
-                    // Do any additional setup after loading the view.
-                    if (self.userDefaults.valueForKey("switchCR") != nil) {
-                        let switchR = self.userDefaults.valueForKey("switchCR")
-                        
-                        if switchR as! String == "on" {
-                            query.whereKey("cirurgia_realizada", equalTo: true)
-                        }else if switchR as! String == "off" {
-                            query.whereKey("cirurgia_realizada", equalTo: false)
-                        }
-                    }else {
-                        query.whereKey("cirurgia_realizada", equalTo: false)
-
-                        self.userDefaults.setValue("off", forKey: "switchCR")
-                        self.userDefaults.synchronize()
-                    }
-                    //--
                     query.findObjectsInBackgroundWithBlock {
                         (objects:[PFObject]?, error:NSError?) -> Void in
                         if error == nil {
@@ -129,7 +124,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                                 for object in objects {
                                     self.recordsParse.addObject(object)
                                 }
-                                
+                                self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
+
                             }
                             self.tableView.reloadData()
                             self.refreshControl?.endRefreshing()
@@ -198,10 +194,10 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if recordsParse.count > 0 {
+        if recordsDicAtoZ.count > 0 {
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             self.tableView.backgroundView?.hidden = true
-            return 1
+            return recordsDicAtoZ.keys.count
         }
         
         let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
@@ -221,27 +217,42 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         return 0
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if recordsDicAtoZ.count > 0 {
+            let key = Array(recordsDicAtoZ.keys.sort())[section]
+            return key.uppercaseString as String
+        }
+        return ""
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if recordsParse.count > 0 {
-            return recordsParse.count
+        if recordsDicAtoZ.count > 0 {
+            let key = Array(recordsDicAtoZ.keys.sort())[section]
+            let objects = recordsDicAtoZ[key]!
+            
+            return objects.count
         }
         return 0
     }
     
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return Array(recordsDicAtoZ.keys.sort())
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PacientesCell", forIndexPath: indexPath) as! PacientesTVCell
         
-        if recordsParse.count == 0 {
-            cell.nomeLabel.text = "Nome do Paciente"
-            cell.dataNascimentoLabel.text = "Idade do Paciente"
-            cell.thumbImageView.image = UIImage(named: "modelo_frontal")
-            
-            return cell
-        }
+        cell.thumbImageView.layer.cornerRadius = cell.thumbImageView.frame.size.width / 2
+        cell.thumbImageView.clipsToBounds = true
+        cell.thumbImageView.layer.borderWidth = 1.0
+        cell.thumbImageView.layer.borderColor = UIColor.darkGrayColor().CGColor
+        cell.thumbImageView.layer.cornerRadius = 10.0
+
         
-        let cellDataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+        let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+        let object = recordsDicAtoZ[key]!
+        
+        let cellDataParse:PFObject = object[indexPath.row] as! PFObject
         
         let nome = cellDataParse.objectForKey("nome") as! String
         let data_nascimento = dataFormatter().dateFromString(cellDataParse.objectForKey("data_nascimento") as! String)
@@ -256,6 +267,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 
                 if error == nil {
                     cell.activityIndicator.stopAnimating()
+                    cell.thumbImageView.layer.cornerRadius = 10
                     cell.thumbImageView.image  = UIImage(data: data!)!
                 }
                 
@@ -279,7 +291,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if recordsParse.count > 0 {
+        if recordsDicAtoZ.keys.count > 0 {
             self.performSegueWithIdentifier("UpdateSegue", sender: indexPath)
         }
         
@@ -293,7 +305,10 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
                 controller.type = "Atualizando"
                 
-                let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+                let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+                let object = recordsDicAtoZ[key]!
+                
+                let dataParse:PFObject = object[indexPath.row] as! PFObject
                 controller.parseObject = dataParse
                 
             }
@@ -301,9 +316,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! AUFichaVC
             controller.type = "Adicionando"
-        }else if segue.identifier == "UserSegue" || segue.identifier == "SettingsSegue" {
-            let popoverViewController = segue.destinationViewController
-            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        }else if segue.identifier == "PopOverSegue" {
+            let popoverViewController = segue.destinationViewController as! MostrarCirurgiasVC
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popoverViewController.popoverPresentationController!.delegate = self
+            popoverViewController.popoverPresentationController!.sourceRect = pacientesPopBtn!.layer.frame
         }
     }
     
@@ -324,16 +341,24 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             //ENVIANDO os dados por Object
             centroDeNotificacao.postNotificationName("noData", object: nil)
             
-            let dataParse:PFObject = self.recordsParse.objectAtIndex(indexPath.row) as! PFObject
+            let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+            let object = recordsDicAtoZ[key]!
+            
+            let dataParse:PFObject = object[indexPath.row] as! PFObject
             let nome = dataParse.objectForKey("nome") as! String
             
             Drop.down("Deletando ficha do paciente \(nome)", state: .Info)
             
-            if recordsParse.count == 1 {
-                self.recordsParse.removeObjectAtIndex(indexPath.row)
+            if recordsDicAtoZ.keys.count == 1 && object.count == 1 {
+                self.recordsParse.removeAllObjects()
+                self.recordsDicAtoZ.removeAll(keepCapacity: false)
                 self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+            }else if object.count == 1{
+                self.recordsDicAtoZ.removeValueForKey(key)
+                self.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+                
             }else {
-                self.recordsParse.removeObjectAtIndex(indexPath.row)
+                self.recordsDicAtoZ[key]!.removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }
             
@@ -353,18 +378,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     func add(button: UIBarButtonItem){
         self.performSegueWithIdentifier("AddSegue", sender: nil)
-    }
-    
-    // MARK: - Mostra a tela com os dados do usuario (opcao de deslogar)
-    
-    func userScreen(button: UIBarButtonItem){
-        self.performSegueWithIdentifier("UserSegue", sender: nil)
-    }
-    
-    // MARK: - Mostra a tela de configuração
-    
-    func settings(button: UIBarButtonItem){
-        self.performSegueWithIdentifier("SettingsSegue", sender: nil)
     }
     
 
@@ -393,7 +406,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         searchBar.setShowsCancelButton(true, animated: true)
 
         self.recordsParse.removeAllObjects()
-        
+        self.recordsDicAtoZ.removeAll(keepCapacity: false)
         let nome = PFQuery(className:"Paciente")
         nome.whereKey("nome", containsString: searchBar.text)
         
@@ -418,7 +431,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                     for object in objects {
                         self.recordsParse.addObject(object)
                     }
-                    
+                    self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
                 }
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
@@ -458,6 +471,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         searchBar.text = ""
         self.searchBar = searchBar
         self.recordsParse.removeAllObjects()
+        self.recordsDicAtoZ.removeAll(keepCapacity: false)
         self.update()
     }
     
@@ -469,6 +483,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchBar.text)
         self.recordsParse.removeAllObjects()
+        self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
         let nome = PFQuery(className:"Paciente")
         nome.whereKey("nome", containsString: searchText)
@@ -489,6 +504,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                         self.recordsParse.addObject(object)
                     }
                     
+                    self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
+
                 }
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
@@ -521,5 +538,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
     }
     
-    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
 }
