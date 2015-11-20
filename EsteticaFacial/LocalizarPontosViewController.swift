@@ -107,6 +107,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
             self.ponto_escolhido = LocalizarPontosViewController.menor_distancia_em_array(self.pontos_views, ponto: toque)
             toque_inicial = toque
             ponto_escolhido_inicial = (self.ponto_escolhido?.local)!
+            self.ponto_escolhido?.ponto_view.image = UIImage(named: "ponto_vermelho")
             print("\(self.ponto_escolhido?.local)")
         }
         else if recognizer.state == UIGestureRecognizerState.Changed{
@@ -114,9 +115,12 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
             let y = toque.y - toque_inicial.y
             self.ponto_escolhido?.frame = CGRectMake(x+ponto_escolhido_inicial.x, y+ponto_escolhido_inicial.y, (self.ponto_escolhido?.frame.width)!, (self.ponto_escolhido?.frame.height)!)
             self.ponto_escolhido?.local = (self.ponto_escolhido?.frame.origin)!
+            self.ponto_escolhido?.ponto_view.image = UIImage(named: "ponto_vermelho")
         }
         else if recognizer.state == UIGestureRecognizerState.Ended{
             pontos_localizados?.updateValue(NSValue(CGPoint:(ponto_escolhido?.local)!), forKey:(ponto_escolhido?.nome)!)
+            self.ponto_escolhido?.ponto_view.image = UIImage(named: "ponto_verde")
+
         }
     }
     

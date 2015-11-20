@@ -70,11 +70,8 @@ class LoginViewController: UIViewController, VSReachability{
                 if ((user) != nil) {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         
-                        let tabbarController: UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("UserLog") as! UITabBarController
-                        tabbarController.selectedIndex = 0
-                        let svc = tabbarController.viewControllers![0] as! UISplitViewController
-                        
-                        self.presentViewController(svc, animated: true, completion: nil)
+                        var tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("UserLog") as! UITabBarController
+                        self.presentViewController(tabBarController, animated: true, completion: nil)
                         
                     })
                     

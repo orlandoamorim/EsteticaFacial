@@ -2,26 +2,36 @@ PODS:
   - Bolts/Tasks (1.5.0)
   - Eureka (1.2.0)
   - GPUImage (0.1.7)
-  - Parse (1.9.1):
-    - Bolts/Tasks (>= 1.4.0)
-  - ParseCrashReporting (1.9.1):
-    - Bolts/Tasks (>= 1.4.0)
-    - Parse (~> 1.9.1)
+  - Parse (1.10.0):
+    - Bolts/Tasks (~> 1.5)
+  - ParseCrashReporting (1.9.2):
+    - Bolts/Tasks (~> 1.5)
+    - Parse (~> 1.9)
   - SwiftyDrop (2.0.0)
 
 DEPENDENCIES:
   - Eureka (~> 1.0)
-  - GPUImage
+  - GPUImage (from `https://github.com/BradLarson/GPUImage`, branch `master`)
   - Parse
   - ParseCrashReporting
   - SwiftyDrop (~> 2.0)
+
+EXTERNAL SOURCES:
+  GPUImage:
+    :branch: master
+    :git: https://github.com/BradLarson/GPUImage
+
+CHECKOUT OPTIONS:
+  GPUImage:
+    :commit: c5f0914152419437869c35e29858773b1a06083c
+    :git: https://github.com/BradLarson/GPUImage
 
 SPEC CHECKSUMS:
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   Eureka: aa7059d2a30e1b206a581f0aabfcf903ece6beae
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
-  ParseCrashReporting: c5ea641e698d576f081f080dff06877ef831d30a
+  Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
+  ParseCrashReporting: 33b760facc649d4fd99eef8f35dcda6a406099e5
   SwiftyDrop: d94821084296482e717e0f4c07198a25f4a85140
 
 COCOAPODS: 0.39.0
