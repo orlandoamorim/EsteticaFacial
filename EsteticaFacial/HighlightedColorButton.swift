@@ -10,9 +10,7 @@ import UIKit
 
 class HighlightedColorButton: UIButton {
     
-    // A new highlightedBackgroundColor, which shows on tap
     var highlightedBackgroundColor: UIColor?
-    // A temporary background color property, which stores the original color while the button is highlighted
     var temporaryBackgroundColor: UIColor?
     
     // Only override drawRect: if you perform custom drawing.
@@ -20,13 +18,6 @@ class HighlightedColorButton: UIButton {
     override func drawRect(rect: CGRect) {
         // Drawing code
         super.drawRect(rect)
-        
-        
-//        view.btnUserImage.layer.cornerRadius = view.btnUserImage.frame.size.width / 2
-//        view.btnUserImage.clipsToBounds = true
-//        view.btnUserImage.layer.borderWidth = 3.0
-//        view.btnUserImage.layer.borderColor = UIColor.whiteColor().CGColor
-//        view.btnUserImage.layer.cornerRadius = 10.0
         
         self.layer.borderColor = UIColor.clearColor().CGColor
         self.layer.borderWidth = 1.0

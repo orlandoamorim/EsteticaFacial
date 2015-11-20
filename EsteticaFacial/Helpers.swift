@@ -273,6 +273,13 @@ class Helpers: NSObject{
         return (pontos_frontal,pontos_perfil,pontos_nasal,dicFormValues)
     }
     
+    /**
+     Recebe o array de PFObjects e o tranforma em um dicionario com chaves referentes as iniciais de cada PFObject(nome de cada paciente)
+     
+     - Parameter formValues: NSMutableArray
+     
+     - Returns:  **[String : [AnyObject]]**.
+     */
     
     static func dicAtoZ (formValues:NSMutableArray)-> [String : [AnyObject]]{
         

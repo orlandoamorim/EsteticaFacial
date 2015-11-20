@@ -17,14 +17,13 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     @IBOutlet weak var pacientesPopBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    
     let userDefaults = NSUserDefaults.standardUserDefaults()
-
+    
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
 
-    
-    var maxCount: Int = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,128 +65,9 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         super.viewDidAppear(animated)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Parse
-    
-    func update(){
-        
-        if self.isConnectedToNetwork(){
-            updateParse()
-            
-        }else{
-            Drop.down("Sem conexão com a Internet", state: DropState.Warning)
-            self.refreshControl?.endRefreshing()
-        }
-    }
-    
-    func updateParse() {
-        maxCount = 0
-        let query = PFQuery(className:"Paciente")
-        print(PFUser.currentUser()!.username!)
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
-        //--
-        if (userDefaults.valueForKey("switchCT") != nil) {
-            let switchCT = userDefaults.valueForKey("switchCT")
-            
-            if switchCT as! String == "Realizadas" {
-                query.whereKey("cirurgia_realizada", equalTo: true)
-            }else if switchCT as! String == "Não Realizadas" {
-                query.whereKey("cirurgia_realizada", equalTo: false)
-            }else if switchCT as! String == "Todas" {
-            }
-        }else {
-            userDefaults.setValue("Todas", forKey: "switchCT")
-            userDefaults.synchronize()
-        }
-        //--
-        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
-            if error == nil {
-                self.maxCount = Int(count)
-                
-                if self.maxCount > self.recordsParse.count {
-                    self.recordsParse.removeAllObjects()
-                    self.recordsDicAtoZ.removeAll(keepCapacity: false)
-                    query.orderByAscending("nome")
-                    query.findObjectsInBackgroundWithBlock {
-                        (objects:[PFObject]?, error:NSError?) -> Void in
-                        if error == nil {
-                            if let objects = objects {
-                                for object in objects {
-                                    self.recordsParse.addObject(object)
-                                }
-                                self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
-
-                            }
-                            self.tableView.reloadData()
-                            self.refreshControl?.endRefreshing()
-                        } else {
-                            self.refreshControl?.endRefreshing()
-                            
-                            let errorCode = error!.code
-                            
-                            switch errorCode {
-                            case 100:
-                                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                                break
-                            case 101:
-                                Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-                                break
-                            case 209:
-                                // Send a request to log out a user
-                                PFUser.logOut()
-                                
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                                    
-                                    self.presentViewController(viewController, animated: true, completion: nil)
-                                })
-                                break
-                            default:
-                                break
-                            }
-
-
-                        }
-                    }
-                }else {
-                    self.refreshControl?.endRefreshing()
-                }
-            }else{
-                self.refreshControl?.endRefreshing()
-
-                let errorCode = error!.code
-                
-                switch errorCode {
-                case 100:
-                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                    break
-                case 101:
-                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-                    break
-                case 209:
-                    // Send a request to log out a user
-                    PFUser.logOut()
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                        
-                        self.presentViewController(viewController, animated: true, completion: nil)
-                    })
-                    break
-                default:
-                    break
-                }
-            }
-        }
     }
     
     // MARK: - Table view data source
@@ -255,11 +135,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let cellDataParse:PFObject = object[indexPath.row] as! PFObject
         
         let nome = cellDataParse.objectForKey("nome") as! String
-        let data_nascimento = dataFormatter().dateFromString(cellDataParse.objectForKey("data_nascimento") as! String)
         
+        let data_nascimento = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).dateFromString(cellDataParse.objectForKey("data_nascimento") as! String)
         
         cell.nomeLabel.text = nome
-        cell.dataNascimentoLabel.text = dataFormatter().stringFromDate(data_nascimento!)
+        cell.dataNascimentoLabel.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(data_nascimento!)
         
         if let thumb_frontal = cellDataParse.objectForKey("thumb_frontal") as? PFFile{
             
@@ -297,6 +177,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         
     }
     
+    // MARK: - prepareForSegue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue.identifier == "UpdateSegue" {
@@ -320,7 +202,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             let popoverViewController = segue.destinationViewController as! MostrarCirurgiasVC
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
-            popoverViewController.popoverPresentationController!.sourceRect = pacientesPopBtn!.layer.frame
+            popoverViewController.popoverPresentationController!.sourceRect = pacientesPopBtn!.bounds
+            popoverViewController.popoverPresentationController!.sourceView = pacientesPopBtn
         }
     }
     
@@ -374,96 +257,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
     }
     
-    // MARK: - Add Call
-    
-    func add(button: UIBarButtonItem){
-        self.performSegueWithIdentifier("AddSegue", sender: nil)
-    }
-    
-
-    // MARK: - Formatador
-    
-    func dataFormatter() -> NSDateFormatter {
-        let formatador: NSDateFormatter = NSDateFormatter()
-        let localizacao = NSLocale(localeIdentifier: "pt_BR")
-        formatador.locale = localizacao
-        formatador.dateStyle =  NSDateFormatterStyle.ShortStyle
-        formatador.dateFormat = "dd/MM/yyyy"
-        
-        return formatador
-    }
-    
-    // MARK: - UISplitViewControllerDelegate
-    //Adição para funcionar melhor no iPad
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
-        return true
-    }
     
     // MARK: - UISearch
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar){
-        searchBar.resignFirstResponder()
-        searchBar.setShowsCancelButton(true, animated: true)
-
-        self.recordsParse.removeAllObjects()
-        self.recordsDicAtoZ.removeAll(keepCapacity: false)
-        let nome = PFQuery(className:"Paciente")
-        nome.whereKey("nome", containsString: searchBar.text)
-        
-        let sexo = PFQuery(className:"Paciente")
-        sexo.whereKey("sexo", containsString: searchBar.text)
-        
-        let etnia = PFQuery(className:"Paciente")
-        etnia.whereKey("etnia", containsString: searchBar.text)
-        
-        let data_nascimento = PFQuery(className:"Paciente")
-        data_nascimento.whereKey("data_nascimento", containsString: searchBar.text)
-        
-        let notas = PFQuery(className:"Paciente")
-        notas.whereKey("notas", containsString: searchBar.text)
-        
-        let query = PFQuery.orQueryWithSubqueries([nome, data_nascimento,notas])
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        query.findObjectsInBackgroundWithBlock {
-            (objects:[PFObject]?, error:NSError?) -> Void in
-            if error == nil {
-                if let objects = objects {
-                    for object in objects {
-                        self.recordsParse.addObject(object)
-                    }
-                    self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
-                }
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            } else {
-                self.refreshControl?.endRefreshing()
-                
-                let errorCode = error!.code
-                
-                switch errorCode {
-                case 100:
-                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                    break
-                case 101:
-                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-                    break
-                case 209:
-                    // Send a request to log out a user
-                    PFUser.logOut()
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                        
-                        self.presentViewController(viewController, animated: true, completion: nil)
-                    })
-                    break
-                default:
-                    break
-                }
-            }
-        }
-
-    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
@@ -477,7 +272,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
-
+        
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -505,7 +300,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                     }
                     
                     self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
-
+                    
                 }
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
@@ -537,8 +332,143 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
         }
     }
+
+    
+    
+    // MARK: - Add Call
+    
+    func add(button: UIBarButtonItem){
+        self.performSegueWithIdentifier("AddSegue", sender: nil)
+    }
+    
+
+    // MARK: - UISplitViewControllerDelegate
+    //Adição para funcionar melhor no iPad
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
+        return true
+    }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
     }
+    
+    
+    // MARK: - Parse Connection
+    
+    // MARK: - Parse
+    
+    func update(){
+        
+        if self.isConnectedToNetwork(){
+            updateParse()
+            
+        }else{
+            Drop.down("Sem conexão com a Internet", state: DropState.Warning)
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func updateParse() {
+        var maxCount: Int = 0
+        let query = PFQuery(className:"Paciente")
+        print(PFUser.currentUser()!.username!)
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        
+        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
+            if error == nil {
+                maxCount = Int(count)
+                
+                if maxCount > self.recordsParse.count {
+                    self.recordsParse.removeAllObjects()
+                    self.recordsDicAtoZ.removeAll(keepCapacity: false)
+                    query.orderByAscending("nome")
+                    
+                    //--
+                    if self.userDefaults.valueForKey("switchCT") != nil {
+                        let switchCT = self.userDefaults.valueForKey("switchCT")
+                        
+                        if switchCT as! String == "realizadas" {
+                            query.whereKey("cirurgia_realizada", equalTo: true)
+                        }else if switchCT as! String == "nao_realizadas" {
+                            query.whereKey("cirurgia_realizada", equalTo: false)
+                        }
+                    }
+                    //--
+                    
+                    query.findObjectsInBackgroundWithBlock {
+                        (objects:[PFObject]?, error:NSError?) -> Void in
+                        if error == nil {
+                            if let objects = objects {
+                                for object in objects {
+                                    self.recordsParse.addObject(object)
+                                }
+                                self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
+                                
+                            }
+                            self.tableView.reloadData()
+                            self.refreshControl?.endRefreshing()
+                        } else {
+                            self.refreshControl?.endRefreshing()
+                            
+                            let errorCode = error!.code
+                            
+                            switch errorCode {
+                            case 100:
+                                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                                break
+                            case 101:
+                                Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                                break
+                            case 209:
+                                // Send a request to log out a user
+                                PFUser.logOut()
+                                
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                                    
+                                    self.presentViewController(viewController, animated: true, completion: nil)
+                                })
+                                break
+                            default:
+                                break
+                            }
+                            
+                            
+                        }
+                    }
+                }else {
+                    self.refreshControl?.endRefreshing()
+                }
+            }else{
+                self.refreshControl?.endRefreshing()
+                
+                let errorCode = error!.code
+                
+                switch errorCode {
+                case 100:
+                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+                    break
+                case 101:
+                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+                    break
+                case 209:
+                    // Send a request to log out a user
+                    PFUser.logOut()
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                        
+                        self.presentViewController(viewController, animated: true, completion: nil)
+                    })
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+
+    
+    
 }

@@ -19,17 +19,11 @@ class AjustesVC: FormViewController,VSReachability {
         super.viewDidLoad()
         self.title = "Ajustes"
         initializeForm()
-                // Do any additional setup after loading the view.
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-
-    
     
     private func initializeForm() {
         
@@ -105,8 +99,9 @@ class AjustesVC: FormViewController,VSReachability {
                     
                     alertController.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
                     
-                    alertController.popoverPresentationController?.sourceView = self.view
-                    alertController.popoverPresentationController?.sourceRect = cell.frame
+                    alertController.popoverPresentationController?.sourceView = cell
+                    alertController.popoverPresentationController?.sourceRect = cell.bounds
+                    
                     self.presentViewController(alertController, animated: true, completion: nil)
                 })
             

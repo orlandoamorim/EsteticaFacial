@@ -413,10 +413,10 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlockImage : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockImage : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      
-     - Parameter resultBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      */
     
@@ -452,10 +452,10 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlockImage : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockImage : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      
-     - Parameter resultBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      */
     
@@ -488,10 +488,10 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlockImage : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockImage : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      
-     - Parameter resultBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      */
 
@@ -526,7 +526,7 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlock : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
 
      */
@@ -548,7 +548,7 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlock : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      
      */
@@ -569,7 +569,7 @@ class ParseConnection: NSObject {
      
      - Parameter parseObject: O PFObject a ser baixado.
      
-     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(UIIMAGE image, NSError *error)`.
+     - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlock : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
      
      */
@@ -609,6 +609,7 @@ class ParseConnection: NSObject {
                                         progressBlock(progress: Float(progress))
                             })
                         }else{
+                            //retorna nil se o usuario nao possuir nenhuma imagem.
                             resultBlock(data: nil, error: nil)
                         }
                     }

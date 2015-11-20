@@ -22,11 +22,11 @@ class MostrarCirurgiasVC: FormViewController {
         if (userDefaults.valueForKey("switchCT") != nil) {
             let switchCT = userDefaults.valueForKey("switchCT")
             
-            if switchCT as! String == "Realizadas" {
+            if switchCT as! String == "realizadas" {
                 formValues.updateValue(true, forKey: "realizadas")
-            }else if switchCT as! String == "Não Realizadas" {
+            }else if switchCT as! String == "nao_realizadas" {
                 formValues.updateValue(true, forKey: "nao_realizadas")
-            }else if switchCT as! String == "Todas" {
+            }else if switchCT as! String == "todas" {
                 formValues.updateValue(true, forKey: "todas")
             }
         }else {
@@ -50,7 +50,7 @@ class MostrarCirurgiasVC: FormViewController {
         
         form +++
             
-            Section("Abordagem")
+            Section("Tipo de Ficha que sera mostrada")
             
             <<< CheckRow("realizadas") {
                 $0.title = "Realizadas"
@@ -63,7 +63,7 @@ class MostrarCirurgiasVC: FormViewController {
                         self?.form.rowByTag("todas")?.baseValue = false
                         self?.form.rowByTag("todas")?.updateCell()
                         
-                        self!.userDefaults.setValue("Realizadas", forKey: "switchCT")
+                        self!.userDefaults.setValue("realizadas", forKey: "switchCT")
                         self!.userDefaults.synchronize()
                         
                         self?.dismissViewControllerAnimated(true, completion: nil)
@@ -81,7 +81,7 @@ class MostrarCirurgiasVC: FormViewController {
                         self?.form.rowByTag("todas")?.baseValue = false
                         self?.form.rowByTag("todas")?.updateCell()
                         
-                        self!.userDefaults.setValue("Não Realizadas", forKey: "switchCT")
+                        self!.userDefaults.setValue("nao_realizadas", forKey: "switchCT")
                         self!.userDefaults.synchronize()
                         self?.dismissViewControllerAnimated(true, completion: nil)
                     }
@@ -97,7 +97,7 @@ class MostrarCirurgiasVC: FormViewController {
                         self?.form.rowByTag("nao_realizadas")?.baseValue = false
                         self?.form.rowByTag("nao_realizadas")?.updateCell()
                         
-                        self!.userDefaults.setValue("Todas", forKey: "switchCT")
+                        self!.userDefaults.setValue("todas", forKey: "switchCT")
                         self!.userDefaults.synchronize()
                         
                         self?.dismissViewControllerAnimated(true, completion: nil)
@@ -109,6 +109,16 @@ class MostrarCirurgiasVC: FormViewController {
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
+    }
+    
+    override var preferredContentSize: CGSize {
+        get {
+            let height = tableView?.rectForSection(0).height
+            
+            
+            return CGSize(width: CGFloat(super.preferredContentSize.width), height: height!)
+        }
+        set { super.preferredContentSize = newValue }
     }
 
 
