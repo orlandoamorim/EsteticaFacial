@@ -84,12 +84,15 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "getFormValues")
                         
         }else if type == "Atualizando" {
-            
-            self.formValuesServidor = ParseConnection.getFromServer(parseObject, completion: { (dicFormValues) -> Void in
-                self.dicFormValuesServidor = dicFormValues
-                self.dicFormValuesAtual = dicFormValues
+
+            ParseConnection.getFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+                 self.formValuesServidor = formValues
+                }, resultBlockDic: { (dicFormValues) -> Void in
+                    self.dicFormValuesServidor = dicFormValues
+                    self.dicFormValuesAtual = dicFormValues
+                }, progressBlockDic: { (progress) -> Void in
+                    
             })
-            
            form.setValues(self.formValuesServidor)
 
             self.tableView?.reloadData()

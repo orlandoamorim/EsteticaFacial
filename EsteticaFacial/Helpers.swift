@@ -319,4 +319,38 @@ class Helpers: NSObject{
         
     }
     
+    /**
+     Recebe o PFObject e a view que chama a função 'retornando' os dados da ficha para serem compartilhados
+     
+     - Parameter parseObject: PFObject
+     - Parameter VC: UIViewController
+
+     */
+    
+    static func compartilharFicha(parseObject : PFObject, VC:UIViewController) {
+        
+        var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
+        var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
+        
+        ParseConnection.getFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+                formValuesServidor = convertAnyToAnyObject(formValues)
+            }, resultBlockDic: { (dicFormValues) -> Void in
+                dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
+            }) { (progress) -> Void in
+                print(progress)
+                if progress == 100 {print("AQUI")
+                    let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
+                    let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
+                    let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
+                    let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
+                    let Item5 = "* Plano Cirurgico: \(dicFormValuesServidor)"
+                    
+                    let Item7 = "| Dados via DocReminder |"
+                    
+                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item7], applicationActivities: nil)
+                    VC.presentViewController(activityViewController, animated: true, completion: nil)
+                }
+        }
+    }
+    
 }

@@ -70,7 +70,7 @@ class LoginViewController: UIViewController, VSReachability{
                 if ((user) != nil) {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         
-                        var tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("UserLog") as! UITabBarController
+                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("UserLog") as! UITabBarController
                         self.presentViewController(tabBarController, animated: true, completion: nil)
                         
                     })

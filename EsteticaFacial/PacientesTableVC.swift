@@ -19,6 +19,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     @IBOutlet weak var searchBar: UISearchBar!
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
+    var switchCT:AnyObject?
+    var switchAnterior:AnyObject?
     
     var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
@@ -63,12 +65,14 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     // MARK: - Table view data source
     
@@ -176,6 +180,51 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
         
     }
+    
+    // MARK: - DetailDisclosureButton
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        let meuAlertSheet: UIAlertController = UIAlertController(title: "DocReminder", message: "Escolha umas das opções abaixo.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let btnRealizada: UIAlertAction = UIAlertAction(title: "Cirurgia Realizada", style: UIAlertActionStyle.Default) { (action) -> Void in
+            let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
+            let object = self.recordsDicAtoZ[key]!
+            
+            let parseObject:PFObject = object[indexPath.row] as! PFObject
+            parseObject["cirurgia_realizada"] = true
+            
+            parseObject.saveInBackgroundWithBlock({ (seccess, error) -> Void in
+                if error == nil {
+                    Drop.down("Atualizada com sucesso", state: .Success)
+                    self.update()
+                }else{
+                    Drop.down("Erro atualizar a ficha.", state: .Error)
+                }
+            })
+        }
+        
+        
+        let btnCompartilhar: UIAlertAction = UIAlertAction(title: "Compartilhar 🔃", style: UIAlertActionStyle.Default) { (action) -> Void in
+            if self.recordsDicAtoZ.keys.count > 0 {
+                let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
+                let object = self.recordsDicAtoZ[key]!
+                
+                let parseObject:PFObject = object[indexPath.row] as! PFObject
+                Helpers.compartilharFicha(parseObject, VC: self)
+            }
+        }
+        
+
+        let btnCancelar: UIAlertAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        meuAlertSheet.addAction(btnRealizada)
+        meuAlertSheet.addAction(btnCompartilhar)
+        meuAlertSheet.addAction(btnCancelar)
+        
+        self.presentViewController(meuAlertSheet, animated: true, completion: nil)
+    }
+
     
     // MARK: - prepareForSegue
     
@@ -355,8 +404,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     // MARK: - Parse Connection
     
-    // MARK: - Parse
-    
     func update(){
         
         if self.isConnectedToNetwork(){
@@ -377,22 +424,28 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
             if error == nil {
                 maxCount = Int(count)
+                if self.userDefaults.valueForKey("switchCT") != nil {
+                    self.switchCT = self.userDefaults.valueForKey("switchCT")
+                }
                 
-                if maxCount > self.recordsParse.count {
+                if maxCount > self.recordsParse.count || self.switchCT as! String != self.switchAnterior as! String{
                     self.recordsParse.removeAllObjects()
                     self.recordsDicAtoZ.removeAll(keepCapacity: false)
                     query.orderByAscending("nome")
                     
                     //--
-                    if self.userDefaults.valueForKey("switchCT") != nil {
-                        let switchCT = self.userDefaults.valueForKey("switchCT")
-                        
-                        if switchCT as! String == "realizadas" {
+                        if self.switchCT as! String == "realizadas" {
                             query.whereKey("cirurgia_realizada", equalTo: true)
-                        }else if switchCT as! String == "nao_realizadas" {
+                            self.switchAnterior = "realizadas"
+
+                        }else if self.switchCT as! String == "nao_realizadas" {
                             query.whereKey("cirurgia_realizada", equalTo: false)
+                            self.switchAnterior = "nao_realizadas"
+
+                        }else if self.switchCT as! String == "todas" {
+                            self.switchAnterior = "todas"
                         }
-                    }
+                    
                     //--
                     
                     query.findObjectsInBackgroundWithBlock {
