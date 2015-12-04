@@ -18,14 +18,10 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     @IBOutlet weak var pacientesPopBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let userDefaults = NSUserDefaults.standardUserDefaults()
-    var switchCT:AnyObject?
-    var switchAnterior:AnyObject?
-    
-    var recordsParse:NSMutableArray = NSMutableArray()
+//    var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +37,9 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         refreshControl.attributedTitle = NSAttributedString(string: "Puxe para Atualizar...")
         //refreshControl.t = "Atualizar"
         self.refreshControl = refreshControl
-
+        
         // BarButtun Right
-                
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
         
         if (PFUser.currentUser() == nil) {
@@ -60,7 +56,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             self.refreshControl?.beginRefreshing()
             update()
         }
-
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -131,7 +127,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         cell.thumbImageView.layer.borderWidth = 1.0
         cell.thumbImageView.layer.borderColor = UIColor.darkGrayColor().CGColor
         cell.thumbImageView.layer.cornerRadius = 10.0
-
+        
         
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
         let object = recordsDicAtoZ[key]!
@@ -215,7 +211,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
         }
         
-
+        
         let btnCancelar: UIAlertAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
         
         meuAlertSheet.addAction(btnRealizada)
@@ -224,12 +220,12 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         
         self.presentViewController(meuAlertSheet, animated: true, completion: nil)
     }
-
+    
     
     // MARK: - prepareForSegue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
+        
         if segue.identifier == "UpdateSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! AUFichaVC
@@ -247,19 +243,20 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! AUFichaVC
             controller.type = "Adicionando"
-        }else if segue.identifier == "PopOverSegue" {
-            let popoverViewController = segue.destinationViewController as! MostrarCirurgiasVC
-            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-            popoverViewController.popoverPresentationController!.delegate = self
-            popoverViewController.popoverPresentationController!.sourceRect = pacientesPopBtn!.bounds
-            popoverViewController.popoverPresentationController!.sourceView = pacientesPopBtn
         }
+//        else if segue.identifier == "PopOverSegue" {
+//            let popoverViewController = segue.destinationViewController as! MostrarCirurgiasVC
+//            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+//            popoverViewController.popoverPresentationController!.delegate = self
+//            popoverViewController.popoverPresentationController!.sourceRect = pacientesPopBtn!.bounds
+//            popoverViewController.popoverPresentationController!.sourceView = pacientesPopBtn
+//        }
     }
     
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        if recordsParse.count == 0 {
+        if recordsDicAtoZ.keys.count == 0 {
             return UITableViewCellEditingStyle.None
         }
         return UITableViewCellEditingStyle.Delete
@@ -282,7 +279,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             Drop.down("Deletando ficha do paciente \(nome)", state: .Info)
             
             if recordsDicAtoZ.keys.count == 1 && object.count == 1 {
-                self.recordsParse.removeAllObjects()
                 self.recordsDicAtoZ.removeAll(keepCapacity: false)
                 self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
             }else if object.count == 1{
@@ -314,7 +310,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         searchBar.resignFirstResponder()
         searchBar.text = ""
         self.searchBar = searchBar
-        self.recordsParse.removeAllObjects()
         self.recordsDicAtoZ.removeAll(keepCapacity: false)
         self.update()
     }
@@ -326,7 +321,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchBar.text)
-        self.recordsParse.removeAllObjects()
         self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
         let nome = PFQuery(className:"Paciente")
@@ -344,12 +338,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             (objects:[PFObject]?, error:NSError?) -> Void in
             if error == nil {
                 if let objects = objects {
-                    for object in objects {
-                        self.recordsParse.addObject(object)
-                    }
-                    
-                    self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
-                    
+                    self.recordsDicAtoZ = Helpers.dicAtoZ(objects)
                 }
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
@@ -381,7 +370,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
         }
     }
-
+    
     
     
     // MARK: - Add Call
@@ -390,7 +379,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         self.performSegueWithIdentifier("AddSegue", sender: nil)
     }
     
-
+    
     // MARK: - UISplitViewControllerDelegate
     //Adição para funcionar melhor no iPad
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
@@ -401,6 +390,56 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         return UIModalPresentationStyle.None
     }
     
+    @IBAction func switchTipo(sender: UIButton) {
+        
+        var todas = "Todas as Fichas"
+        var realizadas = "Realizadas"
+        var nao_realizadas = "Não Realizadas"
+        
+        switch Helpers.verificaSwitch() {
+        case "realizadas":
+            realizadas = "Realizadas ⚡️"
+            print("realizadas")
+        case "nao_realizadas":
+            nao_realizadas = "Não Realizadas ⚡️"
+            print("nao_realizadas")
+            
+        default:
+            todas = "Todas as Fichas ⚡️"
+
+        }
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+
+        let alertController = UIAlertController(title: "Analise Facial", message: "Qual tipo de conteudo deseja carregar?", preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+        
+        alertController.addAction(UIAlertAction(title: todas, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            userDefaults.setValue("todas", forKey: "switchCT")
+            userDefaults.synchronize()
+            self.update()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: realizadas, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            userDefaults.setValue("realizadas", forKey: "switchCT")
+            userDefaults.synchronize()
+            self.update()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: nao_realizadas, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            userDefaults.setValue("nao_realizadas", forKey: "switchCT")
+            userDefaults.synchronize()
+            self.update()
+        }))
+        
+        
+        alertController.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        alertController.popoverPresentationController?.sourceView = sender
+        alertController.popoverPresentationController?.sourceRect = sender.bounds
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     // MARK: - Parse Connection
     
@@ -415,84 +454,76 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
     }
     
+//    func updateParse() {
+//        self.recordsDicAtoZ.removeAll(keepCapacity: false)
+//        
+//        let query = PFQuery(className:"Paciente")
+//        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+//        print(PFUser.currentUser()!.username!)
+//        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+//        query.orderByAscending("nome")
+//
+//        switch Helpers.verificaSwitch() {
+//            case "realizadas":
+//                query.whereKey("cirurgia_realizada", equalTo: true)
+//                print("realizadas")
+//            case "nao_realizadas":
+//                query.whereKey("cirurgia_realizada", equalTo: false)
+//                print("nao_realizadas")
+//
+//            default: break
+//        }
+//        
+//        query.findObjectsInBackgroundWithBlock {
+//            (objects:[PFObject]?, error:NSError?) -> Void in
+//            if error == nil {
+//                if let objects = objects {
+//                    self.recordsDicAtoZ = Helpers.dicAtoZ(objects)
+//                }
+//                self.tableView.reloadData()
+//                self.refreshControl?.endRefreshing()
+//            } else {
+//                self.refreshControl?.endRefreshing()
+//                
+//                let errorCode = error!.code
+//                
+//                switch errorCode {
+//                case 100:
+//                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
+//                    break
+//                case 101:
+//                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
+//                    break
+//                case 209:
+//                    // Send a request to log out a user
+//                    PFUser.logOut()
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+//                        
+//                        self.presentViewController(viewController, animated: true, completion: nil)
+//                    })
+//                    break
+//                default:
+//                    break
+//                }
+//                
+//                
+//            }
+//        }
+//    }
+    
     func updateParse() {
-        var maxCount: Int = 0
-        let query = PFQuery(className:"Paciente")
-        print(PFUser.currentUser()!.username!)
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
-        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
+        ParseConnection.getAllFromParse { (objects, error) -> Void in
             if error == nil {
-                maxCount = Int(count)
-                if self.userDefaults.valueForKey("switchCT") != nil {
-                    self.switchCT = self.userDefaults.valueForKey("switchCT")
+                if let objects = objects {
+                    self.recordsDicAtoZ = Helpers.dicAtoZ(objects)
                 }
-                
-                if maxCount > self.recordsParse.count || self.switchCT as! String != self.switchAnterior as! String{
-                    self.recordsParse.removeAllObjects()
-                    self.recordsDicAtoZ.removeAll(keepCapacity: false)
-                    query.orderByAscending("nome")
-                    
-                    //--
-                        if self.switchCT as! String == "realizadas" {
-                            query.whereKey("cirurgia_realizada", equalTo: true)
-                            self.switchAnterior = "realizadas"
-
-                        }else if self.switchCT as! String == "nao_realizadas" {
-                            query.whereKey("cirurgia_realizada", equalTo: false)
-                            self.switchAnterior = "nao_realizadas"
-
-                        }else if self.switchCT as! String == "todas" {
-                            self.switchAnterior = "todas"
-                        }
-                    
-                    //--
-                    
-                    query.findObjectsInBackgroundWithBlock {
-                        (objects:[PFObject]?, error:NSError?) -> Void in
-                        if error == nil {
-                            if let objects = objects {
-                                for object in objects {
-                                    self.recordsParse.addObject(object)
-                                }
-                                self.recordsDicAtoZ = Helpers.dicAtoZ(self.recordsParse)
-                                
-                            }
-                            self.tableView.reloadData()
-                            self.refreshControl?.endRefreshing()
-                        } else {
-                            self.refreshControl?.endRefreshing()
-                            
-                            let errorCode = error!.code
-                            
-                            switch errorCode {
-                            case 100:
-                                Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-                                break
-                            case 101:
-                                Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-                                break
-                            case 209:
-                                // Send a request to log out a user
-                                PFUser.logOut()
-                                
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                                    
-                                    self.presentViewController(viewController, animated: true, completion: nil)
-                                })
-                                break
-                            default:
-                                break
-                            }
-                            
-                            
-                        }
-                    }
-                }else {
-                    self.refreshControl?.endRefreshing()
-                }
-            }else{
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            } else {
                 self.refreshControl?.endRefreshing()
                 
                 let errorCode = error!.code
@@ -505,6 +536,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                     Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
                     break
                 case 209:
+                    PFQuery.clearAllCachedResults()
                     // Send a request to log out a user
                     PFUser.logOut()
                     
@@ -519,9 +551,9 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 }
             }
         }
+        
     }
     
 
-    
-    
+
 }

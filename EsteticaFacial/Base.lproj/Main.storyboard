@@ -29,23 +29,23 @@
                                 <rect key="frame" x="0.0" y="136" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wWb-XI-QJy" id="lNI-q9-8mZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJ7-MA-ZXz">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="64" id="Xaw-uu-CSx"/>
-                                                <constraint firstAttribute="height" constant="63.5" id="mVr-0D-P3z"/>
+                                                <constraint firstAttribute="height" constant="64" id="2OB-sd-rCc"/>
+                                                <constraint firstAttribute="width" constant="64" id="Tq2-cr-PeD"/>
                                             </constraints>
                                         </imageView>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3U9-1i-aiV">
                                             <rect key="frame" x="21" y="21" width="37" height="37"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="37" id="Oub-xj-rsk"/>
-                                                <constraint firstAttribute="height" constant="37" id="sIX-As-AgZ"/>
+                                                <constraint firstAttribute="width" constant="37" id="0qw-m5-8KG"/>
+                                                <constraint firstAttribute="height" constant="37" id="ati-qq-Vhw"/>
                                             </constraints>
                                             <color key="color" red="0.0" green="0.24984693810325775" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
@@ -53,7 +53,7 @@
                                             <rect key="frame" x="79" y="41" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="PK5-mQ-YIZ"/>
+                                                <constraint firstAttribute="height" constant="30" id="5Rq-LU-5eO"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +63,7 @@
                                             <rect key="frame" x="79" y="8" width="446" height="30"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="v5O-P5-bIN"/>
+                                                <constraint firstAttribute="height" constant="30" id="9Iv-Kf-INX"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -72,21 +72,21 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="top" secondItem="N2z-pd-3pa" secondAttribute="bottom" constant="3" id="Hp1-e4-AFe"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7" id="LqU-qE-v7u"/>
-                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" constant="13" id="WjJ-pW-0uR"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="3U9-1i-aiV" secondAttribute="bottom" constant="13.5" id="XS0-5Q-eIP"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="cZO-0r-Hj5"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" id="cd2-vn-1PL"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7" id="cx1-YJ-moG"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="dWx-0m-6Bf"/>
-                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="bottom" secondItem="lNI-q9-8mZ" secondAttribute="bottomMargin" id="ea3-9a-fiP"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="21" id="epc-4n-DVK"/>
-                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="ifS-MK-zbY"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="21" id="kPq-Du-MHL"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="TQg-aA-1Lj" secondAttribute="bottom" constant="0.5" id="pbX-ZJ-ha2"/>
-                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" constant="13" id="s72-fG-yJq"/>
-                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="uD6-E1-SQS"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7" id="17g-o0-b0h"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="WJ7-MA-ZXz" secondAttribute="trailing" constant="7" id="1zE-va-kqv"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="A1o-Pq-4cn"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="AfL-Tq-znt"/>
+                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" id="CJV-W6-866"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3U9-1i-aiV" secondAttribute="bottom" constant="13" id="Oz5-n2-BDt"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="21" id="T0B-nI-Hb5"/>
+                                        <constraint firstItem="WJ7-MA-ZXz" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" id="Un8-xc-25l"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="bottom" secondItem="lNI-q9-8mZ" secondAttribute="bottomMargin" id="ZuE-nI-88p"/>
+                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="leading" secondItem="lNI-q9-8mZ" secondAttribute="leadingMargin" constant="13" id="dRC-Qg-ER8"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="top" secondItem="N2z-pd-3pa" secondAttribute="bottom" constant="3" id="qbb-c4-FZ5"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WJ7-MA-ZXz" secondAttribute="bottom" constant="-1" id="sia-JM-jQc"/>
+                                        <constraint firstItem="TQg-aA-1Lj" firstAttribute="leading" secondItem="3U9-1i-aiV" secondAttribute="trailing" constant="21" id="vAv-uW-fDu"/>
+                                        <constraint firstItem="3U9-1i-aiV" firstAttribute="top" secondItem="lNI-q9-8mZ" secondAttribute="topMargin" constant="13" id="vfP-Sr-BKQ"/>
+                                        <constraint firstItem="N2z-pd-3pa" firstAttribute="trailing" secondItem="lNI-q9-8mZ" secondAttribute="trailingMargin" id="ynT-qa-nyd"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -114,9 +114,7 @@
                                 <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <segue destination="UoX-FO-wFm" kind="popoverPresentation" identifier="PopOverSegue" popoverAnchorView="kRm-pq-xA5" id="50E-eG-d4L">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <action selector="switchTipo:" destination="ghm-n5-Tl9" eventType="touchUpInside" id="wU3-I4-Efb"/>
                             </connections>
                         </button>
                     </navigationItem>
@@ -247,7 +245,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
-                                                    <rect key="frame" x="208" y="8" width="186" height="114"/>
+                                                    <rect key="frame" x="208" y="8" width="185" height="114"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" backgroundImage="modelo_perfil"/>
@@ -445,11 +443,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-TG-Q69">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-TG-Q69">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6pQ-40-c7v">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pQ-40-c7v">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                         <animations/>
                                         <connections>
                                             <outlet property="delegate" destination="asl-qs-5Lg" id="Msd-RH-AUv"/>
@@ -1081,6 +1079,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="wFd-Dn-OWh"/>
         <segue reference="edP-Kv-ZE1"/>
-        <segue reference="x1z-yB-rsu"/>
+        <segue reference="pOG-7W-LpM"/>
     </inferredMetricsTieBreakers>
 </document>

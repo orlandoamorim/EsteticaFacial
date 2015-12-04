@@ -274,6 +274,33 @@ class Helpers: NSObject{
     }
     
     /**
+     Vaerifica qual tipo de conteudo o usuario deseja mostrar na tableview
+     
+     - Returns:  **String**.
+     */
+    
+    static func verificaSwitch()->String{
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if (userDefaults.valueForKey("switchCT") != nil) {
+            let switchCT = userDefaults.valueForKey("switchCT")
+            
+            if switchCT as! String == "realizadas" {
+                return "realizadas"
+            }else if switchCT as! String == "nao_realizadas" {
+                return "nao_realizadas"
+            }else if switchCT as! String == "todas" {
+                return "todas"
+            }
+        }else {
+            userDefaults.setValue("Todas", forKey: "switchCT")
+            userDefaults.synchronize()
+            return "todas"
+        }
+        
+        return "todas"
+    }
+    
+    /**
      Recebe o array de PFObjects e o tranforma em um dicionario com chaves referentes as iniciais de cada PFObject(nome de cada paciente)
      
      - Parameter formValues: NSMutableArray
@@ -281,13 +308,13 @@ class Helpers: NSObject{
      - Returns:  **[String : [AnyObject]]**.
      */
     
-    static func dicAtoZ (formValues:NSMutableArray)-> [String : [AnyObject]]{
+    static func dicAtoZ (pfobject:[PFObject]?)-> [String : [AnyObject]]{
         
         var recordsHeader: [String] = [String]()
         var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
         
-        for i in formValues {
-            let parseObject:PFObject = i as! PFObject
+        for i in pfobject! {
+            let parseObject:PFObject = i 
             let nome = parseObject.objectForKey("nome") as! String
             
 
@@ -332,7 +359,7 @@ class Helpers: NSObject{
         var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
         var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
         
-        ParseConnection.getFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+        ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
                 formValuesServidor = convertAnyToAnyObject(formValues)
             }, resultBlockDic: { (dicFormValues) -> Void in
                 dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)

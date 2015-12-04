@@ -85,7 +85,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico 
                         
         }else if type == "Atualizando" {
 
-            ParseConnection.getFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
                  self.formValuesServidor = formValues
                 }, resultBlockDic: { (dicFormValues) -> Void in
                     self.dicFormValuesServidor = dicFormValues

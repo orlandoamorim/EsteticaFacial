@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import SwiftyDrop
 
 /**
  # Comunicação com o Servidor
@@ -26,6 +27,32 @@ import Parse
  */
 
 class ParseConnection: NSObject {
+    
+    
+    static func getAllFromParse(block: ((objects:[PFObject]?, error:NSError?) -> Void)){
+        let query = PFQuery(className:"Paciente")
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+        print(PFUser.currentUser()!.username!)
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.orderByAscending("nome")
+        
+        switch Helpers.verificaSwitch() {
+        case "realizadas":
+            query.whereKey("cirurgia_realizada", equalTo: true)
+            print("realizadas")
+        case "nao_realizadas":
+            query.whereKey("cirurgia_realizada", equalTo: false)
+            print("nao_realizadas")
+            
+        default: break
+        }
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects:[PFObject]?, error:NSError?) -> Void in
+            block(objects: objects, error: error)
+        }
+    }
+
     
     /**
      Salva a `Ficha` *assincronamente* no servidor e executa o bloco de retorno.
@@ -368,7 +395,7 @@ class ParseConnection: NSObject {
 
      */
     
-    static func getFromServer(parseObject:PFObject, resultBlockForm: ((formValues:  [String : Any?]) -> Void), resultBlockDic: ((dicFormValues:  [String : Any?]) -> Void), progressBlockDic: ((progress: Float?) -> Void)){
+    static func getFichaFromServer(parseObject:PFObject, resultBlockForm: ((formValues:  [String : Any?]) -> Void), resultBlockDic: ((dicFormValues:  [String : Any?]) -> Void), progressBlockDic: ((progress: Float?) -> Void)){
         
         var formValues:[String : Any?] = [String : Any?]()
         
