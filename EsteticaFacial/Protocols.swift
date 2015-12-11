@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol NovoPacienteDelegate{
-    func atribuir_imagem(imagem: UIImage, flag:Int)
-    func atribuir_marcacao(dic:[String:NSValue], flag:Int)
+    func atribuir_imagem(imagem: UIImage, imageTypesSelected:imageTypes)
+    func atribuir_marcacao(dic:[String:NSValue], imageTypesSelected:imageTypes)
 }
 
 protocol ProcedimentoCirurgico{

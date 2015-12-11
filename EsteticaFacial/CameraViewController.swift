@@ -26,20 +26,16 @@ class CameraViewController: UIViewController, CameraViewDelegate {
     
     var dicionario: [String:NSValue]?
     
-    // Indica que foto (perspectiva) deve ser tirada
-    var flag: Int = 0
+    var imageTypesSelected:imageTypes = .Frontal
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("FLAG = \(flag)")
-        if flag == 0{
-            self.imagem_guia.image = UIImage.init(named: "modelo_frontal")
-        }
-        if flag == 1{
-            self.imagem_guia.image = UIImage.init(named: "modelo_perfil")
-        }
-        if flag == 2{
-            self.imagem_guia.image = UIImage.init(named: "modelo_nasal")
+        print("FLAG = \(imageTypesSelected)")
+        
+        switch imageTypesSelected {
+            case.Frontal:   self.imagem_guia.image = UIImage.init(named: "modelo_frontal")
+            case.Perfil:    self.imagem_guia.image = UIImage.init(named: "modelo_perfil")
+            case.Nasal:     self.imagem_guia.image = UIImage.init(named: "modelo_nasal")
         }
         
         if self.imagem_recuperada != nil{
@@ -131,7 +127,7 @@ class CameraViewController: UIViewController, CameraViewDelegate {
                 let height_crop = imagem.size.height*self.quadro_corte.frame.size.height/(self.camada_preview?.frame.height)!
                 
                 self.imagem_capturada.image = TratamentoEntrada.recortar_imagem(imagem, rect: CGRectMake(x_crop, y_crop, width_crop, height_crop))
-                self.delegate!.atribuir_imagem(self.imagem_capturada.image!, flag: self.flag)
+                self.delegate!.atribuir_imagem(self.imagem_capturada.image!, imageTypesSelected: self.imageTypesSelected)
                 
               //  self.imagem_capturada.image = TratamentoEntrada.resize_image(self.imagem_capturada.image!, scale_w: 0.2, scale_h: 0.2)
                 
@@ -149,7 +145,7 @@ class CameraViewController: UIViewController, CameraViewDelegate {
     }
     
     func marcar_pontos(dic: [String : NSValue]) {
-        delegate.atribuir_marcacao(dic, flag: flag)
+        delegate.atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected)
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

@@ -135,7 +135,6 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if error == nil {
                         self.pontosPerfilServidor = pontos
                         self.pontosPerfilAtual = pontos
-                        print("TA DANDO MERADA")
                     }else{
                         Drop.down("Erro ao baixar pontos perfil. Objeto nao encontrado.", state: .Error)
                     }
@@ -397,37 +396,26 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     }
     
     //NovoPacienteDelegate
-    func atribuir_imagem(imagem: UIImage, flag: Int) {
-        if flag==0 {
-            btn_imagem_frontal.setImage(imagem, forState: UIControlState.Normal)
+    func atribuir_imagem(imagem: UIImage, imageTypesSelected:imageTypes) {
+        switch imageTypesSelected {
+            case .Frontal:  btn_imagem_frontal.setImage(imagem, forState: UIControlState.Normal)
+            case .Perfil:   btn_imagem_perfil.setImage(imagem, forState: UIControlState.Normal)
+            case .Nasal:    btn_imagem_nasal.setImage(imagem, forState: UIControlState.Normal)
         }
-        if flag==1 {
-            btn_imagem_perfil.setImage(imagem, forState: UIControlState.Normal)
-        }
-        if flag==2 {
-            btn_imagem_nasal.setImage(imagem, forState: UIControlState.Normal)
-        }
+
     }
     //NovoPacienteDelegate
-    func atribuir_marcacao(dic: [String : NSValue], flag: Int) {
-        if flag==0{
-            self.pontosFrontalAtual = dic
-        }
-        if flag==1{
-            self.pontosPerfilAtual = dic
-        }
-        if flag==2{
-            self.pontosNasalAtual = dic
+    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected:imageTypes) {
+        switch imageTypesSelected {
+            case .Frontal:  self.pontosFrontalAtual = dic
+            case .Perfil:   self.pontosPerfilAtual = dic
+            case .Nasal:    self.pontosNasalAtual = dic
         }
     }
     
     //CameraViewDelegate
     func marcar_pontos(dic: [String : NSValue]) {
-        switch imageTypesSelected {
-        case .Frontal:  atribuir_marcacao(dic, flag: 0)
-        case .Perfil:   atribuir_marcacao(dic, flag: 1)
-        case .Nasal:    atribuir_marcacao(dic, flag: 2)
-        }
+        atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected)
     }
     
     //--------------------
@@ -443,13 +431,13 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 camera.delegate = self
                 
                 switch imageTypesSelected {
-                    case .Frontal:  camera.flag = 0
+                    case .Frontal:  camera.imageTypesSelected = .Frontal
                                     camera.dicionario = self.pontosFrontalAtual
                     
-                    case .Perfil:   camera.flag = 1
+                    case .Perfil:   camera.imageTypesSelected = .Perfil
                                     camera.dicionario = self.pontosPerfilAtual
                     
-                    case .Nasal:    camera.flag = 2
+                    case .Nasal:    camera.imageTypesSelected = .Nasal
                                     camera.dicionario = self.pontosNasalAtual
                 }
             }
