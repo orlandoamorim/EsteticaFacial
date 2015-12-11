@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -25,12 +26,24 @@
                                     <constraint firstAttribute="width" constant="200" id="S3g-XL-ddD"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UFPI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-Ih-ydw">
+                                <rect key="frame" x="20" y="546" width="560" height="34"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="HUh-ic-HWH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0Pv-ME-sGM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IVV-xp-iCq"/>
                             <constraint firstItem="0Pv-ME-sGM" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="QWF-Cm-KXM"/>
+                            <constraint firstItem="2TG-Ih-ydw" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="TdX-e6-RUV"/>
+                            <constraint firstItem="2TG-Ih-ydw" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="Vxv-6X-MyR"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="2TG-Ih-ydw" secondAttribute="bottom" constant="20" id="ZZT-TF-YFL"/>
                         </constraints>
                     </view>
                 </viewController>

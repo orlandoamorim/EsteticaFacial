@@ -120,14 +120,12 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PacientesCell", forIndexPath: indexPath) as! PacientesTVCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PacienteCell", forIndexPath: indexPath)
         
-        cell.thumbImageView.layer.cornerRadius = cell.thumbImageView.frame.size.width / 2
-        cell.thumbImageView.clipsToBounds = true
-        cell.thumbImageView.layer.borderWidth = 1.0
-        cell.thumbImageView.layer.borderColor = UIColor.darkGrayColor().CGColor
-        cell.thumbImageView.layer.cornerRadius = 10.0
-        
+        cell.imageView!.clipsToBounds = true
+        cell.imageView!.layer.borderWidth = 1.0
+        cell.imageView!.layer.borderColor = UIColor.darkGrayColor().CGColor
+        cell.imageView!.layer.cornerRadius = 10.0
         
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
         let object = recordsDicAtoZ[key]!
@@ -138,17 +136,15 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         
         let data_nascimento = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).dateFromString(cellDataParse.objectForKey("data_nascimento") as! String)
         
-        cell.nomeLabel.text = nome
-        cell.dataNascimentoLabel.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(data_nascimento!)
+        cell.textLabel!.text = nome
+        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(data_nascimento!)
         
         if let thumb_frontal = cellDataParse.objectForKey("thumb_frontal") as? PFFile{
             
             thumb_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
                 
                 if error == nil {
-                    cell.activityIndicator.stopAnimating()
-                    cell.thumbImageView.layer.cornerRadius = 10
-                    cell.thumbImageView.image  = UIImage(data: data!)!
+                    cell.imageView!.image  = UIImage(data: data!)!
                 }
                 
                 }) { (progress) -> Void in
@@ -156,8 +152,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             }
             
         }else{
-            cell.activityIndicator.stopAnimating()
-            cell.thumbImageView.image = UIImage(named: "modelo_frontal")
+            cell.imageView!.image = UIImage(named: "modelo_frontal")
         }
         
         
@@ -230,8 +225,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! AUFichaVC
             if let indexPath:NSIndexPath = sender as? NSIndexPath {
-                controller.type = "Atualizando"
-                
+                controller.contentToDisplay = .Atualizar
                 let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
                 let object = recordsDicAtoZ[key]!
                 
@@ -242,7 +236,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }else if segue.identifier == "AddSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! AUFichaVC
-            controller.type = "Adicionando"
+            controller.contentToDisplay = .Adicionar
         }
 //        else if segue.identifier == "PopOverSegue" {
 //            let popoverViewController = segue.destinationViewController as! MostrarCirurgiasVC
@@ -454,65 +448,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         }
     }
     
-//    func updateParse() {
-//        self.recordsDicAtoZ.removeAll(keepCapacity: false)
-//        
-//        let query = PFQuery(className:"Paciente")
-//        query.cachePolicy = PFCachePolicy.CacheThenNetwork
-//        print(PFUser.currentUser()!.username!)
-//        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-//        query.orderByAscending("nome")
-//
-//        switch Helpers.verificaSwitch() {
-//            case "realizadas":
-//                query.whereKey("cirurgia_realizada", equalTo: true)
-//                print("realizadas")
-//            case "nao_realizadas":
-//                query.whereKey("cirurgia_realizada", equalTo: false)
-//                print("nao_realizadas")
-//
-//            default: break
-//        }
-//        
-//        query.findObjectsInBackgroundWithBlock {
-//            (objects:[PFObject]?, error:NSError?) -> Void in
-//            if error == nil {
-//                if let objects = objects {
-//                    self.recordsDicAtoZ = Helpers.dicAtoZ(objects)
-//                }
-//                self.tableView.reloadData()
-//                self.refreshControl?.endRefreshing()
-//            } else {
-//                self.refreshControl?.endRefreshing()
-//                
-//                let errorCode = error!.code
-//                
-//                switch errorCode {
-//                case 100:
-//                    Drop.down("Erro ao baixar dados. Verifique sua conexao e tente novamente mais tarde.", state: .Error)
-//                    break
-//                case 101:
-//                    Drop.down("Erro ao baixar dados. Objetos nao encontrados.", state: .Error)
-//                    break
-//                case 209:
-//                    // Send a request to log out a user
-//                    PFUser.logOut()
-//                    
-//                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-//                        
-//                        self.presentViewController(viewController, animated: true, completion: nil)
-//                    })
-//                    break
-//                default:
-//                    break
-//                }
-//                
-//                
-//            }
-//        }
-//    }
-    
+
     func updateParse() {
         self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
@@ -537,7 +473,6 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                     break
                 case 209:
                     PFQuery.clearAllCachedResults()
-                    // Send a request to log out a user
                     PFUser.logOut()
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in

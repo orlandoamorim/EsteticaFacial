@@ -15,22 +15,12 @@ class PontoView: UIView {
     
     var nome : String?
     var local : CGPoint = CGPointMake(0.0, 0.0)
-//    var ponto_view : UIImageView! = UIImageView(image: UIImage.init(named: "ponto_azul"), highlightedImage: UIImage.init(named: "ponto_vermelho"))
-    
     var ponto_view : UIImageView! = UIImageView(image: UIImage(named: "ponto_azul"))
     var nome_label : UILabel! = UILabel(frame: CGRectMake(30.0, 5.0, 80.0, 20.0))
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+
     
     func inicializar(nome: String, posicao:CGPoint){
-        
         let primeiroNome = nome.characters.split{$0 == "_"}.map(String.init)
-                
         self.nome =  primeiroNome[0]
 
         self.local = posicao

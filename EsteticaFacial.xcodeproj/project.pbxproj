@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181FF7131C1A4DA900313E57 /* YPMagnifyingGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */; };
+		181FF7141C1A4DA900313E57 /* YPMagnifyingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */; };
+		181FF7161C1A657E00313E57 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7151C1A657E00313E57 /* Protocols.swift */; };
 		183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */; };
-		183D2F551BD9EACB0033BDA3 /* AUPacienteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */; };
 		1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */; };
 		1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */; };
 		1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */; };
-		188654911BDBF430000190B1 /* PacientesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654901BDBF430000190B1 /* PacientesTVCell.swift */; };
 		188654971BDC0A0F000190B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654931BDC0A0F000190B1 /* LoginViewController.swift */; };
 		188654981BDC0A0F000190B1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654941BDC0A0F000190B1 /* ResetPasswordViewController.swift */; };
 		188654991BDC0A0F000190B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654951BDC0A0F000190B1 /* SignUpViewController.swift */; };
-		1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188654961BDC0A0F000190B1 /* HomeViewController.swift */; };
 		188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D88AC1BF243490008F557 /* SCLAlertView.swift */; };
 		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
@@ -77,16 +77,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPMagnifyingGlass.swift; sourceTree = "<group>"; };
+		181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPMagnifyingView.swift; sourceTree = "<group>"; };
+		181FF7151C1A657E00313E57 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTableVC.swift; sourceTree = "<group>"; };
-		183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUPacienteVC.swift; sourceTree = "<group>"; };
 		1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConnection.swift; sourceTree = "<group>"; };
 		1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUFichaVC.swift; sourceTree = "<group>"; };
 		1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedimentosCirurgicosVC.swift; sourceTree = "<group>"; };
-		188654901BDBF430000190B1 /* PacientesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTVCell.swift; sourceTree = "<group>"; };
 		188654931BDC0A0F000190B1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		188654941BDC0A0F000190B1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		188654951BDC0A0F000190B1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		188654961BDC0A0F000190B1 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		188D88AC1BF243490008F557 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -151,6 +151,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181FF7101C1A4D9B00313E57 /* Loop */ = {
+			isa = PBXGroup;
+			children = (
+				181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */,
+				181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */,
+			);
+			name = Loop;
+			sourceTree = "<group>";
+		};
 		183D2F4C1BD9E68D0033BDA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,15 +186,6 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
-		1863F3AD1BF52AD500C369D9 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				188654961BDC0A0F000190B1 /* HomeViewController.swift */,
-				183D2F541BD9EACB0033BDA3 /* AUPacienteVC.swift */,
-			);
-			name = Deprecated;
-			sourceTree = "<group>";
-		};
 		1883EA601BF10814000F22A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,18 +195,8 @@
 				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
 				18FEC0431BFC09EC008AA555 /* Configurações */,
 				189B03021BF195CE00A516F4 /* Helper */,
-				1883EA611BF1081D000F22A3 /* Cells */,
-				1863F3AD1BF52AD500C369D9 /* Deprecated */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		1883EA611BF1081D000F22A3 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				188654901BDBF430000190B1 /* PacientesTVCell.swift */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		188654921BDC09FE000190B1 /* Login/Register */ = {
@@ -239,11 +229,13 @@
 		189B03021BF195CE00A516F4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				181FF7101C1A4D9B00313E57 /* Loop */,
 				189B03031BF1964500A516F4 /* Helpers.swift */,
 				1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */,
 				18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */,
 				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
 				B85392801BD5E64E000DCD91 /* PontoView.swift */,
+				181FF7151C1A657E00313E57 /* Protocols.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -531,7 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183D2F551BD9EACB0033BDA3 /* AUPacienteVC.swift in Sources */,
+				181FF7131C1A4DA900313E57 /* YPMagnifyingGlass.swift in Sources */,
 				B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */,
 				188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */,
 				B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */,
@@ -546,15 +538,15 @@
 				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
 				18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */,
 				1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */,
-				1886549A1BDC0A0F000190B1 /* HomeViewController.swift in Sources */,
 				B8AFADA11BE8DF5F000EF30A /* LocalizadorFrontal.swift in Sources */,
 				18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */,
 				B829B8C71BE26AB7009909C0 /* TratamentoEntrada.swift in Sources */,
-				188654911BDBF430000190B1 /* PacientesTVCell.swift in Sources */,
 				188654971BDC0A0F000190B1 /* LoginViewController.swift in Sources */,
+				181FF7141C1A4DA900313E57 /* YPMagnifyingView.swift in Sources */,
 				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
 				189B03041BF1964500A516F4 /* Helpers.swift in Sources */,
 				1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */,
+				181FF7161C1A657E00313E57 /* Protocols.swift in Sources */,
 				18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */,
 				188654981BDC0A0F000190B1 /* ResetPasswordViewController.swift in Sources */,
 				B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */,

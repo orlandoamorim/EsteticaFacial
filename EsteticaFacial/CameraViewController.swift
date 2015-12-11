@@ -10,10 +10,6 @@ import UIKit
 import AVFoundation
 import GPUImage
 
-protocol CameraViewDelegate{
-    func marcar_pontos(dic : [String:NSValue])
-}
-
 class CameraViewController: UIViewController, CameraViewDelegate {
     
     var delegate: NovoPacienteDelegate! = nil
@@ -72,7 +68,7 @@ class CameraViewController: UIViewController, CameraViewDelegate {
         }
         catch _ {
             entrada = nil
-            print("Algo deu errado")
+            print("Simulador nao possiu camera")
         }
         
         if entrada != nil && sessao_captura!.canAddInput(entrada){
@@ -113,7 +109,6 @@ class CameraViewController: UIViewController, CameraViewDelegate {
                 else{
                     localizar.imagem_cortada = self.imagem_recuperada
                 }
-                
             }
         }
     }
