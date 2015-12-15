@@ -144,25 +144,31 @@
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUG-4q-bmX">
                                                     <rect key="frame" x="8" y="8" width="185.5" height="114"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
                                                     <state key="normal" backgroundImage="modelo_frontal"/>
                                                     <connections>
-                                                        <action selector="btnFrontal:" destination="BDg-fg-0Yt" eventType="touchUpInside" id="Sz0-d0-XtI"/>
+                                                        <outletCollection property="gestureRecognizers" destination="GCq-Zr-c1I" appends="YES" id="zHV-7K-rZL"/>
+                                                        <outletCollection property="gestureRecognizers" destination="FbG-ce-bDh" appends="YES" id="K8A-XL-jKX"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9s-Dx-hPg">
                                                     <rect key="frame" x="406" y="8" width="185.5" height="114"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
                                                     <state key="normal" backgroundImage="modelo_nasal"/>
                                                     <connections>
-                                                        <action selector="btnNasal:" destination="BDg-fg-0Yt" eventType="touchUpInside" id="CK8-E5-kmr"/>
+                                                        <outletCollection property="gestureRecognizers" destination="djD-zf-wec" appends="YES" id="mfh-lp-qXB"/>
+                                                        <outletCollection property="gestureRecognizers" destination="JQw-pY-jXn" appends="YES" id="OsB-EN-ZKO"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idu-Rb-pa4">
                                                     <rect key="frame" x="207" y="8" width="186" height="114"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
                                                     <state key="normal" backgroundImage="modelo_perfil"/>
                                                     <connections>
-                                                        <action selector="btnPerfil:" destination="BDg-fg-0Yt" eventType="touchUpInside" id="M6z-HI-bc0"/>
+                                                        <outletCollection property="gestureRecognizers" destination="eAU-bc-ENV" appends="YES" id="0TI-Jq-juP"/>
+                                                        <outletCollection property="gestureRecognizers" destination="17g-LW-Rkc" appends="YES" id="4eN-5C-IWT"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -223,6 +229,36 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="FbG-ce-bDh">
+                    <connections>
+                        <action selector="btnFrontal:" destination="BDg-fg-0Yt" id="M5E-Kf-oeA"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="17g-LW-Rkc">
+                    <connections>
+                        <action selector="btnPerfil:" destination="BDg-fg-0Yt" id="UsW-ff-IXS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="JQw-pY-jXn">
+                    <connections>
+                        <action selector="btnNasal:" destination="BDg-fg-0Yt" id="ajx-JH-Vo1"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="GCq-Zr-c1I">
+                    <connections>
+                        <action selector="btnFrontal:" destination="BDg-fg-0Yt" id="A0I-XS-VfT"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="eAU-bc-ENV">
+                    <connections>
+                        <action selector="btnPerfil:" destination="BDg-fg-0Yt" id="eT6-Fi-37Z"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="djD-zf-wec">
+                    <connections>
+                        <action selector="btnNasal:" destination="BDg-fg-0Yt" id="BAc-iI-lGn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1634" y="1257"/>
         </scene>
@@ -947,6 +983,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gBZ-TC-cMO"/>
-        <segue reference="pOG-7W-LpM"/>
+        <segue reference="x1z-yB-rsu"/>
     </inferredMetricsTieBreakers>
 </document>

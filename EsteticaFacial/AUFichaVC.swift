@@ -20,7 +20,7 @@ enum contentTypes {
 }
 
 class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico, CameraViewDelegate {
-
+    
     var parseObject:PFObject!
     var alertView:SCLAlertViewResponder?
     
@@ -33,7 +33,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     var imagemFrontalServidor:UIImage = UIImage()
     var imagemPerfilServidor:UIImage = UIImage()
     var imagemNasalServidor:UIImage = UIImage()
-
+    
     
     var pontosFrontalServidor : [String:NSValue]?
     var pontosPerfilServidor : [String:NSValue]?
@@ -45,7 +45,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     var pontosNasalAtual : [String:NSValue]?
     
     var formValuesServidor:[String : Any?] = [String : Any?]()
-
+    
     //Procedimentos Cirurgicos
     var dicFormValuesServidor:[String : Any?] = [String : Any?]()
     var dicFormValuesAtual:[String : Any?] = [String : Any?]()
@@ -58,9 +58,9 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeForm()
-
+        
         let iniciar_dicionarios = Helpers.iniciar_dicionarios()
-
+        
         pontosFrontalServidor = iniciar_dicionarios.pontos_frontal
         pontosFrontalAtual = iniciar_dicionarios.pontos_frontal
         pontosPerfilServidor = iniciar_dicionarios.pontos_perfil
@@ -169,7 +169,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             self.title = "Atualizar Ficha"
             
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: "getFormValues")
-            case .Nil : noData()
+        case .Nil : noData()
         }
     }
     
@@ -178,7 +178,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     }
     
     //--------------------
-
+    
     func getFormValues(){
         alertView = SCLAlertView().showWait("Carregando", subTitle: "Aguarde...", closeButtonTitle: "Cancelar", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
         let results = Helpers.verifyFormValues(form.values(includeHidden: false))
@@ -190,62 +190,62 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         }
         
         switch contentToDisplay {
-            case .Adicionar:
+        case .Adicionar:
             
-                ParseConnection.adicionarFicha(form.values(includeHidden: false)
-                    , dicFormValues: self.dicFormValuesAtual
-                    , imagemPerfil: self.btn_imagem_perfil.currentImage
-                    , imagemFrontal: self.btn_imagem_frontal.currentImage
-                    , imagemNasal: self.btn_imagem_nasal.currentImage
-                    , pontosFrontalAtual: self.pontosFrontalAtual
-                    , pontosPerfilAtual: self.pontosPerfilAtual
-                    , pontosNasalAtual: self.pontosNasalAtual
-                    , completion: { (sucesso, erro) -> Void in
-                        
-                        if erro == nil {
-                            self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                                self.alertView?.close()
-                                self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                            })
-                        }else {
+            ParseConnection.adicionarFicha(form.values(includeHidden: false)
+                , dicFormValues: self.dicFormValuesAtual
+                , imagemPerfil: self.btn_imagem_perfil.currentImage
+                , imagemFrontal: self.btn_imagem_frontal.currentImage
+                , imagemNasal: self.btn_imagem_nasal.currentImage
+                , pontosFrontalAtual: self.pontosFrontalAtual
+                , pontosPerfilAtual: self.pontosPerfilAtual
+                , pontosNasalAtual: self.pontosNasalAtual
+                , completion: { (sucesso, erro) -> Void in
+                    
+                    if erro == nil {
+                        self.dismissViewControllerAnimated(true, completion: { () -> Void in
                             self.alertView?.close()
-                            self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao salvar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                        }
-                        
-                })
-                return
-            case .Atualizar:
-                ParseConnection.atualizarFicha(parseObject
-                    , formValuesServidor: self.formValuesServidor, formValuesAtual: form.values(includeHidden: false)
-                    , dicFormValuesServidor: self.dicFormValuesServidor, dicFormValuesAtual: self.dicFormValuesAtual
-                    , imagemFrontalServidor: self.imagemFrontalServidor, imagemFrontalAtual: self.btn_imagem_frontal.currentImage
-                    , imagemPerfilServidor: self.imagemPerfilServidor, imagemPerfilAtual: self.btn_imagem_perfil.currentImage
-                    , imagemNasalServidor: self.imagemNasalServidor, imagemNasalAtual: self.btn_imagem_nasal.currentImage
-                    , pontosFrontalServidor: self.pontosFrontalServidor, pontosFrontalAtual: self.pontosFrontalAtual
-                    , pontosPerfilServidor: self.pontosPerfilServidor, pontosPerfilAtual: self.pontosPerfilAtual
-                    , pontosNasalServidor: self.pontosNasalServidor, pontosNasalAtual: self.pontosNasalAtual
-                    , completion: { (success, error) -> Void in
-                        
-                        if error == nil {
-                            self.alertView?.close()
-                            self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                        }else {
-                            self.alertView?.close()
-                            self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                        }
-                        
-                })
-                
+                            self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                        })
+                    }else {
+                        self.alertView?.close()
+                        self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao salvar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    }
+                    
+            })
+            return
+        case .Atualizar:
+            ParseConnection.atualizarFicha(parseObject
+                , formValuesServidor: self.formValuesServidor, formValuesAtual: form.values(includeHidden: false)
+                , dicFormValuesServidor: self.dicFormValuesServidor, dicFormValuesAtual: self.dicFormValuesAtual
+                , imagemFrontalServidor: self.imagemFrontalServidor, imagemFrontalAtual: self.btn_imagem_frontal.currentImage
+                , imagemPerfilServidor: self.imagemPerfilServidor, imagemPerfilAtual: self.btn_imagem_perfil.currentImage
+                , imagemNasalServidor: self.imagemNasalServidor, imagemNasalAtual: self.btn_imagem_nasal.currentImage
+                , pontosFrontalServidor: self.pontosFrontalServidor, pontosFrontalAtual: self.pontosFrontalAtual
+                , pontosPerfilServidor: self.pontosPerfilServidor, pontosPerfilAtual: self.pontosPerfilAtual
+                , pontosNasalServidor: self.pontosNasalServidor, pontosNasalAtual: self.pontosNasalAtual
+                , completion: { (success, error) -> Void in
+                    
+                    if error == nil {
+                        self.alertView?.close()
+                        self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    }else {
+                        self.alertView?.close()
+                        self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    }
+                    
+            })
+            
             return
             
-            case .Nil : return
+        case .Nil : return
         }
     }
     
     //--------------------
     
     private func initializeForm() {
-
+        
         DateInlineRow.defaultRowInitializer = { row in row.maximumDate = NSDate() }
         
         form +++
@@ -293,7 +293,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 row.title = "Plano Cirurgico"
                 row.presentationMode = .SegueName(segueName: "ProcedimentosCirurgicosSegue", completionCallback: nil)
             }
-        
+            
             <<< SwitchRow("cirurgia_realizada") {
                 $0.title = "Cirurgia Realizada?"
                 $0.value = false
@@ -307,21 +307,21 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                         self?.form.rowByTag("btn_cirurgia_realizada")?.updateCell()
                     }
             }
-        
+            
             <<< ButtonRow("btn_cirurgia_realizada") { (row: ButtonRow) -> Void in
                 row.title = "Dados da Cirurgia"
                 row.hidden = "$cirurgia_realizada == false"
-
+                
                 row.presentationMode = .SegueName(segueName: "ProcedimentosCirurgicosSegue", completionCallback: nil)
             }
-        
+            
             +++ Section("Notas")
             
             <<< TextAreaRow("notas") { $0.placeholder = "Este paciente..." }
     }
     
     //--------------------
-
+    
     
     // MARK: - Tela Sem Dados
     
@@ -342,7 +342,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         self.header.hidden = true
         
         self.form.removeAll()
-
+        
         self.navigationItem.rightBarButtonItem = nil
         
         self.tableView!.reloadData()
@@ -353,30 +353,144 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     //--------------------
     @IBAction func btnFrontal(sender: AnyObject) {
         imageTypesSelected = .Frontal
-        switch contentToDisplay {
-            case .Adicionar: performSegueWithIdentifier("SegueCamera", sender: nil)
-            case .Atualizar: performSegueWithIdentifier("SegueShowImage", sender: nil)
-            case .Nil : return
+        let bonus = (sender is UITapGestureRecognizer ? true : false)
+        if !bonus {
+            if sender.state == UIGestureRecognizerState.Began{
+                if btn_imagem_frontal.currentImage != nil {
+                    showOptions()
+                }else{
+                    performSegueWithIdentifier("SegueCamera", sender: nil)
+                }
+            }
+        }else {
+            if btn_imagem_frontal.currentImage != nil {
+                performSegueWithIdentifier("SegueShowImage", sender: nil)
+            }else{
+                performSegueWithIdentifier("SegueCamera", sender: nil)
+            }
         }
     }
     @IBAction func btnPerfil(sender: AnyObject) {
         imageTypesSelected = .Perfil
-        switch contentToDisplay {
-            case .Adicionar: performSegueWithIdentifier("SegueCamera", sender: nil)
-            case .Atualizar: performSegueWithIdentifier("SegueShowImage", sender: nil)
-            case .Nil : return
-
+        let bonus = (sender is UITapGestureRecognizer ? true : false)
+        if !bonus {
+            if sender.state == UIGestureRecognizerState.Began{
+                if btn_imagem_perfil.currentImage != nil {
+                    showOptions()
+                }else{
+                    performSegueWithIdentifier("SegueCamera", sender: nil)
+                }
+            }
+        }else {
+            if btn_imagem_perfil.currentImage != nil {
+                performSegueWithIdentifier("SegueShowImage", sender: nil)
+            }else{
+                performSegueWithIdentifier("SegueCamera", sender: nil)
+            }
         }
     }
     @IBAction func btnNasal(sender: AnyObject) {
         imageTypesSelected = .Nasal
-        switch contentToDisplay {
-            case .Adicionar: performSegueWithIdentifier("SegueCamera", sender: nil)
-            case .Atualizar: performSegueWithIdentifier("SegueShowImage", sender: nil)
-            case .Nil : return
+        let bonus = (sender is UITapGestureRecognizer ? true : false)
+        if !bonus {
+            if sender.state == UIGestureRecognizerState.Began{
+                if btn_imagem_nasal.currentImage != nil {
+                    showOptions()
+                }else{
+                    performSegueWithIdentifier("SegueCamera", sender: nil)
+                }
+            }
+        }else {
+            if btn_imagem_nasal.currentImage != nil {
+                performSegueWithIdentifier("SegueShowImage", sender: nil)
+            }else{
+                performSegueWithIdentifier("SegueCamera", sender: nil)
+            }
         }
     }
-
+    
+    func showOptions(){
+        let alertController = UIAlertController(title: "Analise Facial", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let visualizarImagem = UIAlertAction(title: "Visualizar", style: UIAlertActionStyle.Default) { (visualizar) -> Void in
+            self.performSegueWithIdentifier("SegueShowImage", sender: nil)
+        }
+        
+        let novaImagem = UIAlertAction(title: "Nova Imagem", style: UIAlertActionStyle.Default) { (novaImagem) -> Void in
+            self.performSegueWithIdentifier("SegueCamera", sender: nil)
+        }
+        
+        let apagarImagem = UIAlertAction(title: "Apagar Imagem", style: UIAlertActionStyle.Destructive) { (apagar) -> Void in
+            Drop.down("Apagando Imagem", state: .Info)
+            
+            switch self.contentToDisplay {
+            case .Adicionar:
+                switch self.imageTypesSelected {
+                case .Frontal: self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
+                case .Perfil: self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
+                case .Nasal: self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
+                }
+            case .Atualizar:
+                switch self.imageTypesSelected {
+                case .Frontal:
+                    print("OLA")
+                    if ParseConnection.getFromParseImgFrontal(self.parseObject) {
+                        self.parseObject.removeObjectForKey("img_frontal")
+                        self.parseObject.removeObjectForKey("thumb_frontal")
+                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if error == nil {
+                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
+                            }else{
+                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
+                            }
+                        })
+                        self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
+                    }
+                case .Perfil:
+                    if ParseConnection.getFromParseImgPerfil(self.parseObject) {
+                        self.parseObject.removeObjectForKey("img_perfil")
+                        self.parseObject.removeObjectForKey("thumb_perfil")
+                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if error == nil {
+                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
+                            }else{
+                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
+                            }
+                        })
+                    }else{
+                        self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
+                    }
+                case .Nasal:
+                    if ParseConnection.getFromParseImgNasal(self.parseObject) {
+                        self.parseObject.removeObjectForKey("img_nasal")
+                        self.parseObject.removeObjectForKey("thumb_nasal")
+                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if error == nil {
+                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
+                            }else{
+                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
+                            }
+                        })
+                    }else{
+                        self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
+                    }
+                }
+                self.view.setNeedsDisplay()
+            case .Nil : return
+            }
+            
+        }
+        
+        alertController.addAction(visualizarImagem)
+        alertController.addAction(novaImagem)
+        alertController.addAction(apagarImagem)
+        alertController.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     //MARK: - Pressionou o btn Cancelar
     
@@ -386,7 +500,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     }
     
     //--------------------
-
+    
     
     // MARK: - Protocols
     
@@ -398,18 +512,18 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     //NovoPacienteDelegate
     func atribuir_imagem(imagem: UIImage, imageTypesSelected:imageTypes) {
         switch imageTypesSelected {
-            case .Frontal:  btn_imagem_frontal.setImage(imagem, forState: UIControlState.Normal)
-            case .Perfil:   btn_imagem_perfil.setImage(imagem, forState: UIControlState.Normal)
-            case .Nasal:    btn_imagem_nasal.setImage(imagem, forState: UIControlState.Normal)
+        case .Frontal:  btn_imagem_frontal.setImage(imagem, forState: UIControlState.Normal)
+        case .Perfil:   btn_imagem_perfil.setImage(imagem, forState: UIControlState.Normal)
+        case .Nasal:    btn_imagem_nasal.setImage(imagem, forState: UIControlState.Normal)
         }
-
+        
     }
     //NovoPacienteDelegate
     func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected:imageTypes) {
         switch imageTypesSelected {
-            case .Frontal:  self.pontosFrontalAtual = dic
-            case .Perfil:   self.pontosPerfilAtual = dic
-            case .Nasal:    self.pontosNasalAtual = dic
+        case .Frontal:  self.pontosFrontalAtual = dic
+        case .Perfil:   self.pontosPerfilAtual = dic
+        case .Nasal:    self.pontosNasalAtual = dic
         }
     }
     
@@ -425,42 +539,42 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-
+        
         if segue.identifier == "SegueCamera"{
             if let camera = segue.destinationViewController as? CameraViewController{
                 camera.delegate = self
                 
                 switch imageTypesSelected {
-                    case .Frontal:  camera.imageTypesSelected = .Frontal
-                                    camera.dicionario = self.pontosFrontalAtual
+                case .Frontal:  camera.imageTypesSelected = .Frontal
+                camera.dicionario = self.pontosFrontalAtual
                     
-                    case .Perfil:   camera.imageTypesSelected = .Perfil
-                                    camera.dicionario = self.pontosPerfilAtual
+                case .Perfil:   camera.imageTypesSelected = .Perfil
+                camera.dicionario = self.pontosPerfilAtual
                     
-                    case .Nasal:    camera.imageTypesSelected = .Nasal
-                                    camera.dicionario = self.pontosNasalAtual
+                case .Nasal:    camera.imageTypesSelected = .Nasal
+                camera.dicionario = self.pontosNasalAtual
                 }
             }
         }
-
+        
         
         if segue.identifier == "SegueShowImage"{
             if let localizar = segue.destinationViewController as? LocalizarPontosViewController{
                 localizar.delegate = self
-
+                
                 switch imageTypesSelected {
-                    case .Frontal:  localizar.imagem_cortada = self.btn_imagem_frontal.currentImage
-                                    localizar.pontos_localizados = self.pontosFrontalAtual
+                case .Frontal:  localizar.imagem_cortada = self.btn_imagem_frontal.currentImage
+                localizar.pontos_localizados = self.pontosFrontalAtual
                     
-                    case .Perfil:   localizar.imagem_cortada = self.btn_imagem_perfil.currentImage
-                                    localizar.pontos_localizados = self.pontosPerfilAtual
-
-                    case .Nasal:    localizar.imagem_cortada = self.btn_imagem_nasal.currentImage
-                                    localizar.pontos_localizados = self.pontosNasalAtual
+                case .Perfil:   localizar.imagem_cortada = self.btn_imagem_perfil.currentImage
+                localizar.pontos_localizados = self.pontosPerfilAtual
+                    
+                case .Nasal:    localizar.imagem_cortada = self.btn_imagem_nasal.currentImage
+                localizar.pontos_localizados = self.pontosNasalAtual
                 }
             }
         }
-
+        
         if segue.identifier == "ProcedimentosCirurgicosSegue"{
             let controller = segue.destinationViewController as! ProcedimentosCirurgicosVC
             

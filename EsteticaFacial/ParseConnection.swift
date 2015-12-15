@@ -447,33 +447,40 @@ class ParseConnection: NSObject {
      
      - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
+     
+     - Returns:  **Bool** que indica que se existe ou nao uma imagem salva no sevidor (True - existe).
+
      */
     
     static func getFromParseImgFrontal(parseObject:PFObject
-        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void), progressBlockImage: ((progress: Float?) -> Void)
-        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void), progressBlockPontos: ((progress: Float?) -> Void)) {
+        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void)?=nil, progressBlockImage: ((progress: Float?) -> Void)?=nil
+        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void)?=nil, progressBlockPontos: ((progress: Float?) -> Void)?=nil) -> Bool {
         if let img_frontal = parseObject.objectForKey("img_frontal") as? PFFile{
             
             img_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
 
-                    resultBlockImage(data: data, error: error)
+                    resultBlockImage?(data: data, error: error)
                     
                     //DIC FRONTAL
                     if let pontos_frontal = parseObject.objectForKey("pontos_frontal") as? PFFile{
                         
                         pontos_frontal.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                            resultBlockPontos(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
+                            resultBlockPontos?(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
                             
                             }) { (progress) -> Void in
-                                progressBlockPontos(progress: Float(progress))
+                                progressBlockPontos?(progress: Float(progress))
                         }
                 }
 
                 
                 }) { (progress) -> Void in
-                    progressBlockImage(progress: Float(progress))
+                    progressBlockImage?(progress: Float(progress))
             }
+        }else {
+            return false
         }
+            
+        return true
     }
     
     /**
@@ -486,29 +493,36 @@ class ParseConnection: NSObject {
      
      - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
+     
+     - Returns:  **Bool** que indica que se existe ou nao uma imagem salva no sevidor.
+
      */
     
    static func getFromParseImgPerfil(parseObject:PFObject
-        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void), progressBlockImage: ((progress: Float?) -> Void)
-        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void), progressBlockPontos: ((progress: Float?) -> Void)) {
+        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void)?=nil, progressBlockImage: ((progress: Float?) -> Void)?=nil
+        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void)?=nil, progressBlockPontos: ((progress: Float?) -> Void)?=nil) -> Bool{
             if let img_perfil = parseObject.objectForKey("img_perfil") as? PFFile{
                 
                 img_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                        resultBlockImage(data: data, error: nil)
+                        resultBlockImage?(data: data, error: nil)
                         //DIC FRONTAL
                         if let pontos_perfil = parseObject.objectForKey("pontos_perfil") as? PFFile{
                             
                             pontos_perfil.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                                resultBlockPontos(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
+                                resultBlockPontos?(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
                                 
                                 }) { (progress) -> Void in
-                                    progressBlockPontos(progress: Float(progress))
+                                    progressBlockPontos?(progress: Float(progress))
                             }
                         }
                     }) { (progress) -> Void in
-                        progressBlockImage(progress: Float(progress))
+                        progressBlockImage?(progress: Float(progress))
                 }
+            }else {
+                return false
             }
+            
+            return true
     }
     
     
@@ -522,31 +536,38 @@ class ParseConnection: NSObject {
      
      - Parameter resultBlock : Para executar. Ele contem os seguintes argumentos: `^(NSData data, NSError *error)`.
      - Parameter progressBlockPontos : Para executar. Ele contem os seguintes argumentos: `^(FLOAT progress)`.
+     
+     - Returns:  **Bool** que indica que se existe ou nao uma imagem salva no sevidor.
+
      */
 
     static func getFromParseImgNasal(parseObject:PFObject
-        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void), progressBlockImage: ((progress: Float?) -> Void)
-        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void), progressBlockPontos: ((progress: Float?) -> Void)) {
+        ,resultBlockImage: ((data: NSData?,error: NSError?) -> Void)?=nil, progressBlockImage: ((progress: Float?) -> Void)?=nil
+        ,resultBlockPontos: ((pontos: [String : NSValue]?,error: NSError?) -> Void)?=nil, progressBlockPontos: ((progress: Float?) -> Void)?=nil) -> Bool {
             if let img_nasal = parseObject.objectForKey("img_nasal") as? PFFile{
                 
                 img_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                        resultBlockImage(data: data, error: error)
+                        resultBlockImage?(data: data, error: error)
                         
                         //DIC FRONTAL
                         if let pontos_nasal = parseObject.objectForKey("pontos_nasal") as? PFFile{
                             
                             pontos_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                                    resultBlockPontos(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
+                                    resultBlockPontos?(pontos: NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue], error: error)
                                 
                                 }) { (progress) -> Void in
-                                    progressBlockPontos(progress: Float(progress))
+                                    progressBlockPontos?(progress: Float(progress))
                             }
                         }
                     
                     }) { (progress) -> Void in
-                        progressBlockImage(progress: Float(progress))
+                        progressBlockImage?(progress: Float(progress))
                 }
+            }else {
+                return false
             }
+            
+            return true
     }
 
 
