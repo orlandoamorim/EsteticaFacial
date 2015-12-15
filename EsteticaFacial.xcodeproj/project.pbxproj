@@ -233,9 +233,9 @@
 				189B03031BF1964500A516F4 /* Helpers.swift */,
 				1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */,
 				18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */,
-				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
 				B85392801BD5E64E000DCD91 /* PontoView.swift */,
 				181FF7151C1A657E00313E57 /* Protocols.swift */,
+				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";

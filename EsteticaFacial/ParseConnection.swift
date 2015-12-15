@@ -395,7 +395,7 @@ class ParseConnection: NSObject {
 
      */
     
-    static func getFichaFromServer(parseObject:PFObject, resultBlockForm: ((formValues:  [String : Any?]) -> Void), resultBlockDic: ((dicFormValues:  [String : Any?]) -> Void), progressBlockDic: ((progress: Float?) -> Void)){
+    static func getFichaFromServer(parseObject:PFObject, resultBlockForm: ((formValues:  [String : Any?]) -> Void), resultBlockDic: ((dicFormValues:  [String : Any?]) -> Void)?=nil, progressBlockDic: ((progress: Float?) -> Void)?=nil){
         
         var formValues:[String : Any?] = [String : Any?]()
         
@@ -425,12 +425,12 @@ class ParseConnection: NSObject {
             dic_plano_cirurgico.getDataInBackgroundWithBlock({ (data, error) -> Void in
                 if error == nil {
                     let dados = NSKeyedUnarchiver.unarchiveObjectWithData(data!)! as! [String:AnyObject]
-                    resultBlockDic(dicFormValues: Helpers.convertAnyObjectToAny(dados))
+                    resultBlockDic!(dicFormValues: Helpers.convertAnyObjectToAny(dados))
                 }
                 
                 }) { (progress) -> Void in
-                    progressBlockDic(progress: Float(progress))
                     print("Baixando |dic_plano_cirurgico| -> \(Float(progress))")
+                    progressBlockDic!(progress: Float(progress))
             }
         }
         

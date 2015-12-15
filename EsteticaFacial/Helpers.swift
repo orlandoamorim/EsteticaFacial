@@ -359,25 +359,43 @@ class Helpers: NSObject{
         var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
         var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
         
-        ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+        if let _ = parseObject.objectForKey("dic_plano_cirurgico") as? PFFile{
+            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
                 formValuesServidor = convertAnyToAnyObject(formValues)
-            }, resultBlockDic: { (dicFormValues) -> Void in
-                dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
-            }) { (progress) -> Void in
-                print(progress)
-                if progress == 100 {print("AQUI")
+                }, resultBlockDic: { (dicFormValues) -> Void in
+                    dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
+                    
                     let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
                     let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
                     let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
                     let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
                     let Item5 = "* Plano Cirurgico: \(dicFormValuesServidor)"
+                    let Item6 = ""
+                    let Item7 = "| Dados via UFPI Estetica Facial |"
                     
-                    let Item7 = "| Dados via DocReminder |"
-                    
-                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item7], applicationActivities: nil)
+                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
                     VC.presentViewController(activityViewController, animated: true, completion: nil)
-                }
+                }) { (progress) -> Void in
+            }
+        }else{
+            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+                formValuesServidor = convertAnyToAnyObject(formValues)
+                
+                let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
+                let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
+                let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
+                let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
+                let Item5 = "* Plano Cirurgico: \(convertAnyToAnyObject(Helpers.iniciar_dicionarios().dicFormValues))"
+                let Item6 = ""
+                let Item7 = "| Dados via UFPI Estetica Facial |"
+                
+                let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
+                VC.presentViewController(activityViewController, animated: true, completion: nil)
+
+                })
         }
+        
+
     }
     
 }
