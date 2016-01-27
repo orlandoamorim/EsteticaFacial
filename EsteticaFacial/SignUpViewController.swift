@@ -1,116 +1,63 @@
 //
 //  SignUpViewController.swift
-//  ParseDemo
+//  EsteticaFacial
 //
-//  Created by Rumiya Murtazina on 7/30/15.
-//  Copyright (c) 2015 abearablecode. All rights reserved.
+//  Created by Orlando Amorim on 15/12/15.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit
 import Parse
-import SwiftyDrop
+import ParseUI
 
-class SignUpViewController: UIViewController, VSReachability {
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-
+class SignUpViewController : PFSignUpViewController {
+    
+    var backgroundImage : UIImageView!;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    @IBAction func signUpAction(sender: AnyObject) {
-        if self.isConnectedToNetwork(){
-            signUp()
-            
-        }else{
-            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
-        }
-    }
-    
-    func signUp(){
+        // set our custom background image
+        backgroundImage = UIImageView(image: UIImage(named: "welcome_bg"))
+        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+        signUpView!.insertSubview(backgroundImage, atIndex: 0)
         
-        let username = self.usernameField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        let password = self.passwordField.text
-        let email = self.emailField.text
-        let finalEmail = email!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        // remove the parse Logo
+        let logo = UILabel()
+        logo.text = "LabInC"
+        logo.textColor = UIColor.whiteColor()
+        logo.font = UIFont(name: "Pacifico", size: 70)
+        logo.shadowColor = UIColor.lightGrayColor()
+        logo.shadowOffset = CGSizeMake(2, 2)
+        signUpView?.logo = logo
         
-        // Validate the text fields
-        if username.characters.count < 5 {
-            SCLAlertView().showInfo("Verificação de Dados", subTitle: "Nome de usuario deve possuir mais  que 5 caracteres", closeButtonTitle: "OK")
-            
-        } else if password!.characters.count < 8 {
-            SCLAlertView().showInfo("Verificação de Dados", subTitle: "Senha deve possuir mais  que 8 caracteres", closeButtonTitle: "OK")
-            
-        } else if email!.characters.count < 8 {
-            SCLAlertView().showInfo("Verificação de Dados", subTitle: "Insira um email valido.", closeButtonTitle: "OK")
-            
-        } else {
-            // Run a spinner to show a task in progress
-            let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
-            spinner.startAnimating()
-            
-            let newUser = PFUser()
-            
-            newUser.username = username
-            newUser.password = password
-            newUser.email = finalEmail
-            
-            // Sign up the user asynchronously
-            newUser.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
-                
-                // Stop the spinner
-                if ((error) != nil) {
-                    Drop.down("Verifique os dados inseridos.", state: DropState.Error)
-                    
-                } else {
-                    spinner.stopAnimating()
-
-                    SCLAlertView().showSuccess("Sucesso", subTitle: "Cadastro realizado.", closeButtonTitle: "OK", duration: 3.0)
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PacientesTableVC")
-                        self.presentViewController(viewController, animated: true, completion: nil)
-                    })
-                }
-            })
-        }
-    }
-    
-    // MARK: - Dismiss no teclado
-    override func canBecomeFirstResponder() -> Bool {
-        return true
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.becomeFirstResponder()
+        // make the background of the sign up button pop more
+        signUpView?.signUpButton?.setTitle("Criar Conta", forState: UIControlState.Normal)
+        signUpView?.signUpButton!.setBackgroundImage(nil, forState: .Normal)
+        signUpView?.signUpButton!.backgroundColor = UIColor(red: 52/255, green: 191/255, blue: 73/255, alpha: 1)
         
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 100)
-        UIApplication.sharedApplication().statusBarHidden = true
-    }
-    func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 100)
-        UIApplication.sharedApplication().statusBarHidden = false
-    }
-    
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
-        let movementDuration:NSTimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
-        UIView.commitAnimations()
-    }
+        // change dismiss button to say 'Already signed up?'
+        signUpView?.dismissButton!.setTitle("Ja possui conta?", forState: .Normal)
+        signUpView?.dismissButton!.setImage(nil, forState: .Normal)
 
+        // modify the present tranisition to be a flip instead
+        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // stretch background image to fill screen
+        backgroundImage.frame = CGRectMake( 0,  0,  signUpView!.frame.width,  signUpView!.frame.height)
+        
+        // position logo at top with larger frame
+        signUpView!.logo!.sizeToFit()
+        let logoFrame = signUpView!.logo!.frame
+        signUpView!.logo!.frame = CGRectMake(logoFrame.origin.x, signUpView!.usernameField!.frame.origin.y - logoFrame.height - 16, signUpView!.frame.width,  logoFrame.height)
+        
+        // re-layout out dismiss button to be below sign
+        let dismissButtonFrame = signUpView!.dismissButton!.frame
+        signUpView?.dismissButton!.frame = CGRectMake(0, signUpView!.signUpButton!.frame.origin.y + signUpView!.signUpButton!.frame.height + 16.0,  signUpView!.frame.width,  dismissButtonFrame.height)
+
+    }
+    
 }

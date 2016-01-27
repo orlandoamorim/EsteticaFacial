@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import CoreData
 import Parse
-import Bolts
 import ParseCrashReporting
+import ParseFacebookUtilsV4
+import ParseTwitterUtils
+import CoreData
 
 
 @UIApplicationMain
@@ -30,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse.
         Parse.setApplicationId("5aa6JqGqhC7iw8bG6CXC4imvXlCZ63i7j9bC9Ace",
             clientKey: "0G40jdCQrAVB8cyzhEGrwDDLUMk0tiSQFh7WshCN")
+        PFTwitterUtils.initializeWithConsumerKey("SGsxLqRllnUEPKLbTRXI8m2YX", consumerSecret: "O0ZE8TqyuzVwZVcsPdqSkBxIPemXq7pRWVNwlSvlb0XJtv9amx")
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
@@ -37,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ...
         
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -55,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {

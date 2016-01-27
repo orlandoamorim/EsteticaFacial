@@ -28,6 +28,11 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
 
     @IBOutlet weak var container_imagem: UIScrollView!
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.container_imagem.translatesAutoresizingMaskIntoConstraints = false
@@ -48,17 +53,7 @@ class LocalizarPontosViewController: UIViewController,UIScrollViewDelegate {
         container_imagem.zoomScale = container_imagem.minimumZoomScale
       //  self.conteudo_view.frame = CGRectMake(0, 0, (self.imagem_cortada?.size.width)!, (self.imagem_cortada?.size.height)!)
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func iniciar_views(){
         

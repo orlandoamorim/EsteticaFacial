@@ -10,6 +10,8 @@ import UIKit
 import Eureka
 import Parse
 import SwiftyDrop
+import ParseFacebookUtilsV4
+import ParseTwitterUtils
 
 class AjustesVC: FormViewController,VSReachability {
     
@@ -41,27 +43,90 @@ class AjustesVC: FormViewController,VSReachability {
                     UIView.animateWithDuration(1.0, animations: { [weak view] in
                         view?.layer.transform = CATransform3DIdentity
                         })
-
-                    ParseConnection.getUserImage({ (data, error) -> Void in
-                        if error == nil {
-                            if data == nil {
+                    
+                    if PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
+                        dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+                            let urlFoto = NSURL(string: "https://graph.facebook.com/\(FBSDKAccessToken.currentAccessToken().userID)/picture?type=large")!
+                            let err: NSErrorPointer = nil
+                            
+                            let dataFoto: NSData?
+                            do {
+                                dataFoto = try NSData(contentsOfURL: urlFoto, options: NSDataReadingOptions())
+                            } catch let error as NSError {
+                                err.memory = error
+                                dataFoto = nil
+                                
                                 view.activityIndicator.stopAnimating()
                                 view.btnUserImage.setBackgroundImage(UIImage(named: "LabInC"), forState: UIControlState.Normal)
-
-                            }else{
-                                view.btnUserImage.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                            } catch {
+                                fatalError()
                             }
-                        }else{
-                            Drop.down("Erro ao baixar imagem do usuario.", state: DropState.Warning)
-                            view.activityIndicator.stopAnimating()
-                        }
-                        }, progressBlock: { (progress) -> Void in
-                            if progress == 100 {
+                            let imagem: UIImage? = UIImage(data: dataFoto!)
+
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                view.activityIndicator.stopAnimating()
+                                view.btnUserImage.setImage(imagem, forState: UIControlState.Normal)
+                            })
+                        })
+                        
+                    }else if PFTwitterUtils.isLinkedWithUser(PFUser.currentUser()!) {
+                        
+                        let screenName = PFTwitterUtils.twitter()?.screenName!
+                        let requestString = NSURL(string: "https://api.twitter.com/1.1/users/show.json?screen_name=" + screenName!)
+                        let request = NSMutableURLRequest(URL: requestString!, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5.0)
+                        PFTwitterUtils.twitter()?.signRequest(request)
+                        let session = NSURLSession.sharedSession()
+                        
+                        session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+                            if error == nil {
+                                var result: AnyObject?
+                                do {
+                                    result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                                } catch let error2 as NSError? {
+                                    print("error 2 \(error2)")
+                                }
+                                
+//                                print(result)
+//                                let names: String! = result?.objectForKey("name") as! String
+//                                let separatedNames: [String] = names.componentsSeparatedByString(" ")
+//                                
+                                //self.firstName = separatedNames.first!
+                                //self.lastName = separatedNames.last!
+                                
+                                let urlString = result?.objectForKey("profile_image_url_https") as! String
+                                let hiResUrlString = urlString.stringByReplacingOccurrencesOfString("_normal", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                                let twitterPhotoUrl = NSURL(string: hiResUrlString)
+                                let imageData = NSData(contentsOfURL: twitterPhotoUrl!)
+                                let twitterImage: UIImage! = UIImage(data:imageData!)
+                                view.activityIndicator.stopAnimating()
+                                view.btnUserImage.setImage(twitterImage, forState: UIControlState.Normal)
+                            }else{
+                                view.activityIndicator.stopAnimating()
+                                view.btnUserImage.setBackgroundImage(UIImage(named: "LabInC"), forState: UIControlState.Normal)
+                            }
+                        }).resume()
+                    }else{
+                        ParseConnection.getUserImage({ (data, error) -> Void in
+                            if error == nil {
+                                if data == nil {
+                                    view.activityIndicator.stopAnimating()
+                                    view.btnUserImage.setBackgroundImage(UIImage(named: "LabInC"), forState: UIControlState.Normal)
+                                    
+                                }else{
+                                    view.activityIndicator.stopAnimating()
+                                    view.btnUserImage.setImage(UIImage(data: data!), forState: UIControlState.Normal)
+                                }
+                            }else{
+                                Drop.down("Erro ao baixar imagem do usuario.", state: DropState.Warning)
                                 view.activityIndicator.stopAnimating()
                             }
-                            
-                    })
-
+                            }, progressBlock: { (progress) -> Void in
+                                if progress == 100 {
+                                    view.activityIndicator.stopAnimating()
+                                }
+                                
+                        })
+                    }
                 }
                 $0.header = header
                 
@@ -72,6 +137,15 @@ class AjustesVC: FormViewController,VSReachability {
                 row.cellStyle = UITableViewCellStyle.Default
                 }.cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "userFavi-32")
+//                    if PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
+//                        FBSDKGraphRequest.init(graphPath: "me", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
+//                            if error == nil {
+//                                self.form.rowByTag("userName")?.title = result["name"]! as? String
+//                                self.form.rowByTag("userName")?.updateCell()
+//                            }
+//                        })
+//                    }
+                    
                 }.cellUpdate {
                     $0.cell.textLabel?.textAlignment = .Right
                 }.onCellSelection({ (cell, row) -> () in
@@ -82,13 +156,18 @@ class AjustesVC: FormViewController,VSReachability {
                             Drop.down("Saindo", state: DropState.Info)
                             
                             // Send a request to log out a user
-                            PFUser.logOut()
-                            
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                                
-                                self.presentViewController(viewController, animated: true, completion: nil)
+                            PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
+                                if error == nil {
+                                    PFQuery.clearAllCachedResults()
+                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+                                    
+                                    self.presentViewController(viewController, animated: true, completion: nil)
+                                }else{
+                                    Drop.down("Erro ao sair.", state: DropState.Warning)
+                                    row.baseValue = "@\(PFUser.currentUser()!.username!.lowercaseString)"
+                                }
                             })
+
                             
                         }else{
                             Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
@@ -106,8 +185,16 @@ class AjustesVC: FormViewController,VSReachability {
                 })
             
     }
-    
-    
+}
+
+extension AjustesVC {
+    func showAlert() {
+    let alert:UIAlertController = UIAlertController(title: "Alterar Imagem", message: "Sua imagem nao pode ser alterada porque sua conta esta atrelada ao FaceBook.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
 class UserImage: UIView {
@@ -126,6 +213,10 @@ class UserImage: UIView {
     
     @IBAction func userImage(sender: UIButton) {
         print("seleconada")
+        
+        if PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
+            AjustesVC().showAlert()
+        }
 
     }
 }

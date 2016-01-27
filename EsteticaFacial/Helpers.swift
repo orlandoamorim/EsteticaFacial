@@ -8,6 +8,8 @@
 
 import UIKit
 import Parse
+import AssetsLibrary
+import DeviceKit
 
 /**
  # Conjunto de Funções necessarios para todas as classes.
@@ -141,6 +143,8 @@ class Helpers: NSObject{
                 anyObjectDict[key] = bool
             }else if let data = anyDict[key]! as? NSDate {
                 anyObjectDict[key] = data
+            }else if let teste = anyDict[key]! as? [String]{
+                anyObjectDict[key] = teste
             }
         }
         return anyObjectDict
@@ -268,7 +272,7 @@ class Helpers: NSObject{
             "Juncao_Direita":NSValue(CGPoint: CGPointMake(1683, 1657))]
         
         
-        dicFormValues = ["enxerto_de_sheen": "Tipo I Esmagado", "suturas": "Intradomal", "raiz": "Reducao Raspa", "fechada": false, "osso": "Raspa", "dorso": "Nao Tocado", "incisoes": "Inter", "transversa": "Nenhum Transversa", "aberta": true, "lateral": "Nenhum Lateral", "medial": "Nenhum Medial", "enxerto_de_ponta": "Tampao", "liberacao": "Resseccao Cefalica", "cartilagem": "Abaixada"]
+        dicFormValues = ["enxerto_de_sheen": ["Tipo I Esmagado"], "suturas": ["Intradomal"], "raiz": ["Reducao Raspa"], "fechada": false, "osso": ["Raspa"], "dorso": ["Nao Tocado"], "incisoes": ["Inter"], "transversa": ["Nenhum Transversa"], "aberta": true, "lateral": ["Nenhum Lateral"], "medial": ["Nenhum Medial"], "enxerto_de_ponta": ["Tampao"], "liberacao": ["Resseccao Cefalica"], "cartilagem": ["Abaixada"],"fechada_opcoes": "Retrograda"]
         
         return (pontos_frontal,pontos_perfil,pontos_nasal,dicFormValues)
     }
@@ -394,8 +398,108 @@ class Helpers: NSObject{
 
                 })
         }
-        
-
     }
     
+    func getLatestPhotos(completion completionBlock : ([UIImage] -> ()))   {
+        let library = ALAssetsLibrary()
+        var count = 0
+        var images : [UIImage] = []
+        var stopped = false
+        
+        library.enumerateGroupsWithTypes(ALAssetsGroupSavedPhotos, usingBlock: { (group, stop) -> Void in
+            
+            group?.setAssetsFilter(ALAssetsFilter.allPhotos())
+            
+            group?.enumerateAssetsWithOptions(NSEnumerationOptions.Reverse, usingBlock: {
+                (asset : ALAsset!, index, stopEnumeration) -> Void in
+                
+                if (!stopped)
+                {
+                    if count >= 1
+                    {
+                        
+                        stopEnumeration.memory = ObjCBool(true)
+                        stop.memory = ObjCBool(true)
+                        completionBlock(images)
+                        stopped = true
+                    }
+                    else
+                    {
+                        // For just the thumbnails use the following line.
+                        let cgImage = asset.thumbnail().takeUnretainedValue()
+                        
+                        // Use the following line for the full image.
+//                        let cgImage = asset.defaultRepresentation().fullScreenImage().takeUnretainedValue()
+                        
+                        if let image:UIImage = UIImage(CGImage: cgImage) {
+                            images.append(image)
+                            count += 1
+                        }
+                    }
+                }
+                
+            })
+            
+            },failureBlock : { error in
+                print(error)
+        })
+    }
+    
+    static func removeImageView(view:UIView){
+        view.subviews.forEach ({
+            if $0 is UIImageView {
+                $0.removeFromSuperview()
+            }
+        })
+    }
+    
+
+    static func inicializeImageView(type type:Bool, view: UIView, imageTypesSelected:imageTypes,x:CGFloat?,y:CGFloat?,width:CGFloat?,height:CGFloat?) {
+        var imageViewObject :UIImageView!
+        
+        print("x->\(x) | y->\(y) | width->\(width) | height-> \(height)")
+        if type {
+            print("AQUI")
+            imageViewObject = UIImageView(frame:CGRectMake(x!, y!, width!, height!))
+        }else{
+            imageViewObject = inicializeImageViewFrame()
+        }
+        
+        imageViewObject.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        switch imageTypesSelected {
+        case.Frontal:   imageViewObject.image = UIImage(named: "modelo_frontal")
+        case.Perfil:    imageViewObject.image = UIImage(named: "modelo_perfil")
+        case.Nasal:     imageViewObject.image = UIImage(named: "modelo_nasal")
+        }
+        
+//        imageViewObject.layer.cornerRadius = 4
+        imageViewObject.layer.masksToBounds = true
+        imageViewObject.layer.borderWidth = 1
+        imageViewObject.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        view.addSubview(imageViewObject)
+        
+    }
+    
+    static private func inicializeImageViewFrame() -> UIImageView {
+        let device = Device()
+        print(device)
+        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
+            return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+        }else if device == .Simulator(.iPhone5) || device == .Simulator(.iPhone5c) || device == .Simulator(.iPhone5s) {
+            return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0)) //
+        }else if device == .Simulator(.iPhone6) || device == .Simulator(.iPhone6s) {
+            return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0)) //
+        } else if device == .Simulator(.iPhone6Plus) || device == .Simulator(.iPhone6sPlus) {
+            return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+        }
+        
+        return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+    }
+    
+    
+    static func getArrayFromSet(set:NSSet)-> NSArray {
+        return set.map ({ String($0) })
+    }
 }

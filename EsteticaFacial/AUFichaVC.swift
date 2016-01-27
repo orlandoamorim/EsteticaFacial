@@ -11,14 +11,6 @@ import Parse
 import Eureka
 import SwiftyDrop
 
-enum imageTypes {
-    case Frontal, Perfil, Nasal
-}
-
-enum contentTypes {
-    case Adicionar, Atualizar, Nil
-}
-
 class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico, CameraViewDelegate {
     
     var parseObject:PFObject!
@@ -98,6 +90,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             
             self.tableView?.reloadData()
             
+            
             ParseConnection.getFromParseImgFrontal(parseObject
                 , resultBlockImage: { (data, error) -> Void in
                     if error == nil {
@@ -107,6 +100,12 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                         Drop.down("Erro ao baixar imagem frontal. Objeto nao encontrado.", state: .Error)
                     }
                 }, progressBlockImage: { (progress) -> Void in
+                    if progress == 100.0{
+                        self.btn_imagem_frontal.enabled = true
+                    }else{
+                        self.btn_imagem_frontal.enabled = false
+                    }
+                    
                     print("Baixando |Imgem Frontal| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
                     if error == nil {
@@ -130,6 +129,11 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                         Drop.down("Erro ao baixar imagem perfil. Objeto nao encontrado.", state: .Error)
                     }
                 }, progressBlockImage: { (progress) -> Void in
+                    if progress == 100.0{
+                        self.btn_imagem_perfil.enabled = true
+                    }else{
+                        self.btn_imagem_perfil.enabled = false
+                    }
                     print("Baixando |Imgem Perfil| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
                     if error == nil {
@@ -152,6 +156,11 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                         Drop.down("Erro ao baixar imagem nasal. Objeto nao encontrado.", state: .Error)
                     }
                 }, progressBlockImage: { (progress) -> Void in
+                    if progress == 100.0{
+                        self.btn_imagem_nasal.enabled = true
+                    }else{
+                        self.btn_imagem_nasal.enabled = false
+                    }
                     print("Baixando |Imgem Nasal| -> \(progress!)")
                 }, resultBlockPontos: { (pontos, error) -> Void in
                     if error == nil {
@@ -357,7 +366,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         if !bonus {
             if sender.state == UIGestureRecognizerState.Began{
                 if btn_imagem_frontal.currentImage != nil {
-                    showOptions()
+                    showOptions(btn_imagem_frontal)
                 }else{
                     performSegueWithIdentifier("SegueCamera", sender: nil)
                 }
@@ -376,7 +385,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         if !bonus {
             if sender.state == UIGestureRecognizerState.Began{
                 if btn_imagem_perfil.currentImage != nil {
-                    showOptions()
+                    showOptions(btn_imagem_perfil)
                 }else{
                     performSegueWithIdentifier("SegueCamera", sender: nil)
                 }
@@ -395,7 +404,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         if !bonus {
             if sender.state == UIGestureRecognizerState.Began{
                 if btn_imagem_nasal.currentImage != nil {
-                    showOptions()
+                    showOptions(btn_imagem_nasal)
                 }else{
                     performSegueWithIdentifier("SegueCamera", sender: nil)
                 }
@@ -409,7 +418,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         }
     }
     
-    func showOptions(){
+    func showOptions(button: UIButton!){
         let alertController = UIAlertController(title: "Analise Facial", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let visualizarImagem = UIAlertAction(title: "Visualizar", style: UIAlertActionStyle.Default) { (visualizar) -> Void in
@@ -487,6 +496,10 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         alertController.addAction(visualizarImagem)
         alertController.addAction(novaImagem)
         alertController.addAction(apagarImagem)
+        
+        alertController.popoverPresentationController?.sourceView = button
+        alertController.popoverPresentationController?.sourceRect = button.bounds
+        
         alertController.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -520,11 +533,15 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     }
     //NovoPacienteDelegate
     func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected:imageTypes) {
+        print(imageTypesSelected)
+        print(dic)
         switch imageTypesSelected {
         case .Frontal:  self.pontosFrontalAtual = dic
         case .Perfil:   self.pontosPerfilAtual = dic
         case .Nasal:    self.pontosNasalAtual = dic
         }
+        print("****")
+        print(self.pontosFrontalAtual)
     }
     
     //CameraViewDelegate
@@ -541,7 +558,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         
         
         if segue.identifier == "SegueCamera"{
-            if let camera = segue.destinationViewController as? CameraViewController{
+            if let camera = segue.destinationViewController as? CameraVC{
                 camera.delegate = self
                 
                 switch imageTypesSelected {
@@ -559,18 +576,20 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         
         
         if segue.identifier == "SegueShowImage"{
-            if let localizar = segue.destinationViewController as? LocalizarPontosViewController{
-                localizar.delegate = self
+            if let processarImagemVC = segue.destinationViewController as? ProcessarImagemVC{
+                processarImagemVC.delegate = self
+                processarImagemVC.imageTypesSelected = self.imageTypesSelected
+                processarImagemVC.imageGetFrom = .Servidor
                 
                 switch imageTypesSelected {
-                case .Frontal:  localizar.imagem_cortada = self.btn_imagem_frontal.currentImage
-                localizar.pontos_localizados = self.pontosFrontalAtual
+                case .Frontal:  processarImagemVC.image = self.btn_imagem_frontal.currentImage!
+                processarImagemVC.dicionario = self.pontosFrontalAtual
                     
-                case .Perfil:   localizar.imagem_cortada = self.btn_imagem_perfil.currentImage
-                localizar.pontos_localizados = self.pontosPerfilAtual
+                case .Perfil:   processarImagemVC.image = self.btn_imagem_perfil.currentImage!
+                processarImagemVC.dicionario = self.pontosPerfilAtual
                     
-                case .Nasal:    localizar.imagem_cortada = self.btn_imagem_nasal.currentImage
-                localizar.pontos_localizados = self.pontosNasalAtual
+                case .Nasal:    processarImagemVC.image = self.btn_imagem_nasal.currentImage!
+                processarImagemVC.dicionario = self.pontosNasalAtual
                 }
             }
         }

@@ -18,10 +18,10 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     @IBOutlet weak var pacientesPopBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
-//    var recordsParse:NSMutableArray = NSMutableArray()
     var recordsSearch: [AnyObject] = [AnyObject]()
     var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
     
+    var image:UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,33 +35,20 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "update", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Puxe para Atualizar...")
-        //refreshControl.t = "Atualizar"
         self.refreshControl = refreshControl
         
         // BarButtun Right
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "add:")
-        
-        if (PFUser.currentUser() == nil) {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-                let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                self.presentViewController(viewController, animated: true, completion: nil)
-            })
-        }else{
-            //[yourScrollView(or tableView) setContentOffset:CGPointMake(0.0f, -60.0f)animated:YES];
-            tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: true)
-            //150
-            
-            self.refreshControl?.beginRefreshing()
-            update()
-        }
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: true)
+        //150
         
+        self.refreshControl?.beginRefreshing()
+        update()
     }
     
     override func didReceiveMemoryWarning() {
@@ -213,6 +200,9 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         meuAlertSheet.addAction(btnCompartilhar)
         meuAlertSheet.addAction(btnCancelar)
         
+        meuAlertSheet.popoverPresentationController?.sourceView = tableView
+        meuAlertSheet.popoverPresentationController?.sourceRect = tableView.bounds
+        
         self.presentViewController(meuAlertSheet, animated: true, completion: nil)
     }
     
@@ -327,7 +317,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         notas.whereKey("notas", containsString: searchText)
         
         let query = PFQuery.orQueryWithSubqueries([nome, data_nascimento,notas])
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.whereKey("userID", equalTo: PFUser.currentUser()!.objectId!)
         query.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error:NSError?) -> Void in
             if error == nil {
@@ -450,6 +440,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
 
     func updateParse() {
+        
         self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
         ParseConnection.getAllFromParse { (objects, error) -> Void in

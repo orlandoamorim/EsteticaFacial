@@ -1,116 +1,129 @@
-//
+
 //  LoginViewController.swift
-//  ParseDemo
+//  EsteticaFacial
 //
-//  Created by Rumiya Murtazina on 7/28/15.
-//  Copyright (c) 2015 abearablecode. All rights reserved.
+//  Created by Orlando Amorim on 15/12/15.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit
 import Parse
-import SwiftyDrop
+import ParseUI
+import DeviceKit
 
-class LoginViewController: UIViewController, VSReachability{
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+class LoginViewController : PFLogInViewController {
+    
+    var backgroundImage : UIImageView!
+    
+    var viewsToAnimate: [UIView!]!
+    
+    var viewsFinalYPosition : [CGFloat]!
+    
+    let device = Device()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @IBAction func unwindToLogInScreen(segue:UIStoryboardSegue) {
+        // set our custom background image
+        backgroundImage = UIImageView(image: UIImage(named: "welcome_bg"))
+        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
+        logInView!.insertSubview(backgroundImage, atIndex: 0)
+        
+        // remove the parse Logo
+        let logo = UILabel()
+        logo.text = "LabInC"
+        logo.textColor = UIColor.whiteColor()
+        logo.font = UIFont(name: "Pacifico", size: 70)
+        logo.shadowColor = UIColor.lightGrayColor()
+        logo.shadowOffset = CGSizeMake(2, 2)
+        logInView?.logo = logo
+        
+        // set forgotten password button to white
+        logInView?.passwordForgottenButton?.setTitle("Esqueceu a senha?", forState: UIControlState.Normal)
+        logInView?.passwordForgottenButton?.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
+        // make the background of the login button pop more
+        logInView?.logInButton?.setTitle("Logar", forState: UIControlState.Normal)
+        logInView?.logInButton?.setBackgroundImage(nil, forState: .Normal)
+        logInView?.logInButton?.backgroundColor = UIColor(red: 52/255, green: 191/255, blue: 73/255, alpha: 1)
+        
+        logInView?.signUpButton?.setTitle("Criar Conta", forState: UIControlState.Normal)
+        logInView?.signUpButton?.setBackgroundImage(nil, forState: .Normal)
+        logInView?.signUpButton?.backgroundColor = UIColor(red: 52/255, green: 191/255, blue: 73/255, alpha: 1)
+        
+        // make the buttons classier
+        customizeButton(logInView?.facebookButton!)
+//        customizeButton(logInView?.twitterButton!)
+        customizeButton(logInView?.signUpButton!)
+        
+        // create an array of all the views we want to animate in when we launch
+        // the screen
+//        viewsToAnimate = [self.logInView?.usernameField, self.logInView?.passwordField, self.logInView?.logInButton, self.logInView?.passwordForgottenButton, self.logInView?.facebookButton, self.logInView?.signUpButton, self.logInView?.logo]
+//        
+        viewsToAnimate = [self.logInView?.usernameField, self.logInView?.passwordField, self.logInView?.logInButton, self.logInView?.passwordForgottenButton, self.logInView?.facebookButton, self.logInView?.signUpButton, self.logInView?.logo]
+        
+        // use our custom SignUpViewController
+        self.signUpController = SignUpViewController()
     }
     
-    @IBAction func loginAction(sender: AnyObject) {
+    func customizeButton(button: UIButton!) {
+        button.setBackgroundImage(nil, forState: .Normal)
+        button.backgroundColor = UIColor.clearColor()
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // stretch background image to fill screen
+        backgroundImage.frame = CGRectMake( 0,  0,  logInView!.frame.width,  logInView!.frame.height)
         
-        if self.isConnectedToNetwork(){
-            logar()
+        // position logo at top with larger frame
+        logInView!.logo!.sizeToFit()
+        let logoFrame = logInView!.logo!.frame
+        logInView!.logo!.frame = CGRectMake(logoFrame.origin.x, logInView!.usernameField!.frame.origin.y - logoFrame.height - 16, logInView!.frame.width,  logoFrame.height)
+        
+        // We to position all the views off the bottom of the screen
+        // and then make them rise back to where they should be
+        // so we track their final position in an array
+        // but change their frame so they are shifted downwards off the screen
+        viewsFinalYPosition = [CGFloat]();
+        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
+
+        }else{
+            for viewToAnimate in viewsToAnimate {
+                let currentFrame = viewToAnimate.frame
+                viewsFinalYPosition.append(currentFrame.origin.y)
+                viewToAnimate.frame = CGRectMake(currentFrame.origin.x, self.view.frame.height + currentFrame.origin.y, currentFrame.width, currentFrame.height)
+            }
+        }
+        
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Now we'll animate all our views back into view
+        // so they are no longer transparent (alpha = 1)
+        // and, using the final position we stored, we'll
+        // reset them to where they should be
+        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
             
         }else{
-            Drop.down("Sem conexão com a Internet.", state: DropState.Warning)
+            if viewsFinalYPosition.count == self.viewsToAnimate.count {
+                UIView.animateWithDuration(1, delay: 0.0, options: .CurveEaseInOut,  animations: { () -> Void in
+                    for viewToAnimate in self.viewsToAnimate {
+                        //viewToAnimate.alpha = 1
+                        let currentFrame = viewToAnimate.frame
+                        viewToAnimate.frame = CGRectMake(currentFrame.origin.x, self.viewsFinalYPosition.removeAtIndex(0), currentFrame.width, currentFrame.height)
+                    }
+                    }, completion: nil)
+            }
         }
-        
-        
-    }
-    
-    func logar(){
-        let username = self.usernameField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        let password = self.passwordField.text
-        
-        // Validate the text fields
-        if username.characters.count < 5 || password!.characters.count < 8{
-            Drop.down("Nome de usuario ou senha incorretos.", state: DropState.Error)
-        }else {
-            // Run a spinner to show a task in progress
-            let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
-            spinner.startAnimating()
-            
-            // Send a request to login
-            PFUser.logInWithUsernameInBackground(username, password: password!, block: { (user, error) -> Void in
-                
-                // Stop the spinner
-                spinner.stopAnimating()
-                
-                if ((user) != nil) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        
-                        PFQuery.clearAllCachedResults()
-                        
-                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("UserLog") as! UITabBarController
-                        self.presentViewController(tabBarController, animated: true, completion: nil)
-                        
-                    })
-                    
-                } else {
-                    Drop.down("Nome de usuario ou senha incorretos.", state: DropState.Error)
-                }
-            })
-        }
-    }
-    
-    // MARK: - Dismiss no teclado
-    override func canBecomeFirstResponder() -> Bool {
-        return true
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.becomeFirstResponder()
 
     }
-        
-    func textFieldDidBeginEditing(textField: UITextField) {
-        animateViewMoving(true, moveValue: 100)
-        UIApplication.sharedApplication().statusBarHidden = true
-    }
-    func textFieldDidEndEditing(textField: UITextField) {
-        animateViewMoving(false, moveValue: 100)
-        UIApplication.sharedApplication().statusBarHidden = false
-    }
     
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
-        let movementDuration:NSTimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
-        UIView.commitAnimations()
-    }
-
 }
+    

@@ -21,3 +21,15 @@ protocol ProcedimentoCirurgico{
 protocol CameraViewDelegate{
     func marcar_pontos(dic : [String:NSValue])
 }
+
+enum imageTypes {
+    case Frontal, Perfil, Nasal
+}
+
+enum contentTypes {
+    case Adicionar, Atualizar, Nil
+}
+
+enum imageGet {
+    case Camera, Biblioteca, Servidor
+}

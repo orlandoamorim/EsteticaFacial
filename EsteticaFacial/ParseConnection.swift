@@ -33,7 +33,7 @@ class ParseConnection: NSObject {
         let query = PFQuery(className:"Paciente")
         query.cachePolicy = PFCachePolicy.CacheThenNetwork
         print(PFUser.currentUser()!.username!)
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        query.whereKey("userID", equalTo: PFUser.currentUser()!.objectId!)
         query.orderByAscending("nome")
         
         switch Helpers.verificaSwitch() {
@@ -90,7 +90,7 @@ class ParseConnection: NSObject {
 
         parseObject = PFObject(className: "Paciente")
         //parseObject.ACL = PFACL(user: PFUser.currentUser()!)
-        parseObject["username"] = PFUser.currentUser()!.username
+        parseObject["userID"] = PFUser.currentUser()!.objectId!
         parseObject["nome"] = formValues["nome"]
         parseObject["sexo"] = formValues["sexo"]
         parseObject["etnia"] = formValues["etnia"]
@@ -321,12 +321,15 @@ class ParseConnection: NSObject {
         
         if imagemPerfilAtual != nil {
             if !Helpers.comparaImagem(imagemPerfilServidor!, image2: imagemPerfilAtual!){
+                
+                //Thumbnail da imagem
                 let thumb_perfil = Helpers.criar_thumbnail((imagemPerfilAtual)!)
-                
                 let imageFileThumb:PFFile = PFFile(data: UIImageJPEGRepresentation(thumb_perfil, 1.0)!)!
-                let imageFileFrontal:PFFile = PFFile(data: UIImageJPEGRepresentation((imagemPerfilAtual)!, 1.0)!)!
-                
                 parseObject.setObject(imageFileThumb, forKey: "thumb_perfil")
+
+                //Imagem Original
+                let imageData:NSData? = UIImagePNGRepresentation(imagemPerfilAtual!)
+                let imageFileFrontal:PFFile = PFFile(name: "img_perfil.png", data: imageData!)!
                 parseObject.setObject(imageFileFrontal, forKey: "img_perfil")
             }
             
@@ -645,8 +648,9 @@ class ParseConnection: NSObject {
      */
     
     static func getUserImage(resultBlock: ((data: NSData?,error: NSError?) -> Void), progressBlock: ((progress: Float?) -> Void)){
-        let query:PFQuery = PFUser.query()!
-        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        let query = PFUser.query()!
+        query.cachePolicy = PFCachePolicy.CacheThenNetwork
+        query.whereKey("objectId", equalTo: PFUser.currentUser()!.objectId!)
         query.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error:NSError?) -> Void in
             if error == nil {
