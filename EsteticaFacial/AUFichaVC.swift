@@ -434,13 +434,16 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             self.performSegueWithIdentifier("SegueShowImage", sender: nil)
         }
         
-        let novaImagem = UIAlertAction(title: "Nova Imagem", style: UIAlertActionStyle.Default) { (novaImagem) -> Void in
-            
-            self.performSegueWithIdentifier("SegueCamera", sender: nil)
-        }
+//        let novaImagem = UIAlertAction(title: "Nova Imagem", style: UIAlertActionStyle.Default) { (novaImagem) -> Void in
+//            
+//            self.performSegueWithIdentifier("SegueCamera", sender: nil)
+//        }
         
         let apagarImagem = UIAlertAction(title: "Apagar Imagem", style: UIAlertActionStyle.Destructive) { (apagar) -> Void in
             Drop.down("Apagando Imagem", state: .Info)
+            
+            
+            let iniciar_dicionarios = Helpers.iniciar_dicionarios()
             
             switch self.contentToDisplay {
             case .Adicionar:
@@ -456,9 +459,14 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if ParseConnection.getFromParseImgFrontal(self.parseObject) {
                         self.parseObject.removeObjectForKey("img_frontal")
                         self.parseObject.removeObjectForKey("thumb_frontal")
+                        self.parseObject.removeObjectForKey("pontos_frontal")
                         self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if error == nil {
                                 Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.pontosFrontalServidor = iniciar_dicionarios.pontos_frontal
+                                self.pontosFrontalAtual = iniciar_dicionarios.pontos_frontal
+                                self.pontosFrontalFrom = .Local
+                                
                                 self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
                             }else{
                                 Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
@@ -470,9 +478,13 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if ParseConnection.getFromParseImgPerfil(self.parseObject) {
                         self.parseObject.removeObjectForKey("img_perfil")
                         self.parseObject.removeObjectForKey("thumb_perfil")
+                        self.parseObject.removeObjectForKey("pontos_perfil")
                         self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if error == nil {
                                 Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.pontosPerfilServidor = iniciar_dicionarios.pontos_perfil
+                                self.pontosPerfilAtual = iniciar_dicionarios.pontos_perfil
+                                self.pontosPerfilFrom = .Local
                                 self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
                             }else{
                                 Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
@@ -485,9 +497,14 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if ParseConnection.getFromParseImgNasal(self.parseObject) {
                         self.parseObject.removeObjectForKey("img_nasal")
                         self.parseObject.removeObjectForKey("thumb_nasal")
+                        self.parseObject.removeObjectForKey("pontos_nasal")
                         self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if error == nil {
                                 Drop.down("Imagem deletada com Sucesso.", state: .Success)
+                                self.pontosNasalServidor = iniciar_dicionarios.pontos_nasal
+                                self.pontosNasalAtual = iniciar_dicionarios.pontos_nasal
+                                self.pontosNasalFrom = .Local
+                                
                                 self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
                             }else{
                                 Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
@@ -504,7 +521,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         }
         
         alertController.addAction(visualizarImagem)
-        alertController.addAction(novaImagem)
+//        alertController.addAction(novaImagem)
         alertController.addAction(apagarImagem)
         
         alertController.popoverPresentationController?.sourceView = button

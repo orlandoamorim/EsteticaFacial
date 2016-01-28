@@ -68,8 +68,15 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
         //-- TESTE
         imageView = UIImageView(image: image)
         
+        let height = view.frame.height
+        let width = view.frame.width
+        let x = view.frame.origin.x
+        let y = view.frame.origin.y
+        //view.bounds
         
-        scrollView = UIScrollView(frame: view.bounds)
+        print(CGRect(x: x, y: y, width: width, height: height - self.processarToolbar.frame.height) )
+        
+        scrollView = UIScrollView(frame: CGRect(x: x, y: y, width: width, height: height - self.processarToolbar.frame.height) )
         scrollView.backgroundColor = UIColor.blackColor()
         scrollView.contentSize = imageView.bounds.size
         scrollView.addSubview(imageView)

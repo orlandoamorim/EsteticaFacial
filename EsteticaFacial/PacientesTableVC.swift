@@ -44,10 +44,11 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.refreshControl?.beginRefreshing()
+
         tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: true)
         //150
         
-        self.refreshControl?.beginRefreshing()
         update()
     }
     
