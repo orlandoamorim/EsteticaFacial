@@ -36,6 +36,10 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     var pontosPerfilAtual : [String:NSValue]?
     var pontosNasalAtual : [String:NSValue]?
     
+    var pontosFrontalFrom:pontosFrontalType = .Local
+    var pontosPerfilFrom:pontosPerfilType = .Local
+    var pontosNasalFrom:pontosNasalType = .Local
+    
     var formValuesServidor:[String : Any?] = [String : Any?]()
     
     //Procedimentos Cirurgicos
@@ -111,6 +115,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if error == nil {
                         self.pontosFrontalServidor = pontos
                         self.pontosFrontalAtual = pontos
+                        self.pontosFrontalFrom = .Servidor
                     }else{
                         Drop.down("Erro ao baixar pontos frontal. Objeto nao encontrado.", state: .Error)
                     }
@@ -139,6 +144,8 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if error == nil {
                         self.pontosPerfilServidor = pontos
                         self.pontosPerfilAtual = pontos
+                        self.pontosPerfilFrom = .Servidor
+
                     }else{
                         Drop.down("Erro ao baixar pontos perfil. Objeto nao encontrado.", state: .Error)
                     }
@@ -166,6 +173,8 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     if error == nil {
                         self.pontosNasalServidor = pontos
                         self.pontosNasalAtual = pontos
+                        self.pontosNasalFrom = .Servidor
+                        
                     }else{
                         Drop.down("Erro ao baixar pontos nasal. Objeto nao encontrado.", state: .Error)
                     }
@@ -426,6 +435,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         }
         
         let novaImagem = UIAlertAction(title: "Nova Imagem", style: UIAlertActionStyle.Default) { (novaImagem) -> Void in
+            
             self.performSegueWithIdentifier("SegueCamera", sender: nil)
         }
         
@@ -532,21 +542,26 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         
     }
     //NovoPacienteDelegate
-    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected:imageTypes) {
-        print(imageTypesSelected)
-        print(dic)
+    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected: imageTypes, pontosFrontalFrom: pontosFrontalType, pontosPerfilFrom: pontosPerfilType, pontosNasalFrom: pontosNasalType) {
+
         switch imageTypesSelected {
         case .Frontal:  self.pontosFrontalAtual = dic
         case .Perfil:   self.pontosPerfilAtual = dic
         case .Nasal:    self.pontosNasalAtual = dic
         }
-        print("****")
-        print(self.pontosFrontalAtual)
+        
+        if pontosFrontalFrom != .Nil {
+            self.pontosFrontalFrom = pontosFrontalFrom
+        }else if pontosPerfilFrom != .Nil {
+            self.pontosPerfilFrom = pontosPerfilFrom
+        }else if pontosNasalFrom != .Nil{
+            self.pontosNasalFrom = pontosNasalFrom
+        }
     }
     
     //CameraViewDelegate
     func marcar_pontos(dic: [String : NSValue]) {
-        atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected)
+        atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected, pontosFrontalFrom: pontosFrontalFrom, pontosPerfilFrom: pontosPerfilFrom, pontosNasalFrom: pontosNasalFrom)
     }
     
     //--------------------
@@ -564,12 +579,15 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 switch imageTypesSelected {
                 case .Frontal:  camera.imageTypesSelected = .Frontal
                 camera.dicionario = self.pontosFrontalAtual
-                    
+                camera.pontosFrontalFrom = self.pontosFrontalFrom
                 case .Perfil:   camera.imageTypesSelected = .Perfil
                 camera.dicionario = self.pontosPerfilAtual
-                    
+                camera.pontosPerfilFrom = self.pontosPerfilFrom
+
                 case .Nasal:    camera.imageTypesSelected = .Nasal
                 camera.dicionario = self.pontosNasalAtual
+                camera.pontosNasalFrom = self.pontosNasalFrom
+
                 }
             }
         }
@@ -584,12 +602,16 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 switch imageTypesSelected {
                 case .Frontal:  processarImagemVC.image = self.btn_imagem_frontal.currentImage!
                 processarImagemVC.dicionario = self.pontosFrontalAtual
+                processarImagemVC.pontosFrontalFrom = self.pontosFrontalFrom
                     
                 case .Perfil:   processarImagemVC.image = self.btn_imagem_perfil.currentImage!
                 processarImagemVC.dicionario = self.pontosPerfilAtual
+                processarImagemVC.pontosPerfilFrom = self.pontosPerfilFrom
                     
                 case .Nasal:    processarImagemVC.image = self.btn_imagem_nasal.currentImage!
                 processarImagemVC.dicionario = self.pontosNasalAtual
+                processarImagemVC.pontosNasalFrom = self.pontosNasalFrom
+
                 }
             }
         }

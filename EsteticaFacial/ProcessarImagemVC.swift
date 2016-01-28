@@ -23,8 +23,13 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
     
     var imageTypesSelected:imageTypes = .Frontal
     var imageGetFrom:imageGet = .Camera
-
+    
     var dicionario: [String:NSValue]?
+    var pontosFrontalFrom:pontosFrontalType = .Nil
+    var pontosPerfilFrom:pontosPerfilType = .Nil
+    var pontosNasalFrom:pontosNasalType = .Nil
+
+    var testeBo:Bool = Bool()
     
     static let infinity : CGFloat = 9999999.9
     var pontos_views : NSMutableArray = NSMutableArray()
@@ -43,6 +48,8 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        testeBo = false
         
         self.voltarBtn = UIBarButtonItem(image: UIImage(named: "back"), style: UIBarButtonItemStyle.Done, target: self, action: "dismiss:")
         self.reloadBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: nil, action: "novaFoto:")
@@ -142,12 +149,34 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
     // MARK: - Inserir Pontos
     func inserirPontos(){
         for (nome,local) in self.dicionario!{
-            let p = PontoView()
-            let l = CGPoint(x: (self.imageView.image?.size.width)!*(local.CGPointValue().x/1914), y: (self.imageView.image?.size.height)!*(local.CGPointValue().y/1914))
-            p.inicializar(nome , posicao: l)
-            
-            self.imageView.layer.addSublayer(p.layer)
-            self.pontos_views.addObject(p)
+            if pontosFrontalFrom == .Local || pontosPerfilFrom == .Local || pontosNasalFrom == .Local {
+                let p = PontoView()
+                let l = CGPoint(x: (self.imageView.image?.size.width)!*(local.CGPointValue().x/1914), y: (self.imageView.image?.size.height)!*(local.CGPointValue().y/1914))
+                p.inicializar(nome , posicao: l)
+                //Atualizando
+                dicionario?.updateValue(NSValue(CGPoint:l), forKey: nome)
+                self.testeBo = true
+                
+                self.imageView.layer.addSublayer(p.layer)
+                self.pontos_views.addObject(p)
+                
+            }else if pontosFrontalFrom == .Servidor || pontosPerfilFrom == .Servidor || pontosNasalFrom == .Servidor || pontosFrontalFrom == .Atualizado || pontosPerfilFrom == .Atualizado || pontosNasalFrom == .Atualizado {
+                let p = PontoView()
+                let l = local
+                
+                p.inicializar(nome , posicao: l.CGPointValue())
+                
+                self.imageView.layer.addSublayer(p.layer)
+                self.pontos_views.addObject(p)
+            }
+        }
+        
+        if self.testeBo == true {
+            switch imageTypesSelected {
+            case .Frontal: pontosFrontalFrom = .Servidor
+            case .Perfil: pontosPerfilFrom = .Servidor
+            case .Nasal: pontosNasalFrom = .Servidor
+            }
         }
     }
     
@@ -174,6 +203,13 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
         else if recognizer.state == UIGestureRecognizerState.Ended{
             dicionario?.updateValue(NSValue(CGPoint:(ponto_escolhido?.local)!), forKey:(ponto_escolhido?.nome)!)
             print("\(self.ponto_escolhido?.local)")
+            
+            switch imageTypesSelected {
+            case .Frontal: pontosFrontalFrom = .Atualizado
+            case .Perfil: pontosPerfilFrom = .Atualizado
+            case .Nasal: pontosNasalFrom = .Atualizado
+            }
+            
             if pontoInicial != self.ponto_escolhido!.local {
                 self.ponto_escolhido?.ponto_view.image = UIImage(named: "ponto_verde")
             }else{
@@ -213,8 +249,8 @@ class ProcessarImagemVC: UIViewController,UIScrollViewDelegate {
     func salvarAlteracoes(button: UIBarButtonItem){
         if delegate != nil {
             delegate.atribuir_imagem(image, imageTypesSelected: imageTypesSelected)
-            delegate.atribuir_marcacao(dicionario! , imageTypesSelected: imageTypesSelected)
-            
+//            delegate.atribuir_marcacao(dicionario! , imageTypesSelected: imageTypesSelected)
+            delegate.atribuir_marcacao(dicionario!, imageTypesSelected: imageTypesSelected, pontosFrontalFrom: pontosFrontalFrom, pontosPerfilFrom: pontosPerfilFrom, pontosNasalFrom: pontosNasalFrom)
             if self.imageGetFrom == .Camera || self.imageGetFrom == .Biblioteca  {
                 self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }else if self.imageGetFrom == .Servidor  {

@@ -11,7 +11,7 @@ import UIKit
 
 protocol NovoPacienteDelegate{
     func atribuir_imagem(imagem: UIImage, imageTypesSelected:imageTypes)
-    func atribuir_marcacao(dic:[String:NSValue], imageTypesSelected:imageTypes)
+    func atribuir_marcacao(dic:[String:NSValue], imageTypesSelected:imageTypes, pontosFrontalFrom: pontosFrontalType, pontosPerfilFrom:pontosPerfilType, pontosNasalFrom: pontosNasalType)
 }
 
 protocol ProcedimentoCirurgico{
@@ -32,4 +32,16 @@ enum contentTypes {
 
 enum imageGet {
     case Camera, Biblioteca, Servidor
+}
+
+enum pontosFrontalType {
+    case Servidor, Local, Atualizado, Nil
+}
+
+enum pontosPerfilType {
+    case Servidor, Local, Atualizado, Nil
+}
+
+enum pontosNasalType {
+    case Servidor, Local, Atualizado, Nil
 }

@@ -27,8 +27,12 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     var capturedImage: UIImageView = UIImageView()
     var imageTypesSelected:imageTypes = .Frontal
     var imageGetFrom:imageGet = .Camera
+    
     var dicionario: [String:NSValue]?
-
+    var pontosFrontalFrom:pontosFrontalType = .Nil
+    var pontosPerfilFrom:pontosPerfilType = .Nil
+    var pontosNasalFrom:pontosNasalType = .Nil
+    
     var flashBtn:UIBarButtonItem = UIBarButtonItem()
     var imagemGuiaBtn:UIBarButtonItem = UIBarButtonItem()
     var spaceButton:UIBarButtonItem = UIBarButtonItem()
@@ -243,6 +247,10 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 
                 processImagemVC.image = self.capturedImage.image!
                 processImagemVC.dicionario = self.dicionario
+                
+                processImagemVC.pontosFrontalFrom = self.pontosFrontalFrom
+                processImagemVC.pontosPerfilFrom = self.pontosPerfilFrom
+                processImagemVC.pontosNasalFrom = self.pontosNasalFrom
             }
         }
     }
@@ -303,8 +311,10 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     func atribuir_imagem(imagem: UIImage, imageTypesSelected: imageTypes) {
         self.delegate.atribuir_imagem(imagem, imageTypesSelected: imageTypesSelected)
     }
-    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected: imageTypes) {
-        self.delegate.atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected)
+    
+    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected: imageTypes, pontosFrontalFrom: pontosFrontalType, pontosPerfilFrom: pontosPerfilType, pontosNasalFrom: pontosNasalType) {
+        self.delegate.atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected, pontosFrontalFrom: pontosFrontalFrom, pontosPerfilFrom: pontosPerfilFrom, pontosNasalFrom: pontosNasalFrom)
+
     }
 
 }

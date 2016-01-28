@@ -145,7 +145,7 @@ class CameraViewController: UIViewController, CameraViewDelegate {
     }
     
     func marcar_pontos(dic: [String : NSValue]) {
-        delegate.atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected)
+//        delegate.atribuir_marcacao(<#T##dic: [String : NSValue]##[String : NSValue]#>, imageTypesSelected: <#T##imageTypes#>, pontosFrontalFrom: <#T##pontosFrontalType#>, pontosPerfilFrom: <#T##pontosPerfilType#>, pontosNasalFrom: <#T##pontosNasalType#>)
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
