@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 05/11/15.
-//  Copyright © 2015 UFPI. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit

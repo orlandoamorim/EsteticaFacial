@@ -32,7 +32,7 @@ class ParseConnection: NSObject {
     static func getAllFromParse(block: ((objects:[PFObject]?, error:NSError?) -> Void)){
         let query = PFQuery(className:"Paciente")
         query.cachePolicy = PFCachePolicy.CacheThenNetwork
-        print(PFUser.currentUser()!.username!)
+//        print(PFUser.currentUser()!.username!)
         query.whereKey("userID", equalTo: PFUser.currentUser()!.objectId!)
         query.orderByAscending("nome")
         

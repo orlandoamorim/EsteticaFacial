@@ -12,6 +12,7 @@ import Parse
 import SwiftyDrop
 import ParseFacebookUtilsV4
 import ParseTwitterUtils
+import SCLAlertView
 
 class AjustesVC: FormViewController,VSReachability {
     
@@ -153,20 +154,33 @@ class AjustesVC: FormViewController,VSReachability {
                     
                     alertController.addAction(UIAlertAction(title: "Sair", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
                         if self.isConnectedToNetwork(){
-                            Drop.down("Saindo", state: DropState.Info)
+                            let alert = SCLAlertView()
+                            alert.showCloseButton = false
+                            alert.showWait("Saindo", subTitle: "Aguarde...", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                            PFUser.logOut()
+                            PFQuery.clearAllCachedResults()
+                            
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+
+                                self.presentViewController(viewController, animated: true, completion: { () -> Void in
+                                    alert.hideView()
+                                })
+//                                self.navigationController?.popToViewController(viewController, animated: true)
+                            })
                             
                             // Send a request to log out a user
-                            PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
-                                if error == nil {
-                                    PFQuery.clearAllCachedResults()
-                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
-                                    
-                                    self.presentViewController(viewController, animated: true, completion: nil)
-                                }else{
-                                    Drop.down("Erro ao sair.", state: DropState.Warning)
-                                    row.baseValue = "@\(PFUser.currentUser()!.username!.lowercaseString)"
-                                }
-                            })
+//                            PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
+//                                if error == nil {
+//                                    PFQuery.clearAllCachedResults()
+//                                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Login")
+//                                    
+//                                    self.presentViewController(viewController, animated: true, completion: nil)
+//                                }else{
+//                                    Drop.down("Erro ao sair.", state: DropState.Warning)
+//                                    row.baseValue = "@\(PFUser.currentUser()!.username!.lowercaseString)"
+//                                }
+//                            })
 
                             
                         }else{
@@ -212,8 +226,6 @@ class UserImage: UIView {
     
     
     @IBAction func userImage(sender: UIButton) {
-        print("seleconada")
-        
         if PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
             AjustesVC().showAlert()
         }

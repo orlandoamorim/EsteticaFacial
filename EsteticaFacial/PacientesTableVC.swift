@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 22/10/15.
-//  Copyright © 2015 UFPI. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 // Segue Name : UpdateSegue -> Atualiza os dados.
@@ -136,7 +136,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
                 }
                 
                 }) { (progress) -> Void in
-                    print(Float(progress))
+//                    print(Float(progress))
             }
             
         }else{
@@ -305,7 +305,7 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchBar.text)
+//        print(searchBar.text)
         self.recordsDicAtoZ.removeAll(keepCapacity: false)
         
         let nome = PFQuery(className:"Paciente")
@@ -384,11 +384,8 @@ class PacientesTableVC: UITableViewController,VSReachability, UISplitViewControl
         switch Helpers.verificaSwitch() {
         case "realizadas":
             realizadas = "Realizadas ⚡️"
-            print("realizadas")
         case "nao_realizadas":
             nao_realizadas = "Não Realizadas ⚡️"
-            print("nao_realizadas")
-            
         default:
             todas = "Todas as Fichas ⚡️"
 

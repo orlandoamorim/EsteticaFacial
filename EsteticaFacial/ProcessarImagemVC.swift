@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 27/12/15.
-//  Copyright © 2015 Ricardo Freitas. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit

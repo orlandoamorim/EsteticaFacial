@@ -22,7 +22,6 @@
 		188840211C2441C9000899ED /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188840201C2441C9000899ED /* Pacifico.ttf */; };
 		188840241C25E79F000899ED /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188840231C25E79F000899ED /* Accounts.framework */; };
 		188840261C25E7A8000899ED /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188840251C25E7A8000899ED /* Social.framework */; };
-		188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D88AC1BF243490008F557 /* SCLAlertView.swift */; };
 		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
 		18A2C8071C2F1FAB000CA8C8 /* EditarImagemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C8061C2F1FAB000CA8C8 /* EditarImagemVC.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
@@ -84,7 +83,6 @@
 		188840201C2441C9000899ED /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		188840231C25E79F000899ED /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		188840251C25E7A8000899ED /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		188D88AC1BF243490008F557 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		18A2C8061C2F1FAB000CA8C8 /* EditarImagemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditarImagemVC.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 				B81B4A6D1BC344AE002A306F /* Info.plist */,
 				18F6F1131BDD69E5008DA5B1 /* NetworkVerify */,
 				183D2F531BD9E83D0033BDA3 /* CoreData */,
-				1886549B1BDC0D6E000190B1 /* SCLAlertController */,
 				18F6F1161BDDE632008DA5B1 /* Teste.swift */,
 				188840201C2441C9000899ED /* Pacifico.ttf */,
 			);
@@ -218,14 +215,6 @@
 				1888401C1C244161000899ED /* SignUpViewController.swift */,
 			);
 			name = Login;
-			sourceTree = "<group>";
-		};
-		1886549B1BDC0D6E000190B1 /* SCLAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				188D88AC1BF243490008F557 /* SCLAlertView.swift */,
-			);
-			name = SCLAlertController;
 			sourceTree = "<group>";
 		};
 		188840191C24375A000899ED /* Storyboard */ = {
@@ -443,7 +432,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Ricardo Freitas";
+				ORGANIZATIONNAME = "Orlando Amorim";
 				TargetAttributes = {
 					B81B4A5A1BC344AE002A306F = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -534,7 +523,6 @@
 				1888401E1C244161000899ED /* LoginViewController.swift in Sources */,
 				181FF7131C1A4DA900313E57 /* YPMagnifyingGlass.swift in Sources */,
 				B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */,
-				188D88AD1BF243490008F557 /* SCLAlertView.swift in Sources */,
 				B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */,
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
 				1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */,

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  EsteticaFacial
 //
-//  Created by Ricardo Freitas on 05/10/15.
-//  Copyright © 2015 Ricardo Freitas. All rights reserved.
+//  Created by Orlando Amorim on 05/10/15.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit

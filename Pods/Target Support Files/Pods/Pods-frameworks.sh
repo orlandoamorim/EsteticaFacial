@@ -96,6 +96,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/ParseFacebookUtilsV4.framework"
   install_framework "Pods/ParseTwitterUtils.framework"
   install_framework "Pods/ParseUI.framework"
+  install_framework "Pods/SCLAlertView.framework"
   install_framework "Pods/SwiftyDrop.framework"
   install_framework "Pods/TOCropViewController.framework"
 fi
@@ -112,6 +113,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/ParseFacebookUtilsV4.framework"
   install_framework "Pods/ParseTwitterUtils.framework"
   install_framework "Pods/ParseUI.framework"
+  install_framework "Pods/SCLAlertView.framework"
   install_framework "Pods/SwiftyDrop.framework"
   install_framework "Pods/TOCropViewController.framework"
 fi

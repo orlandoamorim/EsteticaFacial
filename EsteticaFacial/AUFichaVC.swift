@@ -3,18 +3,18 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 09/11/15.
-//  Copyright © 2015 UFPI. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit
 import Parse
 import Eureka
 import SwiftyDrop
+import SCLAlertView
 
 class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico, CameraViewDelegate {
     
     var parseObject:PFObject!
-    var alertView:SCLAlertViewResponder?
     
     @IBOutlet weak var header: UIView!
     //Camera BTN
@@ -79,7 +79,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             self.title = "Add Ficha"
             
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed:")
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "getFormValues")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "getConfirmation")
             
         case .Atualizar:
             ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
@@ -186,7 +186,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             
             self.title = "Atualizar Ficha"
             
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: "getFormValues")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: "getConfirmation")
         case .Nil : noData()
         }
     }
@@ -196,16 +196,42 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     }
     
     //--------------------
-    
-    func getFormValues(){
-        alertView = SCLAlertView().showWait("Carregando", subTitle: "Aguarde...", closeButtonTitle: "Cancelar", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+    func getConfirmation(){
+        let alert = SCLAlertView()
         let results = Helpers.verifyFormValues(form.values(includeHidden: false))
         
         if !results.0 {
-            alertView?.close()
-            alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio \(results.1) nao foi preenchido", closeButtonTitle: "OK")
+            alert.showInfo("UFPI", subTitle: "Campo obrigatorio \(results.1) nao foi preenchido", closeButtonTitle: "OK")
             return
         }
+        
+        
+        let labelInfo:String?
+        switch contentToDisplay {
+        case .Adicionar: labelInfo = "Adicionar"
+        case .Atualizar: labelInfo = "Atualizar"
+        case .Nil: labelInfo = "ERRO"
+        }
+        
+        alert.addButton(labelInfo!) { () -> Void in
+            self.getFormValues()
+        }
+        alert.addButton("Cancelar") { () -> Void in
+            print("cancelar")
+        }
+        alert.showCloseButton = false
+
+        alert.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
+    }
+    
+    func getFormValues(){
+        let alert = SCLAlertView()
+
+        alert.addButton("Concluir em background...") { () -> Void in
+            alert.hideView()
+        }
+        alert.showCloseButton = false
+        alert.showWait("Carregando", subTitle: "Aguarde...", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
         
         switch contentToDisplay {
         case .Adicionar:
@@ -222,12 +248,14 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                     
                     if erro == nil {
                         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                            self.alertView?.close()
-                            self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                            alert.hideView()
+                            alert.showCloseButton = true
+                            alert.showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                         })
                     }else {
-                        self.alertView?.close()
-                        self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao salvar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                        alert.hideView()
+                        alert.showCloseButton = true
+                        alert.showError("UFPI", subTitle: "Algum erro ocorreu ao salvar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                     }
                     
             })
@@ -245,11 +273,13 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 , completion: { (success, error) -> Void in
                     
                     if error == nil {
-                        self.alertView?.close()
-                        self.alertView? = SCLAlertView().showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                        alert.hideView()
+                        alert.showCloseButton = true
+                        alert.showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                     }else {
-                        self.alertView?.close()
-                        self.alertView? = SCLAlertView().showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                        alert.hideView()
+                        alert.showCloseButton = true
+                        alert.showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
                     }
                     
             })
@@ -433,11 +463,6 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         let visualizarImagem = UIAlertAction(title: "Visualizar", style: UIAlertActionStyle.Default) { (visualizar) -> Void in
             self.performSegueWithIdentifier("SegueShowImage", sender: nil)
         }
-        
-//        let novaImagem = UIAlertAction(title: "Nova Imagem", style: UIAlertActionStyle.Default) { (novaImagem) -> Void in
-//            
-//            self.performSegueWithIdentifier("SegueCamera", sender: nil)
-//        }
         
         let apagarImagem = UIAlertAction(title: "Apagar Imagem", style: UIAlertActionStyle.Destructive) { (apagar) -> Void in
             Drop.down("Apagando Imagem", state: .Info)

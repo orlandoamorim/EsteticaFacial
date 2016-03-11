@@ -3,7 +3,7 @@
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 23/12/15.
-//  Copyright © 2015 Ricardo Freitas. All rights reserved.
+//  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
 import UIKit
@@ -185,17 +185,28 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     func inicializeCropViewController(image: UIImage){
+//        UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
+//        UIDevice.currentDevice().
         cropViewController = TOCropViewController(image: image)
         
         cropViewController.delegate = self
 //        cropViewController.toolbar.resetButtonEnabled = false
         cropViewController.defaultAspectRatio =  TOCropViewControllerAspectRatio.RatioSquare
-        cropViewController.lockedAspectRatio = true
-        cropViewController.cropView.aspectLockEnabled = false
-        cropViewController.cropView.cropBoxResizeEnabled = false
+//        cropViewController.lockedAspectRatio = true
+//        cropViewController.cropView.aspectLockEnabled = false
+//        cropViewController.cropView.l
+        print(cropViewController.toolbarPosition.rawValue)
+        switch cropViewController.toolbarPosition.rawValue {
+        case 0: print("90")
+        case 1: print("180")
+        case 2: print("360")
+        case 3: print("ihh")
+        default: print("NADA")
+        }
         
+        cropViewController.toolbar.resetButton.hidden = true
         cropViewController.toolbar.clampButton.hidden = true
-        cropViewController.toolbar.resetButton.addTarget(self, action: "ajust", forControlEvents: UIControlEvents.TouchUpInside)
+        cropViewController.cropView.cropBoxResizeEnabled = false
         cropViewController.toolbar.rotateButton.addTarget(self, action: "ajust", forControlEvents: UIControlEvents.TouchUpInside)
         self.presentViewController(cropViewController, animated: true) { () -> Void in
             self.ajust()
@@ -219,17 +230,17 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             
             self.capturedImage.image = image
             
-            print("****")
-            print("x -> \(cropViewController.cropView.cropBoxFrame.origin.x) || y -> \(cropViewController.cropView.cropBoxFrame.origin.y)")
-            print("****")
-            print("cropBoxFrame -> \(cropViewController.cropView.cropBoxFrame.size)")
-            print("--")
-            print("image.size -> \(image.size)")
-            print("--")
-            print(cropRect)
-            print("--")
-            print(angle)
-            print("****")
+//            print("****")
+//            print("x -> \(cropViewController.cropView.cropBoxFrame.origin.x) || y -> \(cropViewController.cropView.cropBoxFrame.origin.y)")
+//            print("****")
+//            print("cropBoxFrame -> \(cropViewController.cropView.cropBoxFrame.size)")
+//            print("--")
+//            print("image.size -> \(image.size)")
+//            print("--")
+//            print(cropRect)
+//            print("--")
+//            print(angle)
+//            print("****")
             
             self.performSegueWithIdentifier("PontosSegue", sender: nil)
         }

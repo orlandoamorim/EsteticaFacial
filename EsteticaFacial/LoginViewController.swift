@@ -20,6 +20,7 @@ class LoginViewController : PFLogInViewController {
     var viewsFinalYPosition : [CGFloat]!
     
     let device = Device()
+    let groupOfAllowedDevices: [Device] = [.iPhone4, .iPhone4s, .iPhone5, .iPhone5c, .iPhone5s, .Simulator(.iPhone4), .Simulator(.iPhone4s), .Simulator(.iPhone5), .Simulator(.iPhone5c), .Simulator(.iPhone5s)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +90,7 @@ class LoginViewController : PFLogInViewController {
         // so we track their final position in an array
         // but change their frame so they are shifted downwards off the screen
         viewsFinalYPosition = [CGFloat]();
-        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
+        if device.isOneOf(groupOfAllowedDevices) {
 
         }else{
             for viewToAnimate in viewsToAnimate {
@@ -109,7 +110,7 @@ class LoginViewController : PFLogInViewController {
         // so they are no longer transparent (alpha = 1)
         // and, using the final position we stored, we'll
         // reset them to where they should be
-        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
+        if device.isOneOf(groupOfAllowedDevices) {
             
         }else{
             if viewsFinalYPosition.count == self.viewsToAnimate.count {

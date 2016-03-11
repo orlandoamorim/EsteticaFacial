@@ -52,38 +52,40 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
     
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        if PFFacebookUtils.isLinkedWithUser(user) {
-            FBSDKGraphRequest.init(graphPath: "me", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
-                if error == nil {
-                    if PFUser.currentUser()!.username != result["name"]! as? String {
-                        PFUser.currentUser()!.username = result["name"]! as? String
-                        PFUser.currentUser()!.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                self.presentLoggedInAlert()
-                            }
-                         })
-                    }else{
-                        self.presentLoggedInAlert()
-                    }
-                }
-            })
-        }else if PFTwitterUtils.isLinkedWithUser(user) {
-            let twitterUsername = PFTwitterUtils.twitter()!.screenName
-
-            if PFUser.currentUser()!.username != twitterUsername {
-                PFUser.currentUser()!.username = twitterUsername
-                PFUser.currentUser()!.saveInBackgroundWithBlock({ (success, error) -> Void in
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            if PFFacebookUtils.isLinkedWithUser(user) {
+                FBSDKGraphRequest.init(graphPath: "me", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
                     if error == nil {
-                        self.presentLoggedInAlert()
+                        if PFUser.currentUser()!.username != result["name"]! as? String {
+                            PFUser.currentUser()!.username = result["name"]! as? String
+                            PFUser.currentUser()!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                                if error == nil {
+                                    self.presentLoggedInAlert()
+                                }
+                            })
+                        }else{
+                            self.presentLoggedInAlert()
+                        }
                     }
                 })
+            }else if PFTwitterUtils.isLinkedWithUser(user) {
+                let twitterUsername = PFTwitterUtils.twitter()!.screenName
+                
+                if PFUser.currentUser()!.username != twitterUsername {
+                    PFUser.currentUser()!.username = twitterUsername
+                    PFUser.currentUser()!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        if error == nil {
+                            self.presentLoggedInAlert()
+                        }
+                    })
+                }else{
+                    self.presentLoggedInAlert()
+                }
             }else{
-                presentLoggedInAlert()
+                self.presentLoggedInAlert()
             }
-        }else{
-            presentLoggedInAlert()
         }
+
 
         
     }
@@ -111,13 +113,18 @@ class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpV
 
     
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        presentLoggedInAlert()
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.presentLoggedInAlert()
+        })
+        
     }
     
     func presentLoggedInAlert() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.dismissViewControllerAnimated(true, completion: nil)
         self.performSegueWithIdentifier("SegueApp", sender: nil)
+//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//            
+//        })
     }
 
 }
