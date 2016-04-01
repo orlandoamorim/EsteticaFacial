@@ -7,46 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		181C89D71C307ED3003FC62D /* ProcessarImagemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C89D61C307ED3003FC62D /* ProcessarImagemVC.swift */; };
-		181FF7131C1A4DA900313E57 /* YPMagnifyingGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */; };
-		181FF7141C1A4DA900313E57 /* YPMagnifyingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */; };
+		18126CE71CAB05B3002D26F7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18126CE61CAB05B3002D26F7 /* Settings.swift */; };
+		18126CED1CAB82D9002D26F7 /* SurgeryData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18126CEB1CAB82D9002D26F7 /* SurgeryData.storyboard */; };
+		18126CF21CACC5F7002D26F7 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18126CF11CACC5F7002D26F7 /* CameraManager.swift */; };
+		18126CF51CACD9AD002D26F7 /* CameraScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18126CF31CACD9AD002D26F7 /* CameraScreen.storyboard */; };
+		18126CF71CACF9C4002D26F7 /* VerifyImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18126CF61CACF9C4002D26F7 /* VerifyImageVC.swift */; };
+		181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */; };
+		181C559E1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */; };
+		181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */; };
+		181C55A11C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */; };
+		181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */; };
+		181C55A51C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */; };
+		181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
+		181C55AE1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
+		181C89D71C307ED3003FC62D /* ProcessImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C89D61C307ED3003FC62D /* ProcessImageVC.swift */; };
 		181FF7161C1A657E00313E57 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7151C1A657E00313E57 /* Protocols.swift */; };
 		183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */; };
 		1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */; };
 		1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */; };
 		1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */; };
 		187524AE1C2A638700FA0A95 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187524AD1C2A638700FA0A95 /* CameraVC.swift */; };
-		1888401D1C244161000899ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888401A1C244161000899ED /* ViewController.swift */; };
-		1888401E1C244161000899ED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888401B1C244161000899ED /* LoginViewController.swift */; };
-		1888401F1C244161000899ED /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888401C1C244161000899ED /* SignUpViewController.swift */; };
-		188840211C2441C9000899ED /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188840201C2441C9000899ED /* Pacifico.ttf */; };
-		188840241C25E79F000899ED /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188840231C25E79F000899ED /* Accounts.framework */; };
-		188840261C25E7A8000899ED /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188840251C25E7A8000899ED /* Social.framework */; };
 		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
-		18A2C8071C2F1FAB000CA8C8 /* EditarImagemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C8061C2F1FAB000CA8C8 /* EditarImagemVC.swift */; };
+		18BAB9EA1C9B7E3300BD575B /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */; };
+		18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
+		18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
+		18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
+		18BAB9F41C9BA4C400BD575B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
+		18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
+		18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
 		18D88D311C27BA4C00F90C41 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D88D301C27BA4C00F90C41 /* Pods.framework */; };
 		18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */; };
 		18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */; };
 		18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1161BDDE632008DA5B1 /* Teste.swift */; };
-		18FAA1C91BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */; };
-		18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA1C81BDABCDC00EC3751 /* Paciente.swift */; };
-		18FEC03D1BFC08E0008AA555 /* AjustesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */; };
-		18FEC0421BFC09DF008AA555 /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FEC0401BFC09DF008AA555 /* UserImage.xib */; };
+		53399E36196AB120ADBB793A /* Pods_EsteticaFacial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
-		B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */; };
 		B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A681BC344AE002A306F /* Assets.xcassets */; };
 		B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */; };
 		B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A761BC344AE002A306F /* EsteticaFacialTests.swift */; };
 		B81B4A821BC344AE002A306F /* EsteticaFacialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */; };
 		B829B8C71BE26AB7009909C0 /* TratamentoEntrada.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829B8C61BE26AB7009909C0 /* TratamentoEntrada.swift */; };
 		B829B8C91BE26ACF009909C0 /* TecnicasPDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829B8C81BE26ACF009909C0 /* TecnicasPDI.swift */; };
-		B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */; };
 		B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85392801BD5E64E000DCD91 /* PontoView.swift */; };
 		B8AFADA11BE8DF5F000EF30A /* LocalizadorFrontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFADA01BE8DF5F000EF30A /* LocalizadorFrontal.swift */; };
 		B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFADA21BE8ED83000EF30A /* VisaoComputacional.swift */; };
-		B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F7E0CC1BD429060053B948 /* CameraViewController.swift */; };
 		B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,39 +73,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		181C89D61C307ED3003FC62D /* ProcessarImagemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessarImagemVC.swift; sourceTree = "<group>"; };
-		181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPMagnifyingGlass.swift; sourceTree = "<group>"; };
-		181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPMagnifyingView.swift; sourceTree = "<group>"; };
+		18126CE61CAB05B3002D26F7 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Settings/Settings.swift; sourceTree = "<group>"; };
+		18126CEC1CAB82D9002D26F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SurgeryData.storyboard; sourceTree = "<group>"; };
+		18126CF11CACC5F7002D26F7 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraManager.swift; path = Classes/Core/CameraManager.swift; sourceTree = "<group>"; };
+		18126CF41CACD9AD002D26F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CameraScreen.storyboard; sourceTree = "<group>"; };
+		18126CF61CACF9C4002D26F7 /* VerifyImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyImageVC.swift; path = Classes/Modules/Camera/VerifyImageVC.swift; sourceTree = "<group>"; };
+		181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanning.swift; path = "Model/Surgical Planning/SurgicalPlanning.swift"; sourceTree = "<group>"; };
+		181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningKey.swift; path = "Model/Surgical Planning/SurgicalPlanningKey/SurgicalPlanningKey.swift"; sourceTree = "<group>"; };
+		181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningValue.swift; path = "Model/Surgical Planning/SurgicalPlanningValue/SurgicalPlanningValue.swift"; sourceTree = "<group>"; };
+		181C55AC1C9C43A400BC35AD /* RealmParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmParse.swift; path = Model/RealmParse/RealmParse.swift; sourceTree = "<group>"; };
+		181C89D61C307ED3003FC62D /* ProcessImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessImageVC.swift; sourceTree = "<group>"; };
 		181FF7151C1A657E00313E57 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTableVC.swift; sourceTree = "<group>"; };
 		1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConnection.swift; sourceTree = "<group>"; };
 		1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUFichaVC.swift; sourceTree = "<group>"; };
 		1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedimentosCirurgicosVC.swift; sourceTree = "<group>"; };
 		187524AD1C2A638700FA0A95 /* CameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
-		1888401A1C244161000899ED /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1888401B1C244161000899ED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		1888401C1C244161000899ED /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		188840201C2441C9000899ED /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		188840231C25E79F000899ED /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		188840251C25E7A8000899ED /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		18A2C8061C2F1FAB000CA8C8 /* EditarImagemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditarImagemVC.swift; sourceTree = "<group>"; };
+		18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizarPontosViewController.swift; sourceTree = "<group>"; };
+		18BAB9EC1C9B983E00BD575B /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Patient.swift; path = Model/Patient/Patient.swift; sourceTree = "<group>"; };
+		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
+		18BAB9F51C9BA67D00BD575B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Model/Record/Record.swift; sourceTree = "<group>"; };
 		18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostrarCirurgiasVC.swift; sourceTree = "<group>"; };
 		18D88D301C27BA4C00F90C41 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedColorButton.swift; sourceTree = "<group>"; };
 		18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSReachability.swift; sourceTree = "<group>"; };
 		18F6F1161BDDE632008DA5B1 /* Teste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
-		18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Paciente+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		18FAA1C81BDABCDC00EC3751 /* Paciente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paciente.swift; sourceTree = "<group>"; };
-		18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AjustesVC.swift; sourceTree = "<group>"; };
-		18FEC0401BFC09DF008AA555 /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
+		24F0A10AE2D837209F9039E7 /* Pods-EsteticaFacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.debug.xcconfig"; sourceTree = "<group>"; };
+		2822637C4A48596B8AC4E44B /* Pods-EsteticaFacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.release.xcconfig"; sourceTree = "<group>"; };
 		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2C72C9167826A097F31E065 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B81B4A631BC344AE002A306F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B81B4A661BC344AE002A306F /* EsteticaFacial.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EsteticaFacial.xcdatamodel; sourceTree = "<group>"; };
 		B81B4A681BC344AE002A306F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B81B4A6B1BC344AE002A306F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B81B4A6D1BC344AE002A306F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,13 +119,11 @@
 		B81B4A831BC344AE002A306F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B829B8C61BE26AB7009909C0 /* TratamentoEntrada.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TratamentoEntrada.swift; sourceTree = "<group>"; };
 		B829B8C81BE26ACF009909C0 /* TecnicasPDI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TecnicasPDI.swift; sourceTree = "<group>"; };
-		B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizarPontosViewController.swift; sourceTree = "<group>"; };
 		B85392801BD5E64E000DCD91 /* PontoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PontoView.swift; sourceTree = "<group>"; };
 		B8AFADA01BE8DF5F000EF30A /* LocalizadorFrontal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizadorFrontal.swift; sourceTree = "<group>"; };
 		B8AFADA21BE8ED83000EF30A /* VisaoComputacional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaoComputacional.swift; sourceTree = "<group>"; };
-		B8F7E0CC1BD429060053B948 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		CB630DCB19D6DC3F7B3B5FC2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,9 +132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D88D311C27BA4C00F90C41 /* Pods.framework in Frameworks */,
-				188840261C25E7A8000899ED /* Social.framework in Frameworks */,
-				188840241C25E79F000899ED /* Accounts.framework in Frameworks */,
 				B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */,
+				53399E36196AB120ADBB793A /* Pods_EsteticaFacial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,13 +154,106 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		181FF7101C1A4D9B00313E57 /* Loop */ = {
+		18126CDC1CAACC6B002D26F7 /* Pacientes */ = {
 			isa = PBXGroup;
 			children = (
-				181FF7111C1A4DA900313E57 /* YPMagnifyingGlass.swift */,
-				181FF7121C1A4DA900313E57 /* YPMagnifyingView.swift */,
+				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
 			);
-			name = Loop;
+			name = Pacientes;
+			sourceTree = "<group>";
+		};
+		18126CDD1CAACC85002D26F7 /* Add / Update Pacientes */ = {
+			isa = PBXGroup;
+			children = (
+				1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */,
+			);
+			name = "Add / Update Pacientes";
+			sourceTree = "<group>";
+		};
+		18126CEF1CACC557002D26F7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				188840191C24375A000899ED /* Storyboards */,
+				18126CF81CACF9CD002D26F7 /* Modules */,
+				18126CF01CACC58A002D26F7 /* Core */,
+				18BAB9EB1C9B895700BD575B /* Model */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		18126CF01CACC58A002D26F7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				18126CF11CACC5F7002D26F7 /* CameraManager.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		18126CF81CACF9CD002D26F7 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				18126CF91CACF9D3002D26F7 /* Camera */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		18126CF91CACF9D3002D26F7 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				187524AD1C2A638700FA0A95 /* CameraVC.swift */,
+				18126CF61CACF9C4002D26F7 /* VerifyImageVC.swift */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		181C55A61C9C409400BC35AD /* SurgicalPlanning */ = {
+			isa = PBXGroup;
+			children = (
+				181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */,
+				181C55A71C9C409C00BC35AD /* Key */,
+				181C55A81C9C40A100BC35AD /* Value */,
+			);
+			name = SurgicalPlanning;
+			sourceTree = "<group>";
+		};
+		181C55A71C9C409C00BC35AD /* Key */ = {
+			isa = PBXGroup;
+			children = (
+				181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */,
+			);
+			name = Key;
+			sourceTree = "<group>";
+		};
+		181C55A81C9C40A100BC35AD /* Value */ = {
+			isa = PBXGroup;
+			children = (
+				181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */,
+			);
+			name = Value;
+			sourceTree = "<group>";
+		};
+		181C55A91C9C40AB00BC35AD /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				18BAB9F21C9BA4C400BD575B /* Image.swift */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		181C55AA1C9C40B300BC35AD /* Patient */ = {
+			isa = PBXGroup;
+			children = (
+				18BAB9EC1C9B983E00BD575B /* Patient.swift */,
+			);
+			name = Patient;
+			sourceTree = "<group>";
+		};
+		181C55AB1C9C40BC00BC35AD /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				18BAB9F51C9BA67D00BD575B /* Record.swift */,
+			);
+			name = Record;
 			sourceTree = "<group>";
 		};
 		183D2F4C1BD9E68D0033BDA3 /* Supporting Files */ = {
@@ -166,64 +263,48 @@
 				B81B4A681BC344AE002A306F /* Assets.xcassets */,
 				B81B4A6D1BC344AE002A306F /* Info.plist */,
 				18F6F1131BDD69E5008DA5B1 /* NetworkVerify */,
-				183D2F531BD9E83D0033BDA3 /* CoreData */,
 				18F6F1161BDDE632008DA5B1 /* Teste.swift */,
-				188840201C2441C9000899ED /* Pacifico.ttf */,
 			);
 			name = "Supporting Files";
 			path = EsteticaFacial;
 			sourceTree = "<group>";
 		};
-		183D2F531BD9E83D0033BDA3 /* CoreData */ = {
+		187AD4291CAF069F002EF035 /* Procedimentos Cirurgicos */ = {
 			isa = PBXGroup;
 			children = (
-				18FAA1C71BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift */,
-				18FAA1C81BDABCDC00EC3751 /* Paciente.swift */,
-				B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
-		186B920F1C504AF6007AD79A /* Classes Depreciadas */ = {
-			isa = PBXGroup;
-			children = (
-				181FF7101C1A4D9B00313E57 /* Loop */,
-				B8F7E0CC1BD429060053B948 /* CameraViewController.swift */,
-				B853927D1BD5D949000DCD91 /* LocalizarPontosViewController.swift */,
-				18A2C8061C2F1FAB000CA8C8 /* EditarImagemVC.swift */,
-			);
-			name = "Classes Depreciadas";
-			sourceTree = "<group>";
-		};
-		1883EA601BF10814000F22A3 /* Ficha Pacientes */ = {
-			isa = PBXGroup;
-			children = (
-				183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */,
-				1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */,
 				1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */,
-				187524AD1C2A638700FA0A95 /* CameraVC.swift */,
-				181C89D61C307ED3003FC62D /* ProcessarImagemVC.swift */,
 			);
-			name = "Ficha Pacientes";
+			name = "Procedimentos Cirurgicos";
 			sourceTree = "<group>";
 		};
-		188654921BDC09FE000190B1 /* Login */ = {
+		187AD42A1CAF06AC002EF035 /* Process Image */ = {
 			isa = PBXGroup;
 			children = (
-				1888401A1C244161000899ED /* ViewController.swift */,
-				1888401B1C244161000899ED /* LoginViewController.swift */,
-				1888401C1C244161000899ED /* SignUpViewController.swift */,
+				181C89D61C307ED3003FC62D /* ProcessImageVC.swift */,
 			);
-			name = Login;
+			name = "Process Image";
 			sourceTree = "<group>";
 		};
-		188840191C24375A000899ED /* Storyboard */ = {
+		1883EA601BF10814000F22A3 /* Ficha  */ = {
+			isa = PBXGroup;
+			children = (
+				18126CDC1CAACC6B002D26F7 /* Pacientes */,
+				18126CDD1CAACC85002D26F7 /* Add / Update Pacientes */,
+				187AD4291CAF069F002EF035 /* Procedimentos Cirurgicos */,
+				187AD42A1CAF06AC002EF035 /* Process Image */,
+			);
+			name = "Ficha ";
+			sourceTree = "<group>";
+		};
+		188840191C24375A000899ED /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				B81B4A621BC344AE002A306F /* Main.storyboard */,
 				B81B4A6A1BC344AE002A306F /* LaunchScreen.storyboard */,
+				18126CEB1CAB82D9002D26F7 /* SurgeryData.storyboard */,
+				18126CF31CACD9AD002D26F7 /* CameraScreen.storyboard */,
 			);
-			name = Storyboard;
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		188840221C245078000899ED /* AppDelegate */ = {
@@ -247,6 +328,18 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		18BAB9EB1C9B895700BD575B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				181C55AC1C9C43A400BC35AD /* RealmParse.swift */,
+				181C55AB1C9C40BC00BC35AD /* Record */,
+				181C55AA1C9C40B300BC35AD /* Patient */,
+				181C55A91C9C40AB00BC35AD /* Image */,
+				181C55A61C9C409400BC35AD /* SurgicalPlanning */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		18F6F1131BDD69E5008DA5B1 /* NetworkVerify */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,18 +351,18 @@
 		18FEC0431BFC09EC008AA555 /* Configurações */ = {
 			isa = PBXGroup;
 			children = (
-				18FEC03C1BFC08E0008AA555 /* AjustesVC.swift */,
-				18FEC0441BFC0A05008AA555 /* Header */,
+				18126CE61CAB05B3002D26F7 /* Settings.swift */,
 			);
 			name = "Configurações";
 			sourceTree = "<group>";
 		};
-		18FEC0441BFC0A05008AA555 /* Header */ = {
+		3C1E51D102712B0780A8A2D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				18FEC0401BFC09DF008AA555 /* UserImage.xib */,
+				24F0A10AE2D837209F9039E7 /* Pods-EsteticaFacial.debug.xcconfig */,
+				2822637C4A48596B8AC4E44B /* Pods-EsteticaFacial.release.xcconfig */,
 			);
-			name = Header;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
@@ -281,17 +374,9 @@
 				189B02FF1BF1897F00A516F4 /* Eureka.framework */,
 				B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */,
 				68C73DDC933BB7E09C4EF935 /* Pods.framework */,
+				F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		660B5CAB792193A1EBA37294 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CB630DCB19D6DC3F7B3B5FC2 /* Pods.debug.xcconfig */,
-				B2C72C9167826A097F31E065 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		B81B4A521BC344AE002A306F = {
@@ -303,7 +388,7 @@
 				B81B4A801BC344AE002A306F /* EsteticaFacialUITests */,
 				B81B4A5C1BC344AE002A306F /* Products */,
 				5B6EEE5922A447A0B8B835E0 /* Frameworks */,
-				660B5CAB792193A1EBA37294 /* Pods */,
+				3C1E51D102712B0780A8A2D6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -320,13 +405,11 @@
 		B81B4A5D1BC344AE002A306F /* EsteticaFacial */ = {
 			isa = PBXGroup;
 			children = (
-				188840191C24375A000899ED /* Storyboard */,
-				188654921BDC09FE000190B1 /* Login */,
-				1883EA601BF10814000F22A3 /* Ficha Pacientes */,
+				18126CEF1CACC557002D26F7 /* Classes */,
+				1883EA601BF10814000F22A3 /* Ficha  */,
 				18FEC0431BFC09EC008AA555 /* Configurações */,
-				189B03021BF195CE00A516F4 /* Helper */,
 				B829B8C51BE26881009909C0 /* CG */,
-				186B920F1C504AF6007AD79A /* Classes Depreciadas */,
+				189B03021BF195CE00A516F4 /* Helper */,
 			);
 			path = EsteticaFacial;
 			sourceTree = "<group>";
@@ -352,6 +435,7 @@
 		B829B8C51BE26881009909C0 /* CG */ = {
 			isa = PBXGroup;
 			children = (
+				18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */,
 				B829B8CA1BE26AD3009909C0 /* Algoritmos */,
 				B829B8C61BE26AB7009909C0 /* TratamentoEntrada.swift */,
 				B829B8C81BE26ACF009909C0 /* TecnicasPDI.swift */,
@@ -375,10 +459,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B81B4A861BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacial" */;
 			buildPhases = (
+				BA56F896191E96859A6A4DF2 /* Check Pods Manifest.lock */,
 				B81B4A571BC344AE002A306F /* Sources */,
 				B81B4A581BC344AE002A306F /* Frameworks */,
 				B81B4A591BC344AE002A306F /* Resources */,
-				4D4AA07868F644CD62CE3B32 /* Embed Pods Frameworks */,
+				5AA9EC9C209CF46265B8571F /* Embed Pods Frameworks */,
+				60BD78377BA7E7C12FEF28FF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -473,11 +559,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18126CF51CACD9AD002D26F7 /* CameraScreen.storyboard in Resources */,
+				18126CED1CAB82D9002D26F7 /* SurgeryData.storyboard in Resources */,
 				B81B4A6C1BC344AE002A306F /* LaunchScreen.storyboard in Resources */,
-				188840211C2441C9000899ED /* Pacifico.ttf in Resources */,
 				B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */,
 				B81B4A641BC344AE002A306F /* Main.storyboard in Resources */,
-				18FEC0421BFC09DF008AA555 /* UserImage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +584,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D4AA07868F644CD62CE3B32 /* Embed Pods Frameworks */ = {
+		5AA9EC9C209CF46265B8571F /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -510,7 +596,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60BD78377BA7E7C12FEF28FF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA56F896191E96859A6A4DF2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -520,36 +636,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1888401E1C244161000899ED /* LoginViewController.swift in Sources */,
-				181FF7131C1A4DA900313E57 /* YPMagnifyingGlass.swift in Sources */,
-				B81B4A671BC344AE002A306F /* EsteticaFacial.xcdatamodeld in Sources */,
-				B853927E1BD5D949000DCD91 /* LocalizarPontosViewController.swift in Sources */,
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
 				1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */,
 				187524AE1C2A638700FA0A95 /* CameraVC.swift in Sources */,
 				B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */,
-				18FAA1C91BDABCDC00EC3751 /* Paciente+CoreDataProperties.swift in Sources */,
-				1888401D1C244161000899ED /* ViewController.swift in Sources */,
-				18FAA1CA1BDABCDC00EC3751 /* Paciente.swift in Sources */,
 				18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */,
-				181C89D71C307ED3003FC62D /* ProcessarImagemVC.swift in Sources */,
+				181C89D71C307ED3003FC62D /* ProcessImageVC.swift in Sources */,
 				B829B8C91BE26ACF009909C0 /* TecnicasPDI.swift in Sources */,
 				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
 				18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */,
+				181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */,
+				18BAB9EA1C9B7E3300BD575B /* LocalizarPontosViewController.swift in Sources */,
 				1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */,
+				18126CF21CACC5F7002D26F7 /* CameraManager.swift in Sources */,
+				181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */,
+				18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */,
 				B8AFADA11BE8DF5F000EF30A /* LocalizadorFrontal.swift in Sources */,
 				18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */,
+				18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */,
 				B829B8C71BE26AB7009909C0 /* TratamentoEntrada.swift in Sources */,
-				181FF7141C1A4DA900313E57 /* YPMagnifyingView.swift in Sources */,
-				B8F7E0CD1BD429060053B948 /* CameraViewController.swift in Sources */,
-				18A2C8071C2F1FAB000CA8C8 /* EditarImagemVC.swift in Sources */,
 				189B03041BF1964500A516F4 /* Helpers.swift in Sources */,
-				1888401F1C244161000899ED /* SignUpViewController.swift in Sources */,
+				18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */,
 				1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */,
 				181FF7161C1A657E00313E57 /* Protocols.swift in Sources */,
+				18126CE71CAB05B3002D26F7 /* Settings.swift in Sources */,
 				18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */,
 				B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */,
-				18FEC03D1BFC08E0008AA555 /* AjustesVC.swift in Sources */,
+				181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
+				181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
+				18126CF71CACF9C4002D26F7 /* VerifyImageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +672,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181C559E1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */,
+				18BAB9F41C9BA4C400BD575B /* Image.swift in Sources */,
 				B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */,
+				18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */,
+				181C55A51C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
+				18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */,
+				181C55A11C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
+				181C55AE1C9C43A400BC35AD /* RealmParse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +707,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		18126CEB1CAB82D9002D26F7 /* SurgeryData.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18126CEC1CAB82D9002D26F7 /* Base */,
+			);
+			name = SurgeryData.storyboard;
+			sourceTree = "<group>";
+		};
+		18126CF31CACD9AD002D26F7 /* CameraScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18126CF41CACD9AD002D26F7 /* Base */,
+			);
+			name = CameraScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		B81B4A621BC344AE002A306F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -688,7 +826,7 @@
 		};
 		B81B4A871BC344AE002A306F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB630DCB19D6DC3F7B3B5FC2 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 24F0A10AE2D837209F9039E7 /* Pods-EsteticaFacial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -714,7 +852,7 @@
 		};
 		B81B4A881BC344AE002A306F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2C72C9167826A097F31E065 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 2822637C4A48596B8AC4E44B /* Pods-EsteticaFacial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -820,19 +958,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		B81B4A651BC344AE002A306F /* EsteticaFacial.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				B81B4A661BC344AE002A306F /* EsteticaFacial.xcdatamodel */,
-			);
-			currentVersion = B81B4A661BC344AE002A306F /* EsteticaFacial.xcdatamodel */;
-			path = EsteticaFacial.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = B81B4A531BC344AE002A306F /* Project object */;
 }

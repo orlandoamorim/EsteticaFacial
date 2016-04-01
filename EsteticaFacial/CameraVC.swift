@@ -10,116 +10,72 @@ import UIKit
 import AVFoundation
 import KYShutterButton
 import TOCropViewController
+import AssetsLibrary
+import DeviceKit
 
+class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
-class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate, NovoPacienteDelegate{
+    // MARK: - Constants
+    
+    var delegate: RecordImageDelegate! = nil
+    var imageType:ImageTypes = .Front
 
-    @IBOutlet var cameraView: UIView!
-    @IBOutlet weak var libraryImages: UIButton!
-    @IBOutlet weak var cameraButton: KYShutterButton!
-    @IBOutlet weak var cancelarBtn: UIButton!
-    @IBOutlet weak var cameraToolbar: UIToolbar!
-    
-    var captureSession: AVCaptureSession?
-    var stillImageOutput: AVCaptureStillImageOutput?
-    var previewLayer: AVCaptureVideoPreviewLayer?
-    
-    var capturedImage: UIImageView = UIImageView()
-    var imageTypesSelected:imageTypes = .Frontal
-    var imageGetFrom:imageGet = .Camera
-    
-    var dicionario: [String:NSValue]?
-    var pontosFrontalFrom:pontosFrontalType = .Nil
-    var pontosPerfilFrom:pontosPerfilType = .Nil
-    var pontosNasalFrom:pontosNasalType = .Nil
-    
-    var flashBtn:UIBarButtonItem = UIBarButtonItem()
-    var imagemGuiaBtn:UIBarButtonItem = UIBarButtonItem()
-    var spaceButton:UIBarButtonItem = UIBarButtonItem()
-    
-    var delegate: NovoPacienteDelegate! = nil
-    
-    var imageGuiaState:Bool = Bool()
+    let cameraManager = CameraManager()
     var cropViewController = TOCropViewController()
+    let library:ALAssetsLibrary = ALAssetsLibrary()
+    
+    var capturedImage: UIImage?
 
+    // MARK: - @IBOutlets
+    
+    @IBOutlet var cameraView: UIView!
+    @IBOutlet weak var cameraBtn: UIButton!
+    @IBOutlet weak var libraryImages: UIButton!
+    @IBOutlet weak var flashBtn: UIButton!
+    @IBOutlet weak var helpImageBtn: UIButton!
+    
+    @IBOutlet weak var cameraToolbar: UIToolbar!
+    @IBOutlet weak var cancelBtn: UIButton!
 
+    
+    var flashBarBtn:UIBarButtonItem = UIBarButtonItem()
+    var helpImageBarBtn:UIBarButtonItem = UIBarButtonItem()
+    var spaceBarBtn:UIBarButtonItem = UIBarButtonItem()
+    
+    enum HelpImageState {
+        case On, Off
+    }
+    var helpImageState:HelpImageState = .Off
+
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return UIStatusBarAnimation.Slide
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imageGuiaState = true
-        Helpers.inicializeImageView(type: false, view:self.cameraView, imageTypesSelected: self.imageTypesSelected, x: nil, y: nil, width: nil, height: nil)
-        
-        self.flashBtn = UIBarButtonItem(image: UIImage(named: "FlashOff"), style: UIBarButtonItemStyle.Done, target: self, action: "flashState:")
-        self.spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        self.imagemGuiaBtn = UIBarButtonItem(image: UIImage(named: "userFavi-32"), style: UIBarButtonItemStyle.Done, target: self, action: "imagemGuiaState:")
-        flashBtn.tintColor = UIColor.whiteColor()
-        imagemGuiaBtn.tintColor = UIColor.orangeColor()
-        
-        cameraToolbar.setItems([flashBtn, spaceButton, imagemGuiaBtn], animated: true)
-        
 
-        self.libraryImages.addTarget(self, action: "getLibraryImages:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.cameraButton.addTarget(self, action: "takePhoto:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.cancelarBtn.addTarget(self, action: "dismissView:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        
-        //**************//
-//        print(imagemGuia.frame.size)
-        
-        //**************//
+        setLayout()
+        setCameraAjusts()
+        print(imageType)
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if Platform.isSimulator {
-            print("NOTE: Simulador nao possui camera.")
-        }else{
-            previewLayer!.frame = cameraView.bounds
-        }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        cameraManager.resumeCaptureSession()
+        
         Helpers().getLatestPhotos { (images) -> () in
             self.libraryImages.setBackgroundImage(images[0], forState: UIControlState.Normal)
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        captureSession = AVCaptureSession()
-        captureSession!.sessionPreset = AVCaptureSessionPreset1920x1080
-        
-        let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
-        var error: NSError?
-        var input: AVCaptureDeviceInput!
-        do {
-            input = try AVCaptureDeviceInput(device: backCamera)
-        } catch let error1 as NSError {
-            error = error1
-            input = nil
-        }
-        
-        if error == nil && captureSession!.canAddInput(input) {
-            captureSession!.addInput(input)
-            
-            stillImageOutput = AVCaptureStillImageOutput()
-            stillImageOutput!.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-            if captureSession!.canAddOutput(stillImageOutput) {
-                captureSession!.addOutput(stillImageOutput)
-                
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
-                previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.Portrait
-                cameraView.layer.addSublayer(previewLayer!)
-                
-                captureSession!.startRunning()
-            }
-        }
-        
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
+        cameraManager.stopCaptureSession()
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,37 +83,136 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         // Dispose of any resources that can be recreated.
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
-    }
-    
-    func takePhoto(sender: KYShutterButton) {
-        if let videoConnection = stillImageOutput!.connectionWithMediaType(AVMediaTypeVideo) {
-            videoConnection.videoOrientation = AVCaptureVideoOrientation.Portrait
-            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(sampleBuffer, error) in
-                if (sampleBuffer != nil) {
-                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                    let imagem = TratamentoEntrada.corrigir_orientacao(UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right))
-                    
-//                    let x_crop = imagem.size.width*self.imagemGuia.frame.origin.x/(self.previewLayer?.frame.width)!
-//                    let y_crop = imagem.size.height*self.imagemGuia.frame.origin.y/(self.previewLayer?.frame.height)!
-//                    let width_crop = imagem.size.width*self.imagemGuia.frame.size.width/(self.previewLayer?.frame.width)!
-//                    let height_crop = imagem.size.height*self.imagemGuia.frame.size.height/(self.previewLayer?.frame.height)!
-//                    
-//                    self.capturedImage.image = TratamentoEntrada.recortar_imagem(imagem, rect: CGRectMake(x_crop, y_crop, width_crop, height_crop))
-                    
-                    self.imageGetFrom = .Camera
-                    self.captureSession?.stopRunning()
-                    self.inicializeCropViewController(imagem)
+    func setLayout() {
+        if !Device().isPad {
+            self.flashBarBtn = UIBarButtonItem(image: UIImage(named: "FlashOff"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(CameraVC.flashState))
+            self.spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+            
+            self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
+            
+            
+            cameraToolbar.setItems([flashBarBtn, spaceBarBtn, helpImageBarBtn], animated: true)
+            
+        }else{
+            
+            self.helpImageBtn.setImage(UIImage(named: "modelOffIcon"), forState: UIControlState.Normal)
+            self.helpImageBtn.addTarget(self, action: #selector(imagemGuiaState), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            self.flashBtn.addTarget(nil, action: #selector(CameraVC.flashState) , forControlEvents: UIControlEvents.TouchUpInside)
+            
+        }
+        let imageTypeCrop:[ImageTypes] = [.Front, .ProfileRight, .Nasal]
 
+        if !imageTypeCrop.contains(imageType) {
+            print("ENTROU ERRO")
+            if Device().isPad {
+                self.helpImageBtn.enabled = false
+            }else{
+                self.helpImageBarBtn.enabled = false
+            }
+        }
+        
+        self.cameraBtn.setImage(UIImage(named:"cameraButton" ), forState: UIControlState.Normal)
+        self.cameraBtn.setImage(UIImage(named:"cameraButtonHighlighted" ), forState: UIControlState.Highlighted)
+        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
+//        Helpers.inicializeImageView(type: false, view:self.cameraView, imageTypesSelected: self.imageType, x: nil, y: nil, width: nil, height: nil)
+        
+        
+        self.libraryImages.addTarget(self, action: #selector(CameraVC.getLibraryImages(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.cameraBtn.addTarget(self, action: #selector(takePhoto), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.cancelBtn.addTarget(self, action: #selector(dismiss), forControlEvents: UIControlEvents.TouchUpInside)
+        
+    }
+    
+    func setCameraAjusts(){
+        cameraManager.showAccessPermissionPopupAutomatically = true
+        
+        let currentCameraState = cameraManager.currentCameraStatus()
+        print(currentCameraState)
+        if currentCameraState == .AccessDenied {
+
+        } else if currentCameraState == .NoDeviceFound {
+            
+        } else if currentCameraState == .NotDetermined {
+
+        } else if currentCameraState == .Ready {
+            addCameraToView()
+        }
+        if !cameraManager.hasFlash {
+            
+            if Device().isPad {
+                self.flashBtn.hidden = true
+            }else{
+                self.cameraToolbar.setItems([spaceBarBtn, helpImageBarBtn], animated: true)
+            }
+        }
+    }
+    
+    private func addCameraToView(){
+        cameraManager.addPreviewLayerToView(cameraView, newCameraOutputMode: CameraOutputMode.StillImage)
+    }
+    
+    func dismiss() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
+    internal func rotate() {
+        let rotation = currentRotation()
+        let rads = CGFloat(radians(rotation))
+        
+        UIView.animateWithDuration(0.3) {
+            self.cameraBtn.transform = CGAffineTransformMakeRotation(rads)
+            self.libraryImages.transform = CGAffineTransformMakeRotation(rads)
+            
+            self.view.subviews.forEach ({
+                if $0 is UIImageView {
+                    $0.transform = CGAffineTransformMakeRotation(rads)
                 }
             })
+        }
+    }
+    
+    internal func radians(degrees: Double) -> Double {
+        return degrees / 180 * M_PI
+    }
+    
+    internal func currentRotation() -> Double {
+        var rotation: Double = 0
+        
+        if UIDevice.currentDevice().orientation == .LandscapeLeft {
+            rotation = 90
+        } else if UIDevice.currentDevice().orientation == .LandscapeRight {
+            rotation = 270
+        } else if UIDevice.currentDevice().orientation == .PortraitUpsideDown {
+            rotation = 180
+        }
+        
+        return rotation
+    }
+    
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
+    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.Portrait
+//    }
+    
+    func takePhoto() {
+        switch (cameraManager.cameraOutputMode) {
+        case .StillImage:
+            cameraManager.capturePictureWithCompletition({ (image, error) -> Void in
+                self.capturedImage = image
+                print(image)
+                self.performSegueWithIdentifier("VerifyImageSegue", sender: nil)
+            })
+        case .VideoWithMic, .VideoOnly:
+            return
         }
     }
 
@@ -177,155 +232,111 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image: UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        self.capturedImage.image = image
-        imageGetFrom = .Biblioteca
+        self.capturedImage = image
+        print(image)
         picker.dismissViewControllerAnimated(true) { () -> Void in
-            self.inicializeCropViewController(image)
+            self.performSegueWithIdentifier("VerifyImageSegue", sender: nil)
         }
     }
     
-    func inicializeCropViewController(image: UIImage){
-//        UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
-//        UIDevice.currentDevice().
-        cropViewController = TOCropViewController(image: image)
-        
-        cropViewController.delegate = self
-//        cropViewController.toolbar.resetButtonEnabled = false
-        cropViewController.defaultAspectRatio =  TOCropViewControllerAspectRatio.RatioSquare
-//        cropViewController.lockedAspectRatio = true
-//        cropViewController.cropView.aspectLockEnabled = false
-//        cropViewController.cropView.l
-        print(cropViewController.toolbarPosition.rawValue)
-        switch cropViewController.toolbarPosition.rawValue {
-        case 0: print("90")
-        case 1: print("180")
-        case 2: print("360")
-        case 3: print("ihh")
-        default: print("NADA")
-        }
-        
-        cropViewController.toolbar.resetButton.hidden = true
-        cropViewController.toolbar.clampButton.hidden = true
-        cropViewController.cropView.cropBoxResizeEnabled = false
-        cropViewController.toolbar.rotateButton.addTarget(self, action: "ajust", forControlEvents: UIControlEvents.TouchUpInside)
-        self.presentViewController(cropViewController, animated: true) { () -> Void in
-            self.ajust()
-        }
-
-
-        
-    }
-    
-    func ajust(){
-        Helpers.removeImageView(cropViewController.cropView)
-        TOCropViewControllerAspectRatio.RatioSquare
-        Helpers.inicializeImageView(type: true, view:cropViewController.cropView, imageTypesSelected: imageTypesSelected, x: cropViewController.cropView.cropBoxFrame.origin.x, y: cropViewController.cropView.cropBoxFrame.origin.y, width: cropViewController.cropView.cropBoxFrame.size.width, height: cropViewController.cropView.cropBoxFrame.size.height)
-        
-    }
+//    func inicializeCropViewController(image: UIImage){
+//        cropViewController = TOCropViewController(image: image)
+//        
+//        cropViewController.delegate = self
+//        cropViewController.defaultAspectRatio =  TOCropViewControllerAspectRatio.RatioSquare
+//        cropViewController.toolbar.resetButton.hidden = true
+//        cropViewController.toolbar.clampButton.hidden = true
+//        cropViewController.cropView.cropBoxResizeEnabled = false
+//        cropViewController.toolbar.rotateButton.addTarget(self, action: #selector(CameraVC.ajust), forControlEvents: UIControlEvents.TouchUpInside)
+//        self.presentViewController(cropViewController, animated: true) { () -> Void in
+//            self.ajust()
+//        }
+//
+//
+//        
+//    }
+//    
+//    func ajust(){
+//        Helpers.removeImageView(cropViewController.cropView)
+//        TOCropViewControllerAspectRatio.RatioSquare
+//        Helpers.inicializeImageView(type: true, view:cropViewController.cropView, imageTypesSelected: imageType, x: cropViewController.cropView.cropBoxFrame.origin.x, y: cropViewController.cropView.cropBoxFrame.origin.y, width: cropViewController.cropView.cropBoxFrame.size.width, height: cropViewController.cropView.cropBoxFrame.size.height)
+//        
+//    }
     
     
-    func cropViewController(cropViewController: TOCropViewController!, didCropToImage image: UIImage!, withRect cropRect: CGRect, angle: Int) {
-
-        cropViewController.dismissViewControllerAnimated(true) { () -> Void in
-            
-            self.capturedImage.image = image
-            
-//            print("****")
-//            print("x -> \(cropViewController.cropView.cropBoxFrame.origin.x) || y -> \(cropViewController.cropView.cropBoxFrame.origin.y)")
-//            print("****")
-//            print("cropBoxFrame -> \(cropViewController.cropView.cropBoxFrame.size)")
-//            print("--")
-//            print("image.size -> \(image.size)")
-//            print("--")
-//            print(cropRect)
-//            print("--")
-//            print(angle)
-//            print("****")
-            
-            self.performSegueWithIdentifier("PontosSegue", sender: nil)
-        }
-        
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
-        if segue.identifier == "PontosSegue" && self.capturedImage.image != nil{
-            if let processImagemVC = segue.destinationViewController as? ProcessarImagemVC{
-                processImagemVC.delegate = self
-                
-                processImagemVC.imageGetFrom = self.imageGetFrom
-                processImagemVC.imageTypesSelected = self.imageTypesSelected
-                
-                processImagemVC.image = self.capturedImage.image!
-                processImagemVC.dicionario = self.dicionario
-                
-                processImagemVC.pontosFrontalFrom = self.pontosFrontalFrom
-                processImagemVC.pontosPerfilFrom = self.pontosPerfilFrom
-                processImagemVC.pontosNasalFrom = self.pontosNasalFrom
-            }
-        }
-    }
-    
-    
-    func flashState(button: UIBarButtonItem) {
-        let avDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-
-        // check if the device has torch
-        if avDevice.hasTorch {
-            // lock your device for configuration
-            do {
-                _ = try avDevice.lockForConfiguration()
-            } catch {
-                print("NOTE: Simulador nao possui flash.")
-            }
+        if segue.identifier == "VerifyImageSegue" && self.capturedImage != nil{
+            let controller = segue.destinationViewController as! VerifyImageVC
             
-            // check if your torchMode is on or off. If on turns it off otherwise turns it on
-            if avDevice.torchActive {
-                avDevice.torchMode = AVCaptureTorchMode.Off
-                self.flashBtn.image = UIImage(named: "FlashOff")
-                flashBtn.tintColor = UIColor.whiteColor()
-
-            } else {
-                // sets the torch intensity to 100%
-                do {
-                    _ = try avDevice.setTorchModeOnWithLevel(1.0)
-                } catch {
-                    print("NOTE: Simulador nao possui flash.")
-                }
-                self.flashBtn.image = UIImage(named: "FlashOn")
-                flashBtn.tintColor = UIColor.yellowColor()
+            controller.delegate = self
+            controller.capturedImage = self.capturedImage
+            controller.imageType = self.imageType
+        }
+        
+    }
+    
+    
+    func flashState() {
+        switch (cameraManager.changeFlashMode()) {
+        case .Off:
+            if Device().isPad{
+                self.flashBtn.setImage(UIImage(named: "flashOffIcon"), forState: UIControlState.Normal)
+            }else{
+                self.flashBarBtn.image = UIImage(named: "flashOffIcon")
             }
-            // unlock your device
-            avDevice.unlockForConfiguration()
+        case .On:
+            if Device().isPad{
+                self.flashBtn.setImage(UIImage(named: "flashOnIcon"), forState: UIControlState.Normal)
+            }else{
+                self.flashBarBtn.image = UIImage(named: "flashOnIcon")
+            }
+        case .Auto:
+            if Device().isPad{
+                self.flashBtn.setImage(UIImage(named: "flashAutoIcon"), forState: UIControlState.Normal)
+            }else{
+                self.flashBarBtn.image = UIImage(named: "flashAutoIcon")
+            }
         }
-
     }
     
-    func imagemGuiaState(button: UIBarButtonItem) {
-        if imageGuiaState == true {
-            self.imageGuiaState = false
-            self.imagemGuiaBtn.tintColor = UIColor.whiteColor()
+    func imagemGuiaState() {
+        if helpImageState == .On {
+            helpImageState = .Off
+            if Device().isPad{
+                self.helpImageBtn.setImage(UIImage(named: "modelOffIcon"), forState: UIControlState.Normal)
+            }else{
+                self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
+            }
             Helpers.removeImageView(cameraView)
-        }else{
-            self.imageGuiaState = true
-            self.imagemGuiaBtn.tintColor = UIColor.orangeColor()
-            Helpers.inicializeImageView(type: false, view: self.cameraView, imageTypesSelected: self.imageTypesSelected, x: nil, y: nil, width: nil, height: nil)
+        }else if helpImageState == .Off{
+            helpImageState = .On
+
+            if Device().isPad{
+                self.helpImageBtn.setImage(UIImage(named: "modelOnIcon"), forState: UIControlState.Normal)
+            }else{
+                self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOnIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
+            }
+            Helpers.inicializeImageView(type: false, view: self.cameraView, imageTypes: self.imageType)
         }
-    }
-
-    
-    func dismissView(sender: UIButton) {
-        captureSession?.stopRunning()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func atribuir_imagem(imagem: UIImage, imageTypesSelected: imageTypes) {
-        self.delegate.atribuir_imagem(imagem, imageTypesSelected: imageTypesSelected)
-    }
-    
-    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected: imageTypes, pontosFrontalFrom: pontosFrontalType, pontosPerfilFrom: pontosPerfilType, pontosNasalFrom: pontosNasalType) {
-        self.delegate.atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected, pontosFrontalFrom: pontosFrontalFrom, pontosPerfilFrom: pontosPerfilFrom, pontosNasalFrom: pontosNasalFrom)
-
     }
 
 }
+
+extension CameraVC: ImageVerification{
+    
+    func imageVerification(image image: UIImage?, ImageVerify: ImageVerificationType) {
+        switch ImageVerify {
+        case .Retake:
+            self.capturedImage = image
+            return
+        case .Ok:
+            print("AQUI")
+            self.delegate.updateData(image: image!, ImageType: self.imageType)
+            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            
+        }
+    }
+}
+

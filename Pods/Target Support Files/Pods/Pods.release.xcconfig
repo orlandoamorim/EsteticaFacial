@@ -1,9 +1,0 @@
-CLANG_MODULES_AUTOLINK = YES
-EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Bolts.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DeviceKit.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Eureka.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FBSDKCoreKit.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FBSDKLoginKit.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/GPUImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/KYShutterButton.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Parse.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ParseCrashReporting.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ParseFacebookUtilsV4.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ParseTwitterUtils.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ParseUI.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SCLAlertView.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SwiftyDrop.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/TOCropViewController.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -ObjC -framework "Bolts" -framework "DeviceKit" -framework "Eureka" -framework "FBSDKCoreKit" -framework "FBSDKLoginKit" -framework "GPUImage" -framework "KYShutterButton" -framework "Parse" -framework "ParseCrashReporting" -framework "ParseFacebookUtilsV4" -framework "ParseTwitterUtils" -framework "ParseUI" -framework "SCLAlertView" -framework "SwiftyDrop" -framework "TOCropViewController"
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
-PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods
-PODS_ROOT = ${SRCROOT}/Pods

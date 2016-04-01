@@ -145,13 +145,15 @@ class Helpers: NSObject{
                 anyObjectDict[key] = data
             }else if let teste = anyDict[key]! as? [String]{
                 anyObjectDict[key] = teste
+            }else if let arrayStrings = anyDict[key]! as? Set<String> {
+                anyObjectDict[key] = getArrayFromSet(arrayStrings)
             }
         }
         return anyObjectDict
     }
     
     /**
-    Converte um diconario [String:Any?]  para [Any].
+    Converte um diconario [String:Any?]  para [String: Any].
     
     - Parameter anyDict: [String: Any?]
     
@@ -170,6 +172,8 @@ class Helpers: NSObject{
                 anyToAnyDict[key] = bool
             }else if let data = anyDict[key]! as? NSDate {
                 anyToAnyDict[key] = data
+            }else if let arrayStrings = anyDict[key]! as? Set<String> {
+                anyToAnyDict[key] = getArrayFromSet(arrayStrings)
             }
         }
         
@@ -182,7 +186,7 @@ class Helpers: NSObject{
     - Parameter anyDict: [String: Any?]
     
     - Returns:  **Bool**.
-    - Returns:  **String** Aplicacoes futuras.
+    - Returns:  **String** Usado para formular aviso para o usuario.
     */
     
     static func verifyFormValues(anyDict:[String: Any?]) -> (Bool,String) {
@@ -196,7 +200,7 @@ class Helpers: NSObject{
                 verifyFormValues[key] = bool
             }else if let data = anyDict[key]! as? NSDate {
                 verifyFormValues[key] = data
-            }else if key ==  "email" || key ==  "telefone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key == "notas"{
+            }else if key ==  "mail" || key ==  "phone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key ==  "surgeryRealized" || key == "note"{
                 continue
             }else{
                 return (false,key)
@@ -205,6 +209,33 @@ class Helpers: NSObject{
         
         return (true,"ok")
     }
+    
+    /**
+     Retorna um formulario padrao para os Planos Cirurgicos
+     
+     - Returns:  **[String : Any?]**.
+     */
+    
+    static func surgicalPlanningForm() -> [String : Any?] {
+//        let dicFormValues:[String : AnyObject] = ["enxerto_de_sheen": ["Tipo I Esmagado"], "suturas": ["Intradomal"], "raiz": ["Reducao Raspa"], "osso": ["Raspa"], "dorso": ["Nao Tocado"], "incisoes": ["Inter"], "transversa": ["Nenhum Transversa"], "abordagem": false, "lateral": ["Nenhum Lateral"], "medial": ["Nenhum Medial"], "enxerto_de_ponta": ["Tampao"], "liberacao": ["Resseccao Cefalica"], "cartilagem": ["Abaixada"],"abordagem_opcoes": "Retrograda"]
+        let dicFormValues:[String : AnyObject] = ["abordagem": false]
+        
+        var formArray: [String : Any?] = [String : Any?]()
+        
+        for (key, value) in dicFormValues {
+            if let string = value as? String {
+                formArray.updateValue(string , forKey: key)
+            }else if let bool = value as? Bool {
+                formArray.updateValue(bool , forKey: key)
+            }else if let stringArray = value as? [String] {
+                let set: NSSet = NSSet(array: stringArray)
+                formArray.updateValue(set as! Set<String>, forKey: key )
+            }
+            
+        }
+        return formArray
+    }
+    
     
     // MARK: - Dicionarios
     
@@ -215,11 +246,10 @@ class Helpers: NSObject{
 
     */
     
-    static func iniciar_dicionarios() -> (pontos_frontal:[String:NSValue]?, pontos_perfil:[String:NSValue]?, pontos_nasal:[String:NSValue]?, dicFormValues:[String : Any?]){
+    static func iniciar_dicionarios() -> (pontos_frontal:[String:NSValue]?, pontos_perfil:[String:NSValue]?, pontos_nasal:[String:NSValue]?){
         var pontos_frontal : [String:NSValue]?
         var pontos_perfil : [String:NSValue]?
         var pontos_nasal : [String:NSValue]?
-        var dicFormValues:[String : Any?] = [String : Any?]()
         
         pontos_frontal = [
             "Triquio":NSValue(CGPoint: CGPointMake(1005, 550)),
@@ -271,10 +301,7 @@ class Helpers: NSObject{
             "Juncao_Esquerda":NSValue(CGPoint: CGPointMake(200, 1588)),
             "Juncao_Direita":NSValue(CGPoint: CGPointMake(1683, 1657))]
         
-        
-        dicFormValues = ["enxerto_de_sheen": ["Tipo I Esmagado"], "suturas": ["Intradomal"], "raiz": ["Reducao Raspa"], "fechada": false, "osso": ["Raspa"], "dorso": ["Nao Tocado"], "incisoes": ["Inter"], "transversa": ["Nenhum Transversa"], "aberta": true, "lateral": ["Nenhum Lateral"], "medial": ["Nenhum Medial"], "enxerto_de_ponta": ["Tampao"], "liberacao": ["Resseccao Cefalica"], "cartilagem": ["Abaixada"],"fechada_opcoes": "Retrograda"]
-        
-        return (pontos_frontal,pontos_perfil,pontos_nasal,dicFormValues)
+        return (pontos_frontal,pontos_perfil,pontos_nasal)
     }
     
     /**
@@ -358,47 +385,47 @@ class Helpers: NSObject{
 
      */
     
-    static func compartilharFicha(parseObject : PFObject, VC:UIViewController) {
-        
-        var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
-        var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
-        
-        if let _ = parseObject.objectForKey("dic_plano_cirurgico") as? PFFile{
-            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
-                formValuesServidor = convertAnyToAnyObject(formValues)
-                }, resultBlockDic: { (dicFormValues) -> Void in
-                    dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
-                    
-                    let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
-                    let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
-                    let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
-                    let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
-                    let Item5 = "* Plano Cirurgico: \(dicFormValuesServidor)"
-                    let Item6 = ""
-                    let Item7 = "| Dados via UFPI Estetica Facial |"
-                    
-                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
-                    VC.presentViewController(activityViewController, animated: true, completion: nil)
-                }) { (progress) -> Void in
-            }
-        }else{
-            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
-                formValuesServidor = convertAnyToAnyObject(formValues)
-                
-                let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
-                let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
-                let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
-                let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
-                let Item5 = "* Plano Cirurgico: \(convertAnyToAnyObject(Helpers.iniciar_dicionarios().dicFormValues))"
-                let Item6 = ""
-                let Item7 = "| Dados via UFPI Estetica Facial |"
-                
-                let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
-                VC.presentViewController(activityViewController, animated: true, completion: nil)
-
-                })
-        }
-    }
+//    static func compartilharFicha(parseObject : PFObject, VC:UIViewController) {
+//        
+//        var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
+//        var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
+//        
+//        if let _ = parseObject.objectForKey("dic_plano_cirurgico") as? PFFile{
+//            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+//                formValuesServidor = convertAnyToAnyObject(formValues)
+//                }, resultBlockDic: { (dicFormValues) -> Void in
+//                    dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
+//                    
+//                    let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
+//                    let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
+//                    let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
+//                    let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
+//                    let Item5 = "* Plano Cirurgico: \(dicFormValuesServidor)"
+//                    let Item6 = ""
+//                    let Item7 = "| Dados via UFPI Estetica Facial |"
+//                    
+//                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
+//                    VC.presentViewController(activityViewController, animated: true, completion: nil)
+//                }) { (progress) -> Void in
+//            }
+//        }else{
+//            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
+//                formValuesServidor = convertAnyToAnyObject(formValues)
+//                
+//                let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
+//                let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
+//                let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
+//                let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
+//                let Item5 = "* Plano Cirurgico: \(convertAnyToAnyObject(Helpers.surgicalPlanningForm()))"
+//                let Item6 = ""
+//                let Item7 = "| Dados via UFPI Estetica Facial |"
+//                
+//                let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
+//                VC.presentViewController(activityViewController, animated: true, completion: nil)
+//
+//                })
+//        }
+//    }
     
     func getLatestPhotos(completion completionBlock : ([UIImage] -> ()))   {
         let library = ALAssetsLibrary()
@@ -454,26 +481,29 @@ class Helpers: NSObject{
     }
     
 
-    static func inicializeImageView(type type:Bool, view: UIView, imageTypesSelected:imageTypes,x:CGFloat?,y:CGFloat?,width:CGFloat?,height:CGFloat?) {
+    static func inicializeImageView(type type:Bool, view: UIView, imageTypes:ImageTypes, cgRect: CGRect?=nil, x:CGFloat?=nil, y:CGFloat?=nil, width:CGFloat?=nil, height:CGFloat?=nil) {
         var imageViewObject :UIImageView!
         
-        print("x->\(x) | y->\(y) | width->\(width) | height-> \(height)")
         if type {
-            print("AQUI")
-            imageViewObject = UIImageView(frame:CGRectMake(x!, y!, width!, height!))
+//            imageViewObject = UIImageView(frame:CGRectMake(x!, y!, width!, height!))
+            print(cgRect!)
+            imageViewObject = UIImageView(frame:cgRect!)
+
         }else{
             imageViewObject = inicializeImageViewFrame()
         }
         
         imageViewObject.contentMode = UIViewContentMode.ScaleAspectFit
         
-        switch imageTypesSelected {
-        case.Frontal:   imageViewObject.image = UIImage(named: "modelo_frontal")
-        case.Perfil:    imageViewObject.image = UIImage(named: "modelo_perfil")
+        switch imageTypes {
+        case.Front:   imageViewObject.image = UIImage(named: "modelo_frontal")
+        case.ProfileRight:    imageViewObject.image = UIImage(named: "modelo_perfil")
+        case.ProfileLeft:    imageViewObject.image = nil
+        case.ObliqueRight:    imageViewObject.image = nil
+        case.ObliqueLeft:    imageViewObject.image = nil
         case.Nasal:     imageViewObject.image = UIImage(named: "modelo_nasal")
         }
         
-//        imageViewObject.layer.cornerRadius = 4
         imageViewObject.layer.masksToBounds = true
         imageViewObject.layer.borderWidth = 1
         imageViewObject.layer.borderColor = UIColor.whiteColor().CGColor
@@ -485,14 +515,51 @@ class Helpers: NSObject{
     static private func inicializeImageViewFrame() -> UIImageView {
         let device = Device()
         print(device)
-        if device == .Simulator(.iPhone4) || device == .Simulator(.iPhone4s) {
-            return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
-        }else if device == .Simulator(.iPhone5) || device == .Simulator(.iPhone5c) || device == .Simulator(.iPhone5s) {
-            return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0)) //
+        if device == .iPhone4 || device == .iPhone4s {
+            switch UIDevice.currentDevice().orientation{
+            case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+            default:                    return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))
+            }
+
+        }else if device == .iPhone5 || device == .iPhone5c || device == .iPhone5s {
+            switch UIDevice.currentDevice().orientation{
+            case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+            default:                    return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
+            }
+
         }else if device == .Simulator(.iPhone6) || device == .Simulator(.iPhone6s) {
-            return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0)) //
-        } else if device == .Simulator(.iPhone6Plus) || device == .Simulator(.iPhone6sPlus) {
-            return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            switch UIDevice.currentDevice().orientation{
+            case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0))
+            default:                    return UIImageView(frame:CGRectMake(14.0, 138.0, 347.0, 347.0))
+            }
+            
+        } else if device == .iPhone6Plus || device == .iPhone6sPlus {
+            switch UIDevice.currentDevice().orientation{
+            case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            default:                    return UIImageView(frame:CGRectMake(14.0, 153.0, 386.0, 386.0))
+            }
+            
+        } else if device == .iPad3 {
+            switch UIDevice.currentDevice().orientation{
+            case .Portrait:             return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            default:                    return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            }
+            
         }
         
         return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
@@ -502,4 +569,51 @@ class Helpers: NSObject{
     static func getArrayFromSet(set:NSSet)-> NSArray {
         return set.map ({ String($0) })
     }
+    
+    static func setTitle(title:String, subtitle:String) -> UIView {
+        //Create a label programmatically and give it its property's
+        let titleLabel = UILabel(frame: CGRectMake(0, 0, 0, 0)) //x, y, width, height where y is to offset from the view center
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.font = UIFont.boldSystemFontOfSize(17)
+        titleLabel.text = title
+        titleLabel.sizeToFit()
+        
+        //Create a label for the Subtitle
+        let subtitleLabel = UILabel(frame: CGRectMake(0, 18, 0, 0))
+        subtitleLabel.backgroundColor = UIColor.clearColor()
+        subtitleLabel.textColor = UIColor.lightGrayColor()
+        subtitleLabel.font = UIFont.systemFontOfSize(12)
+        subtitleLabel.text = subtitle
+        subtitleLabel.sizeToFit()
+        
+        // Create a view and add titleLabel and subtitleLabel as subviews setting
+        let titleView = UIView(frame: CGRectMake(0, 0, max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), 30))
+        
+        // Center title or subtitle on screen (depending on which is larger)
+        if titleLabel.frame.width >= subtitleLabel.frame.width {
+            var adjustment = subtitleLabel.frame
+            adjustment.origin.x = titleView.frame.origin.x + (titleView.frame.width/2) - (subtitleLabel.frame.width/2)
+            subtitleLabel.frame = adjustment
+        } else {
+            var adjustment = titleLabel.frame
+            adjustment.origin.x = titleView.frame.origin.x + (titleView.frame.width/2) - (titleLabel.frame.width/2)
+            titleLabel.frame = adjustment
+        }
+        
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(subtitleLabel)
+        
+        return titleView
+    }
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+//    let getImage =  UIImage(data: NSData(contentsOfURL: NSURL(string: self.remoteImage)))
+//    UIImageJPEGRepresentation(getImage, 100).writeToFile(imagePath, atomically: true)
+//    
+//    dispatch_async(dispatch_get_main_queue()) {
+//    self.image?.image = getImage
+//    return
+//    }
+//    }
 }

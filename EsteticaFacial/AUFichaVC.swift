@@ -11,182 +11,99 @@ import Parse
 import Eureka
 import SwiftyDrop
 import SCLAlertView
+import DeviceKit
 
-class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico, CameraViewDelegate {
+class AUFichaVC: FormViewController{
     
-    var parseObject:PFObject!
+    var record:Record!
     
     @IBOutlet weak var header: UIView!
-    //Camera BTN
-    @IBOutlet weak var btn_imagem_frontal: UIButton!
-    @IBOutlet weak var btn_imagem_perfil: UIButton!
-    @IBOutlet weak var btn_imagem_nasal: UIButton!
-    
-    var imagemFrontalServidor:UIImage = UIImage()
-    var imagemPerfilServidor:UIImage = UIImage()
-    var imagemNasalServidor:UIImage = UIImage()
     
     
-    var pontosFrontalServidor : [String:NSValue]?
-    var pontosPerfilServidor : [String:NSValue]?
-    var pontosNasalServidor : [String:NSValue]?
+    @IBOutlet weak var btnFront: UIButton!
+    @IBOutlet weak var btnProfileRight: UIButton!
+    @IBOutlet weak var btnNasal: UIButton!
     
-    //Verificadores para saber se os pontos foram atualizados pelo usuario
-    var pontosFrontalAtual : [String:NSValue]?
-    var pontosPerfilAtual : [String:NSValue]?
-    var pontosNasalAtual : [String:NSValue]?
+    @IBOutlet weak var btnObliqueRight: UIButton!
+    @IBOutlet weak var btnProfileLeft: UIButton!
+    @IBOutlet weak var btnObliqueLeft: UIButton!
     
-    var pontosFrontalFrom:pontosFrontalType = .Local
-    var pontosPerfilFrom:pontosPerfilType = .Local
-    var pontosNasalFrom:pontosNasalType = .Local
+    var frontPoints : [String:NSValue]?
+    var profileRightPoints : [String:NSValue]?
+    var nasalPoints : [String:NSValue]?
     
-    var formValuesServidor:[String : Any?] = [String : Any?]()
+    var sourceTypes: ImageRowSourceTypes = []
+    var imageURL: NSURL?
+    var showAction = ImageShowAction.Yes(style: .Default)
+    var clearAction = ImageClearAction.Yes(style: .Destructive)
+    
+//    private var _sourceType: UIImagePickerControllerSourceType = .Camera
     
     //Procedimentos Cirurgicos
-    var dicFormValuesServidor:[String : Any?] = [String : Any?]()
-    var dicFormValuesAtual:[String : Any?] = [String : Any?]()
-    
-    var imageTypesSelected:imageTypes = .Frontal
+    var preSurgicalPlanningForm:[String : Any?] = [String : Any?]()
+    var postSurgicalPlanningForm:[String : Any?] = [String : Any?]()
+
+    var imageType:ImageTypes = .Front
     var contentToDisplay:contentTypes = .Nil
+    var surgicalPlanning:SurgicalPlanningTypes = .PreSurgical
+    
+    var alertViewResponder: SCLAlertViewResponder?
     
     //--------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeForm()
-        
-        let iniciar_dicionarios = Helpers.iniciar_dicionarios()
-        
-        pontosFrontalServidor = iniciar_dicionarios.pontos_frontal
-        pontosFrontalAtual = iniciar_dicionarios.pontos_frontal
-        pontosPerfilServidor = iniciar_dicionarios.pontos_perfil
-        pontosPerfilAtual = iniciar_dicionarios.pontos_perfil
-        pontosNasalServidor = iniciar_dicionarios.pontos_nasal
-        pontosNasalAtual = iniciar_dicionarios.pontos_nasal
-        dicFormValuesServidor = iniciar_dicionarios.dicFormValues
-        dicFormValuesAtual = iniciar_dicionarios.dicFormValues
-        
-        self.imagemFrontalServidor = UIImage(named: "modelo_frontal")!
-        self.imagemPerfilServidor = UIImage(named: "modelo_perfil")!
-        self.imagemNasalServidor = UIImage(named: "modelo_nasal")!
-        
+        setButtons()
+        sourceTypes = .All
+        preSurgicalPlanningForm = Helpers.surgicalPlanningForm()
+        postSurgicalPlanningForm = Helpers.surgicalPlanningForm()
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        centroDeNotificacao.addObserver(self, selector: "noData", name: "noData", object: nil)
+        centroDeNotificacao.addObserver(self, selector: #selector(AUFichaVC.noData), name: "noData", object: nil)
         
         switch contentToDisplay {
         case .Adicionar:
             self.title = "Add Ficha"
             
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPressed:")
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: "getConfirmation")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.cancelPressed(_:)))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.getConfirmation))
             
         case .Atualizar:
-            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
-                self.formValuesServidor = formValues
-                }, resultBlockDic: { (dicFormValues) -> Void in
-                    self.dicFormValuesServidor = dicFormValues
-                    self.dicFormValuesAtual = dicFormValues
-                }, progressBlockDic: { (progress) -> Void in
+            for surgicalPlanning in record.surgicalPlanning {
+                if surgicalPlanning.type ==  false {
+                    self.preSurgicalPlanningForm = RealmParse.convertRealmSurgicalPlanningForm(surgicalPlanning)
+                }else if surgicalPlanning.type ==  true {
+                    self.postSurgicalPlanningForm = RealmParse.convertRealmSurgicalPlanningForm(surgicalPlanning)
+                }
+            }
+            
+            for image in record.image {
+                switch Int(image.imageType)! {
+                case ImageTypes.Front.hashValue :       self.btnFront.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                                                        if image.points != nil { self.frontPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
                     
-            })
-            form.setValues(self.formValuesServidor)
-            
-            self.tableView?.reloadData()
-            
-            
-            ParseConnection.getFromParseImgFrontal(parseObject
-                , resultBlockImage: { (data, error) -> Void in
-                    if error == nil {
-                        self.btn_imagem_frontal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
-                        self.imagemFrontalServidor = UIImage(data: data!)!
-                    }else{
-                        Drop.down("Erro ao baixar imagem frontal. Objeto nao encontrado.", state: .Error)
-                    }
-                }, progressBlockImage: { (progress) -> Void in
-                    if progress == 100.0{
-                        self.btn_imagem_frontal.enabled = true
-                    }else{
-                        self.btn_imagem_frontal.enabled = false
-                    }
+                case ImageTypes.ProfileRight.hashValue :self.btnProfileRight.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                                                        if image.points != nil { self.profileRightPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
                     
-                    print("Baixando |Imgem Frontal| -> \(progress!)")
-                }, resultBlockPontos: { (pontos, error) -> Void in
-                    if error == nil {
-                        self.pontosFrontalServidor = pontos
-                        self.pontosFrontalAtual = pontos
-                        self.pontosFrontalFrom = .Servidor
-                    }else{
-                        Drop.down("Erro ao baixar pontos frontal. Objeto nao encontrado.", state: .Error)
-                    }
-                    
-                }, progressBlockPontos: { (progress) -> Void in
-                    print("Baixando |Pontos Frontal| -> \(progress!)")
-            })
-            
-            
-            ParseConnection.getFromParseImgPerfil(parseObject
-                , resultBlockImage: { (data, error) -> Void in
-                    if error == nil {
-                        self.btn_imagem_perfil.setImage(UIImage(data: data!), forState: UIControlState.Normal)
-                        self.imagemPerfilServidor = UIImage(data: data!)!
-                    }else{
-                        Drop.down("Erro ao baixar imagem perfil. Objeto nao encontrado.", state: .Error)
-                    }
-                }, progressBlockImage: { (progress) -> Void in
-                    if progress == 100.0{
-                        self.btn_imagem_perfil.enabled = true
-                    }else{
-                        self.btn_imagem_perfil.enabled = false
-                    }
-                    print("Baixando |Imgem Perfil| -> \(progress!)")
-                }, resultBlockPontos: { (pontos, error) -> Void in
-                    if error == nil {
-                        self.pontosPerfilServidor = pontos
-                        self.pontosPerfilAtual = pontos
-                        self.pontosPerfilFrom = .Servidor
+                case ImageTypes.Nasal.hashValue :       self.btnNasal.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                                                        if image.points != nil { self.nasalPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
 
-                    }else{
-                        Drop.down("Erro ao baixar pontos perfil. Objeto nao encontrado.", state: .Error)
-                    }
-                    
-                }, progressBlockPontos: { (progress) -> Void in
-                    print("Baixando |Pontos Perfil| -> \(progress!)")
-            })
+                case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+
+                default:   print("ERRO")
+                }
+            }
             
-            ParseConnection.getFromParseImgNasal(parseObject
-                , resultBlockImage: { (data, error) -> Void in
-                    if error == nil {
-                        self.btn_imagem_nasal.setImage(UIImage(data: data!), forState: UIControlState.Normal)
-                        self.imagemNasalServidor = UIImage(data: data!)!
-                    }else{
-                        Drop.down("Erro ao baixar imagem nasal. Objeto nao encontrado.", state: .Error)
-                    }
-                }, progressBlockImage: { (progress) -> Void in
-                    if progress == 100.0{
-                        self.btn_imagem_nasal.enabled = true
-                    }else{
-                        self.btn_imagem_nasal.enabled = false
-                    }
-                    print("Baixando |Imgem Nasal| -> \(progress!)")
-                }, resultBlockPontos: { (pontos, error) -> Void in
-                    if error == nil {
-                        self.pontosNasalServidor = pontos
-                        self.pontosNasalAtual = pontos
-                        self.pontosNasalFrom = .Servidor
-                        
-                    }else{
-                        Drop.down("Erro ao baixar pontos nasal. Objeto nao encontrado.", state: .Error)
-                    }
-                    
-                }, progressBlockPontos: { (progress) -> Void in
-                    print("Baixando |Pontos Nasal| -> \(progress!)")
-            })
-            
-            
+            self.form.setValues(RealmParse.convertRealmRecordForm(record))
+            self.tableView?.reloadData()
             self.title = "Atualizar Ficha"
             
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: "getConfirmation")
+            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.noData)) : nil
+            
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.getConfirmation))
         case .Nil : noData()
         }
     }
@@ -197,96 +114,238 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     
     //--------------------
     func getConfirmation(){
-        let alert = SCLAlertView()
-        let results = Helpers.verifyFormValues(form.values(includeHidden: false))
+        let (verify, keyMissing) = Helpers.verifyFormValues(form.values(includeHidden: false))
         
-        if !results.0 {
-            alert.showInfo("UFPI", subTitle: "Campo obrigatorio \(results.1) nao foi preenchido", closeButtonTitle: "OK")
+        if !verify {
+            SCLAlertView().showInfo("UFPI", subTitle: "Campo obrigatorio \(keyMissing) nao foi preenchido", closeButtonTitle: "OK")
             return
         }
         
-        
-        let labelInfo:String?
         switch contentToDisplay {
-        case .Adicionar: labelInfo = "Adicionar"
-        case .Atualizar: labelInfo = "Atualizar"
-        case .Nil: labelInfo = "ERRO"
+        case .Adicionar: self.getFormValues()
+        case .Atualizar:
+            
+            let alertView = SCLAlertView()
+            
+            alertView.addButton("Atualizar") { () -> Void in
+                self.getFormValues()
+            }
+            alertView.addButton("Cancelar") { () -> Void in
+                print("cancelar")
+            }
+            alertView.showCloseButton = false
+            
+            alertView.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
+
+        case .Nil: SCLAlertView().showError("Ops...", subTitle: "Ocorreu algum erro :(", closeButtonTitle: "OK")
         }
         
-        alert.addButton(labelInfo!) { () -> Void in
-            self.getFormValues()
-        }
-        alert.addButton("Cancelar") { () -> Void in
-            print("cancelar")
-        }
-        alert.showCloseButton = false
 
-        alert.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
     }
     
     func getFormValues(){
-        let alert = SCLAlertView()
-
-        alert.addButton("Concluir em background...") { () -> Void in
-            alert.hideView()
-        }
-        alert.showCloseButton = false
-        alert.showWait("Carregando", subTitle: "Aguarde...", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
         
         switch contentToDisplay {
         case .Adicionar:
+            RealmParse.add(formValues: self.form.values(includeHidden: false),
+            preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd() )
             
-            ParseConnection.adicionarFicha(form.values(includeHidden: false)
-                , dicFormValues: self.dicFormValuesAtual
-                , imagemPerfil: self.btn_imagem_perfil.currentImage
-                , imagemFrontal: self.btn_imagem_frontal.currentImage
-                , imagemNasal: self.btn_imagem_nasal.currentImage
-                , pontosFrontalAtual: self.pontosFrontalAtual
-                , pontosPerfilAtual: self.pontosPerfilAtual
-                , pontosNasalAtual: self.pontosNasalAtual
-                , completion: { (sucesso, erro) -> Void in
-                    
-                    if erro == nil {
-                        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                            alert.hideView()
-                            alert.showCloseButton = true
-                            alert.showInfo("UFPI", subTitle: "Dados salvos com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                        })
-                    }else {
-                        alert.hideView()
-                        alert.showCloseButton = true
-                        alert.showError("UFPI", subTitle: "Algum erro ocorreu ao salvar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                    }
-                    
+            //images:[ImageTypes:(UIImage,[String:NSValue]?)]?=nil
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                let alertView = SCLAlertView()
+                alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha adicionada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
             })
-            return
+
         case .Atualizar:
-            ParseConnection.atualizarFicha(parseObject
-                , formValuesServidor: self.formValuesServidor, formValuesAtual: form.values(includeHidden: false)
-                , dicFormValuesServidor: self.dicFormValuesServidor, dicFormValuesAtual: self.dicFormValuesAtual
-                , imagemFrontalServidor: self.imagemFrontalServidor, imagemFrontalAtual: self.btn_imagem_frontal.currentImage
-                , imagemPerfilServidor: self.imagemPerfilServidor, imagemPerfilAtual: self.btn_imagem_perfil.currentImage
-                , imagemNasalServidor: self.imagemNasalServidor, imagemNasalAtual: self.btn_imagem_nasal.currentImage
-                , pontosFrontalServidor: self.pontosFrontalServidor, pontosFrontalAtual: self.pontosFrontalAtual
-                , pontosPerfilServidor: self.pontosPerfilServidor, pontosPerfilAtual: self.pontosPerfilAtual
-                , pontosNasalServidor: self.pontosNasalServidor, pontosNasalAtual: self.pontosNasalAtual
-                , completion: { (success, error) -> Void in
+            RealmParse.update(record: record, formValues: self.form.values(includeHidden: false),
+                preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayUpdate())
+            let alertView = SCLAlertView()
+            alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha atualizada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+            self.form.setValues(self.form.values(includeHidden: false))
+            self.tableView?.reloadData()
+
+        case .Nil : return
+        }
+    }
+    
+    func mountArrayAdd() -> [ImageTypes:(UIImage,[String:NSValue]?)]{
+        let btnArray = [self.btnFront, self.btnProfileRight, self.btnNasal, self.btnObliqueLeft, self.btnProfileLeft, self.btnObliqueRight]
+        var imageArray:[ImageTypes:(UIImage,[String:NSValue]?)] = [ImageTypes:(UIImage,[String:NSValue]?)]()
+        
+        for btn in btnArray {
+            if btn.currentImage != nil {
+                switch btn {
+                case self.btnFront:         imageArray.updateValue((btn.currentImage!, frontPoints != nil ? frontPoints : nil), forKey: .Front)
+                case self.btnProfileRight:  imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? frontPoints : nil), forKey: .ProfileRight)
+                case self.btnNasal:         imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? frontPoints : nil), forKey: .Nasal)
+                case self.btnObliqueLeft:   imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
+                case self.btnProfileLeft:   imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
+                case self.btnObliqueRight:  imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
+                default: print("ERRO mountArrayAdd()")
+                }
+            }
+        }
+        
+        return imageArray
+        
+    }
+    
+    func mountArrayUpdate() -> [ImageTypes:(UIImage?,[String:NSValue]?)]{
+        let btnArray = [self.btnFront, self.btnProfileRight, self.btnNasal, self.btnObliqueLeft, self.btnProfileLeft, self.btnObliqueRight]
+        var imageArray:[ImageTypes:(UIImage?,[String:NSValue]?)] = [ImageTypes:(UIImage?,[String:NSValue]?)]()
+        
+        for btn in btnArray {
+            if btn.currentImage != nil {
+                switch btn {
+                case self.btnFront:
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.Front.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    print("AQUI SIIIM")
+                                    imageArray.updateValue((btn.currentImage, frontPoints != nil ? frontPoints : nil), forKey: .Front)
+                                }else{
+                                    boo = true
+                                    imageArray.updateValue((nil, frontPoints != nil ? frontPoints : nil), forKey: .Front)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage, frontPoints != nil ? frontPoints : nil), forKey: .Front)
+                        }
+                    }
+
                     
-                    if error == nil {
-                        alert.hideView()
-                        alert.showCloseButton = true
-                        alert.showInfo("UFPI", subTitle: "Dados Atualizados com sucesso.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
-                    }else {
-                        alert.hideView()
-                        alert.showCloseButton = true
-                        alert.showError("UFPI", subTitle: "Algum erro ocorreu ao atualizar a ficha. Tente novamente em poucos instantes.", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                    
+                case self.btnProfileRight:
+                    
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.ProfileRight.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
+                                }else{
+                                    boo = true
+                                    imageArray.updateValue((nil, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
+                        }
+                    }
+                
+                    
+                case self.btnNasal:
+                    
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.Nasal.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
+                                }else{
+                                    boo = true
+                                    imageArray.updateValue((nil, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
+                        }
                     }
                     
-            })
-            
-            return
-            
-        case .Nil : return
+                case self.btnObliqueLeft:
+                    
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.ObliqueLeft.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
+                        }
+                    }
+                    
+                case self.btnProfileLeft:
+                    
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.ProfileLeft.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
+                        }
+                    }
+                    
+                case self.btnObliqueRight:
+                    
+                    if self.record != nil{
+                        var boo:Bool? = false
+                        for image in self.record.image {
+                            if Int(image.imageType) == ImageTypes.ObliqueRight.hashValue {
+                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
+                                    RealmParse.removeImage(image.path, record: self.record)
+                                    boo = true
+                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
+                                }
+                            }
+                        }
+                        if boo == false {
+                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
+                        }
+                    }
+                    
+                default: print("ERRO mountArrayUpdate()")
+                }
+            }else{
+                switch btn {
+                case self.btnFront:         verifyAndRemoveImage(.Front)
+                case self.btnProfileRight:  verifyAndRemoveImage(.ProfileRight)
+                case self.btnNasal:         verifyAndRemoveImage(.Nasal)
+                case self.btnObliqueLeft:   verifyAndRemoveImage(.ObliqueLeft)
+                case self.btnProfileLeft:   verifyAndRemoveImage(.ProfileLeft)
+                case self.btnObliqueRight:  verifyAndRemoveImage(.ObliqueRight)
+                    
+                default: print("ERRO mountArrayUpdate()")
+                }
+                
+            }
+        }
+        
+        return imageArray
+    }
+
+    func verifyAndRemoveImage(imageType: ImageTypes){
+        if self.record != nil{
+            for image in self.record.image {
+                if Int(image.imageType) == imageType.hashValue {
+                    if RealmParse.existImageFromPath(image.path){
+                        RealmParse.removeImage(image.path, record: self.record)
+                    }
+                }
+            }
         }
     }
     
@@ -300,25 +359,25 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             
             Section("Dados do Paciente")
             
-            <<< NameRow("nome") {
+            <<< NameRow("name") {
                 $0.title = "Nome:"
             }
             
-            <<< PickerInlineRow<String>("sexo") { (row : PickerInlineRow<String>) -> Void in
+            <<< PickerInlineRow<String>("sex") { (row : PickerInlineRow<String>) -> Void in
                 
                 row.title = "Sexo:"
                 row.options = ["Masculino", "Feminino"]
                 row.value = row.options[0]
             }
             
-            <<< PickerInlineRow<String>("etnia") { (row : PickerInlineRow<String>) -> Void in
+            <<< PickerInlineRow<String>("ethnic") { (row : PickerInlineRow<String>) -> Void in
                 
                 row.title = "Etnia:"
                 row.options = ["Caucasiano","Negróide","Asiático"]
                 row.value = row.options[0]
             }
             
-            <<< DateInlineRow("data_nascimento") {
+            <<< DateInlineRow("date_of_birth") {
                 $0.title = "Data de Nascimento:"
                 $0.value = NSDate()
                 let formatter = NSDateFormatter()
@@ -327,11 +386,11 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
                 $0.dateFormatter = formatter
             }
             
-            <<< EmailRow("email") {
+            <<< EmailRow("mail") {
                 $0.title = "E-mail:"
             }
             
-            <<< PhoneRow("telefone") {
+            <<< PhoneRow("phone") {
                 $0.title = "Telefone:"
             }
             
@@ -339,33 +398,34 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
             
             <<< ButtonRow("btn_plano_cirurgico") { (row: ButtonRow) -> Void in
                 row.title = "Plano Cirurgico"
-                row.presentationMode = .SegueName(segueName: "ProcedimentosCirurgicosSegue", completionCallback: nil)
+                row.presentationMode = PresentationMode.SegueName(segueName: "SurgeryPlanSegue", completionCallback: nil)
             }
             
-            <<< SwitchRow("cirurgia_realizada") {
+            <<< SwitchRow("surgeryRealized") {
                 $0.title = "Cirurgia Realizada?"
                 $0.value = false
                 
-                }.onChange { [weak self] in
-                    if $0.value == true {
-                        self?.form.rowByTag("btn_cirurgia_realizada")?.hidden = false
-                        self?.form.rowByTag("btn_cirurgia_realizada")?.updateCell()
-                    }else if $0.value == false {
-                        self?.form.rowByTag("btn_cirurgia_realizada")?.hidden = true
-                        self?.form.rowByTag("btn_cirurgia_realizada")?.updateCell()
-                    }
+            }
+            
+            <<< DateInlineRow("date_of_surgery") {
+                $0.hidden = "$surgeryRealized == false"
+                $0.title = "Data da Cirurgia:"
+                $0.value = NSDate()
+                let formatter = NSDateFormatter()
+                formatter.locale = .currentLocale()
+                formatter.dateStyle = .ShortStyle
+                $0.dateFormatter = formatter
             }
             
             <<< ButtonRow("btn_cirurgia_realizada") { (row: ButtonRow) -> Void in
-                row.title = "Dados da Cirurgia"
-                row.hidden = "$cirurgia_realizada == false"
-                
-                row.presentationMode = .SegueName(segueName: "ProcedimentosCirurgicosSegue", completionCallback: nil)
+                row.title = "Relatório Cirúgico"
+                row.hidden = "$surgeryRealized == false"
+                row.presentationMode = PresentationMode.SegueName(segueName: "SurgeryPlanSegue", completionCallback: nil)
             }
             
             +++ Section("Notas")
             
-            <<< TextAreaRow("notas") { $0.placeholder = "Este paciente..." }
+            <<< TextAreaRow("note") { $0.placeholder = "Este paciente..." }
     }
     
     //--------------------
@@ -374,6 +434,13 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
     // MARK: - Tela Sem Dados
     
     func noData(){
+        
+        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        imageView.image = UIImage(named: "LabInC")
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.sizeToFit()
+        
+        
         let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         
         messageLabel.text = "Clique em uma ficha para carregar os dados. "
@@ -383,7 +450,7 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
         messageLabel.sizeToFit()
         
-        self.tableView!.backgroundView = messageLabel
+        self.tableView!.backgroundView = imageView
         self.tableView!.backgroundView?.hidden = false
         self.tableView!.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -391,171 +458,161 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         
         self.form.removeAll()
         
+        self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = nil
         
         self.tableView!.reloadData()
-        self.title = "@UFPI"
+        self.title = nil
         
     }
     
     //--------------------
-    @IBAction func btnFrontal(sender: AnyObject) {
-        imageTypesSelected = .Frontal
-        let bonus = (sender is UITapGestureRecognizer ? true : false)
-        if !bonus {
-            if sender.state == UIGestureRecognizerState.Began{
-                if btn_imagem_frontal.currentImage != nil {
-                    showOptions(btn_imagem_frontal)
-                }else{
-                    performSegueWithIdentifier("SegueCamera", sender: nil)
-                }
-            }
-        }else {
-            if btn_imagem_frontal.currentImage != nil {
-                performSegueWithIdentifier("SegueShowImage", sender: nil)
-            }else{
-                performSegueWithIdentifier("SegueCamera", sender: nil)
-            }
-        }
-    }
-    @IBAction func btnPerfil(sender: AnyObject) {
-        imageTypesSelected = .Perfil
-        let bonus = (sender is UITapGestureRecognizer ? true : false)
-        if !bonus {
-            if sender.state == UIGestureRecognizerState.Began{
-                if btn_imagem_perfil.currentImage != nil {
-                    showOptions(btn_imagem_perfil)
-                }else{
-                    performSegueWithIdentifier("SegueCamera", sender: nil)
-                }
-            }
-        }else {
-            if btn_imagem_perfil.currentImage != nil {
-                performSegueWithIdentifier("SegueShowImage", sender: nil)
-            }else{
-                performSegueWithIdentifier("SegueCamera", sender: nil)
-            }
-        }
-    }
-    @IBAction func btnNasal(sender: AnyObject) {
-        imageTypesSelected = .Nasal
-        let bonus = (sender is UITapGestureRecognizer ? true : false)
-        if !bonus {
-            if sender.state == UIGestureRecognizerState.Began{
-                if btn_imagem_nasal.currentImage != nil {
-                    showOptions(btn_imagem_nasal)
-                }else{
-                    performSegueWithIdentifier("SegueCamera", sender: nil)
-                }
-            }
-        }else {
-            if btn_imagem_nasal.currentImage != nil {
-                performSegueWithIdentifier("SegueShowImage", sender: nil)
-            }else{
-                performSegueWithIdentifier("SegueCamera", sender: nil)
-            }
-        }
+    func setButtons() {
+        self.btnFront.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnProfileRight.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnNasal.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+
+        self.btnObliqueLeft.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnProfileLeft.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnObliqueRight.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    func showOptions(button: UIButton!){
-        let alertController = UIAlertController(title: "Analise Facial", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+//    @IBAction func btnFrontal(sender: AnyObject) {
+//        imageTypesSelected = .Frontal
+//        self.showOptions(btn_imagem_frontal)
+//        let bonus = (sender is UITapGestureRecognizer ? true : false)
+//        if !bonus {
+//            if sender.state == UIGestureRecognizerState.Began{
+//                if btn_imagem_frontal.currentImage != nil {
+//                    //showOptions(btn_imagem_frontal)
+//                }else{
+//                    performSegueWithIdentifier("SegueCamera", sender: nil)
+//                }
+//            }
+//        }else {
+//            if btn_imagem_frontal.currentImage != nil {
+//                performSegueWithIdentifier("SegueShowImage", sender: nil)
+//            }else{
+//                performSegueWithIdentifier("SegueCamera", sender: nil)
+//            }
+//        }
+//    }
+
+    
+    func showOptions(sender: UIButton!) {
         
-        let visualizarImagem = UIAlertAction(title: "Visualizar", style: UIAlertActionStyle.Default) { (visualizar) -> Void in
-            self.performSegueWithIdentifier("SegueShowImage", sender: nil)
+        switch sender {
+        case self.btnFront: self.imageType = .Front
+        case self.btnProfileRight: self.imageType = .ProfileRight
+        case self.btnNasal: self.imageType = .Nasal
+        case self.btnObliqueLeft: self.imageType = .ObliqueLeft
+        case self.btnProfileLeft: self.imageType = .ProfileLeft
+        case self.btnObliqueRight: self.imageType = .ObliqueRight
+        default: self.imageType = .Front
+            print("AQUI ERROR")
         }
         
-        let apagarImagem = UIAlertAction(title: "Apagar Imagem", style: UIAlertActionStyle.Destructive) { (apagar) -> Void in
-            Drop.down("Apagando Imagem", state: .Info)
+        
+        
+        var availableSources: ImageRowSourceTypes = []
+        
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            availableSources.insert(.PhotoLibrary)
+        }
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            availableSources.insert(.Camera)
+        }
+        if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) {
+            availableSources.insert(.SavedPhotosAlbum)
+        }
+        
+        
+        sourceTypes.intersectInPlace(availableSources)
+        
+        if sourceTypes.isEmpty {
+            return
+        }
+        
+        // now that we know the number of actions aren't empty
+        let sourceActionSheet = UIAlertController(title: nil, message: "UFPI", preferredStyle: .ActionSheet)
+        if let popView = sourceActionSheet.popoverPresentationController {
+            sourceActionSheet.modalPresentationStyle = .OverCurrentContext
+            popView.sourceView = sender
+            popView.sourceRect = sender.bounds
             
-            
-            let iniciar_dicionarios = Helpers.iniciar_dicionarios()
-            
-            switch self.contentToDisplay {
-            case .Adicionar:
-                switch self.imageTypesSelected {
-                case .Frontal: self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
-                case .Perfil: self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
-                case .Nasal: self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
-                }
-            case .Atualizar:
-                switch self.imageTypesSelected {
-                case .Frontal:
-                    print("OLA")
-                    if ParseConnection.getFromParseImgFrontal(self.parseObject) {
-                        self.parseObject.removeObjectForKey("img_frontal")
-                        self.parseObject.removeObjectForKey("thumb_frontal")
-                        self.parseObject.removeObjectForKey("pontos_frontal")
-                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
-                                self.pontosFrontalServidor = iniciar_dicionarios.pontos_frontal
-                                self.pontosFrontalAtual = iniciar_dicionarios.pontos_frontal
-                                self.pontosFrontalFrom = .Local
-                                
-                                self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
-                            }else{
-                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
-                            }
-                        })
-                        self.btn_imagem_frontal.setImage(nil, forState: UIControlState.Normal)
-                    }
-                case .Perfil:
-                    if ParseConnection.getFromParseImgPerfil(self.parseObject) {
-                        self.parseObject.removeObjectForKey("img_perfil")
-                        self.parseObject.removeObjectForKey("thumb_perfil")
-                        self.parseObject.removeObjectForKey("pontos_perfil")
-                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
-                                self.pontosPerfilServidor = iniciar_dicionarios.pontos_perfil
-                                self.pontosPerfilAtual = iniciar_dicionarios.pontos_perfil
-                                self.pontosPerfilFrom = .Local
-                                self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
-                            }else{
-                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
-                            }
-                        })
-                    }else{
-                        self.btn_imagem_perfil.setImage(nil, forState: UIControlState.Normal)
-                    }
-                case .Nasal:
-                    if ParseConnection.getFromParseImgNasal(self.parseObject) {
-                        self.parseObject.removeObjectForKey("img_nasal")
-                        self.parseObject.removeObjectForKey("thumb_nasal")
-                        self.parseObject.removeObjectForKey("pontos_nasal")
-                        self.parseObject.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                Drop.down("Imagem deletada com Sucesso.", state: .Success)
-                                self.pontosNasalServidor = iniciar_dicionarios.pontos_nasal
-                                self.pontosNasalAtual = iniciar_dicionarios.pontos_nasal
-                                self.pontosNasalFrom = .Local
-                                
-                                self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
-                            }else{
-                                Drop.down("Erro ao deletar. Tente novamente mais tarde.", state: .Error)
-                            }
-                        })
-                    }else{
-                        self.btn_imagem_nasal.setImage(nil, forState: UIControlState.Normal)
-                    }
-                }
-                self.view.setNeedsDisplay()
-            case .Nil : return
+        }
+        
+        if sourceTypes.contains(.Camera) {
+            let cameraOption = UIAlertAction(title: NSLocalizedString("Tirar Foto", comment: ""), style: .Default, handler: { (_) in
+                self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
+            })
+            sourceActionSheet.addAction(cameraOption)
+        }
+//        if sourceTypes.contains(.PhotoLibrary) {
+//            let photoLibraryOption = UIAlertAction(title: NSLocalizedString("Biblioteca de Fotos", comment: ""), style: .Default, handler: { (_) in
+//                self.performSegueWithIdentifier("SegueCamera", sender: nil)
+//            })
+//            sourceActionSheet.addAction(photoLibraryOption)
+//        }
+//        if sourceTypes.contains(.SavedPhotosAlbum) {
+//            let savedPhotosOption = UIAlertAction(title: NSLocalizedString("Fotos Salvas", comment: ""), style: .Default, handler: { (_) in
+//                self.performSegueWithIdentifier("SegueCamera", sender: nil)
+//            })
+//            sourceActionSheet.addAction(savedPhotosOption)
+//        }
+        
+        switch showAction {
+        case .Yes(let style):
+            if let _ = sender.currentImage {
+                let showPhotoOption = UIAlertAction(title: NSLocalizedString("Visualizar Imagem", comment: ""), style: style, handler: { (_) in
+                    self.performSegueWithIdentifier("ShowImageSegue", sender: nil)
+                })
+                sourceActionSheet.addAction(showPhotoOption)
             }
-            
+        case .No:
+            break
         }
         
-        alertController.addAction(visualizarImagem)
-//        alertController.addAction(novaImagem)
-        alertController.addAction(apagarImagem)
+        switch clearAction {
+        case .Yes(let style):
+            if let _ = sender.currentImage {
+                let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Apagar Imagem", comment: ""), style: style, handler: { (_) in
+                    sender.setImage(nil, forState: UIControlState.Normal)
+                    if self.record != nil{
+                        for image in self.record.image {
+                            if Int(image.imageType) == self.imageType.hashValue {
+                                RealmParse.removeImage(image.path, record: self.record)
+                            }
+                        }
+                    }
+                    switch sender {
+                    case self.btnFront: self.frontPoints = nil
+                    case self.btnProfileRight: self.profileRightPoints = nil
+                    case self.btnNasal: self.nasalPoints = nil
+                    default : return
+                    }
+                    
+                    })
+                sourceActionSheet.addAction(clearPhotoOption)
+            }
+        case .No:
+            break
+        }
         
-        alertController.popoverPresentationController?.sourceView = button
-        alertController.popoverPresentationController?.sourceRect = button.bounds
+        // check if we have only one source type given
+        if sourceActionSheet.actions.count == 1 {
+
+        } else {
+
+            
+        }
+        sourceActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment: ""), style: .Cancel, handler:nil))
         
-        alertController.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(sourceActionSheet, animated: true, completion: nil)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+
     }
+    
     
     //MARK: - Pressionou o btn Cancelar
     
@@ -563,107 +620,135 @@ class AUFichaVC: FormViewController, NovoPacienteDelegate,ProcedimentoCirurgico,
         self.navigationController?.popViewControllerAnimated(true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    //--------------------
-    
-    
-    // MARK: - Protocols
-    
-    //Dicionarios
-    func alterarDic(dicFormValuesAtual: [String : Any?]) {
-        self.dicFormValuesAtual = dicFormValuesAtual
-    }
-    
-    //NovoPacienteDelegate
-    func atribuir_imagem(imagem: UIImage, imageTypesSelected:imageTypes) {
-        switch imageTypesSelected {
-        case .Frontal:  btn_imagem_frontal.setImage(imagem, forState: UIControlState.Normal)
-        case .Perfil:   btn_imagem_perfil.setImage(imagem, forState: UIControlState.Normal)
-        case .Nasal:    btn_imagem_nasal.setImage(imagem, forState: UIControlState.Normal)
-        }
-        
-    }
-    //NovoPacienteDelegate
-    func atribuir_marcacao(dic: [String : NSValue], imageTypesSelected: imageTypes, pontosFrontalFrom: pontosFrontalType, pontosPerfilFrom: pontosPerfilType, pontosNasalFrom: pontosNasalType) {
 
-        switch imageTypesSelected {
-        case .Frontal:  self.pontosFrontalAtual = dic
-        case .Perfil:   self.pontosPerfilAtual = dic
-        case .Nasal:    self.pontosNasalAtual = dic
-        }
-        
-        if pontosFrontalFrom != .Nil {
-            self.pontosFrontalFrom = pontosFrontalFrom
-        }else if pontosPerfilFrom != .Nil {
-            self.pontosPerfilFrom = pontosPerfilFrom
-        }else if pontosNasalFrom != .Nil{
-            self.pontosNasalFrom = pontosNasalFrom
-        }
-    }
-    
-    //CameraViewDelegate
-    func marcar_pontos(dic: [String : NSValue]) {
-        atribuir_marcacao(dic, imageTypesSelected: imageTypesSelected, pontosFrontalFrom: pontosFrontalFrom, pontosPerfilFrom: pontosPerfilFrom, pontosNasalFrom: pontosNasalFrom)
-    }
-    
-    //--------------------
-    
-    
     // MARK: - Navigation
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
-        if segue.identifier == "SegueCamera"{
+        if segue.identifier == (Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue"){
             if let camera = segue.destinationViewController as? CameraVC{
                 camera.delegate = self
+                camera.imageType = self.imageType
+            }
+        }
+        
+        if segue.identifier == "ShowImageSegue"{
+            if let showImagePoints = segue.destinationViewController as? ProcessImageVC{
+                showImagePoints.delegate = self
+                showImagePoints.imageType = self.imageType
                 
-                switch imageTypesSelected {
-                case .Frontal:  camera.imageTypesSelected = .Frontal
-                camera.dicionario = self.pontosFrontalAtual
-                camera.pontosFrontalFrom = self.pontosFrontalFrom
-                case .Perfil:   camera.imageTypesSelected = .Perfil
-                camera.dicionario = self.pontosPerfilAtual
-                camera.pontosPerfilFrom = self.pontosPerfilFrom
-
-                case .Nasal:    camera.imageTypesSelected = .Nasal
-                camera.dicionario = self.pontosNasalAtual
-                camera.pontosNasalFrom = self.pontosNasalFrom
+                switch imageType {
+                case .Front:        showImagePoints.image = self.btnFront.currentImage!
+                                    showImagePoints.points = self.frontPoints
+                                    showImagePoints.pointsUpdated = self.frontPoints
+                    
+                case .ProfileRight: showImagePoints.image = self.btnProfileRight.currentImage!
+                                    showImagePoints.points = self.profileRightPoints
+                                    showImagePoints.pointsUpdated = self.profileRightPoints
+                    
+                case .Nasal:        showImagePoints.image = self.btnNasal.currentImage!
+                                    showImagePoints.points = self.nasalPoints
+                                    showImagePoints.pointsUpdated = self.nasalPoints
+                    
+                case .ObliqueLeft:  showImagePoints.image = self.btnObliqueLeft.currentImage!
+                    
+                case .ProfileLeft:  showImagePoints.image = self.btnProfileLeft.currentImage!
+                    
+                case .ObliqueRight: showImagePoints.image = self.btnObliqueRight.currentImage!
 
                 }
             }
         }
         
-        
-        if segue.identifier == "SegueShowImage"{
-            if let processarImagemVC = segue.destinationViewController as? ProcessarImagemVC{
-                processarImagemVC.delegate = self
-                processarImagemVC.imageTypesSelected = self.imageTypesSelected
-                processarImagemVC.imageGetFrom = .Servidor
-                
-                switch imageTypesSelected {
-                case .Frontal:  processarImagemVC.image = self.btn_imagem_frontal.currentImage!
-                processarImagemVC.dicionario = self.pontosFrontalAtual
-                processarImagemVC.pontosFrontalFrom = self.pontosFrontalFrom
-                    
-                case .Perfil:   processarImagemVC.image = self.btn_imagem_perfil.currentImage!
-                processarImagemVC.dicionario = self.pontosPerfilAtual
-                processarImagemVC.pontosPerfilFrom = self.pontosPerfilFrom
-                    
-                case .Nasal:    processarImagemVC.image = self.btn_imagem_nasal.currentImage!
-                processarImagemVC.dicionario = self.pontosNasalAtual
-                processarImagemVC.pontosNasalFrom = self.pontosNasalFrom
-
-                }
-            }
-        }
-        
-        if segue.identifier == "ProcedimentosCirurgicosSegue"{
+        if segue.identifier == "SurgeryPlanSegue"{
             let controller = segue.destinationViewController as! ProcedimentosCirurgicosVC
             
             controller.delegate = self
-            controller.dicFormValues = self.dicFormValuesAtual
+            
+            if let test = sender as? ButtonRow {
+                if test.tag == "btn_plano_cirurgico"{
+                    controller.surgicalPlanning = .PreSurgical
+                    controller.dicFormValues = self.preSurgicalPlanningForm
+                }else if test.tag == "btn_cirurgia_realizada"{
+                    controller.surgicalPlanning = .PostSurgical
+                    controller.dicFormValues = self.postSurgicalPlanningForm
+                }
+            }
+        }
+        
+    }
+}
+extension AUFichaVC: RecordImageDelegate{
+    func updateData(image image: UIImage, ImageType: ImageTypes) {
+        switch imageType {
+        case .Front:        self.btnFront.setImage(image, forState: UIControlState.Normal)
+            
+        case .ProfileRight: self.btnProfileRight.setImage(image, forState: UIControlState.Normal)
+            
+        case .Nasal:        self.btnNasal.setImage(image, forState: UIControlState.Normal)
+            
+        case .ObliqueLeft:  self.btnObliqueLeft.setImage(image, forState: UIControlState.Normal)
+            
+        case .ProfileLeft:  self.btnProfileLeft.setImage(image, forState: UIControlState.Normal)
+            
+        case .ObliqueRight: self.btnObliqueRight.setImage(image, forState: UIControlState.Normal)
+            
         }
     }
 }
+extension AUFichaVC: RecordPointsDelegate{
+    func updateData(points points: [String : NSValue]?, ImageType: ImageTypes) {
+        print(points)
+        switch imageType {
+        case .Front:        self.frontPoints = points
+            
+        case .ProfileRight: self.profileRightPoints = points
+            
+        case .Nasal:        self.nasalPoints = points
+            
+        case .ObliqueLeft:  return
+            
+        case .ProfileLeft:  return
+            
+        case .ObliqueRight: return
+            
+        }
+    }
+}
+
+extension AUFichaVC: ProcedimentoCirurgico{
+    func updateSurgicalPlanning(surgicalPlanningForm: [String : Any?], SurgicalPlanningType: SurgicalPlanningTypes) {
+        
+        switch SurgicalPlanningType {
+        case .PreSurgical:
+            self.preSurgicalPlanningForm = surgicalPlanningForm
+        case .PostSurgical:
+            self.postSurgicalPlanningForm = surgicalPlanningForm
+        }
+        
+    }
+}
+
+
+
+//    func updateData(image image: UIImage, points: [String : NSValue]?, ImageType: ImageTypes) {
+//        switch ImageType {
+//        case .Front:        self.btnFront.setImage(image, forState: UIControlState.Normal)
+//                            self.frontPoints = points
+//            
+//        case .ProfileRight: self.btnProfileRight.setImage(image, forState: UIControlState.Normal)
+//                            self.profileRightPoints = points
+//            
+//        case .ProfileLeft:  self.btnProfileLeft.setImage(image, forState: UIControlState.Normal)
+//            
+//        case .ObliqueRight: self.btnObliqueRight.setImage(image, forState: UIControlState.Normal)
+//            
+//        case .ObliqueLeft:  self.btnProfileLeft.setImage(image, forState: UIControlState.Normal)
+//            
+//        case .Nasal:        self.btnNasal.setImage(image, forState: UIControlState.Normal)
+//                            self.nasalPoints = points
+//        }
+//    }
 

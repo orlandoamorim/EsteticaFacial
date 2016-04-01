@@ -16,13 +16,22 @@ class ProcedimentosCirurgicosVC:FormViewController {
 
     var dicFormValues:[String : Any?] = [String : Any?]()
     var dicFormValuesAtual:[String : Any?] = [String : Any?]()
-    var searchPlanoCirurgico:String = String()
     
+    var surgicalPlanning:SurgicalPlanningTypes = .PreSurgical
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Plano Cirurgico"
+
+        switch surgicalPlanning {
+        case .PostSurgical: self.title = "Relatório Cirúrgico"
+        case .PreSurgical: self.title = "Plano Cirúrgico"
+        }
         initializeForm()
+        self.form.setValues(dicFormValues)
         self.tableView?.reloadData()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "infoIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(showInfo))
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,85 +47,20 @@ class ProcedimentosCirurgicosVC:FormViewController {
         }
     }
     
-    func formValues(){
-        
-        if let aberta = self.form.rowByTag("aberta")?.baseValue as? Bool {
-            dicFormValuesAtual.updateValue(aberta, forKey: "aberta")
+    func showInfo(sender:UIBarButtonItem){
+        let alert:UIAlertController = UIAlertController(title: NSLocalizedString("", comment:""), message: NSLocalizedString("Se não utilizou um item, deixe-o vazio.", comment:""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        if let popView = alert.popoverPresentationController {
+            popView.barButtonItem = sender
         }
-        
-        if let fechada = self.form.rowByTag("fechada")?.baseValue as? Bool {
-            dicFormValuesAtual.updateValue(fechada, forKey: "fechada")
-        }
+    
+        self.presentViewController(alert, animated: true, completion: nil)
 
-        //fechada_opcoes
-        if let fechada_opcoes = self.form.rowByTag("fechada_opcoes")?.baseValue as? String {
-            dicFormValuesAtual.updateValue(fechada_opcoes, forKey: "fechada_opcoes")
-        }
-        
-        //incisoes
-        let incisoes = (self.form.rowByTag("incisoes") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(incisoes!), forKey: "incisoes")
-        
-        //liberacao
-        let liberacao = (self.form.rowByTag("liberacao") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(liberacao!), forKey: "liberacao")
-        
-        //suturas
-        let suturas = (self.form.rowByTag("suturas") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(suturas!), forKey: "suturas")
-        
-        //outras_suturas
-        if let outras_suturas = self.form.rowByTag("outras_suturas")?.baseValue as? String {
-            dicFormValuesAtual.updateValue(outras_suturas, forKey: "outras_suturas")
-        }
-        //enxerto_de_ponta
-        let enxerto_de_ponta = (self.form.rowByTag("enxerto_de_ponta") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(enxerto_de_ponta!), forKey: "enxerto_de_ponta")
-        
-        //outros_enxertos_de_ponta
-        if let outros_enxertos_de_ponta = self.form.rowByTag("outros_enxertos_de_ponta")?.baseValue as? String {
-            dicFormValuesAtual.updateValue(outros_enxertos_de_ponta, forKey: "outros_enxertos_de_ponta")
-        }
-        
-        //enxerto_de_sheen
-        let enxerto_de_sheen = (self.form.rowByTag("enxerto_de_sheen") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(enxerto_de_sheen!), forKey: "enxerto_de_sheen")
-        
-        //dorso
-        let dorso = (self.form.rowByTag("dorso") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(dorso!), forKey: "dorso")
-        
-        //raiz
-        let raiz = (self.form.rowByTag("raiz") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(raiz!), forKey: "raiz")
-        
-        //osso
-        let osso = (self.form.rowByTag("osso") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(osso!), forKey: "osso")
-        
-        //outros_ossos
-        if let outros_ossos = self.form.rowByTag("outros_ossos")?.baseValue as? String {
-            dicFormValuesAtual.updateValue(outros_ossos, forKey: "outros_ossos")
-        }
-        
-        //cartilagem
-        let cartilagem = (self.form.rowByTag("cartilagem") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(cartilagem!), forKey: "cartilagem")
-        
-        //lateral
-        let lateral = (self.form.rowByTag("lateral") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(lateral!), forKey: "lateral")
-        
-        //transversa
-        let transversa = (self.form.rowByTag("transversa") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(transversa!), forKey: "transversa")
-        
-        //medial
-        let medial = (self.form.rowByTag("medial") as! MultipleSelectorRow<String>).baseValue! as? Set<String>
-        dicFormValuesAtual.updateValue(Helpers.getArrayFromSet(medial!), forKey: "medial")
-        
-        if !NSDictionary(dictionary: convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(convertAnyToAnyObject(dicFormValuesAtual)) {
-            delegate.alterarDic(dicFormValuesAtual)
+    }
+    
+    
+    func formValues(){
+        if !NSDictionary(dictionary: Helpers.convertAnyToAnyObject(dicFormValues)).isEqualToDictionary(Helpers.convertAnyToAnyObject(dicFormValuesAtual)) {
+            delegate.updateSurgicalPlanning(form.values(includeHidden: false), SurgicalPlanningType: surgicalPlanning)
         }
     }
     
@@ -124,34 +68,29 @@ class ProcedimentosCirurgicosVC:FormViewController {
     private func initializeForm() {
     
         form +++
-        
+            
         Section("Abordagem")
-            
-            <<< CheckRow("aberta") {
+            <<< SwitchRow("abordagem") {
                 $0.title = "Aberta"
-                $0.value = dicFormValues["aberta"]! as? Bool
-                }.onChange { [weak self] row in
-                    if row.value == true {
-                        self?.form.rowByTag("fechada")?.baseValue = false
-                        self?.form.rowByTag("fechada")?.updateCell()
+                }.onChange { [weak self] in
+                    if $0.value == true {
+                        $0.title = "Fechada"
+                        $0.updateCell()
+                        self?.form.rowByTag("abordagem_opcoes")?.hidden = false
+                        self?.form.rowByTag("abordagem_opcoes")?.updateCell()
+                    }else if $0.value == false {
+                        $0.title = "Aberta"
+                        $0.updateCell()
+                        self?.form.rowByTag("abordagem_opcoes")?.hidden = true
+                        self?.form.rowByTag("abordagem_opcoes")?.updateCell()
                     }
             }
             
-            <<< CheckRow("fechada") {
-                $0.title = "Fechada"
-                $0.value = dicFormValues["fechada"]! as? Bool
-                }.onChange { [weak self] row in
-                    if row.value == true {
-                        self?.form.rowByTag("aberta")?.baseValue = false
-                        self?.form.rowByTag("aberta")?.updateCell()
-                    }
-            }
-        
-            <<< PushRow<String>("fechada_opcoes") {
-                $0.hidden = "$fechada == false"
+            
+            <<< PushRow<String>("abordagem_opcoes") {
+                $0.hidden = "$abordagem == false"
                 $0.title = "Tipo:"
-                $0.value = dicFormValues["fechada_opcoes"]! as? String
-                $0.options = ["Retrograda","Trans Cartilaginosa","Liberacao"]
+                $0.options = ["Retrógrada","Trans-cartilaginosa","Liberação"]
                 $0.selectorTitle = "Tipo de Abordagem Fechada"
             }
     
@@ -159,197 +98,264 @@ class ProcedimentosCirurgicosVC:FormViewController {
         +++ Section("Incisoes")
             <<< MultipleSelectorRow<String>("incisoes") {
                 $0.title = "Tipo:"
-                $0.options =  ["Inter","Intra","Infra","Transcolumelar"] //["Inter","Intra","Infra","Transcolumelar"]
-                $0.value = Set(dicFormValues["incisoes"] as! [String])
+                $0.options =  ["Inter","Intra","Infra","Transcolumelar"]
                 $0.selectorTitle = "Tipo da Incisao"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
                 }
         +++ Section("Ponta Nasal")
             
             <<< MultipleSelectorRow<String>("liberacao") {
-                $0.title = "Liberacao:"
-                $0.options = ["Resseccao Cefalica","Incisoes Liberacao","Excisao do Seg Lateral","Excisao Domal"]
-                $0.value = Set(dicFormValues["liberacao"] as! [String])
-                $0.selectorTitle = "Tipo da Liberacao"
+                $0.title = "Liberação:"
+                $0.options = ["Ressecção Cefálica","Incisões","Excisão do Seg Lateral","Excisão domal"]
+                $0.selectorTitle = "Tipo da Liberação"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("suturas") {
                 $0.title = "Suturas:"
-                $0.options = ["Intradomal","Transdomal","Criacao","Outras"]
-                $0.value = Set(dicFormValues["suturas"] as! [String])
+                $0.options = ["Intradomal","Transdomal","Criação","Outros"]
                 $0.selectorTitle = "Tipo da Sutura"
             }.onChange { [weak self] row in
-                if row.value == ["Outras"] {
-                    guard let _ : TextAreaRow = self?.form.rowByTag("outras_suturas") else {
-                        let textAreaRow = TextAreaRow("outras_suturas") {
-                            $0.placeholder = "Outras Suturas"
-                            $0.value = self!.dicFormValues["outras_suturas"] as? String
-                        }
-                        row.section?.insert(textAreaRow, atIndex: row.indexPath()!.row + 1)
-                        return
-                    }
+                if row.value!.contains("Outros") {
+                    self?.form.rowByTag("outras_suturas")?.hidden = false
+                    self?.form.rowByTag("outras_suturas")?.updateCell()
                 }else{
-                    if let textAreaRow : TextAreaRow = self?.form.rowByTag("outras_suturas"), let textAreaRowIndexPath = textAreaRow.indexPath() {
-                        row.section?.removeAtIndex(textAreaRowIndexPath.row)
-                    }
+                    self?.form.rowByTag("outras_suturas")?.hidden = true
+                    self?.form.rowByTag("outras_suturas")?.updateCell()
                     
                 }
 
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+            
+            <<< TextAreaRow("outras_suturas") {
+                $0.hidden = "$suturas != 'Outros'"
+                $0.placeholder = "Outras Suturas"
             }
             
         
             <<< MultipleSelectorRow<String>("enxerto_de_ponta") {
                 $0.title = "Enxerto de Ponta:"
-                $0.options = ["Tampao","Juri","Strut Columelar","Strut Pre Columelar","Outros"]
-                $0.value = Set(dicFormValues["enxerto_de_ponta"] as! [String])
+                $0.options = ["Tampão","Júri","Strut columelar","Strut pré-columelar","Outros"]
                 $0.selectorTitle = "Tipo de Enxerto de Ponta"
                 
             } .onChange { [weak self] row in
-                if row.value == ["Outros"] {
-                    guard let _ : TextAreaRow = self?.form.rowByTag("outros_enxertos_de_ponta") else {
-                        let textAreaRow = TextAreaRow("outros_enxertos_de_ponta") {
-                            $0.placeholder = "Outros Enxertos de Ponta"
-                            $0.value = self!.dicFormValues["outros_enxertos_de_ponta"] as? String
-                        }
-                        row.section?.insert(textAreaRow, atIndex: row.indexPath()!.row + 1)
-                        return
-                    }
+                if row.value!.contains("Outros") {
+                    self?.form.rowByTag("outros_enxertos_de_ponta")?.hidden = false
+                    self?.form.rowByTag("outros_enxertos_de_ponta")?.updateCell()
                 }else{
-                    if let textAreaRow : TextAreaRow = self?.form.rowByTag("outros_enxertos_de_ponta"), let textAreaRowIndexPath = textAreaRow.indexPath() {
-                        row.section?.removeAtIndex(textAreaRowIndexPath.row)
-                    }
+                    self?.form.rowByTag("outros_enxertos_de_ponta")?.hidden = true
+                    self?.form.rowByTag("outros_enxertos_de_ponta")?.updateCell()
+                    
                 }
+
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+            <<< TextAreaRow("outros_enxertos_de_ponta") {
+            $0.hidden = "$enxerto_de_ponta != 'Outros'"
+            $0.placeholder = "Outros Enxertos de Ponta"
             }
             
             <<< MultipleSelectorRow<String>("enxerto_de_sheen") {
                 $0.title = "Enxerto de Sheen:"
-                $0.options = ["Tipo I Esmagado","Tipo II Contuso","Tipo III Solido","Tipo IV Barreira"]
-                $0.value = Set(dicFormValues["enxerto_de_sheen"] as! [String])
+                $0.options = ["Tipo I Esmagado","Tipo II Contuso","Tipo III Sólido","Tipo IV Barreira"]
                 $0.selectorTitle = "Tipo de Enxerto de Sheen"
             }
         
-        +++ Section()
+        +++ Section("Dorso")
         
             <<< MultipleSelectorRow<String>("dorso") {
                 $0.title = "Dorso:"
-                $0.options = ["Nao Tocado","Abaixado","Aumentado","Aplainado"]
-                $0.value = Set(dicFormValues["dorso"] as! [String])
+                $0.options = ["Abaixado","Aumentado","Aplainado"]
                 $0.selectorTitle = "Tipo de Dorso"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("raiz") {
                 $0.title = "Raiz:"
-                $0.options = ["Reducao Raspa","Reducao Osteotomo","Aumenta Enxerto Unico","Aumenta Enxertos Multiplos"]
-                $0.value = Set(dicFormValues["raiz"] as! [String])
+                $0.options = ["Redução Raspa","Redução Osteótomo","Aumentada Enxerto Único","Aumentada Enxertos Múltiplos"]
                 $0.selectorTitle = "Tipo de Raiz"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
 
             <<< MultipleSelectorRow<String>("osso") {
                 $0.title = "Osso:"
-                $0.options = ["Raspa","Osteotomo Osso","Outros"]
-                $0.value = Set(dicFormValues["osso"] as! [String])
+                $0.options = ["Raspa","Osteótomo","Outros"]
                 $0.selectorTitle = "Tipo de Osso"
                 } .onChange { [weak self] row in
-                    if row.value == ["Outros"] {
-                        guard let _ : TextAreaRow = self?.form.rowByTag("outros_ossos") else {
-                            let textAreaRow = TextAreaRow("outros_ossos") {
-                                $0.placeholder = "Outros Ossos"
-                                $0.value = self!.dicFormValues["outros_ossos"] as? String
-                            }
-                            row.section?.insert(textAreaRow, atIndex: row.indexPath()!.row + 1)
-                            return
-                        }
+                    if row.value!.contains("Outros") {
+                        self?.form.rowByTag("outros_ossos")?.hidden = false
+                        self?.form.rowByTag("outros_ossos")?.updateCell()
                     }else{
-                        if let textAreaRow : TextAreaRow = self?.form.rowByTag("outros_ossos"), let textAreaRowIndexPath = textAreaRow.indexPath() {
-                            row.section?.removeAtIndex(textAreaRowIndexPath.row)
-                        }
+                        self?.form.rowByTag("outros_ossos")?.hidden = true
+                        self?.form.rowByTag("outros_ossos")?.updateCell()
+                        
                     }
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
+            
+            <<< TextAreaRow("outros_ossos") {
+                $0.hidden = "$osso != 'Outros'"
+                $0.placeholder = "Outros ossos"
+            }
+            
         
             <<< MultipleSelectorRow<String>("cartilagem") {
                 $0.title = "Cartilagem:"
-                $0.options = ["Abaixada","Aumentada","Encurtada","Expansor","Enxerto Extensao"]
-                $0.value = Set(dicFormValues["cartilagem"] as! [String])
+                $0.options = ["Abaixada","Aumentada","Encurtada","Expansor","Enxerto Extensão"]
                 $0.selectorTitle = "Tipo de Cartilagem"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
             
-        +++ Section("Osteotomos")
+        +++ Section("OSTEOTOMIAS")
         
             <<< MultipleSelectorRow<String>("lateral") {
                 $0.title = "Lateral:"
-                $0.options = ["Nenhum Lateral","Baixa Alta","Baixa Baixa","Duplo Nivel"]
-                $0.value = Set(dicFormValues["lateral"] as! [String])
+                $0.options = ["Baixa-alta","Baixa-baixa","Duplo Nível"]
                 $0.selectorTitle = "Lateral"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("transversa") {
                 $0.title = "Transversa:"
-                $0.options = ["Nenhum Transversa","Digital","Osteotomo Transversa"]
-                $0.value = Set(dicFormValues["transversa"] as! [String])
+                $0.options = ["Digital","Osteótomo"]
                 $0.selectorTitle = "Transversa"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
             }
             <<< MultipleSelectorRow<String>("medial") {
                 $0.title = "Medial:"
-                $0.options = ["Nenhum Medial","Medial","Medial_Obliqua"]
-                $0.value = Set(dicFormValues["medial"] as! [String])
+                $0.options = ["Medial", "Medial Oblíqua", "Contínua"]
                 $0.selectorTitle = "Medial"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+
+        +++ Section()
+            <<< MultipleSelectorRow<String>("base_alar") {
+                $0.title = "Base Alar:"
+                $0.options = ["Estreitamento de Assoalho", "Redução da Dilatação Alar", "Sutura de Estreitamento"]
+                $0.selectorTitle = "Lateral"
+                } .onChange { [weak self] row in
+                    if row.value!.contains("Estreitamento de Assoalho") {
+                        self?.form.rowByTag("estreitamento_de_assoalho_option")?.hidden = false
+                        self?.form.rowByTag("estreitamento_de_assoalho_option")?.updateCell()
+                    }else if !row.value!.contains("Estreitamento de Assoalho"){
+                        self?.form.rowByTag("estreitamento_de_assoalho_option")?.hidden = true
+                        self?.form.rowByTag("estreitamento_de_assoalho_option")?.updateCell()
+                        
+                    }
+                    
+                    if row.value!.contains("Redução da Dilatação Alar") {
+                        self?.form.rowByTag("redução_da_dilatação_alar_option")?.hidden = false
+                        self?.form.rowByTag("redução_da_dilatação_alar_option")?.updateCell()
+                    }else if !row.value!.contains("Redução da Dilatação Alar"){
+                        self?.form.rowByTag("redução_da_dilatação_alar_option")?.hidden = true
+                        self?.form.rowByTag("redução_da_dilatação_alar_option")?.updateCell()
+                        
+                    }
+                    
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+        
+            <<< MultipleSelectorRow<String>("estreitamento_de_assoalho_option") {
+                $0.hidden = "$base_alar != 'Estreitamento de Assoalho'"
+                $0.title = "Estreitamento de Assoalho:"
+                $0.options = ["mm esquerda","mm direita"]
+                $0.selectorTitle = "Estreitamento de Assoalho Tipo:"
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+        
+            <<< MultipleSelectorRow<String>("redução_da_dilatação_alar_option") {
+                $0.hidden = "$base_alar != 'Redução da Dilatação Alar'"
+                $0.title = "Redução da Dilatação Alar:"
+                $0.options = ["mm esquerda","mm direita"]
+                $0.selectorTitle = "Redução da Dilatação Alar Tipo"
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+        
+        +++ Section()
+        
+            <<< MultipleSelectorRow<String>("enxertos_autologos") {
+                $0.title = "Enxertos (autólogos):"
+                $0.options = ["Septal", "Auricular", "Costelas", "Implantes", "Outros"]
+                $0.selectorTitle = "Tipo de Enxertos (autólogos):"
+                } .onChange { [weak self] row in
+                    if row.value!.contains("Outros") {
+                        self?.form.rowByTag("outros_enxertos_autologos")?.hidden = false
+                        self?.form.rowByTag("outros_enxertos_autologos")?.updateCell()
+                    }else{
+                        self?.form.rowByTag("outros_enxertos_autologos")?.hidden = true
+                        self?.form.rowByTag("outros_enxertos_autologos")?.updateCell()
+                        
+                    }
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+            
+            <<< TextAreaRow("outros_enxertos_autologos") {
+                $0.hidden = "$enxertos_autologos != 'Outros'"
+                $0.placeholder = "Outros Enxertos (autólogos)"
+        }
+        
+        
+            +++ Section()
+            <<< MultipleSelectorRow<String>("miscelanea") {
+                $0.title = "Miscelânea:"
+                $0.options = ["Ressecção do Septo Nasal", "Turbinectomia", "Mentoplastia", "Outros"]
+                $0.selectorTitle = "Lateral"
+                } .onChange { [weak self] row in
+                    if row.value!.contains("Mentoplastia") {
+                        self?.form.rowByTag("mentoplastia_option")?.hidden = false
+                        self?.form.rowByTag("mentoplastia_option")?.updateCell()
+                    }else if !row.value!.contains("Mentoplastia"){
+                        self?.form.rowByTag("mentoplastia_option")?.hidden = true
+                        self?.form.rowByTag("mentoplastia_option")?.updateCell()
+                        
+                    }
+                    
+                    if row.value!.contains("Outros") {
+                        self?.form.rowByTag("miscelanea_outros")?.hidden = false
+                        self?.form.rowByTag("miscelanea_outros")?.updateCell()
+                    }else if !row.value!.contains("Outros"){
+                        self?.form.rowByTag("miscelanea_outros")?.hidden = true
+                        self?.form.rowByTag("miscelanea_outros")?.updateCell()
+                        
+                    }
+                    
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+            
+            <<< MultipleSelectorRow<String>("mentoplastia_option") {
+                $0.hidden = "$miscelanea != 'Mentoplastia'"
+                $0.title = "Mentoplastia:"
+                $0.options = ["Aumento","Redução"]
+                $0.selectorTitle = "Mentoplastia Tipo:"
+                }.onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+            }
+        
+            <<< TextAreaRow("miscelanea_outros") {
+                $0.hidden = "$miscelanea != 'Outros'"
+                $0.placeholder = "Outros Miscelânea"
         }
     }
     
-
     
     func multipleSelectorDone(item:UIBarButtonItem) {
         navigationController?.popViewControllerAnimated(true)
     }
-
-    func convertAnyObjectToAny(anyObjectDict:[String: AnyObject]) -> [String: Any] {
-        
-        var anyDict = [String: Any]()
-        
-        for key in anyObjectDict.keys {
-            anyDict.updateValue(anyObjectDict[key], forKey: key)
-        }
-        return anyDict
-    }
- 
-    func convertAnyToAnyObject(anyDict:[String: Any?]) -> [String: AnyObject] {
-        
-        var anyObjectDict = [String: AnyObject]()
-        
-        for key in anyDict.keys {
-            if let string = anyDict[key]! as? String {
-                anyObjectDict[key] = string
-            }else if let bool = anyDict[key]! as? Bool {
-                anyObjectDict[key] = bool
-            }else if let teste = anyDict[key]! as? [String]{
-                anyObjectDict[key] = teste
-            }
-        }
-        return anyObjectDict
-    }
-    
-
-
-    
 }

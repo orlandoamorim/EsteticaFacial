@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6ge-zK-1YI">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Procedimentos CirurgicosVC-->
+        <scene sceneID="eY8-Tg-CWv">
+            <objects>
+                <viewController storyboardIdentifier="SurgeryPlan" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6ge-zK-1YI" customClass="ProcedimentosCirurgicosVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Msv-Nf-QHO"/>
+                        <viewControllerLayoutGuide type="bottom" id="uWt-FI-CQD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PbM-ty-CYG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Soo-Rd-ABL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="6ge-zK-1YI" id="5zU-CU-Wk6"/>
+                                    <outlet property="delegate" destination="6ge-zK-1YI" id="jbx-PO-H9w"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Soo-Rd-ABL" firstAttribute="top" secondItem="PbM-ty-CYG" secondAttribute="top" id="LJR-wU-ore"/>
+                            <constraint firstItem="Soo-Rd-ABL" firstAttribute="leading" secondItem="PbM-ty-CYG" secondAttribute="leading" id="XTx-ER-UGC"/>
+                            <constraint firstAttribute="trailing" secondItem="Soo-Rd-ABL" secondAttribute="trailing" id="bje-f6-CvC"/>
+                            <constraint firstItem="Soo-Rd-ABL" firstAttribute="bottom" secondItem="uWt-FI-CQD" secondAttribute="top" id="ksY-jH-s8a"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XFR-Sr-QcK"/>
+                    <connections>
+                        <outlet property="tableView" destination="Soo-Rd-ABL" id="mlF-q7-eD4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vWx-43-9u7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="989" y="1855"/>
+        </scene>
+    </scenes>
+</document>
