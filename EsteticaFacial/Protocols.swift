@@ -45,28 +45,6 @@ enum contentTypes {
     case Adicionar, Atualizar, Nil
 }
 
-enum ImageGet {
-    case Camera, Biblioteca, Servidor
-}
-
-
-
-
-enum PontosTypes {
-    case Servidor, Local, Atualizado, Nil
-}
-
-
-//var frontPoints : [String:NSValue]?
-//var profilePoints : [String:NSValue]?
-////    var profileLeftPoints : [String:NSValue]?
-////    var obliqueRightPoints : [String:NSValue]?
-////    var obliqueLeftPoints : [String:NSValue]?
-//var nasalPoints : [String:NSValue]?
-
-
-
-
 struct ImageRowSourceTypes : OptionSetType {
     
     let rawValue: Int

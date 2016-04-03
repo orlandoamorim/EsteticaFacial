@@ -23,7 +23,7 @@ class ProcessImageVC: UIViewController {
     let (frontPoints, profilePoints, nasalPoints) = Helpers.iniciar_dicionarios()
 
     
-    static let infinity : CGFloat = 9999999.9
+    let infinity : CGFloat = 9999999.9
     
     var pointsViews : NSMutableArray = NSMutableArray()
     var pointChoosed : PontoView?
@@ -211,7 +211,7 @@ extension ProcessImageVC: UIScrollViewDelegate{
     func gerenciarPontoTocado(recognizer:UILongPressGestureRecognizer){
         let toque = recognizer.locationInView(recognizer.view)
         if recognizer.state == UIGestureRecognizerState.Began{
-            self.pointChoosed = LocalizarPontosViewController.menor_distancia_em_array(self.pointsViews, ponto: toque)
+            self.pointChoosed = menor_distancia_em_array(self.pointsViews, ponto: toque)
             initialTouch = toque
             pointInitialChoosed = (self.pointChoosed?.local)!
             self.pointChoosed?.ponto_view.image = UIImage(named: "ponto_vermelho")
@@ -236,11 +236,11 @@ extension ProcessImageVC: UIScrollViewDelegate{
         }
     }
     
-    static func distancia_entre_pontos(p1:CGPoint, p2:CGPoint) -> CGFloat{
+    func distancia_entre_pontos(p1:CGPoint, p2:CGPoint) -> CGFloat{
         return pow((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y),0.5)
     }
     
-    static func menor_distancia_em_array(array: NSMutableArray , ponto: CGPoint)->PontoView{
+    func menor_distancia_em_array(array: NSMutableArray , ponto: CGPoint)->PontoView{
         var min = infinity
         var escolhido : PontoView?
         for obj in array{

@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import Parse
 import Eureka
-import SwiftyDrop
 import SCLAlertView
 import DeviceKit
 
@@ -80,18 +78,22 @@ class AUFichaVC: FormViewController{
             
             for image in record.image {
                 switch Int(image.imageType)! {
-                case ImageTypes.Front.hashValue :       self.btnFront.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
-                                                        if image.points != nil { self.frontPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
+                case ImageTypes.Front.hashValue :
+                    self.btnFront.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                    self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                    //                    if image.points != nil { self.frontPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
                     
-                case ImageTypes.ProfileRight.hashValue :self.btnProfileRight.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
-                                                        if image.points != nil { self.profileRightPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
+                case ImageTypes.ProfileRight.hashValue :
+                    self.btnProfileRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                    self.profileRightPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
                     
-                case ImageTypes.Nasal.hashValue :       self.btnNasal.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
-                                                        if image.points != nil { self.nasalPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
+                case ImageTypes.Nasal.hashValue :
+                    self.btnNasal.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                    self.nasalPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
 
-                case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
-                case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
-                case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.loadImageFromPath(image.path), forState: UIControlState.Normal)
+                case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
 
                 default:   print("ERRO")
                 }
@@ -202,10 +204,11 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.Front.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!)  {
+                                    print("ESSA MERDA")
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
-                                    print("AQUI SIIIM")
                                     imageArray.updateValue((btn.currentImage, frontPoints != nil ? frontPoints : nil), forKey: .Front)
                                 }else{
                                     boo = true
@@ -226,8 +229,9 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.ProfileRight.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
                                     imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
                                 }else{
@@ -248,8 +252,9 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.Nasal.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
                                     imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
                                 }else{
@@ -269,8 +274,9 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.ObliqueLeft.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
                                     imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
                                 }
@@ -287,8 +293,9 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.ProfileLeft.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
                                     imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
                                 }
@@ -305,8 +312,9 @@ class AUFichaVC: FormViewController{
                         var boo:Bool? = false
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.ObliqueRight.hashValue {
-                                if RealmParse.loadImageFromPath(image.path) != btn.currentImage {
-                                    RealmParse.removeImage(image.path, record: self.record)
+                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
                                     boo = true
                                     imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
                                 }
@@ -319,18 +327,6 @@ class AUFichaVC: FormViewController{
                     
                 default: print("ERRO mountArrayUpdate()")
                 }
-            }else{
-                switch btn {
-                case self.btnFront:         verifyAndRemoveImage(.Front)
-                case self.btnProfileRight:  verifyAndRemoveImage(.ProfileRight)
-                case self.btnNasal:         verifyAndRemoveImage(.Nasal)
-                case self.btnObliqueLeft:   verifyAndRemoveImage(.ObliqueLeft)
-                case self.btnProfileLeft:   verifyAndRemoveImage(.ProfileLeft)
-                case self.btnObliqueRight:  verifyAndRemoveImage(.ObliqueRight)
-                    
-                default: print("ERRO mountArrayUpdate()")
-                }
-                
             }
         }
         
@@ -341,8 +337,9 @@ class AUFichaVC: FormViewController{
         if self.record != nil{
             for image in self.record.image {
                 if Int(image.imageType) == imageType.hashValue {
-                    if RealmParse.existImageFromPath(image.path){
-                        RealmParse.removeImage(image.path, record: self.record)
+                    if RealmParse.fileExists(fileName: image.name, fileExtension: .JPG){
+                        RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                        RealmParse.deleteImage(image: image)
                     }
                 }
             }
@@ -581,7 +578,8 @@ class AUFichaVC: FormViewController{
                     if self.record != nil{
                         for image in self.record.image {
                             if Int(image.imageType) == self.imageType.hashValue {
-                                RealmParse.removeImage(image.path, record: self.record)
+                                RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                RealmParse.deleteImage(image: image)
                             }
                         }
                     }
@@ -731,24 +729,16 @@ extension AUFichaVC: ProcedimentoCirurgico{
     }
 }
 
+extension UIImage {
+    
+    func isEqualToImage(image: UIImage) -> Bool {
+        guard let data1 = UIImagePNGRepresentation(self),
+            data2 = UIImagePNGRepresentation(image)
+            else { return false }
+        return data1.isEqualToData(data2)
+    }
+}
 
 
-//    func updateData(image image: UIImage, points: [String : NSValue]?, ImageType: ImageTypes) {
-//        switch ImageType {
-//        case .Front:        self.btnFront.setImage(image, forState: UIControlState.Normal)
-//                            self.frontPoints = points
-//            
-//        case .ProfileRight: self.btnProfileRight.setImage(image, forState: UIControlState.Normal)
-//                            self.profileRightPoints = points
-//            
-//        case .ProfileLeft:  self.btnProfileLeft.setImage(image, forState: UIControlState.Normal)
-//            
-//        case .ObliqueRight: self.btnObliqueRight.setImage(image, forState: UIControlState.Normal)
-//            
-//        case .ObliqueLeft:  self.btnProfileLeft.setImage(image, forState: UIControlState.Normal)
-//            
-//        case .Nasal:        self.btnNasal.setImage(image, forState: UIControlState.Normal)
-//                            self.nasalPoints = points
-//        }
-//    }
+
 

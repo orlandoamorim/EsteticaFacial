@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 import AssetsLibrary
 import DeviceKit
 
@@ -339,43 +338,43 @@ class Helpers: NSObject{
      - Returns:  **[String : [AnyObject]]**.
      */
     
-    static func dicAtoZ (pfobject:[PFObject]?)-> [String : [AnyObject]]{
-        
-        var recordsHeader: [String] = [String]()
-        var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
-        
-        for i in pfobject! {
-            let parseObject:PFObject = i 
-            let nome = parseObject.objectForKey("nome") as! String
-            
-
-            let char = nome.lowercaseString[nome.lowercaseString.startIndex]
-            
-            if recordsDicAtoZ[String(char)] != nil {
-                if !recordsHeader.contains(String(char)) {
-                    recordsHeader.append(String(char))
-                }
-                
-                var fichas = recordsDicAtoZ[String(char)]!
-                fichas.append(parseObject)
-                
-                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
-            }else {
-                if !recordsHeader.contains(String(char)) {
-                    recordsHeader.append(String(char))
-                }
-                
-                var fichas:[AnyObject] = [AnyObject]()
-                fichas.append(parseObject)
-                
-                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
-            }
-            
-        }
-        
-        return recordsDicAtoZ
-        
-    }
+//    static func dicAtoZ (pfobject:[PFObject]?)-> [String : [AnyObject]]{
+//        
+//        var recordsHeader: [String] = [String]()
+//        var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
+//        
+//        for i in pfobject! {
+//            let parseObject:PFObject = i 
+//            let nome = parseObject.objectForKey("nome") as! String
+//            
+//
+//            let char = nome.lowercaseString[nome.lowercaseString.startIndex]
+//            
+//            if recordsDicAtoZ[String(char)] != nil {
+//                if !recordsHeader.contains(String(char)) {
+//                    recordsHeader.append(String(char))
+//                }
+//                
+//                var fichas = recordsDicAtoZ[String(char)]!
+//                fichas.append(parseObject)
+//                
+//                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
+//            }else {
+//                if !recordsHeader.contains(String(char)) {
+//                    recordsHeader.append(String(char))
+//                }
+//                
+//                var fichas:[AnyObject] = [AnyObject]()
+//                fichas.append(parseObject)
+//                
+//                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
+//            }
+//            
+//        }
+//        
+//        return recordsDicAtoZ
+//        
+//    }
     
     /**
      Recebe o PFObject e a view que chama a função 'retornando' os dados da ficha para serem compartilhados

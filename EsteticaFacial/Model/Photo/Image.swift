@@ -14,7 +14,7 @@ class Image: Object {
     dynamic var id = NSUUID().UUIDString
     dynamic var patientId = ""
     dynamic var imageType = ""
-    dynamic var path = ""
+    dynamic var name = ""
     dynamic var create_at:NSDate? = nil
     dynamic var update_at = NSDate()
     dynamic var points: NSData? = nil

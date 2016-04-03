@@ -15,8 +15,6 @@ target 'EsteticaFacial' do
     pod 'DeviceKit', '~> 0.3.1'
     
     pod 'SCLAlertView', :git => 'https://github.com/vikmeup/SCLAlertView-Swift', :branch => 'master'
-    pod 'Parse'
-    pod 'Bolts'
 end
 
 target 'EsteticaFacialTests' do

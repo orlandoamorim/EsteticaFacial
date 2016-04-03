@@ -23,12 +23,11 @@
 		181C89D71C307ED3003FC62D /* ProcessImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C89D61C307ED3003FC62D /* ProcessImageVC.swift */; };
 		181FF7161C1A657E00313E57 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181FF7151C1A657E00313E57 /* Protocols.swift */; };
 		183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */; };
-		1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */; };
 		1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */; };
 		1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */; };
 		187524AE1C2A638700FA0A95 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187524AD1C2A638700FA0A95 /* CameraVC.swift */; };
 		189B03041BF1964500A516F4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B03031BF1964500A516F4 /* Helpers.swift */; };
-		18BAB9EA1C9B7E3300BD575B /* LocalizarPontosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */; };
+		18B8000D1CB1711A00F150D0 /* FileSaveHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8000C1CB1711900F150D0 /* FileSaveHelper.swift */; };
 		18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
 		18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
 		18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
@@ -36,11 +35,9 @@
 		18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
-		18D88D311C27BA4C00F90C41 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D88D301C27BA4C00F90C41 /* Pods.framework */; };
-		18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */; };
+		18E518781CB1A84D00E308BD /* Pods_EsteticaFacial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E518771CB1A84D00E308BD /* Pods_EsteticaFacial.framework */; };
 		18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */; };
 		18F6F1171BDDE632008DA5B1 /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6F1161BDDE632008DA5B1 /* Teste.swift */; };
-		53399E36196AB120ADBB793A /* Pods_EsteticaFacial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
 		B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A681BC344AE002A306F /* Assets.xcassets */; };
@@ -85,26 +82,20 @@
 		181C89D61C307ED3003FC62D /* ProcessImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessImageVC.swift; sourceTree = "<group>"; };
 		181FF7151C1A657E00313E57 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		183D2F4D1BD9E8150033BDA3 /* PacientesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacientesTableVC.swift; sourceTree = "<group>"; };
-		1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConnection.swift; sourceTree = "<group>"; };
 		1865CAD91BF180B00035BDC6 /* AUFichaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUFichaVC.swift; sourceTree = "<group>"; };
 		1873AFA71BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedimentosCirurgicosVC.swift; sourceTree = "<group>"; };
 		187524AD1C2A638700FA0A95 /* CameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
-		188840231C25E79F000899ED /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		188840251C25E7A8000899ED /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		189B02FF1BF1897F00A516F4 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		189B03031BF1964500A516F4 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizarPontosViewController.swift; sourceTree = "<group>"; };
+		18B8000C1CB1711900F150D0 /* FileSaveHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileSaveHelper.swift; path = Classes/Core/FileSaveHelper.swift; sourceTree = "<group>"; };
 		18BAB9EC1C9B983E00BD575B /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Patient.swift; path = Model/Patient/Patient.swift; sourceTree = "<group>"; };
 		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
 		18BAB9F51C9BA67D00BD575B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Model/Record/Record.swift; sourceTree = "<group>"; };
 		18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostrarCirurgiasVC.swift; sourceTree = "<group>"; };
-		18D88D301C27BA4C00F90C41 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
-		18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedColorButton.swift; sourceTree = "<group>"; };
+		18E518771CB1A84D00E308BD /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_EsteticaFacial.framework; path = "../Library/Developer/Xcode/DerivedData/EsteticaFacial-bnsjnwbhszlttnfvdrmwuuqmojhx/Build/Products/Debug-iphonesimulator/Pods_EsteticaFacial.framework"; sourceTree = "<group>"; };
 		18F6F1141BDD6A0A008DA5B1 /* VSReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSReachability.swift; sourceTree = "<group>"; };
 		18F6F1161BDDE632008DA5B1 /* Teste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
 		24F0A10AE2D837209F9039E7 /* Pods-EsteticaFacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.debug.xcconfig"; sourceTree = "<group>"; };
 		2822637C4A48596B8AC4E44B /* Pods-EsteticaFacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.release.xcconfig"; sourceTree = "<group>"; };
-		68C73DDC933BB7E09C4EF935 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B81B4A631BC344AE002A306F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,7 +114,6 @@
 		B8AFADA01BE8DF5F000EF30A /* LocalizadorFrontal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizadorFrontal.swift; sourceTree = "<group>"; };
 		B8AFADA21BE8ED83000EF30A /* VisaoComputacional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaoComputacional.swift; sourceTree = "<group>"; };
 		B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +121,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D88D311C27BA4C00F90C41 /* Pods.framework in Frameworks */,
+				18E518781CB1A84D00E308BD /* Pods_EsteticaFacial.framework in Frameworks */,
 				B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */,
-				53399E36196AB120ADBB793A /* Pods_EsteticaFacial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +173,9 @@
 		18126CF01CACC58A002D26F7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B829B8C51BE26881009909C0 /* CG */,
 				18126CF11CACC5F7002D26F7 /* CameraManager.swift */,
+				18B8000C1CB1711900F150D0 /* FileSaveHelper.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -319,8 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				189B03031BF1964500A516F4 /* Helpers.swift */,
-				1863F3AE1BF52DDD00C369D9 /* ParseConnection.swift */,
-				18ED8D8C1BFD5372003568E6 /* HighlightedColorButton.swift */,
 				B85392801BD5E64E000DCD91 /* PontoView.swift */,
 				181FF7151C1A657E00313E57 /* Protocols.swift */,
 				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
@@ -368,13 +357,8 @@
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				18D88D301C27BA4C00F90C41 /* Pods.framework */,
-				188840251C25E7A8000899ED /* Social.framework */,
-				188840231C25E79F000899ED /* Accounts.framework */,
-				189B02FF1BF1897F00A516F4 /* Eureka.framework */,
+				18E518771CB1A84D00E308BD /* Pods_EsteticaFacial.framework */,
 				B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */,
-				68C73DDC933BB7E09C4EF935 /* Pods.framework */,
-				F3DF96E7968C06E045F2DD98 /* Pods_EsteticaFacial.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -408,7 +392,6 @@
 				18126CEF1CACC557002D26F7 /* Classes */,
 				1883EA601BF10814000F22A3 /* Ficha  */,
 				18FEC0431BFC09EC008AA555 /* Configurações */,
-				B829B8C51BE26881009909C0 /* CG */,
 				189B03021BF195CE00A516F4 /* Helper */,
 			);
 			path = EsteticaFacial;
@@ -435,7 +418,6 @@
 		B829B8C51BE26881009909C0 /* CG */ = {
 			isa = PBXGroup;
 			children = (
-				18BAB9E91C9B7E3300BD575B /* LocalizarPontosViewController.swift */,
 				B829B8CA1BE26AD3009909C0 /* Algoritmos */,
 				B829B8C61BE26AB7009909C0 /* TratamentoEntrada.swift */,
 				B829B8C81BE26ACF009909C0 /* TecnicasPDI.swift */,
@@ -640,13 +622,13 @@
 				1873AFA81BEC3F4800987DCB /* ProcedimentosCirurgicosVC.swift in Sources */,
 				187524AE1C2A638700FA0A95 /* CameraVC.swift in Sources */,
 				B85392811BD5E64E000DCD91 /* PontoView.swift in Sources */,
+				18B8000D1CB1711A00F150D0 /* FileSaveHelper.swift in Sources */,
 				18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */,
 				181C89D71C307ED3003FC62D /* ProcessImageVC.swift in Sources */,
 				B829B8C91BE26ACF009909C0 /* TecnicasPDI.swift in Sources */,
 				183D2F4E1BD9E8150033BDA3 /* PacientesTableVC.swift in Sources */,
 				18F6F1151BDD6A0A008DA5B1 /* VSReachability.swift in Sources */,
 				181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */,
-				18BAB9EA1C9B7E3300BD575B /* LocalizarPontosViewController.swift in Sources */,
 				1865CADA1BF180B00035BDC6 /* AUFichaVC.swift in Sources */,
 				18126CF21CACC5F7002D26F7 /* CameraManager.swift in Sources */,
 				181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */,
@@ -657,10 +639,8 @@
 				B829B8C71BE26AB7009909C0 /* TratamentoEntrada.swift in Sources */,
 				189B03041BF1964500A516F4 /* Helpers.swift in Sources */,
 				18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */,
-				1863F3AF1BF52DDD00C369D9 /* ParseConnection.swift in Sources */,
 				181FF7161C1A657E00313E57 /* Protocols.swift in Sources */,
 				18126CE71CAB05B3002D26F7 /* Settings.swift in Sources */,
-				18ED8D8D1BFD5372003568E6 /* HighlightedColorButton.swift in Sources */,
 				B8AFADA31BE8ED83000EF30A /* VisaoComputacional.swift in Sources */,
 				181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
 				181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
@@ -831,16 +811,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				"HEADER_SEARCH_PATHS[arch=*]" = (
-					/Users/ricardofreitas/Dropbox/Masters,
-					of,
-					the,
-					"Universe/estetica/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = "Universe/estetica/**";
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -857,10 +829,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = EsteticaFacial/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

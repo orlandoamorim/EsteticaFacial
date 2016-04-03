@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Parse
-import RealmSwift
+//import RealmSwift
 
 
 @UIApplicationMain
@@ -18,11 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // Initialize Parse.
-        Parse.setApplicationId("5aa6JqGqhC7iw8bG6CXC4imvXlCZ63i7j9bC9Ace",
-            clientKey: "0G40jdCQrAVB8cyzhEGrwDDLUMk0tiSQFh7WshCN")
-        
+
+//        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+//            schemaVersion: 1,
+//            migrationBlock: { migration, oldSchemaVersion in
+//                // The enumerateObjects:block: method iterates
+//                // over every 'Person' object stored in the Realm file
+//                migration.enumerate(Image.className()) { oldObject, newObject in
+//                    // Add the `fullName` property only to Realms with a schema version of 0
+//                    if oldSchemaVersion < 1 {
+//                        let path = oldObject!["path"] as! String
+//                        newObject!["name"] = path
+//                    }
+//                }
+//        })
+//        
         return true
     }
     

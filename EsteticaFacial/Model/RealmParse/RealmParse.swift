@@ -70,79 +70,31 @@ class RealmParse: NSObject{
         var imagesArray:[Image] = [Image]()
         
         for (imageType,(image, points)) in images! {
-            let newImage = Image()
             
             switch imageType {
-            case .Front:        newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("Front-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-                                points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
+            case .Front:
                 
-                                imagesArray.append(newImage)
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "Front-\(id)", image: image, points: points))
                 
-            case .ProfileRight: newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("ProfileRight-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-                                points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
+            case .ProfileRight:
                 
-                                imagesArray.append(newImage)
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "ProfileRight-\(id)", image: image, points: points))
 
                 
-            case .Nasal:        newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("Nasal-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-                                points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
-                
-                                imagesArray.append(newImage)
+            case .Nasal:
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "Nasal-\(id)", image: image, points: points))
 
                 
-            case .ObliqueLeft:  newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("ObliqueLeft-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-            
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-
-                                imagesArray.append(newImage)
+            case .ObliqueLeft:
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "ObliqueLeft-\(id)", image: image, points: points))
                 
                 
-            case .ProfileLeft:  newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("ProfileLeft-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-            
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-            
-                                imagesArray.append(newImage)
+            case .ProfileLeft:
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "ProfileLeft-\(id)", image: image, points: points))
                 
                 
-            case .ObliqueRight: newImage.patientId = id
-                                newImage.imageType = "\(imageType.hashValue)"
-                                let imagePath = RealmParse.fileInDocumentsDirectory("ObliqueRight-\(id).png")
-                                newImage.path = imagePath
-                                saveImage(image, path: imagePath)
-            
-                                newImage.create_at = NSDate()
-                                newImage.update_at = NSDate()
-            
-                                imagesArray.append(newImage)
-                
+            case .ObliqueRight:
+                imagesArray.append(RealmParse.image(id: id, imageType: imageType.hashValue, fileName: "ObliqueRight-\(id)", image: image, points: points))
                 
             }
         }
@@ -236,87 +188,32 @@ class RealmParse: NSObject{
             var imagesArray:[Image] = [Image]()
             
             for (imageType,(image, points)) in images! {
-                let newImage = Image()
-                
                 switch imageType {
                 case .Front:
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("Front-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
-                    points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
                     
-                    imagesArray.append(newImage)
+                    imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "Front-\(record.id)", image: image, points: points))
                     
                 case .ProfileRight:
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("ProfileRight-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
-                    points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
                     
-                    imagesArray.append(newImage)
+                    imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "ProfileRight-\(record.id)", image: image, points: points))
                     
                     
                 case .Nasal:
                     
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("Nasal-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
-                    points != nil ? newImage.points = NSKeyedArchiver.archivedDataWithRootObject(points!) : print("Não")
-                    
-                    imagesArray.append(newImage)
-                    
+                    imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "Nasal-\(record.id)", image: image, points: points))
+                
                 case .ObliqueLeft:
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("ObliqueLeft-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
-                    
-                    imagesArray.append(newImage)
+
+                    imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "ObliqueLeft-\(record.id)", image: image, points: points))
     
                     
                 case .ProfileLeft:
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("ProfileLeft-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
                     
-                    imagesArray.append(newImage)
-                    
+                      imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "ProfileLeft-\(record.id)", image: image, points: points))
                     
                 case .ObliqueRight:
-                    newImage.patientId = record.id
-                    newImage.imageType = "\(imageType.hashValue)"
-                    if image != nil {
-                        let imagePath = RealmParse.fileInDocumentsDirectory("ObliqueRight-\(record.id).png")
-                        newImage.path = imagePath
-                        saveImage(image!, path: imagePath)
-                        newImage.update_at = NSDate()
-                    }
-                    imagesArray.append(newImage)
                     
+                      imagesArray.append(RealmParse.image(id: record.id, imageType: imageType.hashValue, fileName: "ObliqueRight-\(record.id)", image: image, points: points))
                     
                 }
             }
@@ -418,6 +315,21 @@ class RealmParse: NSObject{
             realm.deleteAll()
         }
     }
+    
+    /**
+     Delete an object Image with a transaction.
+     
+     - Parameter record: Image
+     
+     */
+    
+    static func deleteImage(image image: Image){
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(image)
+        }
+    }
+    
     
     
     /**
@@ -603,132 +515,235 @@ class RealmParse: NSObject{
     }
     
     /**
-     Return an String that contains the diretory so save file.
+     Return an Image Object. If pass image or poinsts nil the func rocnize this and don't save the value
      
-     - Parameter filename: String
+     - Parameter        id: String
+     - Parameter imageType: Int
+     - Parameter  fileName: String
+     - Parameter     image: UIImage?
+     - Parameter    points: [String : NSValue]?
      
-     - Returns:  Return **String** loaded from path.
-     
-     */
-    
-    static func fileInDocumentsDirectory(filename: String) -> String {
-        
-        let documentDirectoryURL =  try! NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-        let newDir = documentDirectoryURL.URLByAppendingPathComponent("LabInC")
-        
-        if !NSFileManager().fileExistsAtPath(newDir.path!){
-            try! NSFileManager.defaultManager().createDirectoryAtURL(newDir, withIntermediateDirectories: true, attributes: nil)
-        }
-        
-        let fileURL = documentDirectoryURL.URLByAppendingPathComponent(filename)
-        
-        return fileURL.path!
-        
-    }
-    
-    
-    /**
-     Save image in the path.
-     
-     - Parameter image: UIImage
-     - Parameter path: String
-     
-     - Returns:  Return **Bool** to indicate if image was saved or not.
+     - Returns: **Image**
      
      */
-    
-    static func saveImage (image: UIImage, path: String ) -> Bool{
-        
-        let pngImageData = UIImagePNGRepresentation(image)
-        let result = pngImageData!.writeToFile(path, atomically: true)
-        
-        return result
-        
-    }
-    
-    /**
-     Remove image in the path. Addictionaly, if pass record, remove image from Recod file.
-     
-     - Parameter path: String
-     - Parameter record: Record? Default nil
-     
-     - Returns:  Return **Bool** to indicate if image was removed or not.
-     
-     */
-    
-    
-    static func removeImage (path: String, record: Record?=nil) -> Bool {
-        let gerenciador = NSFileManager()
-        
-        if gerenciador.fileExistsAtPath(path){
-            do {
-                try gerenciador.removeItemAtPath(path)
 
-                if record != nil {
-                    let realm = try! Realm()
-                    for image in record!.image{
-                        if image.path == path {
-                            try! realm.write {
-                                realm.delete(image)
-                            }
-                        }
-                    }
-                }
-            
-                return true
-            } catch _ {
-                return false
+    static func image(id id:String,imageType: Int, fileName: String,image: UIImage?, points: [String : NSValue]?) -> Image{
+        let newImage = Image()
+        
+        newImage.patientId = id
+        newImage.imageType = "\(imageType)"
+        
+        if !RealmParse.fileExists(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages",
+                                 directory: .DocumentDirectory) {
+            newImage.create_at =  NSDate()
+        }
+        
+        if image != nil {
+            RealmParse.saveFile(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: image!)
+        }
+        newImage.name = fileName
+        newImage.update_at = NSDate()
+        newImage.points = points != nil ? NSKeyedArchiver.archivedDataWithRootObject(points!) : nil
+        
+        print(newImage)
+        
+        return newImage
+        
+    }
+    
+    
+//    
+//    
+//    /**
+//     Return an String that contains the diretory so save file.
+//     
+//     - Parameter filename: String
+//     
+//     - Returns:  Return **String** loaded from path.
+//     
+//     */
+//
+//    static func fileInDocumentsDirectory(filename: String) -> String {
+//        
+//        let documentDirectoryURL =  try! NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+//        let newDir = documentDirectoryURL.URLByAppendingPathComponent("LabInC")
+//        
+//        if !NSFileManager().fileExistsAtPath(newDir.path!){
+//            try! NSFileManager.defaultManager().createDirectoryAtURL(newDir, withIntermediateDirectories: true, attributes: nil)
+//        }
+//        
+//        let fileURL = documentDirectoryURL.URLByAppendingPathComponent(filename)
+//        
+//        return fileURL.path!
+//        
+//    }
+//    
+//    
+//    /**
+//     Save image in the path.
+//     
+//     - Parameter image: UIImage
+//     - Parameter path: String
+//     
+//     - Returns:  Return **Bool** to indicate if image was saved or not.
+//     
+//     */
+//    
+//    static func saveImage (image: UIImage, path: String ) -> Bool{
+//        
+//        let pngImageData = UIImagePNGRepresentation(image)
+//        let result = pngImageData!.writeToFile(path, atomically: true)
+//        
+//        return result
+//        
+//    }
+//    
+//    /**
+//     Remove image in the path. Addictionaly, if pass record, remove image from Recod file.
+//     
+//     - Parameter path: String
+//     - Parameter record: Record? Default nil
+//     
+//     - Returns:  Return **Bool** to indicate if image was removed or not.
+//     
+//     */
+//    
+//    
+//    static func removeImage (path: String, record: Record?=nil) -> Bool {
+//        let gerenciador = NSFileManager()
+//        
+//        if gerenciador.fileExistsAtPath(path){
+//            do {
+//                try gerenciador.removeItemAtPath(path)
+//
+//                if record != nil {
+//                    let realm = try! Realm()
+//                    for image in record!.image{
+//                        if image.path == path {
+//                            try! realm.write {
+//                                realm.delete(image)
+//                            }
+//                        }
+//                    }
+//                }
+//            
+//                return true
+//            } catch _ {
+//                return false
+//            }
+//
+//        }
+//        
+//        
+//        
+//        return false
+//    }
+//    
+//    /**
+//     Verify if exist image(can be any file) in the path.
+//     
+//     - Parameter path: String
+//     
+//     - Returns:  Return **Bool** to indicate if exist image in path or not.
+//     
+//     */
+//    
+//    static func existImageFromPath(path:String) -> Bool{
+//        let gerenciador = NSFileManager()
+//        if gerenciador.fileExistsAtPath(path){
+//            return true
+//        }
+//        
+//        return false
+//    }
+//    
+//    /**
+//    Load image from path send.
+//     
+//     - Parameter path: String
+//     
+//     - Returns:  Return **UIImage?** loaded from path. If not exist image in path send, return nil.
+//     
+//     */
+//    
+//    
+//    static func loadImageFromPath(path: String) -> UIImage? {
+//        let gerenciador = NSFileManager()
+//        var imageFounded:UIImage = UIImage()
+//        if gerenciador.fileExistsAtPath(path){
+//            
+//            if let image = UIImage(contentsOfFile: path) {
+//                imageFounded = image
+//            }else{
+//                print("missing image at: \(path)")
+//            }
+//        }else{
+//            return nil
+//        }
+//        
+//        return imageFounded
+//    }
+    
+    
+    
+    static func saveFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
+                                  directory: NSSearchPathDirectory? = .DocumentDirectory, file:AnyObject){
+        
+        let fileSave = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
+        
+        do {
+            switch fileExtension {
+            case .TXT: try fileSave.saveFile(string: file as! String)
+            case .JPG: try fileSave.saveFile(image: file as! UIImage)
+            case .JSON: try fileSave.saveFile(dataForJson: file)
             }
-
-        }
-        
-        
-        
-        return false
-    }
-    
-    /**
-     Verify if exist image(can be any file) in the path.
-     
-     - Parameter path: String
-     
-     - Returns:  Return **Bool** to indicate if exist image in path or not.
-     
-     */
-    
-    static func existImageFromPath(path:String) -> Bool{
-        let gerenciador = NSFileManager()
-        if gerenciador.fileExistsAtPath(path){
-            return true
-        }
-        
-        return false
-    }
-    
-    /**
-    Load image from path send.
-     
-     - Parameter path: String
-     
-     - Returns:  Return **UIImage?** loaded from path. If not exist image in path send, return nil.
-     
-     */
-    
-    
-    static func loadImageFromPath(path: String) -> UIImage? {
-        let gerenciador = NSFileManager()
-        var imageFounded:UIImage = UIImage()
-        if gerenciador.fileExistsAtPath(path){
             
-            if let image = UIImage(contentsOfFile: path) {
-                imageFounded = image
-            }else{
-                print("missing image at: \(path)")
+            
+        }
+        catch {
+            print("There was an error saving the file: \(error)")
+        }
+    }
+    
+    
+    static func getFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
+                                  directory: NSSearchPathDirectory? = .DocumentDirectory) -> AnyObject? {
+        
+        let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
+        
+        do {
+            switch fileExtension {
+            case .TXT: return try file.getContentsOfFile()
+            case .JPG: return try file.getImage()
+            case .JSON:return try file.getJSONData()
             }
-        }else{
-            return nil
+            
+            
+        }
+        catch {
+            print("There was an error getting the file: \(error)")
         }
         
-        return imageFounded
+        return nil
     }
+    
+    static func deleteFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
+                                 directory: NSSearchPathDirectory? = .DocumentDirectory) {
+        
+        let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
+        print(file)
+        do {
+            try file.deleteFile()
+        }
+        catch {
+            print("There was an error deleting the file: \(error)")
+        }
+    }
+    
+    static func fileExists(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
+                                    directory: NSSearchPathDirectory? = .DocumentDirectory) -> Bool {
+        
+        return FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!).fileExists
+    }
+    
 }

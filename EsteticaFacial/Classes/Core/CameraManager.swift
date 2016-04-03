@@ -1,9 +1,9 @@
 //
 //  CameraManager.swift
-//  EsteticaFacial
+//  camera
 //
-//  Created by Orlando Amorim on 30/03/16.
-//  Copyright © 2016 Orlando Amorim. All rights reserved.
+//  Created by Natalia Terlecka on 10/10/14.
+//  Copyright (c) 2014 imaginaryCloud. All rights reserved.
 //
 
 import UIKit
@@ -904,4 +904,3 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGe
         _stopFollowingDeviceOrientation()
     }
 }
-

@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import KYShutterButton
 import TOCropViewController
 import AssetsLibrary
 import DeviceKit
@@ -130,7 +129,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     func setCameraAjusts(){
         cameraManager.showAccessPermissionPopupAutomatically = true
-        
+        cameraManager.writeFilesToPhoneLibrary = false
         let currentCameraState = cameraManager.currentCameraStatus()
         print(currentCameraState)
         if currentCameraState == .AccessDenied {

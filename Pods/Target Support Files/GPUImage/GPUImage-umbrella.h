@@ -137,6 +137,7 @@
 #import "GPUImageSobelEdgeDetectionFilter.h"
 #import "GPUImageSoftEleganceFilter.h"
 #import "GPUImageSoftLightBlendFilter.h"
+#import "GPUImageSolarizeFilter.h"
 #import "GPUImageSolidColorGenerator.h"
 #import "GPUImageSourceOverBlendFilter.h"
 #import "GPUImageSphereRefractionFilter.h"
