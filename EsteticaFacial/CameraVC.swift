@@ -59,7 +59,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 
         setLayout()
         setCameraAjusts()
-        print(imageType)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -84,7 +84,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     func setLayout() {
         if !Device().isPad {
-            self.flashBarBtn = UIBarButtonItem(image: UIImage(named: "FlashOff"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(CameraVC.flashState))
+            self.flashBarBtn = UIBarButtonItem(image: UIImage(named: "flashOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(CameraVC.flashState))
             self.spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
             
             self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
@@ -103,7 +103,6 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         let imageTypeCrop:[ImageTypes] = [.Front, .ProfileRight, .Nasal]
 
         if !imageTypeCrop.contains(imageType) {
-            print("ENTROU ERRO")
             if Device().isPad {
                 self.helpImageBtn.enabled = false
             }else{
@@ -114,11 +113,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.cameraBtn.setImage(UIImage(named:"cameraButton" ), forState: UIControlState.Normal)
         self.cameraBtn.setImage(UIImage(named:"cameraButtonHighlighted" ), forState: UIControlState.Highlighted)
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        
-//        Helpers.inicializeImageView(type: false, view:self.cameraView, imageTypesSelected: self.imageType, x: nil, y: nil, width: nil, height: nil)
-        
-        
+
         self.libraryImages.addTarget(self, action: #selector(CameraVC.getLibraryImages(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.cameraBtn.addTarget(self, action: #selector(takePhoto), forControlEvents: UIControlEvents.TouchUpInside)
@@ -167,12 +162,13 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         UIView.animateWithDuration(0.3) {
             self.cameraBtn.transform = CGAffineTransformMakeRotation(rads)
             self.libraryImages.transform = CGAffineTransformMakeRotation(rads)
-            
-            self.view.subviews.forEach ({
+            self.cancelBtn.transform = CGAffineTransformMakeRotation(rads)
+            self.cameraView.subviews.forEach ({
                 if $0 is UIImageView {
                     $0.transform = CGAffineTransformMakeRotation(rads)
                 }
             })
+            
         }
     }
     
@@ -197,7 +193,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 //    override func shouldAutorotate() -> Bool {
 //        return false
 //    }
-    
+//    
 //    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
 //        return UIInterfaceOrientationMask.Portrait
 //    }
@@ -237,32 +233,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             self.performSegueWithIdentifier("VerifyImageSegue", sender: nil)
         }
     }
-    
-//    func inicializeCropViewController(image: UIImage){
-//        cropViewController = TOCropViewController(image: image)
-//        
-//        cropViewController.delegate = self
-//        cropViewController.defaultAspectRatio =  TOCropViewControllerAspectRatio.RatioSquare
-//        cropViewController.toolbar.resetButton.hidden = true
-//        cropViewController.toolbar.clampButton.hidden = true
-//        cropViewController.cropView.cropBoxResizeEnabled = false
-//        cropViewController.toolbar.rotateButton.addTarget(self, action: #selector(CameraVC.ajust), forControlEvents: UIControlEvents.TouchUpInside)
-//        self.presentViewController(cropViewController, animated: true) { () -> Void in
-//            self.ajust()
-//        }
-//
-//
-//        
-//    }
-//    
-//    func ajust(){
-//        Helpers.removeImageView(cropViewController.cropView)
-//        TOCropViewControllerAspectRatio.RatioSquare
-//        Helpers.inicializeImageView(type: true, view:cropViewController.cropView, imageTypesSelected: imageType, x: cropViewController.cropView.cropBoxFrame.origin.x, y: cropViewController.cropView.cropBoxFrame.origin.y, width: cropViewController.cropView.cropBoxFrame.size.width, height: cropViewController.cropView.cropBoxFrame.size.height)
-//        
-//    }
-    
-    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
@@ -275,7 +246,6 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         }
         
     }
-    
     
     func flashState() {
         switch (cameraManager.changeFlashMode()) {
@@ -306,7 +276,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             if Device().isPad{
                 self.helpImageBtn.setImage(UIImage(named: "modelOffIcon"), forState: UIControlState.Normal)
             }else{
-                self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
+                self.helpImageBarBtn.image =  UIImage(named: "modelOffIcon")
             }
             Helpers.removeImageView(cameraView)
         }else if helpImageState == .Off{
@@ -315,7 +285,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             if Device().isPad{
                 self.helpImageBtn.setImage(UIImage(named: "modelOnIcon"), forState: UIControlState.Normal)
             }else{
-                self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOnIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
+                self.helpImageBarBtn.image =  UIImage(named: "modelOnIcon")
             }
             Helpers.inicializeImageView(type: false, view: self.cameraView, imageTypes: self.imageType)
         }
@@ -331,7 +301,6 @@ extension CameraVC: ImageVerification{
             self.capturedImage = image
             return
         case .Ok:
-            print("AQUI")
             self.delegate.updateData(image: image!, ImageType: self.imageType)
             self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             

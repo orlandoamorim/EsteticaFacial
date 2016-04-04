@@ -56,7 +56,6 @@ class VerifyImageVC: UIViewController{
             if croppedImage == nil {
                 alert.addAction(UIAlertAction(title: "Recortar", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                     self.askImageguia(sender)
-//                    self.presentCropViewController(self.imageView.image!)
                 }))
             }else{
                 alert.message = NSLocalizedString("Tome cuidado ao recortar uma imagem ja recortada. Isto pode ocasionar perda da qualiade da imagem.", comment:"")
@@ -66,8 +65,6 @@ class VerifyImageVC: UIViewController{
                 
                 alert.addAction(UIAlertAction(title: NSLocalizedString("Recortar Novamente", comment:""), style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                     self.askImageguia(sender)
-
-//                    self.presentCropViewController(self.imageView.image!)
                 }))
             }
             

@@ -95,6 +95,8 @@
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cameraBtn" destination="eeU-c1-HwY" id="bFr-Ax-f8U"/>
                         <outlet property="cameraToolbar" destination="Ong-aG-rqc" id="d71-bu-Y5c"/>
@@ -171,6 +173,9 @@
                             <constraint firstItem="HPw-d9-wLo" firstAttribute="top" secondItem="PVW-RC-gD8" secondAttribute="bottom" constant="20" id="yFK-q8-j3a"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="ZQN-8w-tBq" id="Wkz-VZ-RLp"/>
                         <outlet property="undo" destination="xff-NO-Fd7" id="BWn-Ri-AX5"/>
@@ -278,6 +283,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cameraBtn" destination="Dhv-Po-5mO" id="R3g-ez-gt0"/>
                         <outlet property="cameraView" destination="21b-u8-KeY" id="JCc-f4-Ikz"/>
@@ -302,6 +308,6 @@
         <image name="userFavi-32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oM1-Nv-kEe"/>
+        <segue reference="9IK-3G-Sib"/>
     </inferredMetricsTieBreakers>
 </document>

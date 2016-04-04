@@ -484,7 +484,6 @@ class Helpers: NSObject{
         var imageViewObject :UIImageView!
         
         if type {
-//            imageViewObject = UIImageView(frame:CGRectMake(x!, y!, width!, height!))
             print(cgRect!)
             imageViewObject = UIImageView(frame:cgRect!)
 
