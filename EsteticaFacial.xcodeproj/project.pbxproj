@@ -162,7 +162,7 @@
 		18126CEF1CACC557002D26F7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				188840191C24375A000899ED /* Storyboards */,
+				188840191C24375A000899ED /* UI */,
 				18126CF81CACF9CD002D26F7 /* Modules */,
 				18126CF01CACC58A002D26F7 /* Core */,
 				18BAB9EB1C9B895700BD575B /* Model */,
@@ -287,7 +287,7 @@
 			name = "Ficha ";
 			sourceTree = "<group>";
 		};
-		188840191C24375A000899ED /* Storyboards */ = {
+		188840191C24375A000899ED /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				B81B4A621BC344AE002A306F /* Main.storyboard */,
@@ -295,7 +295,7 @@
 				18126CEB1CAB82D9002D26F7 /* SurgeryData.storyboard */,
 				18126CF31CACD9AD002D26F7 /* CameraScreen.storyboard */,
 			);
-			name = Storyboards;
+			name = UI;
 			sourceTree = "<group>";
 		};
 		188840221C245078000899ED /* AppDelegate */ = {

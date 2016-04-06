@@ -498,115 +498,109 @@ class AUFichaVC: FormViewController{
     
     func showOptions(sender: UIButton!) {
         
-        switch sender {
-        case self.btnFront: self.imageType = .Front
-        case self.btnProfileRight: self.imageType = .ProfileRight
-        case self.btnNasal: self.imageType = .Nasal
-        case self.btnObliqueLeft: self.imageType = .ObliqueLeft
-        case self.btnProfileLeft: self.imageType = .ProfileLeft
-        case self.btnObliqueRight: self.imageType = .ObliqueRight
-        default: self.imageType = .Front
-            print("AQUI ERROR")
-        }
-        
-        
-        
-        var availableSources: ImageRowSourceTypes = []
-        
-        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-            availableSources.insert(.PhotoLibrary)
-        }
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            availableSources.insert(.Camera)
-        }
-        if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) {
-            availableSources.insert(.SavedPhotosAlbum)
-        }
-        
-        
-        sourceTypes.intersectInPlace(availableSources)
-        
-        if sourceTypes.isEmpty {
-            return
-        }
-        
-        // now that we know the number of actions aren't empty
-        let sourceActionSheet = UIAlertController(title: nil, message: "UFPI", preferredStyle: .ActionSheet)
-        if let popView = sourceActionSheet.popoverPresentationController {
-            sourceActionSheet.modalPresentationStyle = .OverCurrentContext
-            popView.sourceView = sender
-            popView.sourceRect = sender.bounds
-            
-        }
-        
-        if sourceTypes.contains(.Camera) {
-            let cameraOption = UIAlertAction(title: NSLocalizedString("Tirar Foto", comment: ""), style: .Default, handler: { (_) in
-                self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
-            })
-            sourceActionSheet.addAction(cameraOption)
-        }
-//        if sourceTypes.contains(.PhotoLibrary) {
-//            let photoLibraryOption = UIAlertAction(title: NSLocalizedString("Biblioteca de Fotos", comment: ""), style: .Default, handler: { (_) in
-//                self.performSegueWithIdentifier("SegueCamera", sender: nil)
-//            })
-//            sourceActionSheet.addAction(photoLibraryOption)
-//        }
-//        if sourceTypes.contains(.SavedPhotosAlbum) {
-//            let savedPhotosOption = UIAlertAction(title: NSLocalizedString("Fotos Salvas", comment: ""), style: .Default, handler: { (_) in
-//                self.performSegueWithIdentifier("SegueCamera", sender: nil)
-//            })
-//            sourceActionSheet.addAction(savedPhotosOption)
-//        }
-        
-        switch showAction {
-        case .Yes(let style):
-            if let _ = sender.currentImage {
-                let showPhotoOption = UIAlertAction(title: NSLocalizedString("Visualizar Imagem", comment: ""), style: style, handler: { (_) in
-                    self.performSegueWithIdentifier("ShowImageSegue", sender: nil)
-                })
-                sourceActionSheet.addAction(showPhotoOption)
+        dispatch_async(dispatch_get_global_queue(0, 0)) {
+            switch sender {
+            case self.btnFront: self.imageType = .Front
+            case self.btnProfileRight: self.imageType = .ProfileRight
+            case self.btnNasal: self.imageType = .Nasal
+            case self.btnObliqueLeft: self.imageType = .ObliqueLeft
+            case self.btnProfileLeft: self.imageType = .ProfileLeft
+            case self.btnObliqueRight: self.imageType = .ObliqueRight
+            default: self.imageType = .Front
             }
-        case .No:
-            break
-        }
-        
-        switch clearAction {
-        case .Yes(let style):
-            if let _ = sender.currentImage {
-                let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Apagar Imagem", comment: ""), style: style, handler: { (_) in
-                    sender.setImage(nil, forState: UIControlState.Normal)
-                    if self.record != nil{
-                        for image in self.record.image {
-                            if Int(image.imageType) == self.imageType.hashValue {
-                                RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                RealmParse.deleteImage(image: image)
+            
+            
+            
+            var availableSources: ImageRowSourceTypes = []
+            
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+                availableSources.insert(.PhotoLibrary)
+            }
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                availableSources.insert(.Camera)
+            }
+            if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) {
+                availableSources.insert(.SavedPhotosAlbum)
+            }
+            
+            
+            self.sourceTypes.intersectInPlace(availableSources)
+            
+            if self.sourceTypes.isEmpty {
+                return
+            }
+            
+            // now that we know the number of actions aren't empty
+            let sourceActionSheet = UIAlertController(title: nil, message: "UFPI", preferredStyle: .ActionSheet)
+            if let popView = sourceActionSheet.popoverPresentationController {
+                sourceActionSheet.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+                popView.sourceView = sender
+                popView.sourceRect = sender.bounds
+                
+            }
+            
+            if self.sourceTypes.contains(.Camera) {
+                let cameraOption = UIAlertAction(title: NSLocalizedString("Tirar Foto", comment: ""), style: .Default, handler: { (_) in
+                    self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
+                })
+                sourceActionSheet.addAction(cameraOption)
+            }
+    
+    
+            switch self.showAction {
+            case .Yes(let style):
+                if let _ = sender.currentImage {
+                    let showPhotoOption = UIAlertAction(title: NSLocalizedString("Visualizar Imagem", comment: ""), style: style, handler: { (_) in
+                        self.performSegueWithIdentifier("ShowImageSegue", sender: nil)
+                    })
+                    sourceActionSheet.addAction(showPhotoOption)
+                }
+            case .No:
+                break
+            }
+            
+            switch self.clearAction {
+            case .Yes(let style):
+                if let _ = sender.currentImage {
+                    let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Apagar Imagem", comment: ""), style: style, handler: { (_) in
+                        sender.setImage(nil, forState: UIControlState.Normal)
+                        if self.record != nil{
+                            for image in self.record.image {
+                                if Int(image.imageType) == self.imageType.hashValue {
+                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                    RealmParse.deleteImage(image: image)
+                                }
                             }
                         }
-                    }
-                    switch sender {
-                    case self.btnFront: self.frontPoints = nil
-                    case self.btnProfileRight: self.profileRightPoints = nil
-                    case self.btnNasal: self.nasalPoints = nil
-                    default : return
-                    }
-                    
+                        switch sender {
+                        case self.btnFront: self.frontPoints = nil
+                        case self.btnProfileRight: self.profileRightPoints = nil
+                        case self.btnNasal: self.nasalPoints = nil
+                        default : return
+                        }
+                        
                     })
-                sourceActionSheet.addAction(clearPhotoOption)
+                    sourceActionSheet.addAction(clearPhotoOption)
+                }
+            case .No:
+                break
             }
-        case .No:
-            break
-        }
-        
-        // check if we have only one source type given
-        if sourceActionSheet.actions.count == 1 {
-
-        } else {
-
             
+            // check if we have only one source type given
+            if sourceActionSheet.actions.count == 1 {
+                
+            } else {
+                
+                
+            }
+            sourceActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment: ""), style: .Cancel, handler:nil))
+
+
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.presentViewController(sourceActionSheet, animated: true, completion: nil)
+            })
         }
-        sourceActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment: ""), style: .Cancel, handler:nil))
         
-        self.presentViewController(sourceActionSheet, animated: true, completion: nil)
         
 
     }

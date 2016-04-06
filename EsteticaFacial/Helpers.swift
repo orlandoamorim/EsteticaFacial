@@ -551,11 +551,11 @@ class Helpers: NSObject{
             
         } else if device == .iPad3 {
             switch UIDevice.currentDevice().orientation{
-            case .Portrait:             return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
-            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
-            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
-            case .LandscapeRight:       return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
-            default:                    return UIImageView(frame:CGRectMake(164.0, 14.0, 696.0, 696.0))
+            case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 120.0, 740.0, 740.0))
+            case .PortraitUpsideDown:   return UIImageView(frame:CGRectMake(14.0, 120.0, 740.0, 740.0))
+            case .LandscapeLeft:        return UIImageView(frame:CGRectMake(120.0, 14.0, 740.0, 740.0))
+            case .LandscapeRight:       return UIImageView(frame:CGRectMake(120.0, 14.0, 740.0, 740.0))
+            default:                    return UIImageView(frame:CGRectMake(120.0, 14.0, 740.0, 740.0))
             }
             
         }
