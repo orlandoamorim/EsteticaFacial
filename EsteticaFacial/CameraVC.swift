@@ -28,17 +28,20 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     // MARK: - @IBOutlets
     
     @IBOutlet var cameraView: UIView!
+    @IBOutlet weak var frankfurtLineView: UIView!
     @IBOutlet weak var cameraBtn: UIButton!
     @IBOutlet weak var libraryImages: UIButton!
     @IBOutlet weak var flashBtn: UIButton!
     @IBOutlet weak var helpImageBtn: UIButton!
-    
+    @IBOutlet weak var frankfurtLineBtn: UIButton!
+
     @IBOutlet weak var cameraToolbar: UIToolbar!
     @IBOutlet weak var cancelBtn: UIButton!
 
     
     var flashBarBtn:UIBarButtonItem = UIBarButtonItem()
     var helpImageBarBtn:UIBarButtonItem = UIBarButtonItem()
+    var frankfurtLineBarBtn:UIBarButtonItem = UIBarButtonItem()
     var spaceBarBtn:UIBarButtonItem = UIBarButtonItem()
     
     enum HelpImageState {
@@ -46,26 +49,23 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     var helpImageState:HelpImageState = .Off
 
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return UIStatusBarAnimation.Slide
+    enum FrankfurtLineState {
+        case On, Off
     }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
+    var frankfurtLineState:FrankfurtLineState = .Off
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setLayout()
         setCameraAjusts()
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        self.frankfurtLineView.hidden = true
     }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraManager.resumeCaptureSession()
-        
         Helpers().getLatestPhotos { (images) -> () in
             self.libraryImages.setBackgroundImage(images[0], forState: UIControlState.Normal)
         }
@@ -73,7 +73,9 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-//        NSNotificationCenter.defaultCenter().removeObserver(self)
+        if helpImageState == .On {
+            NSNotificationCenter.defaultCenter().removeObserver(self)
+        }
         cameraManager.stopCaptureSession()
     }
 
@@ -87,18 +89,21 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             self.flashBarBtn = UIBarButtonItem(image: UIImage(named: "flashOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(CameraVC.flashState))
             self.spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
             
+            self.frankfurtLineBarBtn = UIBarButtonItem(image: UIImage(named: "FrankfurtOff"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(frankfurtLineControl))
+            
             self.helpImageBarBtn = UIBarButtonItem(image: UIImage(named: "modelOffIcon"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(imagemGuiaState))
             
             
-            cameraToolbar.setItems([flashBarBtn, spaceBarBtn, helpImageBarBtn], animated: true)
+            cameraToolbar.setItems([flashBarBtn, spaceBarBtn, frankfurtLineBarBtn, spaceBarBtn, helpImageBarBtn], animated: true)
             
         }else{
             
             self.helpImageBtn.setImage(UIImage(named: "modelOffIcon"), forState: UIControlState.Normal)
             self.helpImageBtn.addTarget(self, action: #selector(imagemGuiaState), forControlEvents: UIControlEvents.TouchUpInside)
             
-            self.flashBtn.addTarget(nil, action: #selector(CameraVC.flashState) , forControlEvents: UIControlEvents.TouchUpInside)
+            self.flashBtn.addTarget(self, action: #selector(flashState) , forControlEvents: UIControlEvents.TouchUpInside)
             
+            self.frankfurtLineBtn.addTarget(self, action: #selector(frankfurtLineControl), forControlEvents: UIControlEvents.TouchUpInside)
         }
         let imageTypeCrop:[ImageTypes] = [.Front, .ProfileRight, .Nasal]
 
@@ -141,7 +146,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             if Device().isPad {
                 self.flashBtn.hidden = true
             }else{
-                self.cameraToolbar.setItems([spaceBarBtn, helpImageBarBtn], animated: true)
+                self.cameraToolbar.setItems([spaceBarBtn, frankfurtLineBarBtn, spaceBarBtn, helpImageBarBtn], animated: true)
             }
         }
     }
@@ -154,49 +159,6 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-
-    internal func rotate() {
-        let rotation = currentRotation()
-        let rads = CGFloat(radians(rotation))
-        
-        UIView.animateWithDuration(0.3) {
-            self.cameraBtn.transform = CGAffineTransformMakeRotation(rads)
-            self.libraryImages.transform = CGAffineTransformMakeRotation(rads)
-            self.cancelBtn.transform = CGAffineTransformMakeRotation(rads)
-            self.cameraView.subviews.forEach ({
-                if $0 is UIImageView {
-                    $0.transform = CGAffineTransformMakeRotation(rads)
-                }
-            })
-            
-        }
-    }
-    
-    internal func radians(degrees: Double) -> Double {
-        return degrees / 180 * M_PI
-    }
-    
-    internal func currentRotation() -> Double {
-        var rotation: Double = 0
-        
-        if UIDevice.currentDevice().orientation == .LandscapeLeft {
-            rotation = 90
-        } else if UIDevice.currentDevice().orientation == .LandscapeRight {
-            rotation = 270
-        } else if UIDevice.currentDevice().orientation == .PortraitUpsideDown {
-            rotation = 180
-        }
-        
-        return rotation
-    }
-    
-//    override func shouldAutorotate() -> Bool {
-//        return false
-//    }
-//    
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        return UIInterfaceOrientationMask.Portrait
-//    }
     
     func takePhoto() {
         switch (cameraManager.cameraOutputMode) {
@@ -279,6 +241,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 self.helpImageBarBtn.image =  UIImage(named: "modelOffIcon")
             }
             Helpers.removeImageView(cameraView)
+            NSNotificationCenter.defaultCenter().removeObserver(self)
         }else if helpImageState == .Off{
             helpImageState = .On
 
@@ -288,6 +251,34 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 self.helpImageBarBtn.image =  UIImage(named: "modelOnIcon")
             }
             Helpers.inicializeImageView(type: false, view: self.cameraView, imageTypes: self.imageType)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateImageGuiaView), name: UIDeviceOrientationDidChangeNotification, object: nil)
+
+        }
+    }
+    
+    func updateImageGuiaView(){
+        Helpers.removeImageView(cameraView)
+        Helpers.inicializeImageView(type: false, view: self.cameraView, imageTypes: self.imageType)
+    }
+    
+    func frankfurtLineControl() {
+        if frankfurtLineState == .On {
+            frankfurtLineState = .Off
+            if Device().isPad{
+                self.frankfurtLineBtn.setImage(UIImage(named: "FrankfurtOff"), forState: UIControlState.Normal)
+            }else{
+                self.frankfurtLineBarBtn.image =  UIImage(named: "FrankfurtOff")
+            }
+            self.frankfurtLineView.hidden = true
+        }else if frankfurtLineState == .Off{
+            frankfurtLineState = .On
+            
+            if Device().isPad{
+                self.frankfurtLineBtn.setImage(UIImage(named: "FrankfurtOn"), forState: UIControlState.Normal)
+            }else{
+                self.frankfurtLineBarBtn.image =  UIImage(named: "FrankfurtOn")
+            }
+            self.frankfurtLineView.hidden = false
         }
     }
 

@@ -27,7 +27,7 @@ class RealmParse: NSObject{
     
     static func add(formValues formValues:[String : Any?],
         preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],
-        images:[ImageTypes:(UIImage,[String:NSValue]?)]?=nil ){
+        images:[ ImageTypes :(UIImage,[String:NSValue]?)]?=nil ){
         
         let id = NSUUID().UUIDString
         let formValues = RealmParse.convertAnyToAnyObject(formValues)

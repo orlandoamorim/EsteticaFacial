@@ -168,6 +168,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>02182B27F4776E0F552A0BEAEA9256E1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Base.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/Base.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>0219A8E0BB9E887FF70DD8CC0A780E90</key>
 		<dict>
 			<key>fileRef</key>
@@ -281,6 +294,19 @@
 			<string>GPUImageNobleCornerDetectionFilter.m</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageNobleCornerDetectionFilter.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>03FE7CAF557609CA38723CCEC7BED757</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>id.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/id.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -476,19 +502,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>0665508313C72F05782AA32DF4F11A10</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>da.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/da.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>06A25230E382900B5B90B9CE5AF36E6A</key>
 		<dict>
@@ -848,6 +861,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>0DE6707426C38AE62A575BB57598DBC8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E91D9A1E5B942EFAAB328607D97B2D7C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>0DFDC14E6DABFFD1EDCA9858741B5155</key>
 		<dict>
 			<key>fileRef</key>
@@ -1074,18 +1094,27 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
-		<key>0FCBD9545A5CF0BC0AC6EA0D042D7DE9</key>
+		<key>0FCB20B0FE7CF21502212438562E2DBD</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>Base.lproj</string>
+			<string>TOActivityCroppedImageProvider.h</string>
 			<key>path</key>
-			<string>TOCropViewController/Base.lproj</string>
+			<string>TOCropViewController/Models/TOActivityCroppedImageProvider.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>100D30D0EA8350982892EEFEF483B688</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5140BB4960F9F5E5C87EC1A7F0FAB1F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>1025A27875608B000784C67CB595CE40</key>
 		<dict>
@@ -1100,21 +1129,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>1028F41961F1F4E1EB7B876FBA676A66</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIImage+CropRotate.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/UIImage+CropRotate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>1089AF6C4952ED72DE5F8A57E504DF21</key>
 		<dict>
@@ -1296,6 +1310,19 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
+		</dict>
+		<key>13562DAA75F5B8690579F97912355522</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ru.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/ru.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>1367201C3EC6A0BA986FE7D6EA7520BD</key>
 		<dict>
@@ -1488,6 +1515,44 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>15D401A10D428B870C11BB807576EA90</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>61416BA7EE704C7B5AF01B6D006DF20D</string>
+				<string>02182B27F4776E0F552A0BEAEA9256E1</string>
+				<string>5140BB4960F9F5E5C87EC1A7F0FAB1F7</string>
+				<string>7B046997761FAE47308225CB9AA3C602</string>
+				<string>E91D9A1E5B942EFAAB328607D97B2D7C</string>
+				<string>84D471235A530A8EBAAEA38A0F99CA8C</string>
+				<string>FEBBE36FB092588DF002E8D7B309880C</string>
+				<string>03FE7CAF557609CA38723CCEC7BED757</string>
+				<string>C075F4AC529ED0159546B99ECE453A74</string>
+				<string>4980ADCB473F58F7E4DF68C26142D4F0</string>
+				<string>809434ED7B4C13B304E008449D9ABAA5</string>
+				<string>8C26B8A9E157B321587A51B7B5873665</string>
+				<string>9805CEF2D2DD3A3380740C8DC09D8E45</string>
+				<string>F7100F20E68A51E6F6BF8ACF85457A14</string>
+				<string>13562DAA75F5B8690579F97912355522</string>
+				<string>4B279ED6E06DC92DD470A747A068D2D9</string>
+				<string>5B1D45EA3BA2D3A741C611E699109A43</string>
+				<string>499E4833E88F27CAFF08125F705D5541</string>
+				<string>AEB8129487723AB085D9CA359B05C2C9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>15FF23358B0C786343B65A10FE55B647</key>
+		<dict>
+			<key>fileRef</key>
+			<string>61416BA7EE704C7B5AF01B6D006DF20D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>16102E4E35FAA0FC4161282FECE56469</key>
 		<dict>
 			<key>fileRef</key>
@@ -1573,7 +1638,7 @@
 		<key>17FB57AE009D2DF0062B4CABEEB7C49E</key>
 		<dict>
 			<key>fileRef</key>
-			<string>A2BDE5F5EA27DBF9A9CF36B1BA103255</string>
+			<string>F01F88C4DD8A81FF9A97E9866CF7EF40</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1800,23 +1865,10 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>1BE404B2AE9DD25467F1249F493F075C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>fr.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/fr.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>1C2740AE506377F5BC9B642ABD219A1A</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>EFEA316D1D3D296107137D413CAB4561</string>
+			<string>F0D70CDC3970BD50EE2A16FECCD96D62</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -1979,7 +2031,7 @@
 		<key>1E35A64CCEEDC120CF26C7C0E35FF0D2</key>
 		<dict>
 			<key>fileRef</key>
-			<string>F7E09E4C6A6A170CEEA000B430AC644E</string>
+			<string>30621578CC63470FF8E86FE575E844B2</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2005,14 +2057,7 @@
 		<key>1FD19C4BA710FA77399F52CE01B5FD57</key>
 		<dict>
 			<key>fileRef</key>
-			<string>CDE488E37F51F9183C84369FCC4F0BE3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>201FCF73D713B2C9EBDF3A2B818BA7A3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E16744B5545E9EBA8099B89EDCF6F74E</string>
+			<string>EE813240746D9294F7D1BFA28D68371D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -2330,21 +2375,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>25F8136B17AD634559FEDF4B6020577C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropViewController.h</string>
-			<key>path</key>
-			<string>TOCropViewController/TOCropViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>25FA1F076F2BB49615746CE84C191A26</key>
 		<dict>
 			<key>fileRef</key>
@@ -2358,13 +2388,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>260ED2C99627EB9A944DB3B192F9B5F6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>86A9D160F2C5A96EFD9DDC7AB4657E8F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>263D216A88CC25398EC090894A31C71E</key>
 		<dict>
@@ -2400,19 +2423,6 @@
 			<string>librealm-ios.a</string>
 			<key>path</key>
 			<string>core/librealm-ios.a</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>267D955E3C39BE2B55CF5763512D2F71</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>pl.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/pl.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2483,7 +2493,7 @@
 		<key>277D66C2A8146D5639B3BD0F2F922520</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>EFEA316D1D3D296107137D413CAB4561</string>
+			<string>F0D70CDC3970BD50EE2A16FECCD96D62</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -2549,6 +2559,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>27984AD900FD9A897AA958672232983C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>27A1FC9D15F5F8904BEB17D99D93B167</key>
 		<dict>
@@ -2810,36 +2833,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>2B3F44EAD0C9FE59E088825A06A7A047</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>903E5C8B8DEB329670926B5E7AC6BA98</string>
-				<string>4B3BA1EF154DD71892547677D3EECF3B</string>
-				<string>AE06548BB88EDB817DB50AA3A780C4AD</string>
-				<string>741EFA56EB2729B90E25E943223FE7C4</string>
-				<string>5879EC79B4A53725E494773EF2494CB5</string>
-				<string>CB04D58EA5C3DD6EBE6BF516246578BD</string>
-				<string>BFE97831FF95102BCCDC6AF11D7C8F09</string>
-				<string>5644E2BEEC7FA6A6C8619E232634CD36</string>
-				<string>7990CE702B04E074EEB0EC49632986DC</string>
-				<string>A744FEB674FBAD20A42EB38D5844195B</string>
-				<string>9FD9BA5F5F3FADB49B8DF3807C00FC60</string>
-				<string>CB7AF63DE3CF8EC21AF757D24113B094</string>
-				<string>D1421B645B7F810A4B99816F87FB7693</string>
-				<string>260ED2C99627EB9A944DB3B192F9B5F6</string>
-				<string>970AA79A29457F2D1D5929698999B0EE</string>
-				<string>EFC794FA3BA299AFBE02AEE4788FA763</string>
-				<string>201FCF73D713B2C9EBDF3A2B818BA7A3</string>
-				<string>914A1ED2BB1557DF4F82765715E7D2AF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>2B5745F08814B6B927590B72D0BCD010</key>
 		<dict>
 			<key>fileRef</key>
@@ -2865,6 +2858,13 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>2BB2081800FA47194FFAA638C3EAF0E8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F7100F20E68A51E6F6BF8ACF85457A14</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>2BBAB2A6F9DFCC92CE55A47D6E7A64A1</key>
 		<dict>
@@ -2923,7 +2923,7 @@
 		<key>2C2E93A7CB8E45A5FDB056169198E703</key>
 		<dict>
 			<key>fileRef</key>
-			<string>CEE7978EAE3A1700998A4B06F1C15372</string>
+			<string>F4B3E2FA9B03EBC63002C86FEBF6AA44</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3236,6 +3236,21 @@
 			<key>remoteInfo</key>
 			<string>Realm</string>
 		</dict>
+		<key>30621578CC63470FF8E86FE575E844B2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropView.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>306876585EBA0E5C500AFC63914BA6EA</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3381,6 +3396,21 @@
 			<string>GPUImageLuminosityBlendFilter.m</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageLuminosityBlendFilter.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>31C9641F6FB0347F72419C3430865EAE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropOverlayView.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropOverlayView.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3555,6 +3585,21 @@
 			<string>GPUImageAverageLuminanceThresholdFilter.h</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageAverageLuminanceThresholdFilter.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>33ED46E20BBDA3F8F8A83D8A30F10CAD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImage+CropRotate.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/UIImage+CropRotate.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3770,40 +3815,6 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>3755C8AF00BDF016D5381407E027A70B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>690CFAE46C6FEA5353062786EEC70F26</string>
-				<string>77F52606C175CCA507C4BBD361016FFB</string>
-				<string>4DC1B70F493BD77B9A1CC0EA6A1F185B</string>
-				<string>7D8D231C4368FFFBCEE7A053A98D4961</string>
-				<string>F700271CF53E2AD2FE2FA052CD37CD69</string>
-				<string>CFC40DCF712DDDC40C551BAC371941C2</string>
-				<string>CEE7978EAE3A1700998A4B06F1C15372</string>
-				<string>A2BDE5F5EA27DBF9A9CF36B1BA103255</string>
-				<string>D497736253476FD7B8117730DBF1257A</string>
-				<string>39491835AD673AC9FDEEE8A41A392490</string>
-				<string>F7E09E4C6A6A170CEEA000B430AC644E</string>
-				<string>C297C5A5490287702859ADBC41229965</string>
-				<string>25F8136B17AD634559FEDF4B6020577C</string>
-				<string>AFB66C274B3F51DBCE7558C47E863182</string>
-				<string>BA4D6CA04E300C44986B4D86EC02F70B</string>
-				<string>6193903AC922EC2550A9A2B583E361DC</string>
-				<string>1028F41961F1F4E1EB7B876FBA676A66</string>
-				<string>CDE488E37F51F9183C84369FCC4F0BE3</string>
-				<string>F538E4143E1F9402886EAB8C320E3E5E</string>
-				<string>62647EA168D5E34EB4F644AD4AABF165</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TOCropViewController</string>
-			<key>path</key>
-			<string>TOCropViewController</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>37646296721171ACFF65897DBC465BD2</key>
 		<dict>
 			<key>fileRef</key>
@@ -3953,21 +3964,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>39491835AD673AC9FDEEE8A41A392490</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropToolbar.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropToolbar.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>395DAFE6211391BDBDDC1C0F632D2437</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4010,17 +4006,6 @@
 			<string>NavigationAccessoryView.swift</string>
 			<key>path</key>
 			<string>Source/Core/NavigationAccessoryView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>39F75DF6CC35DC246AD4AB69C9C8AC5D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>TOCropViewController.modulemap</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4140,6 +4125,13 @@
 			<string>Source/Rows/CheckRow.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B13506D10B1772BA55EE1545A6FA48E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>809434ED7B4C13B304E008449D9ABAA5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>3B21226C9852F66D65ACB4DD6EF21E5E</key>
 		<dict>
@@ -4427,7 +4419,7 @@
 		<key>3E7A93FC738D03BAA12F74D7F8C3E4C3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>F700271CF53E2AD2FE2FA052CD37CD69</string>
+			<string>DBD44B97EFEE30800160BC1342AD2390</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -5069,7 +5061,7 @@
 		<key>46DB3C69C4AC0496A5AE8175AB4D852F</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>EFEA316D1D3D296107137D413CAB4561</string>
+			<string>F0D70CDC3970BD50EE2A16FECCD96D62</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -5133,6 +5125,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>4776F6F5C4EB0086F423D99FDF7F01E1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7B046997761FAE47308225CB9AA3C602</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>4795B8EDE6BB66300FDF2C7EE121CBA1</key>
 		<dict>
 			<key>fileRef</key>
@@ -5153,6 +5152,13 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>47ACB805F9EF996B041783394FA3DC00</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FEBBE36FB092588DF002E8D7B309880C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>47F048068CF9184146FE6D6F0197A604</key>
 		<dict>
@@ -5318,6 +5324,32 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>4980ADCB473F58F7E4DF68C26142D4F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ja.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/ja.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>499E4833E88F27CAFF08125F705D5541</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>zh-Hans.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/zh-Hans.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>49DDE060E1FE0D5BF178AF122BA939F7</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -5402,6 +5434,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>4AAE6A38A64200D468EA7D258FC414BE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>499E4833E88F27CAFF08125F705D5541</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>4AC6261B723ACEA3D9EECC56EDDEF1F3</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -5461,7 +5500,7 @@
 		<key>4AF1E74D43EEF049D8AEEDBABB88EF04</key>
 		<dict>
 			<key>fileRef</key>
-			<string>6193903AC922EC2550A9A2B583E361DC</string>
+			<string>8CF72850AD2EC21EB1407C81A63733BB</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -5492,25 +5531,18 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4B384E1F4B0EE295507390D11942EDE4</key>
+		<key>4B279ED6E06DC92DD470A747A068D2D9</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>id.lproj</string>
+			<string>tr.lproj</string>
 			<key>path</key>
-			<string>TOCropViewController/id.lproj</string>
+			<string>TOCropViewController/tr.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4B3BA1EF154DD71892547677D3EECF3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0FCBD9545A5CF0BC0AC6EA0D042D7DE9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>4B8E3DCCC0D09A4046F67A360EC0ADED</key>
 		<dict>
@@ -5667,7 +5699,7 @@
 		<key>4D117B17580E7B8C5B9D46D3C89FFD4A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>39491835AD673AC9FDEEE8A41A392490</string>
+			<string>D19A9A4322046C44F6CAF0A8D18C4403</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -5779,21 +5811,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4DC1B70F493BD77B9A1CC0EA6A1F185B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropOverlayView.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropOverlayView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>4DE0727895D05237607467E2A5C0610D</key>
 		<dict>
 			<key>fileRef</key>
@@ -5821,12 +5838,30 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>4E0DBD84D267D4C3FF7E52851E2A8D87</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4980ADCB473F58F7E4DF68C26142D4F0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>4E1FE8704D29AB9B3B002272F2F1D825</key>
 		<dict>
 			<key>fileRef</key>
 			<string>593031E9AB8615D29EA684BE6D289CB0</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>4E3030185892E13984F2C4551F93FD42</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>TOCropViewController.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4E517FDF15B58EE59889965BA40AE582</key>
 		<dict>
@@ -5874,7 +5909,7 @@
 		<key>4F3CCBB614BB1F21F0618D2AC1BE2AB0</key>
 		<dict>
 			<key>fileRef</key>
-			<string>690CFAE46C6FEA5353062786EEC70F26</string>
+			<string>0FCB20B0FE7CF21502212438562E2DBD</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -6032,6 +6067,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>5140BB4960F9F5E5C87EC1A7F0FAB1F7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>da.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/da.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>5155E6E45177A3128485D18E7798D091</key>
 		<dict>
@@ -6555,13 +6603,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>5644E2BEEC7FA6A6C8619E232634CD36</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4B384E1F4B0EE295507390D11942EDE4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>567431D1D9E7B1A75CC65C09594F597B</key>
 		<dict>
 			<key>fileRef</key>
@@ -6789,19 +6830,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>58692E64D4B4EDCFD282EB9270D54E0C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TOCropViewController-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>587466B059351B447D4E9752B64F19E3</key>
 		<dict>
 			<key>fileRef</key>
@@ -6813,13 +6841,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>5879EC79B4A53725E494773EF2494CB5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F2AC71E2DBCBF9C8D2BD54067A1D64A1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>58811300A6C60A6BF4B5D21E20024C63</key>
 		<dict>
@@ -7018,6 +7039,19 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>5B1D45EA3BA2D3A741C611E699109A43</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>vi.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/vi.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>5B273FCCBA0EDE476EA28166FD7613E5</key>
 		<dict>
 			<key>fileRef</key>
@@ -7077,6 +7111,21 @@
 			<string>Support Files</string>
 			<key>path</key>
 			<string>../Target Support Files/GPUImage</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5C6DD63A9AED66F1307A729AA28ED15F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOActivityCroppedImageProvider.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/TOActivityCroppedImageProvider.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -7245,19 +7294,6 @@
 			<string>RLMProperty_Private.h</string>
 			<key>path</key>
 			<string>include/Realm/RLMProperty_Private.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5EB28DFE90EC600313D9DB24892F2D67</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ru.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/ru.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -7490,6 +7526,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>61416BA7EE704C7B5AF01B6D006DF20D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ar.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/ar.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>616456E430D8816C2854A48E383AE3A9</key>
 		<dict>
 			<key>fileRef</key>
@@ -7503,21 +7552,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>6193903AC922EC2550A9A2B583E361DC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropViewControllerTransitioning.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/TOCropViewControllerTransitioning.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>6201DF68269FE211BEB60EA152F8455B</key>
 		<dict>
@@ -7563,26 +7597,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>62647EA168D5E34EB4F644AD4AABF165</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CA3060C214ABB95B2AC176A0BAE41438</string>
-				<string>39F75DF6CC35DC246AD4AB69C9C8AC5D</string>
-				<string>EFEA316D1D3D296107137D413CAB4561</string>
-				<string>AF8E72A455A29307C49D66724B602891</string>
-				<string>58692E64D4B4EDCFD282EB9270D54E0C</string>
-				<string>F8CC868B91411CAC0CAFD34510C72800</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/TOCropViewController</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>626F5E976F05B70B8F6EA66E6D5592C3</key>
 		<dict>
 			<key>children</key>
@@ -7602,6 +7616,19 @@
 			<string>C5DFAEFB5B52FCCDE6A8CFED90F1181D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>63101055A4D348BAF29272B7717AF8D9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>TOCropViewController-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>636542B3A26F6C2302EBCE5A03B0B829</key>
 		<dict>
@@ -8374,21 +8401,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>690CFAE46C6FEA5353062786EEC70F26</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOActivityCroppedImageProvider.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/TOActivityCroppedImageProvider.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>6994D4527F3F66D165736F17BC72FAD0</key>
 		<dict>
 			<key>fileRef</key>
@@ -8415,6 +8427,13 @@
 			<string>include/Realm/RLMResults.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>69E0FFCCC91C548796F6C4A3A0825E95</key>
+		<dict>
+			<key>fileRef</key>
+			<string>03FE7CAF557609CA38723CCEC7BED757</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>69EEC77D84F783A91F521F2B9445BDF3</key>
 		<dict>
@@ -8563,7 +8582,7 @@
 		<key>6B84BB4E01E9299147C7C1479EAD072D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>F8CC868B91411CAC0CAFD34510C72800</string>
+			<string>F173C83EA3E2914F0925C470F83A763F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -8594,6 +8613,21 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>6BC4FD7B19B6CBAE79324798F33463AE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropViewControllerTransitioning.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/TOCropViewControllerTransitioning.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>6BC94CF60CC305240FBC73BEF743CFBA</key>
 		<dict>
@@ -8941,6 +8975,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>6FE38992FDC5BF991E65DB3858FD4941</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5B1D45EA3BA2D3A741C611E699109A43</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>70318245887BAF701C181B364E9A1893</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -9044,19 +9085,6 @@
 			<string>0F7CC2B7E57F1CC9556B0AA1B905FC81</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>706CC65EE436816F07C0A1D5ED3381E2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>it.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/it.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>70F3B866624923657C106FF79F144A24</key>
 		<dict>
@@ -9449,13 +9477,6 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>741EFA56EB2729B90E25E943223FE7C4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B0856E1094947A312BC118723DEAEC17</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>7444F92601E4FC274B208EEE0924146B</key>
 		<dict>
 			<key>fileRef</key>
@@ -9466,7 +9487,7 @@
 		<key>746A08FFED3B5E75B1BAFAFA14244C8E</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>EFEA316D1D3D296107137D413CAB4561</string>
+			<string>F0D70CDC3970BD50EE2A16FECCD96D62</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -9497,19 +9518,6 @@
 			<string>GPUImageRawDataOutput.m</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageRawDataOutput.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>74F3820AA652EF2050C138D0B0FEEFF9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ar.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/ar.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -9734,19 +9742,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>76ADF1DA3DFD3218494C3C14702CB5FF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ja.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/ja.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>76AE3B191F8325007A2051F2BF1E40C3</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -9832,7 +9827,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>77F52606C175CCA507C4BBD361016FFB</key>
+		<key>77F25F77935BC20500654E3D5D791335</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -9841,9 +9836,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>TOActivityCroppedImageProvider.m</string>
+			<string>TOCropOverlayView.m</string>
 			<key>path</key>
-			<string>TOCropViewController/Models/TOActivityCroppedImageProvider.m</string>
+			<string>TOCropViewController/Views/TOCropOverlayView.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -9861,6 +9856,13 @@
 			<string>framework/Source/GPUImage3x3TextureSamplingFilter.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>785FEFFB5FF278305F347F013CBFBC0E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>13562DAA75F5B8690579F97912355522</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>792462028659003AEE8CF35787F151ED</key>
 		<dict>
@@ -9904,13 +9906,6 @@
 			<string>Pods-EsteticaFacial-frameworks.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7990CE702B04E074EEB0EC49632986DC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>706CC65EE436816F07C0A1D5ED3381E2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
@@ -9959,7 +9954,7 @@
 		<key>7A7676B702836D0C7AB9FF249BC6C593</key>
 		<dict>
 			<key>fileRef</key>
-			<string>AF8E72A455A29307C49D66724B602891</string>
+			<string>63101055A4D348BAF29272B7717AF8D9</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -10030,6 +10025,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>7B046997761FAE47308225CB9AA3C602</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>de.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/de.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>7B264507431BF18AC7BE49ABED32AB60</key>
 		<dict>
@@ -10223,20 +10231,12 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7D8D231C4368FFFBCEE7A053A98D4961</key>
+		<key>7D8E7791835C70C7D8A8D21422414C85</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>AEB8129487723AB085D9CA359B05C2C9</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropOverlayView.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropOverlayView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>7DA408C337CA2A1F3494221B1FB775C6</key>
 		<dict>
@@ -10329,6 +10329,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>7EFCDBE2783090D3B68248954A1C934C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropToolbar.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropToolbar.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>7F4CA96492E9ADFC84D2DA8E8B53B7C2</key>
 		<dict>
 			<key>fileRef</key>
@@ -10408,6 +10423,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>809434ED7B4C13B304E008449D9ABAA5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ko.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/ko.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>809D5946855364C1C433D846AB64025D</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -10470,6 +10498,13 @@
 			<string>Realm/RLMProperty.mm</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8139CBC98C9441C0F2816AEEE64BB38F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9805CEF2D2DD3A3380740C8DC09D8E45</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>81B1B5EC29011A6424F43A0F70AD91A4</key>
 		<dict>
@@ -10637,6 +10672,26 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>83671BD8E1E5D17B8C43F779E9395A0E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>27984AD900FD9A897AA958672232983C</string>
+				<string>4E3030185892E13984F2C4551F93FD42</string>
+				<string>F0D70CDC3970BD50EE2A16FECCD96D62</string>
+				<string>63101055A4D348BAF29272B7717AF8D9</string>
+				<string>BC7522A89D9F5FA760672FBCEAD9AD5A</string>
+				<string>F173C83EA3E2914F0925C470F83A763F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/TOCropViewController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>83695867504FE62AF5AD91645CDA5371</key>
 		<dict>
 			<key>fileRef</key>
@@ -10681,6 +10736,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>842E653C1E7F1490F1DAF2BBF7A7CF49</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCroppedImageAttributes.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/TOCroppedImageAttributes.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>846306820CA53445B3F725D6F928F178</key>
 		<dict>
 			<key>fileRef</key>
@@ -10704,6 +10774,19 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
+		</dict>
+		<key>84D471235A530A8EBAAEA38A0F99CA8C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>es.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/es.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>84DFFCBBB23904D9CC93FD15B72E9D45</key>
 		<dict>
@@ -10836,19 +10919,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>86A9D160F2C5A96EFD9DDC7AB4657E8F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>pt.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/pt.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>86E90ED95C12FFFC1B4F5420E13DE807</key>
 		<dict>
@@ -11006,19 +11076,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8A5DD64959DAF42D1CA884389AF4F495</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>tr.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/tr.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>8A9EB5B5262426F3BE31F241436C2691</key>
 		<dict>
 			<key>fileRef</key>
@@ -11090,7 +11147,7 @@
 		<key>8B761543368DD4887BDA0CEC8F06A3A9</key>
 		<dict>
 			<key>fileRef</key>
-			<string>1028F41961F1F4E1EB7B876FBA676A66</string>
+			<string>33ED46E20BBDA3F8F8A83D8A30F10CAD</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -11204,6 +11261,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>8C26B8A9E157B321587A51B7B5873665</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>nl.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/nl.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>8C4227CD3886DB88C25A3CF0B0CC33AE</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -11246,6 +11316,21 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>8CF72850AD2EC21EB1407C81A63733BB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCropViewControllerTransitioning.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/TOCropViewControllerTransitioning.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>8D10F9DC0A9D34DE3A46DF0003432348</key>
 		<dict>
@@ -11666,13 +11751,6 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>903E5C8B8DEB329670926B5E7AC6BA98</key>
-		<dict>
-			<key>fileRef</key>
-			<string>74F3820AA652EF2050C138D0B0FEEFF9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>907683D23B66F82328AAC96281BD8A92</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -11778,13 +11856,6 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>914A1ED2BB1557DF4F82765715E7D2AF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D355E3CA604A82D153A38A8EF47B86E9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>91A338A10953AD98B7D83E9FBA59EF08</key>
 		<dict>
 			<key>fileRef</key>
@@ -11848,19 +11919,6 @@
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
 			<string>Alamofire-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>92470B2E04739664EF0DFD578C352429</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>es.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/es.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -12055,6 +12113,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>9453F1AC3D163B5D34EF79C5C9EAAFF9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>02182B27F4776E0F552A0BEAEA9256E1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>9469DF81ECB494E84675969B5E13374C</key>
 		<dict>
 			<key>fileRef</key>
@@ -12207,6 +12272,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>96529369A9A0EF3B410361E27184BA9B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C075F4AC529ED0159546B99ECE453A74</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>96923362C018C2966BF4208A8460F398</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -12278,13 +12350,6 @@
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>970AA79A29457F2D1D5929698999B0EE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5EB28DFE90EC600313D9DB24892F2D67</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>9727D2C2DD8660DB2367EDCE088384CD</key>
 		<dict>
 			<key>fileRef</key>
@@ -12350,6 +12415,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>9805CEF2D2DD3A3380740C8DC09D8E45</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>pl.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/pl.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>9810CE2BC54D2914B830F6DD2ECD97CE</key>
 		<dict>
@@ -12909,7 +12987,7 @@
 		<key>9FC69A30904B0D67DB4D0A805BD3459B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>CFC40DCF712DDDC40C551BAC371941C2</string>
+			<string>842E653C1E7F1490F1DAF2BBF7A7CF49</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -12927,13 +13005,6 @@
 			<string>framework/Source/iOS/GPUImageContext.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9FD9BA5F5F3FADB49B8DF3807C00FC60</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E5A9B2F01C995714978D6DA7146D2E16</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>9FE7E1821F28F7964A63F15B08EDF810</key>
 		<dict>
@@ -13142,21 +13213,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>A2BDE5F5EA27DBF9A9CF36B1BA103255</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropScrollView.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropScrollView.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A31A64515F799E816337A9469AFE6F73</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -13282,7 +13338,7 @@
 		<key>A52386AE789FDA067082A2EFF5D53A8E</key>
 		<dict>
 			<key>fileRef</key>
-			<string>4DC1B70F493BD77B9A1CC0EA6A1F185B</string>
+			<string>31C9641F6FB0347F72419C3430865EAE</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -13364,13 +13420,6 @@
 			<string>include/Realm/RLMCollection.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A744FEB674FBAD20A42EB38D5844195B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>76ADF1DA3DFD3218494C3C14702CB5FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>A7975FB391D751BFECC0650A37371B84</key>
 		<dict>
@@ -13811,13 +13860,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>AE06548BB88EDB817DB50AA3A780C4AD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0665508313C72F05782AA32DF4F11A10</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>AE28BF879AC564971C01001825F5A951</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -13883,6 +13925,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>AEB8129487723AB085D9CA359B05C2C9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>zh-Hant.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/zh-Hant.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>AF38AE1564CBDACAE2D0939F6FAF1BCD</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -13905,19 +13960,6 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>AF8E72A455A29307C49D66724B602891</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TOCropViewController-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>AF9D1466CDF2B114DF5165B3E778FCDE</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -13930,21 +13972,6 @@
 			<string>GPUImageNormalBlendFilter.h</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageNormalBlendFilter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AFB66C274B3F51DBCE7558C47E863182</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropViewController.m</string>
-			<key>path</key>
-			<string>TOCropViewController/TOCropViewController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -13970,6 +13997,21 @@
 			<string>RLMArrayLinkView.mm</string>
 			<key>path</key>
 			<string>Realm/RLMArrayLinkView.mm</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AFE3753864744958E66041D7764063F4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropViewController.h</string>
+			<key>path</key>
+			<string>TOCropViewController/TOCropViewController.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -14015,19 +14057,6 @@
 			<string>BaseRow.swift</string>
 			<key>path</key>
 			<string>Source/Core/BaseRow.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B0856E1094947A312BC118723DEAEC17</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>de.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/de.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -14683,21 +14712,6 @@
 			<key>remoteInfo</key>
 			<string>SwiftyDropbox</string>
 		</dict>
-		<key>BA4D6CA04E300C44986B4D86EC02F70B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropViewControllerTransitioning.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/TOCropViewControllerTransitioning.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -14819,6 +14833,19 @@
 			<string>FormatterConformance.swift</string>
 			<key>path</key>
 			<string>Source/Rows/Common/FormatterConformance.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BC7522A89D9F5FA760672FBCEAD9AD5A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TOCropViewController-prefix.pch</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -14959,7 +14986,7 @@
 		<key>BEAFB4F98CC7B5B3651A62E851447951</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D497736253476FD7B8117730DBF1257A</string>
+			<string>7EFCDBE2783090D3B68248954A1C934C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -14995,13 +15022,6 @@
 			<string>DD33BA1F45F10DDD4F5DBC428B4BF93C</string>
 			<key>targetProxy</key>
 			<string>15A16BE21D11A25DF3D8A50751655B2C</string>
-		</dict>
-		<key>BFE97831FF95102BCCDC6AF11D7C8F09</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1BE404B2AE9DD25467F1249F493F075C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>BFFB665F6D358CA28F54E8B182D64D57</key>
 		<dict>
@@ -15043,6 +15063,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>C075F4AC529ED0159546B99ECE453A74</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>it.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/it.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C0D18141A16B0C4BCB00992612ACDF1F</key>
 		<dict>
@@ -15437,21 +15470,6 @@
 			<string>GPUImagePixellateFilter.h</string>
 			<key>path</key>
 			<string>framework/Source/GPUImagePixellateFilter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C297C5A5490287702859ADBC41229965</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCropView.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropView.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -15960,6 +15978,13 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>C809EF4F69E0A0871374960F384C3087</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4B279ED6E06DC92DD470A747A068D2D9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>C80DC9765CAD027F16EB675977061CBD</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -16123,19 +16148,6 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>CA3060C214ABB95B2AC176A0BAE41438</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>CA85F2BF69637EE21AB719E67C75B86C</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -16190,13 +16202,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>CB04D58EA5C3DD6EBE6BF516246578BD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>92470B2E04739664EF0DFD578C352429</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>CB10FF3D2581E582AB6CA30DD32FE178</key>
 		<dict>
@@ -16255,13 +16260,6 @@
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>CB7AF63DE3CF8EC21AF757D24113B094</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D206D056B9D97BB893479C85B16E1064</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>CB84D5F8579345FFDA2152E65EEDE809</key>
 		<dict>
@@ -16326,6 +16324,13 @@
 				</array>
 			</dict>
 		</dict>
+		<key>CCBBE4F05DA7C25914DCE58BA9C0533A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8C26B8A9E157B321587A51B7B5873665</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>CCBCDD4DDE75D167574BAE270CB7AD2D</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -16366,21 +16371,6 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>SwiftyDropbox-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CDE488E37F51F9183C84369FCC4F0BE3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIImage+CropRotate.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/UIImage+CropRotate.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -16439,20 +16429,36 @@
 				</array>
 			</dict>
 		</dict>
-		<key>CEE7978EAE3A1700998A4B06F1C15372</key>
+		<key>CED01A80528F84F4BC14DDDCCD7B465F</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>15FF23358B0C786343B65A10FE55B647</string>
+				<string>9453F1AC3D163B5D34EF79C5C9EAAFF9</string>
+				<string>100D30D0EA8350982892EEFEF483B688</string>
+				<string>4776F6F5C4EB0086F423D99FDF7F01E1</string>
+				<string>0DE6707426C38AE62A575BB57598DBC8</string>
+				<string>DF275EE19D686B79CC7CC603BBC194E6</string>
+				<string>47ACB805F9EF996B041783394FA3DC00</string>
+				<string>69E0FFCCC91C548796F6C4A3A0825E95</string>
+				<string>96529369A9A0EF3B410361E27184BA9B</string>
+				<string>4E0DBD84D267D4C3FF7E52851E2A8D87</string>
+				<string>3B13506D10B1772BA55EE1545A6FA48E</string>
+				<string>CCBBE4F05DA7C25914DCE58BA9C0533A</string>
+				<string>8139CBC98C9441C0F2816AEEE64BB38F</string>
+				<string>2BB2081800FA47194FFAA638C3EAF0E8</string>
+				<string>785FEFFB5FF278305F347F013CBFBC0E</string>
+				<string>C809EF4F69E0A0871374960F384C3087</string>
+				<string>6FE38992FDC5BF991E65DB3858FD4941</string>
+				<string>4AAE6A38A64200D468EA7D258FC414BE</string>
+				<string>7D8E7791835C70C7D8A8D21422414C85</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropScrollView.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropScrollView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>CEF2F0649B3538E5286A5614FFEE5F5E</key>
 		<dict>
@@ -16503,21 +16509,6 @@
 			<string>lookup_soft_elegance_1.png</string>
 			<key>path</key>
 			<string>framework/Resources/lookup_soft_elegance_1.png</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CFC40DCF712DDDC40C551BAC371941C2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TOCroppedImageAttributes.m</string>
-			<key>path</key>
-			<string>TOCropViewController/Models/TOCroppedImageAttributes.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -16593,12 +16584,20 @@
 				</array>
 			</dict>
 		</dict>
-		<key>D1421B645B7F810A4B99816F87FB7693</key>
+		<key>D19A9A4322046C44F6CAF0A8D18C4403</key>
 		<dict>
-			<key>fileRef</key>
-			<string>267D955E3C39BE2B55CF5763512D2F71</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCropToolbar.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropToolbar.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D1A5E04DA404C43594593D5093D467C2</key>
 		<dict>
@@ -16623,19 +16622,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>D206D056B9D97BB893479C85B16E1064</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>nl.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/nl.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D24067332DC3E16CFAEEFDB8315AF21A</key>
 		<dict>
@@ -16693,23 +16679,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>D355E3CA604A82D153A38A8EF47B86E9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>zh-Hant.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/zh-Hant.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>D366DEE3C47A62352E88B28DF5125AC3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>25F8136B17AD634559FEDF4B6020577C</string>
+			<string>AFE3753864744958E66041D7764063F4</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -16874,21 +16847,6 @@
 			<string>GPUImageOpeningFilter.h</string>
 			<key>path</key>
 			<string>framework/Source/GPUImageOpeningFilter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D497736253476FD7B8117730DBF1257A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropToolbar.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropToolbar.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -17064,6 +17022,21 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
+		</dict>
+		<key>D576C98EBC308465296F89147731ACE7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCropView.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D57F28B3DDFEE20DB0DB3DA7EFB7D053</key>
 		<dict>
@@ -17492,6 +17465,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>DBD44B97EFEE30800160BC1342AD2390</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCroppedImageAttributes.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/TOCroppedImageAttributes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>DC0BB7D43439F297D252283645B763C7</key>
 		<dict>
 			<key>fileRef</key>
@@ -17549,7 +17537,7 @@
 			<array>
 				<string>4D318D71DF9467EE0F81F356BAD4565B</string>
 				<string>250FACF6CBA2897431B8FA1F1017B970</string>
-				<string>2B3F44EAD0C9FE59E088825A06A7A047</string>
+				<string>CED01A80528F84F4BC14DDDCCD7B465F</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -17684,6 +17672,13 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>DF275EE19D686B79CC7CC603BBC194E6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>84D471235A530A8EBAAEA38A0F99CA8C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>DF400CF4C4233120E4BD006EBFBA3BCD</key>
 		<dict>
@@ -17901,19 +17896,6 @@
 				</array>
 			</dict>
 		</dict>
-		<key>E16744B5545E9EBA8099B89EDCF6F74E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>zh-Hans.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/zh-Hans.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>E184927287E4AA45D15B88AF502E485F</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -17932,7 +17914,7 @@
 		<key>E18F5B4EBC518981725B8829317B5077</key>
 		<dict>
 			<key>fileRef</key>
-			<string>7D8D231C4368FFFBCEE7A053A98D4961</string>
+			<string>77F25F77935BC20500654E3D5D791335</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -18263,19 +18245,6 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>E5A9B2F01C995714978D6DA7146D2E16</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ko.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/ko.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>E5B07C5E5D62A85F6D0822106C638517</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -18529,9 +18498,22 @@
 		<key>E8F16713FD362226B4E055A2202D1F2D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C297C5A5490287702859ADBC41229965</string>
+			<string>D576C98EBC308465296F89147731ACE7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>E91D9A1E5B942EFAAB328607D97B2D7C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>en.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/en.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>E93BE07EA6A5685A2A25BDAD20927E11</key>
 		<dict>
@@ -18636,6 +18618,40 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>EAE55DA6BC48994061EBB6EB190F6710</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0FCB20B0FE7CF21502212438562E2DBD</string>
+				<string>5C6DD63A9AED66F1307A729AA28ED15F</string>
+				<string>31C9641F6FB0347F72419C3430865EAE</string>
+				<string>77F25F77935BC20500654E3D5D791335</string>
+				<string>DBD44B97EFEE30800160BC1342AD2390</string>
+				<string>842E653C1E7F1490F1DAF2BBF7A7CF49</string>
+				<string>F4B3E2FA9B03EBC63002C86FEBF6AA44</string>
+				<string>F01F88C4DD8A81FF9A97E9866CF7EF40</string>
+				<string>7EFCDBE2783090D3B68248954A1C934C</string>
+				<string>D19A9A4322046C44F6CAF0A8D18C4403</string>
+				<string>30621578CC63470FF8E86FE575E844B2</string>
+				<string>D576C98EBC308465296F89147731ACE7</string>
+				<string>AFE3753864744958E66041D7764063F4</string>
+				<string>EBEEA01776CFBFEA6750828E81A75251</string>
+				<string>6BC4FD7B19B6CBAE79324798F33463AE</string>
+				<string>8CF72850AD2EC21EB1407C81A63733BB</string>
+				<string>33ED46E20BBDA3F8F8A83D8A30F10CAD</string>
+				<string>EE813240746D9294F7D1BFA28D68371D</string>
+				<string>15D401A10D428B870C11BB807576EA90</string>
+				<string>83671BD8E1E5D17B8C43F779E9395A0E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>TOCropViewController</string>
+			<key>path</key>
+			<string>TOCropViewController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>EB6277DB244EA2F80D9766ADEDBB05DF</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -18670,6 +18686,21 @@
 			<string>7E82EF3158DC7672612EFE46DB8E4C8F</string>
 			<key>targetProxy</key>
 			<string>FF005B5A51985E82E7EEDEC7E3C03C62</string>
+		</dict>
+		<key>EBEEA01776CFBFEA6750828E81A75251</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCropViewController.m</string>
+			<key>path</key>
+			<string>TOCropViewController/TOCropViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>EBFFE01588EE91A7039249A9126ECDF6</key>
 		<dict>
@@ -18784,7 +18815,7 @@
 				<string>E8AC63CFBE51AB0574103BAE5E8F2C19</string>
 				<string>AAB023B8A0C3F5BD31FE2A0E8D46AFCF</string>
 				<string>9A57FEEE7D25B97787B0A2A9DA3E7B1E</string>
-				<string>3755C8AF00BDF016D5381407E027A70B</string>
+				<string>EAE55DA6BC48994061EBB6EB190F6710</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -18930,6 +18961,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>EE813240746D9294F7D1BFA28D68371D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImage+CropRotate.m</string>
+			<key>path</key>
+			<string>TOCropViewController/Models/UIImage+CropRotate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>EEAA41BB42B42FC9880A1FCADBE54CBD</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -19017,13 +19063,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>EFC794FA3BA299AFBE02AEE4788FA763</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8A5DD64959DAF42D1CA884389AF4F495</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>EFDA8C09CBED0067F24A644083A5B774</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -19059,16 +19098,18 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>EFEA316D1D3D296107137D413CAB4561</key>
+		<key>F01F88C4DD8A81FF9A97E9866CF7EF40</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TOCropScrollView.m</string>
 			<key>path</key>
-			<string>TOCropViewController.xcconfig</string>
+			<string>TOCropViewController/Views/TOCropScrollView.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -19118,6 +19159,19 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>F0D70CDC3970BD50EE2A16FECCD96D62</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>TOCropViewController.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>F11F3567470EE2A7F8AD82CB51D5C278</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -19161,6 +19215,19 @@
 			<string>RLMAccessor.mm</string>
 			<key>path</key>
 			<string>Realm/RLMAccessor.mm</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F173C83EA3E2914F0925C470F83A763F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>TOCropViewController-umbrella.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -19237,7 +19304,7 @@
 		<key>F23A285B719DC4BBCC252DC83DEDA9F2</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BA4D6CA04E300C44986B4D86EC02F70B</string>
+			<string>6BC4FD7B19B6CBAE79324798F33463AE</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -19295,19 +19362,6 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
-		</dict>
-		<key>F2AC71E2DBCBF9C8D2BD54067A1D64A1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>en.lproj</string>
-			<key>path</key>
-			<string>TOCropViewController/en.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F300051F819C90FD8F3ADBEF9BEB0238</key>
 		<dict>
@@ -19536,6 +19590,21 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
+		<key>F4B3E2FA9B03EBC63002C86FEBF6AA44</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TOCropScrollView.h</string>
+			<key>path</key>
+			<string>TOCropViewController/Views/TOCropScrollView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>F4EA1B30AB4FD820DD899F08B3AFB2D3</key>
 		<dict>
 			<key>fileRef</key>
@@ -19574,36 +19643,6 @@
 			<string>GPUImageMovieWriter.h</string>
 			<key>path</key>
 			<string>framework/Source/iOS/GPUImageMovieWriter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F538E4143E1F9402886EAB8C320E3E5E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>74F3820AA652EF2050C138D0B0FEEFF9</string>
-				<string>0FCBD9545A5CF0BC0AC6EA0D042D7DE9</string>
-				<string>0665508313C72F05782AA32DF4F11A10</string>
-				<string>B0856E1094947A312BC118723DEAEC17</string>
-				<string>F2AC71E2DBCBF9C8D2BD54067A1D64A1</string>
-				<string>92470B2E04739664EF0DFD578C352429</string>
-				<string>1BE404B2AE9DD25467F1249F493F075C</string>
-				<string>4B384E1F4B0EE295507390D11942EDE4</string>
-				<string>706CC65EE436816F07C0A1D5ED3381E2</string>
-				<string>76ADF1DA3DFD3218494C3C14702CB5FF</string>
-				<string>E5A9B2F01C995714978D6DA7146D2E16</string>
-				<string>D206D056B9D97BB893479C85B16E1064</string>
-				<string>267D955E3C39BE2B55CF5763512D2F71</string>
-				<string>86A9D160F2C5A96EFD9DDC7AB4657E8F</string>
-				<string>5EB28DFE90EC600313D9DB24892F2D67</string>
-				<string>8A5DD64959DAF42D1CA884389AF4F495</string>
-				<string>E16744B5545E9EBA8099B89EDCF6F74E</string>
-				<string>D355E3CA604A82D153A38A8EF47B86E9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -19703,7 +19742,7 @@
 		<key>F6B0222A63C7F3ECD7FA9AC709216824</key>
 		<dict>
 			<key>fileRef</key>
-			<string>AFB66C274B3F51DBCE7558C47E863182</string>
+			<string>EBEEA01776CFBFEA6750828E81A75251</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -19734,18 +19773,16 @@
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
-		<key>F700271CF53E2AD2FE2FA052CD37CD69</key>
+		<key>F7100F20E68A51E6F6BF8ACF85457A14</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>TOCroppedImageAttributes.h</string>
+			<string>pt.lproj</string>
 			<key>path</key>
-			<string>TOCropViewController/Models/TOCroppedImageAttributes.h</string>
+			<string>TOCropViewController/pt.lproj</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -19762,21 +19799,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>F7E09E4C6A6A170CEEA000B430AC644E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TOCropView.h</string>
-			<key>path</key>
-			<string>TOCropViewController/Views/TOCropView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F82198F34DD14753A42F4328CD5E7A6B</key>
 		<dict>
@@ -19798,19 +19820,6 @@
 			<string>4906CF9486171D9215CC40F750373879</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>F8CC868B91411CAC0CAFD34510C72800</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TOCropViewController-umbrella.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F92C1D950AE9B462770C8CAA2F886BC9</key>
 		<dict>
@@ -19885,7 +19894,7 @@
 		<key>F9FFCE74C1A42D46F824A81ABF879223</key>
 		<dict>
 			<key>fileRef</key>
-			<string>77F52606C175CCA507C4BBD361016FFB</string>
+			<string>5C6DD63A9AED66F1307A729AA28ED15F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -20312,6 +20321,19 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
+		</dict>
+		<key>FEBBE36FB092588DF002E8D7B309880C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>fr.lproj</string>
+			<key>path</key>
+			<string>TOCropViewController/fr.lproj</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>FEFD912E724B6DBD96AA251AE3A68622</key>
 		<dict>

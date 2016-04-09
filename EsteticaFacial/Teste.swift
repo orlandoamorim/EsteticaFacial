@@ -174,4 +174,40 @@
 //    }.cellUpdate {
 //        $0.cell.textLabel?.textAlignment = .Right
 //}
-        
+
+//
+//internal func rotate() {
+//    let rotation = currentRotation()
+//    let rads = CGFloat(radians(rotation))
+//    
+//    UIView.animateWithDuration(0.3) {
+//        //            self.cameraBtn.transform = CGAffineTransformMakeRotation(rads)
+//        //            self.libraryImages.transform = CGAffineTransformMakeRotation(rads)
+//        //            self.cancelBtn.transform = CGAffineTransformMakeRotation(rads)
+//        self.cameraView.subviews.forEach ({
+//            if $0 is UIImageView {
+//                $0.transform = CGAffineTransformMakeRotation(rads)
+//            }
+//        })
+//        
+//    }
+//}
+//
+//internal func radians(degrees: Double) -> Double {
+//    return degrees / 180 * M_PI
+//}
+//
+//internal func currentRotation() -> Double {
+//    var rotation: Double = 0
+//    
+//    if UIDevice.currentDevice().orientation == .LandscapeLeft {
+//        rotation = 90
+//    } else if UIDevice.currentDevice().orientation == .LandscapeRight {
+//        rotation = 270
+//    } else if UIDevice.currentDevice().orientation == .PortraitUpsideDown {
+//        rotation = 180
+//    }
+//    
+//    return rotation
+//}
+//

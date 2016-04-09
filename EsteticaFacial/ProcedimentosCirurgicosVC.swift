@@ -29,7 +29,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
         self.form.setValues(dicFormValues)
         self.tableView?.reloadData()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "infoIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(showInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Attention"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(showInfo))
         
     }
 

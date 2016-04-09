@@ -43,7 +43,6 @@ class VerifyImageVC: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
-    
     @IBAction func okBtn(sender: AnyObject) {
         let alert:UIAlertController = UIAlertController(title: NSLocalizedString("", comment:""), message: NSLocalizedString("Agora que você escolheu a imagem correta, vamos recortar a imagem para pegarmos apenas aquilo que nos interessa.", comment:""), preferredStyle: UIAlertControllerStyle.ActionSheet)
         if let popView = alert.popoverPresentationController {
@@ -97,6 +96,7 @@ class VerifyImageVC: UIViewController{
         }
         
         self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.layoutIfNeeded()
 
     }
     
@@ -121,9 +121,9 @@ class VerifyImageVC: UIViewController{
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment:""), style: UIAlertActionStyle.Cancel, handler: nil))
         
-        
-        
         self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.layoutIfNeeded()
+
     }
     
     
@@ -177,9 +177,8 @@ class VerifyImageVC: UIViewController{
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment:""), style: UIAlertActionStyle.Cancel, handler: nil))
         
-        
-        
         self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.layoutIfNeeded()
 
     }
     
@@ -202,6 +201,8 @@ class VerifyImageVC: UIViewController{
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment:""), style: UIAlertActionStyle.Cancel, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
+            alert.view.layoutIfNeeded()
+
         }
     }
     
@@ -217,15 +218,12 @@ extension VerifyImageVC:  TOCropViewControllerDelegate {
     
     func updateImageGuiaView(){
         Helpers.removeImageView(cropViewController.cropView)
-        Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cgRect: cropViewController.cropView.cropBoxFrame)
-        
+        print(self.cropViewController.cropView.cropBoxFrame)
+        Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cropBoxFrame: cropViewController.cropView.cropBoxFrame)
     }
     
     
     func presentCropViewController(image: UIImage) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateImageGuiaView), name: UIDeviceOrientationDidChangeNotification, object: nil)
-
-        
         let cropViewController = TOCropViewController(image: image)
         cropViewController.delegate = self
         cropViewController.aspectRatioLocked = true
@@ -235,11 +233,12 @@ extension VerifyImageVC:  TOCropViewControllerDelegate {
         presentViewController(self.cropViewController, animated: true, completion: nil)
         print(self.cropViewController.cropView.cropBoxFrame)
         switch helpImageState {
-        case .On:   
-                    Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cgRect: cropViewController.cropView.cropBoxFrame)
+        case .On:
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateImageGuiaView), name: UIDeviceOrientationDidChangeNotification, object: nil)
+                Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cropBoxFrame: cropViewController.cropView.cropBoxFrame)
+            
         case .Off: print("")
         }
-//        cropViewController.cropView.setAspectLockEnabledWithAspectRatio(CGSizeMake(16, 1), animated: true)
     }
     
     func cropViewController(cropViewController: TOCropViewController!, didCropToImage image: UIImage!, withRect cropRect: CGRect, angle: Int) {

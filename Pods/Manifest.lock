@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.3.0)
+  - Alamofire (3.3.1)
   - DeviceKit (0.3.2)
   - Eureka (1.5.0)
   - GPUImage (0.1.7)
@@ -11,7 +11,7 @@ PODS:
   - SCLAlertView (0.5.1)
   - SwiftyDropbox (3.0.0):
     - Alamofire (~> 3.1)
-  - TOCropViewController (1.2.6)
+  - TOCropViewController (1.2.8)
 
 DEPENDENCIES:
   - DeviceKit (~> 0.3.1)
@@ -32,14 +32,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   GPUImage:
-    :commit: 816dd180ac322225e1834327e2527453113e8f72
+    :commit: b8285f5a583f234ba1db3b24cfa22a90e1b10f14
     :git: https://github.com/BradLarson/GPUImage
   SCLAlertView:
     :commit: 21e45611a7a3e2ba6842e607049e82992b88a6f3
     :git: https://github.com/vikmeup/SCLAlertView-Swift
 
 SPEC CHECKSUMS:
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   DeviceKit: 79182140c0aa8daaf4f4b3920e0b079f5fa9db79
   Eureka: 2fb37bb50569c62ee3284689d5b7aca694b040e0
   GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   SCLAlertView: 3ac39a863d3e10fc165662b1228b03402297aea9
   SwiftyDropbox: e0d4aa3166082ec07ed942e94edb8c732b3376e4
-  TOCropViewController: 030e38f7c696d8eec4320a5baa8250b49c8f065f
+  TOCropViewController: 2c72208134944234a47bf9e8827342387136bd69
 
 COCOAPODS: 0.39.0

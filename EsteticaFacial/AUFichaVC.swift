@@ -598,6 +598,7 @@ class AUFichaVC: FormViewController{
 
             dispatch_async(dispatch_get_main_queue(), { 
                 self.presentViewController(sourceActionSheet, animated: true, completion: nil)
+                sourceActionSheet.view.layoutIfNeeded()
             })
         }
         

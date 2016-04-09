@@ -39,8 +39,8 @@ class TecnicasPDI: NSObject {
         
         let pixels = UnsafeMutablePointer<RGBA>(calloc(height * width, sizeof(RGBA)))
         print("Aplicando a filtragem mediana...")
-        for var i:Int=0;i<height;i++ {
-            for var j:Int=0;j<width;j++ {
+        for i in 0...height {
+            for j in 0...width {
                 var red = [UInt8]()
                 var green = [UInt8]()
                 var blue = [UInt8]()
@@ -150,15 +150,15 @@ class TecnicasPDI: NSObject {
         var dir = Array(count: height, repeatedValue: Array(count: width, repeatedValue: 0))
         var gra = Array(count: height, repeatedValue: Array(count: width, repeatedValue: 0))
         
-        for var i:Int=0;i<height;i++ {
-            for var j:Int=0;j<width;j++ {
+        for i in 0...height {
+            for j in 0...width {
                 // Canal vermelho desconsiderado
                 pix[i][j] = Int(matrix[i*width+j].g/2 + matrix[i*width+j].b/2)
             }
         }
         
-        for var i:Int=0;i<height;i++ {
-            for var j:Int=0;j<width;j++ {
+        for i in 0...height {
+            for j in 0...width {
                 if i>=1 && j>=1{
                     aux[i][j]+=GX[0][0]*pix[i-1][j-1]
                     aux2[i][j]+=GY[0][0]*pix[i-1][j-1]
@@ -267,8 +267,8 @@ class TecnicasPDI: NSObject {
             primeiro[ii*width + jj].r = 255
             primeiro[ii*width + jj].g = 0
             primeiro[ii*width + jj].b = 0
-            
-            for var k:Int=jj-r;k<=jj+r;k+=1{
+            for k in jj-r...jj+r{
+//            for var k:Int=jj-r;k<=jj+r;k+=1{
                 let C = (k-jj)*(k-jj)
                 let CC = ii*ii + C - r*r
                 
@@ -287,8 +287,8 @@ class TecnicasPDI: NSObject {
                     primeiro[y2*width + k].b = 0
                 }
             }
-            
-            for var k:Int=ii-r;k<=ii+r;k+=1{
+            for k in ii-r...ii+r{
+//            for var k:Int=ii-r;k<=ii+r;k+=1{
                 let C = (k-ii)*(k-ii)
                 let CC = jj*jj + C - r*r
                 

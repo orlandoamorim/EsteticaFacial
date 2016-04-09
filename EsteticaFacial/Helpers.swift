@@ -331,100 +331,10 @@ class Helpers: NSObject{
     }
     
     /**
-     Recebe o array de PFObjects e o tranforma em um dicionario com chaves referentes as iniciais de cada PFObject(nome de cada paciente)
+     Retorna a ultima foto da galeria.
      
-     - Parameter formValues: NSMutableArray
-     
-     - Returns:  **[String : [AnyObject]]**.
+     - Returns:  **[UIImage]**.
      */
-    
-//    static func dicAtoZ (pfobject:[PFObject]?)-> [String : [AnyObject]]{
-//        
-//        var recordsHeader: [String] = [String]()
-//        var recordsDicAtoZ:[String : [AnyObject]] = [String : [AnyObject]]()
-//        
-//        for i in pfobject! {
-//            let parseObject:PFObject = i 
-//            let nome = parseObject.objectForKey("nome") as! String
-//            
-//
-//            let char = nome.lowercaseString[nome.lowercaseString.startIndex]
-//            
-//            if recordsDicAtoZ[String(char)] != nil {
-//                if !recordsHeader.contains(String(char)) {
-//                    recordsHeader.append(String(char))
-//                }
-//                
-//                var fichas = recordsDicAtoZ[String(char)]!
-//                fichas.append(parseObject)
-//                
-//                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
-//            }else {
-//                if !recordsHeader.contains(String(char)) {
-//                    recordsHeader.append(String(char))
-//                }
-//                
-//                var fichas:[AnyObject] = [AnyObject]()
-//                fichas.append(parseObject)
-//                
-//                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
-//            }
-//            
-//        }
-//        
-//        return recordsDicAtoZ
-//        
-//    }
-    
-    /**
-     Recebe o PFObject e a view que chama a função 'retornando' os dados da ficha para serem compartilhados
-     
-     - Parameter parseObject: PFObject
-     - Parameter VC: UIViewController
-
-     */
-    
-//    static func compartilharFicha(parseObject : PFObject, VC:UIViewController) {
-//        
-//        var formValuesServidor:[String : AnyObject] = [String : AnyObject]()
-//        var dicFormValuesServidor:[String : AnyObject] = [String : AnyObject]()
-//        
-//        if let _ = parseObject.objectForKey("dic_plano_cirurgico") as? PFFile{
-//            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
-//                formValuesServidor = convertAnyToAnyObject(formValues)
-//                }, resultBlockDic: { (dicFormValues) -> Void in
-//                    dicFormValuesServidor = convertAnyToAnyObject(dicFormValues)
-//                    
-//                    let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
-//                    let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
-//                    let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
-//                    let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
-//                    let Item5 = "* Plano Cirurgico: \(dicFormValuesServidor)"
-//                    let Item6 = ""
-//                    let Item7 = "| Dados via UFPI Estetica Facial |"
-//                    
-//                    let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
-//                    VC.presentViewController(activityViewController, animated: true, completion: nil)
-//                }) { (progress) -> Void in
-//            }
-//        }else{
-//            ParseConnection.getFichaFromServer(parseObject, resultBlockForm: { (formValues) -> Void in
-//                formValuesServidor = convertAnyToAnyObject(formValues)
-//                
-//                let Item1 = "* Nome: \(formValuesServidor["nome"] as! String)"
-//                let Item2 = "* Sexo: \(formValuesServidor["sexo"] as! String)"
-//                let Item3 = "* Etinia: \(formValuesServidor["etnia"] as! String)"
-//                let Item4 = "* Data Nascimento: \(dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate(formValuesServidor["data_nascimento"] as! NSDate))"
-//                let Item5 = "* Plano Cirurgico: \(convertAnyToAnyObject(Helpers.surgicalPlanningForm()))"
-//                let Item6 = ""
-//                let Item7 = "| Dados via UFPI Estetica Facial |"
-//                
-//                let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [ Item1, Item2, Item3, Item4,Item5,Item6,Item7], applicationActivities: nil)
-//                VC.presentViewController(activityViewController, animated: true, completion: nil)
-//
-//                })
-//        }
-//    }
     
     func getLatestPhotos(completion completionBlock : ([UIImage] -> ()))   {
         let library = ALAssetsLibrary()
@@ -480,18 +390,18 @@ class Helpers: NSObject{
     }
     
 
-    static func inicializeImageView(type type:Bool, view: UIView, imageTypes:ImageTypes, cgRect: CGRect?=nil, x:CGFloat?=nil, y:CGFloat?=nil, width:CGFloat?=nil, height:CGFloat?=nil) {
+    static func inicializeImageView(type type:Bool, view: UIView, imageTypes:ImageTypes, cropBoxFrame: CGRect? = nil) {
         var imageViewObject :UIImageView!
         
         if type {
-            print(cgRect!)
-            imageViewObject = UIImageView(frame:cgRect!)
+            print(cropBoxFrame!)
+            imageViewObject = UIImageView(frame:cropBoxFrame!)
 
         }else{
             imageViewObject = inicializeImageViewFrame()
         }
         
-        imageViewObject.contentMode = UIViewContentMode.ScaleAspectFit
+        imageViewObject.contentMode = UIViewContentMode.ScaleAspectFill
         
         switch imageTypes {
         case.Front:   imageViewObject.image = UIImage(named: "modelo_frontal")
@@ -512,7 +422,6 @@ class Helpers: NSObject{
     
     static private func inicializeImageViewFrame() -> UIImageView {
         let device = Device()
-        print(device)
         if device == .iPhone4 || device == .iPhone4s {
             switch UIDevice.currentDevice().orientation{
             case .Portrait:             return UIImageView(frame:CGRectMake(14.0, 72.0, 292.0, 292.0))

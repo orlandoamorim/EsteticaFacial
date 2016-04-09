@@ -19,6 +19,7 @@ class FileSaveHelper {
         case ImageNotConvertedToData
         case FileNotRead
         case FileNotFound
+        case FileNotDeleted
     }
     
     // MARK:- File Extension Types
@@ -217,7 +218,7 @@ class FileSaveHelper {
             try fileManager.removeItemAtPath(fullyQualifiedPath)
         }
         catch  {
-            throw error
+            throw FileErrors.FileNotDeleted
         }
     }
     

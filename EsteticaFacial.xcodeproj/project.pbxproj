@@ -173,9 +173,9 @@
 		18126CF01CACC58A002D26F7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1859C07F1CB58A2000FD15F5 /* FileSaveHelper */,
 				B829B8C51BE26881009909C0 /* CG */,
-				18126CF11CACC5F7002D26F7 /* CameraManager.swift */,
-				18B8000C1CB1711900F150D0 /* FileSaveHelper.swift */,
+				1859C07E1CB58A1700FD15F5 /* CameraManager */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -258,6 +258,22 @@
 			);
 			name = "Supporting Files";
 			path = EsteticaFacial;
+			sourceTree = "<group>";
+		};
+		1859C07E1CB58A1700FD15F5 /* CameraManager */ = {
+			isa = PBXGroup;
+			children = (
+				18126CF11CACC5F7002D26F7 /* CameraManager.swift */,
+			);
+			name = CameraManager;
+			sourceTree = "<group>";
+		};
+		1859C07F1CB58A2000FD15F5 /* FileSaveHelper */ = {
+			isa = PBXGroup;
+			children = (
+				18B8000C1CB1711900F150D0 /* FileSaveHelper.swift */,
+			);
+			name = FileSaveHelper;
 			sourceTree = "<group>";
 		};
 		187AD4291CAF069F002EF035 /* Procedimentos Cirurgicos */ = {
