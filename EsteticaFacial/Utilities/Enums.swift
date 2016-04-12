@@ -39,3 +39,11 @@ enum ImageClearAction {
 public enum SurgeryShow {
     case Patient, Surgery
 }
+
+public enum PatientShow {
+    case Patient, CheckPatient
+}
+
+public enum PatientDetailShow {
+    case PatientDetail, CheckPatient
+}

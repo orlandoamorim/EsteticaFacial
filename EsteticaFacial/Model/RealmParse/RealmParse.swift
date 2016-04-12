@@ -54,21 +54,43 @@ class RealmParse{
         print("***************** Record ****************")
         let recordAU = Record()
         recordAU.id = id
+        recordAU.surgeryDescription = formValues["surgeryDescription"] as! String
+        print(formValues["surgeryDescription"] as! String)
         recordAU.patient = patient
-        for image in imagesArray {
-            recordAU.image.append(image)
-        }
+//        for image in imagesArray {
+//            recordAU.image.append(image)
+//        }
+        print(formValues["surgeryRealized"] as! Bool)
         recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
-        recordAU.surgicalPlanning.append(preSugicalPlaning)
-        recordAU.surgicalPlanning.append(postSugicalPlaning)
+//        recordAU.surgicalPlanning.append(preSugicalPlaning)
+//        recordAU.surgicalPlanning.append(postSugicalPlaning)
         recordAU.date_of_surgery = formValues["date_of_surgery"] as? NSDate
         recordAU.note = formValues["note"] as? String
         
         print("*****************************************")
-        patient.records.append(recordAU)
+//        patient.records.append(recordAU)
         print("*****************************************")
 
         try! realm.write {
+            for image in imagesArray {
+                recordAU.image.append(image)
+            }
+            recordAU.surgicalPlanning.append(preSugicalPlaning)
+            recordAU.surgicalPlanning.append(postSugicalPlaning)
+            if patient.records.count > 0 {
+                var boo:Bool = false
+                for record in patient.records{
+                    if record.id == recordAU.id {
+                        boo = true
+                    }
+                }
+                if boo == false {
+                    patient.records.append(recordAU)
+                }
+            }else{
+                patient.records.append(recordAU)
+            }
+
             realm.add(recordAU, update: true)
         }
 
@@ -88,10 +110,15 @@ class RealmParse{
     
     static func patient(patient: [String:AnyObject], uPatient:Patient?=nil) -> Patient {
         let patientA = Patient()
-        if uPatient != nil {
+        if !patient.keys.contains("name") && !patient.keys.contains("sex") {
+            return uPatient!
+        }else if uPatient != nil {
             patientA.id = uPatient!.id
             patientA.create_at = uPatient!.create_at
-            patientA.update_at = NSDate()
+            patientA.update_at = !pacientEqual(patient, isEqual: uPatient!) ? NSDate() : uPatient!.update_at
+            for record in uPatient!.records {
+                patientA.records.append(record)
+            }
         }
         
         patientA.name = patient["name"] as! String
@@ -100,9 +127,17 @@ class RealmParse{
         patientA.date_of_birth = patient["date_of_birth"] as! NSDate
         patientA.mail = patient["mail"] as? String
         patientA.phone = patient["phone"] as? String
-        print(patientA)
         
         return patientA
+    }
+    
+    private static func pacientEqual(patient: [String:AnyObject], isEqual uPatient:Patient) -> Bool {
+        
+        if uPatient.name == patient["name"] as! String && uPatient.sex == patient["sex"] as! String && uPatient.ethnic == patient["ethnic"] as! String && uPatient.date_of_birth == patient["date_of_birth"] as! NSDate && uPatient.mail == patient["mail"] as? String && uPatient.phone == patient["phone"] as? String {
+            return true
+        }
+        
+        return false
     }
     
     static func surgicalPlanning(type:Bool,id:String,surgicalPlanning:[String : Any?]) -> SurgicalPlanning {
@@ -158,8 +193,6 @@ class RealmParse{
             RealmParse.saveFile(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: image!)
         }
         img.points = points != nil ? NSKeyedArchiver.archivedDataWithRootObject(points!) : nil
-        
-        print(img)
         
         return img
     }
@@ -297,6 +330,23 @@ class RealmParse{
             
         }
     }
+    
+    /**
+     Delete an object Patient with a transaction.
+     - Parameter patient: Patient
+     
+     */
+    
+    static func deletePatient(patient patient: Patient){
+        for record in patient.records {
+            deleteRecord(record: record)
+        }
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(patient)
+        }
+    }
+    
     
     /**
      Delete all objects from the realm.
@@ -498,6 +548,7 @@ class RealmParse{
         var formArray: [String : Any?] = [String : Any?]()
         
         formArray = convertRealmPatientForm(record.patient!)
+        formArray.updateValue(record.surgeryDescription, forKey: "surgeryDescription")
         formArray.updateValue(record.surgeryRealized, forKey: "surgeryRealized")
         formArray.updateValue(record.note, forKey: "note")
         if record.date_of_surgery != nil {
@@ -552,7 +603,6 @@ class RealmParse{
                                     directory: NSSearchPathDirectory? = .DocumentDirectory) {
         
         let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
-        print(file)
         do {
             try file.deleteFile()
         }

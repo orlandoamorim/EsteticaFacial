@@ -36,8 +36,6 @@ class SurgeryDetailsVC: FormViewController{
     var showAction = ImageShowAction.Yes(style: .Default)
     var clearAction = ImageClearAction.Yes(style: .Destructive)
     
-//    private var _sourceType: UIImagePickerControllerSourceType = .Camera
-    
     //Procedimentos Cirurgicos
     var preSurgicalPlanningForm:[String : Any?] = [String : Any?]()
     var postSurgicalPlanningForm:[String : Any?] = [String : Any?]()
@@ -63,10 +61,13 @@ class SurgeryDetailsVC: FormViewController{
         
         switch contentToDisplay {
         case .Adicionar:
-            self.title = "Add Ficha"
+            self.title = "Adicionar Cirurgia"
             
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.cancelPressed(_:)))
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.getConfirmation))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancelPressed(_:)))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(getConfirmation))
+            if patient != nil {
+                ajustToPacient("Adicionando")
+            }
             
         case .Atualizar:
             for surgicalPlanning in record.surgicalPlanning {
@@ -101,11 +102,16 @@ class SurgeryDetailsVC: FormViewController{
             
             self.form.setValues(RealmParse.convertRealmRecordForm(record))
             self.tableView?.reloadData()
-            self.title = "Atualizar Ficha"
+            self.title = "Dados da Cirurgia"
+            if patient != nil {
+                ajustToPacient("Dados da")
+            }else{
+                self.form.sectionByTag("recover_patient")?.hidden = true
+                self.form.sectionByTag("recover_patient")?.evaluateHidden()
+            }
             
-            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.noData)) : nil
-            
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.getConfirmation))
+            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
         case .Nil : noData()
         }
     }
@@ -113,9 +119,48 @@ class SurgeryDetailsVC: FormViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    //-------------------
+    
+    func editBarBtn(){
+        self.tableView?.endEditing(true)
+        if patient != nil{
+            self.navigationItem.titleView = Helpers.setTitle("\(patient!.name)", subtitle: "Atualizando Cirurgia")
+        }else{
+            self.navigationItem.titleView = Helpers.setTitle("\(record.patient!.name)", subtitle: "Atualizando Cirurgia")
+        }
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancelEditBarBtn))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(getConfirmation))
+    }
+    
+    func cancelEditBarBtn(){
+        self.tableView?.endEditing(true)
+        if patient != nil{
+            self.navigationItem.titleView = Helpers.setTitle("\(patient!.name)", subtitle: "Dados Cirurgia")
+        }else{
+            self.navigationItem.titleView = nil
+            self.title = "Dados da Cirurgia"
+        }
+        self.form.setValues(RealmParse.convertRealmRecordForm(record))
+        
+        self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
+        self.tableView?.reloadData()
+        
+        
+    }
+    //--------------------
+    func ajustToPacient(word: String){
+        self.navigationItem.titleView = Helpers.setTitle("\(patient!.name)", subtitle: "\(word) Cirurgia")
+        self.form.sectionByTag("recover_patient")?.hidden = true
+        self.form.sectionByTag("recover_patient")?.evaluateHidden()
+
+        self.form.sectionByTag("patient_data")?.hidden = true
+        self.form.sectionByTag("patient_data")?.evaluateHidden()
+    }
     
     //--------------------
     func getConfirmation(){
+        self.tableView?.endEditing(true)
         let (verify, keyMissing) = Helpers.verifyFormValues(form.values(includeHidden: false))
         
         if !verify {
@@ -126,7 +171,7 @@ class SurgeryDetailsVC: FormViewController{
         switch contentToDisplay {
         case .Adicionar: self.getFormValues()
         case .Atualizar:
-            
+
             let alertView = SCLAlertView()
             
             alertView.addButton("Atualizar") { () -> Void in
@@ -148,19 +193,29 @@ class SurgeryDetailsVC: FormViewController{
     func getFormValues(){
         switch contentToDisplay {
         case .Adicionar:
-            RealmParse.auSurgery(nil,patient: self.patient, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
+            RealmParse.auSurgery(nil,patient: patient, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
             
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 let alertView = SCLAlertView()
-                alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha adicionada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+                alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Cirurgia adicionada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
             })
 
         case .Atualizar:
             RealmParse.auSurgery(record, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
 
             let alertView = SCLAlertView()
-            alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha atualizada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+            alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Cirurgia atualizada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
+            
+            if patient != nil{
+                self.navigationItem.titleView = Helpers.setTitle("\(patient!.name)", subtitle: "Dados Cirurgia")
+            }else{
+                self.navigationItem.titleView = nil
+                self.title = "Dados da Cirurgia"
+            }
             self.form.setValues(self.form.values(includeHidden: false))
+            
+            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
             self.tableView?.reloadData()
 
         case .Nil : return
@@ -351,18 +406,52 @@ class SurgeryDetailsVC: FormViewController{
         form +++
             
             Section(header: "", footer: "Aqui você pode colocar o nome da cirurgia, por ex.")
-            <<< NameRow("description") {
-                $0.title = "Nome da Ficha:"
+            <<< NameRow("surgeryDescription") {
+                $0.title = "Nome da Cirurgia:"
             }
             
-            +++ Section("Dados do Paciente")
+            +++ Section("") {
+                $0.tag = "recover_patient"
+            }
             
             <<< ButtonRow("btn_recover_patient") { (row: ButtonRow) -> Void in
                 row.title = "Recuperar Paciente:"
-                row.hidden = contentToDisplay == .Atualizar ? true : false
+                row.value = "false"
                 row.presentationMode = PresentationMode.SegueName(segueName: "RecoverPatientSegue", completionCallback: nil)
             }
-        
+            
+            <<< LabelRow ("changePassword") {
+                $0.title = "Limpar Paciente"
+                $0.hidden = "$btn_recover_patient != 'true'"
+                }.onCellSelection({ (_, _) in
+                    
+                    let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "O paciente desta cirurgia não é \(self.patient!.name)?", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
+                    
+                    alert.addAction(UIAlertAction(title: "Limpar", style: UIAlertActionStyle.Destructive, handler: { (delete) -> Void in
+                        self.patient = nil
+                        self.form.rowByTag("btn_recover_patient")?.baseValue = "false"
+                        self.form.rowByTag("btn_recover_patient")?.updateCell()
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+
+                })
+            
+            <<< ButtonRow("btn_edit_recover_patient") { (row: ButtonRow) -> Void in
+                row.title = "Editar Paciente:"
+                row.hidden = "$btn_recover_patient != 'true'"
+                row.presentationMode = PresentationMode.SegueName(segueName: "EditRecoverPatientSegue", completionCallback: nil)
+            }
+            
+            +++ Section("Dados do Paciente"){
+                $0.tag = "patient_data"
+                $0.hidden = "$btn_recover_patient != 'false'"
+
+            }
+            
             <<< NameRow("name") {
                 $0.title = "Nome:"
             }
@@ -467,7 +556,7 @@ class SurgeryDetailsVC: FormViewController{
         
         self.tableView!.reloadData()
         self.title = nil
-        
+        self.navigationItem.titleView = nil
     }
     
     //--------------------
@@ -653,8 +742,53 @@ class SurgeryDetailsVC: FormViewController{
             }
         }
         
+        if segue.identifier == "RecoverPatientSegue"{
+            let controller = segue.destinationViewController as! PatientsTableVC
+            controller.delegate = self
+            if let test = sender as? ButtonRow {
+                if test.tag == "btn_recover_patient"{
+                    controller.patientShow = .CheckPatient
+                    controller.patient = patient
+                }
+            }
+        }
+        
+        if segue.identifier == "EditRecoverPatientSegue"{
+//            let controller = (segue.destinationViewController as! UINavigationController).topViewController as! PatientDetailsVC
+            let controller = segue.destinationViewController as! PatientDetailsVC
+
+//            let nav = segue.destinationViewController as! UINavigationController
+//            let controller = nav.viewControllers[0] as! PatientDetailsVC
+            //            controller.delegate = self
+            if let test = sender as? ButtonRow {
+                if test.tag == "btn_edit_recover_patient"{
+                    //                    controller.patientShow = .CheckPatient
+                    controller.patient = patient
+                    controller.contentToDisplay = .Atualizar
+                    controller.patientDetailShow = .CheckPatient
+                }
+            }
+        }
+        
     }
 }
+extension SurgeryDetailsVC:RecoverPatient {
+    func recoverPatient(patient: Patient?) {
+        self.patient = nil
+        let section: Section?  = form.sectionByTag("recover_patient")
+        section!.header = HeaderFooterView(title: "")
+        self.form.rowByTag("btn_recover_patient")?.baseValue = "false"
+        if patient != nil {
+            self.patient = patient
+            section!.header = HeaderFooterView(title: "\(patient!.name)")
+//            self.form.sectionByTag("recover_patient")?.header?.title = patient!.name
+            self.form.rowByTag("btn_recover_patient")?.baseValue = "true"
+        }
+        section?.reload()
+
+    }
+}
+
 extension SurgeryDetailsVC: RecordImageDelegate{
     func updateData(image image: UIImage, ImageType: ImageTypes) {
         switch imageType {

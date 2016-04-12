@@ -17,6 +17,10 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
     var recordsSearch: [AnyObject] = [AnyObject]()
     var recordsDicAtoZ:[String : [Patient]] = [String : [Patient]]()
     
+    var patientShow:PatientShow = .Patient
+    var patient:Patient?
+    var delegate: RecoverPatient! = nil
+
     var token: NotificationToken?
     
     deinit {
@@ -35,10 +39,12 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
         }
         self.update()
         
-        
-        //Adição para funcionar melhor no iPad
-        self.splitViewController!.delegate = self
-        self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+//        if patientShow == .Patient {
+//            //Adição para funcionar melhor no iPad
+//            self.splitViewController!.delegate = self
+//            self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+//        }
+
         
         
         // UIRefreshControl
@@ -56,13 +62,24 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
 
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParentViewController(){
+            if patientShow == .CheckPatient {
+                delegate.recoverPatient(patient)
+            }else{
+                let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+                //ENVIANDO os dados por Object
+                centroDeNotificacao.postNotificationName("noData", object: nil)
+            }
+        }
+    }
+    
     
     // MARK: - Add Call
     func add(){
@@ -110,9 +127,8 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
 
         self.recordsDicAtoZ.removeAll()
         self.recordsDicAtoZ = RealmParse.queryPatients()
-        print(recordsDicAtoZ)
         self.navigationItem.titleView = nil
-        self.title = "Paciente"
+        self.title = "Pacientes"
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
     }
@@ -121,15 +137,15 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
 
 // MARK: - UISplitViewControllerDelegate
 
-extension PatientsTableVC: UISplitViewControllerDelegate, UIPopoverPresentationControllerDelegate {
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
-        return true
-    }
-    
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.CurrentContext
-    }
-}
+//extension PatientsTableVC: UISplitViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+//    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
+//        return true
+//    }
+//    
+//    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return UIModalPresentationStyle.CurrentContext
+//    }
+//}
 
 // MARK: - UITableViewDataSource
 
@@ -175,7 +191,13 @@ extension PatientsTableVC {
         cell.textLabel!.text = record[indexPath.row].name
         cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].date_of_birth))
 
-        cell.accessoryType = record[indexPath.row].records.count > 0 ? .DetailDisclosureButton : .DisclosureIndicator
+        if patientShow == .Patient {
+            cell.accessoryType = record[indexPath.row].records.count > 0 ? .DetailDisclosureButton : .DisclosureIndicator
+        }else if patientShow == .CheckPatient {
+            if record[indexPath.row] == patient {
+                cell.accessoryType = .Checkmark
+            }
+        }
 
         
         return cell
@@ -192,12 +214,57 @@ extension PatientsTableVC {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if recordsDicAtoZ.keys.count > 0 {
-            self.performSegueWithIdentifier("UpdateSegue", sender: indexPath)
+            if patientShow == .Patient {
+                self.performSegueWithIdentifier("UpdateSegue", sender: indexPath)
+            }else if patientShow == .CheckPatient {
+                let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+                let record = recordsDicAtoZ[key]!
+                patient = record[indexPath.row]
+                navigationController?.popViewControllerAnimated(true)
+            }
         }
     }
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("SurgerySegue", sender: indexPath)
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("SurgeriesTableVC") as! SurgeriesTableVC
+        controller.surgeryShow = .Patient
+        
+        let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+        let record = recordsDicAtoZ[key]!
+        controller.patient = record[indexPath.row]
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        
+        let delete = UITableViewRowAction(style: .Destructive, title: "\u{1F5D1}\n Deletar") { action, index in
+            print("more button tapped")
+            
+            //Criando um objeto do tipo NSNOtitcationCenter
+            
+            let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+            //ENVIANDO os dados por Object
+            centroDeNotificacao.postNotificationName("noData", object: nil)
+            
+            let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
+            let record = self.recordsDicAtoZ[key]!
+            
+            let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "Realmente deseja apagar o paciente \(record[indexPath.row].name)? Ao fazer isto, você tambem remove todas as cirurgias referentes a este paciente.", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Apagar", style: UIAlertActionStyle.Destructive, handler: { (delete) -> Void in
+                RealmParse.deletePatient(patient: record[indexPath.row])
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        delete.backgroundColor = UIColor.redColor()
+        
+        return [delete]
     }
 }
 

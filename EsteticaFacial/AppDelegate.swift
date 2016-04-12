@@ -28,21 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passcodeLockPresenter.presentPasscodeLock()
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 2,
             migrationBlock: { migration, oldSchemaVersion in
-                // The enumerateObjects:block: method iterates
-                // over every 'Person' object stored in the Realm file
                 migration.enumerate(Patient.className()) { oldObject, newObject in
-                    // Add the `fullName` property only to Realms with a schema version of 0
                     if oldSchemaVersion < 1 {
                         newObject?["records"] = nil
-    
                     }
                 }
                 
-//                migration.enumerate(Image.className(), { (oldObject, newObject) in
-//                    oldObject[]
-//                })
+                migration.enumerate(Record.className(), { (oldObject, newObject) in
+                    if oldSchemaVersion < 2 {
+                        newObject?["surgeryDescription"] = ""
+                    }
+                })
         })
         
         return true

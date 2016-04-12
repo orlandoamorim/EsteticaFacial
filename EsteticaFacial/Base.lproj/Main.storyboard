@@ -249,6 +249,8 @@
                         <segue destination="pIi-7w-vwa" kind="presentation" identifier="iPadCameraSegue" id="jTR-pN-e4O"/>
                         <segue destination="rZ6-4F-E91" kind="presentation" identifier="iPhoneCameraSegue" id="u4M-Ld-fGw"/>
                         <segue destination="Pwp-ai-6nj" kind="show" identifier="SurgeryPlanSegue" id="mDA-QW-GgO"/>
+                        <segue destination="9WN-j7-Kir" kind="showDetail" identifier="RecoverPatientSegue" action="showViewController:sender:" id="uwD-Kz-jti"/>
+                        <segue destination="yCy-3S-Wpx" kind="showDetail" identifier="EditRecoverPatientSegue" id="f2M-XH-d2S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -262,6 +264,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDa-sm-7Kq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2186.5" y="1303"/>
+        </scene>
+        <!--PatientsTableVC-->
+        <scene sceneID="5aQ-no-2F5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsTableVC" id="9WN-j7-Kir" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3LY-mV-Ot0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2216.5" y="1414"/>
+        </scene>
+        <!--PatientDetailsVC-->
+        <scene sceneID="BEj-Do-sJB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientDetailsVC" id="yCy-3S-Wpx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Pwa-Pz-iXF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feW-it-rLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="1511"/>
         </scene>
         <!--iPhoneCamera-->
         <scene sceneID="zwg-C4-IHX">

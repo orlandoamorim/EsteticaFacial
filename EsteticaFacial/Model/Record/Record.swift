@@ -12,6 +12,7 @@ import RealmSwift
 class Record: Object {
     
     dynamic var id = ""
+    dynamic var surgeryDescription = ""
     dynamic var patient: Patient?
     let image = List<Image>()
     dynamic var surgeryRealized = false

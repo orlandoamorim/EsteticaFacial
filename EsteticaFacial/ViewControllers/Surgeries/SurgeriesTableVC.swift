@@ -38,12 +38,11 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         }
         self.update()
         
-        
+        if patient == nil {
         //Adição para funcionar melhor no iPad
-        self.splitViewController!.delegate = self
-        self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
-        
-        
+            self.splitViewController!.delegate = self
+            self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        }
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(update), forControlEvents: UIControlEvents.ValueChanged)
@@ -52,8 +51,9 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         self.refreshControl = refreshControl
         
         // BarButtonItem Left
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
+        if surgeryShow == .Surgery {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
+        }
         
         // BarButtonItem Right
         
@@ -63,12 +63,18 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParentViewController(){
+            let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+            //ENVIANDO os dados por Object
+            centroDeNotificacao.postNotificationName("noData", object: nil)
+        }
     }
     
     func settings(button: UIBarButtonItem){
@@ -93,12 +99,14 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
                 let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
                 let record = recordsDicAtoZ[key]!
                 controller.record = record[indexPath.row]
+                controller.patient = patient
                 
             }
         }else if segue.identifier == "AddSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let controller = nav.viewControllers[0] as! SurgeryDetailsVC
             controller.contentToDisplay = .Adicionar
+            controller.patient = patient
         }
     }
     
@@ -116,6 +124,9 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         
         self.navigationItem.titleView = nil
         self.title = "Cirurgias"
+        if patient != nil {
+            self.navigationItem.titleView = Helpers.setTitle("Cirurgias", subtitle: "\(patient!.name)")
+        }
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
     }

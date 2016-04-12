@@ -34,6 +34,7 @@
                             <constraint firstItem="Tjo-GV-alI" firstAttribute="bottom" secondItem="sG8-Do-Yje" secondAttribute="top" id="yhB-Mh-rHy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Fc3-03-LCB"/>
                     <connections>
                         <outlet property="tableView" destination="Tjo-GV-alI" id="msz-lb-9bZ"/>
                         <segue destination="5Jm-Vu-kPk" kind="show" identifier="PacientsSegue" id="V7d-xr-ZeF"/>
@@ -41,15 +42,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYx-4d-KkM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418" y="356"/>
+            <point key="canvasLocation" x="1124" y="356"/>
         </scene>
-        <!--PatientsNavTableVC-->
+        <!--PatientsTableVC-->
         <scene sceneID="OXx-id-U8V">
             <objects>
-                <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsNavTableVC" id="5Jm-Vu-kPk" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsTableVC" id="5Jm-Vu-kPk" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-vm-N8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="356"/>
+            <point key="canvasLocation" x="1631.5" y="356"/>
         </scene>
     </scenes>
 </document>
