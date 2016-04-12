@@ -19,6 +19,7 @@ class Patient: Object {
     dynamic var date_of_birth = NSDate()
     dynamic var mail: String? = nil
     dynamic var phone: String? = nil
+    let records = List<Record>()
     
     override static func primaryKey() -> String? {
         return "id"

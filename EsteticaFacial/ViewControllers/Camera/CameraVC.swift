@@ -65,6 +65,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         cameraManager.resumeCaptureSession()
         Helpers().getLatestPhotos { (images) -> () in
             self.libraryImages.setBackgroundImage(images[0], forState: UIControlState.Normal)
@@ -184,7 +185,15 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         //Determinamos que o nosso image picker vai abrir o app de camera
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.editing = false
+        imagePicker.modalPresentationStyle = .Popover
+        if let popView = imagePicker.popoverPresentationController {
+            popView.sourceView = sender
+            popView.sourceRect = sender.bounds
+        }
+        
         self.presentViewController(imagePicker, animated: true, completion: nil)
+        imagePicker.view.layoutIfNeeded()
+
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {

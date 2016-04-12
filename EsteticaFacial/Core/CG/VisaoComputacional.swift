@@ -41,14 +41,17 @@ class VisaoComputacional: NSObject {
         let sw = Int(rect_to_search.size.width)
         let sh = Int(rect_to_search.size.height)
         
-        for var i:Int=oy;i<oy+sh;i++
+        for i in oy..<(oy + sh)
+//        for var i:Int=oy;i<oy+sh;i++
         {
-            for var j:Int=ox;j<ox+sw;j++
+            for j in ox..<(ox + sw)
+//            for var j:Int=ox;j<ox+sw;j++
             {
                 if matrix[i][j] != 0{
                     var pts = 0
                     var aux = Array(count: height, repeatedValue: Array(count: width, repeatedValue: 0))
-                    for var k:Int=j-R;k<=j+R;k+=1{
+                    for k in j-R...j+R{
+//                    for var k:Int=j-R;k<=j+R;k+=1{
                         let C = (k-j)*(k-j)
                         let CC = i*i + C - R*R
                         
@@ -57,22 +60,22 @@ class VisaoComputacional: NSObject {
                         
                         if k>=0 && k<width && y1>=0 && y1<height{
                             if aux[y1][k] == 0{
-                                map[y1][k]++
+                                map[y1][k] += 1
                                 aux[y1][k]=1
-                                pts++
+                                pts += 1
                             }
                         }
                         
                         if k>=0 && k<width && y2>=0 && y2<height{
                             if aux[y2][k] == 0{
-                                map[y2][k]++
+                                map[y2][k] += 1
                                 aux[y2][k]=1
-                                pts++
+                                pts += 1
                             }
                         }
                     }
-                    
-                    for var k:Int=i-R;k<=i+R;k+=1{
+                    for k in i-R...i+R{
+//                    for var k:Int=i-R;k<=i+R;k+=1{
                         let C = (k-i)*(k-i)
                         let CC = j*j + C - R*R
                         
@@ -81,17 +84,17 @@ class VisaoComputacional: NSObject {
                         
                         if k>=0 && k<height && y1>=0 && y1<width{
                             if aux[k][y1] == 0{
-                                map[k][y1]++
+                                map[k][y1] += 1
                                 aux[k][y1]=1
-                                pts++
+                                pts += 1
                             }
                         }
                         
                         if k>=0 && k<height && y2>=0 && y2<width{
                             if aux[k][y2] == 0{
-                                map[k][y2]++
+                                map[k][y2] += 1
                                 aux[k][y2]=1
-                                pts++
+                                pts += 1
                             }
                         }
                     }
@@ -102,12 +105,14 @@ class VisaoComputacional: NSObject {
                 }
             }
         }
-        
-        for(var kk:Int=0;kk<circles;kk++)
+        for _ in 0..<circles
+//        for(var kk:Int=0;kk<circles;kk++)
         {
-            for var ii:Int=oy;ii<oy+sh;ii++
+            for ii in oy..<oy+sh
+//            for var ii:Int=oy;ii<oy+sh;ii++
             {
-                for var jj:Int=ox;jj<ox+sw;jj++
+                for jj in ox..<ox+sw
+//                for var jj:Int=ox;jj<ox+sw;jj++
                 {
                     if probcirc.x != -1 {
                         let dist = sqrt(pow(Double(probcirc.y)-Double(ii),2)+pow(Double(probcirc.x)-Double(jj),2))
@@ -154,13 +159,13 @@ class VisaoComputacional: NSObject {
         
         print("Aplicando a transformada de Hough...")
         
-        var i_max=0
-        var j_max=0
-        var raio=0
-        var melhor:Double = -1.0
+//        var i_max=0
+//        var j_max=0
+//        var raio=0
+//        var melhor:Double = -1.0
         var houghs = [(Int,Int,Int,Double)]()
-        
-        for var i:Int=min;i<=max;i++ {
+        for i in min...max{
+//        for var i:Int=min;i<=max;i++ {
             let circles = circle_hough(i,matrix: matrix,width: width,height: height,circles:1,rect_to_search:rect_to_search,probcirc:probcirc)
             
             for circle in circles{

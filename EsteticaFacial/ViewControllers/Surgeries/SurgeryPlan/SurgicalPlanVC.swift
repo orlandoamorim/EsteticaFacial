@@ -1,5 +1,5 @@
 //
-//  ProcedimentosCirurgicosVC.swift
+//  SurgicalPlanVC.swift
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 05/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import Eureka
 
-class ProcedimentosCirurgicosVC:FormViewController {
+class SurgicalPlanVC:FormViewController {
     
     var delegate: ProcedimentoCirurgico! = nil
 
@@ -51,7 +51,9 @@ class ProcedimentosCirurgicosVC:FormViewController {
         if let popView = alert.popoverPresentationController {
             popView.barButtonItem = sender
         }
-    
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment:""), style: UIAlertActionStyle.Cancel , handler: nil))
+
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
@@ -100,7 +102,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options =  ["Inter","Intra","Infra","Transcolumelar"]
                 $0.selectorTitle = "Tipo da Incisao"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
                 }
         +++ Section("Ponta Nasal")
             
@@ -109,7 +111,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Ressecção Cefálica","Incisões","Excisão do Seg Lateral","Excisão domal"]
                 $0.selectorTitle = "Tipo da Liberação"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("suturas") {
@@ -127,7 +129,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 }
 
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             
             <<< TextAreaRow("outras_suturas") {
@@ -152,7 +154,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 }
 
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             <<< TextAreaRow("outros_enxertos_de_ponta") {
             $0.hidden = "$enxerto_de_ponta != 'Outros'"
@@ -172,7 +174,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Abaixado","Aumentado","Aplainado"]
                 $0.selectorTitle = "Tipo de Dorso"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("raiz") {
@@ -180,7 +182,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Redução Raspa","Redução Osteótomo","Aumentada Enxerto Único","Aumentada Enxertos Múltiplos"]
                 $0.selectorTitle = "Tipo de Raiz"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
 
             <<< MultipleSelectorRow<String>("osso") {
@@ -197,7 +199,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                         
                     }
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             
             <<< TextAreaRow("outros_ossos") {
@@ -211,7 +213,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Abaixada","Aumentada","Encurtada","Expansor","Enxerto Extensão"]
                 $0.selectorTitle = "Tipo de Cartilagem"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             
         +++ Section("OSTEOTOMIAS")
@@ -221,7 +223,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Baixa-alta","Baixa-baixa","Duplo Nível"]
                 $0.selectorTitle = "Lateral"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("transversa") {
@@ -229,14 +231,14 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Digital","Osteótomo"]
                 $0.selectorTitle = "Transversa"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             <<< MultipleSelectorRow<String>("medial") {
                 $0.title = "Medial:"
                 $0.options = ["Medial", "Medial Oblíqua", "Contínua"]
                 $0.selectorTitle = "Medial"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
 
         +++ Section()
@@ -264,7 +266,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                     }
                     
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("estreitamento_de_assoalho_option") {
@@ -273,7 +275,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["mm esquerda","mm direita"]
                 $0.selectorTitle = "Estreitamento de Assoalho Tipo:"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< MultipleSelectorRow<String>("redução_da_dilatação_alar_option") {
@@ -282,7 +284,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["mm esquerda","mm direita"]
                 $0.selectorTitle = "Redução da Dilatação Alar Tipo"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
         +++ Section()
@@ -301,7 +303,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                         
                     }
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             
             <<< TextAreaRow("outros_enxertos_autologos") {
@@ -335,7 +337,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                     }
                     
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
             
             <<< MultipleSelectorRow<String>("mentoplastia_option") {
@@ -344,7 +346,7 @@ class ProcedimentosCirurgicosVC:FormViewController {
                 $0.options = ["Aumento","Redução"]
                 $0.selectorTitle = "Mentoplastia Tipo:"
                 }.onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(ProcedimentosCirurgicosVC.multipleSelectorDone(_:)))
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(SurgicalPlanVC.multipleSelectorDone(_:)))
             }
         
             <<< TextAreaRow("miscelanea_outros") {

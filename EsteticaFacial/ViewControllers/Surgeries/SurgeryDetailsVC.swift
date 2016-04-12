@@ -1,5 +1,5 @@
 //
-//  AUFichaVC.swift
+//  SurgeryDetailsVC.swift
 //  EsteticaFacial
 //
 //  Created by Orlando Amorim on 09/11/15.
@@ -11,9 +11,10 @@ import Eureka
 import SCLAlertView
 import DeviceKit
 
-class AUFichaVC: FormViewController{
+class SurgeryDetailsVC: FormViewController{
     
     var record:Record!
+    var patient:Patient?
     
     @IBOutlet weak var header: UIView!
     
@@ -58,14 +59,14 @@ class AUFichaVC: FormViewController{
         postSurgicalPlanningForm = Helpers.surgicalPlanningForm()
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        centroDeNotificacao.addObserver(self, selector: #selector(AUFichaVC.noData), name: "noData", object: nil)
+        centroDeNotificacao.addObserver(self, selector: #selector(SurgeryDetailsVC.noData), name: "noData", object: nil)
         
         switch contentToDisplay {
         case .Adicionar:
             self.title = "Add Ficha"
             
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.cancelPressed(_:)))
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.getConfirmation))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.cancelPressed(_:)))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.getConfirmation))
             
         case .Atualizar:
             for surgicalPlanning in record.surgicalPlanning {
@@ -81,7 +82,6 @@ class AUFichaVC: FormViewController{
                 case ImageTypes.Front.hashValue :
                     self.btnFront.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
                     self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
-                    //                    if image.points != nil { self.frontPoints = (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?)}
                     
                 case ImageTypes.ProfileRight.hashValue :
                     self.btnProfileRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
@@ -103,9 +103,9 @@ class AUFichaVC: FormViewController{
             self.tableView?.reloadData()
             self.title = "Atualizar Ficha"
             
-            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.noData)) : nil
+            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.noData)) : nil
             
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(AUFichaVC.getConfirmation))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Atualizar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SurgeryDetailsVC.getConfirmation))
         case .Nil : noData()
         }
     }
@@ -146,21 +146,18 @@ class AUFichaVC: FormViewController{
     }
     
     func getFormValues(){
-        
         switch contentToDisplay {
         case .Adicionar:
-            RealmParse.add(formValues: self.form.values(includeHidden: false),
-            preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd() )
+            RealmParse.auSurgery(nil,patient: self.patient, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
             
-            //images:[ImageTypes:(UIImage,[String:NSValue]?)]?=nil
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 let alertView = SCLAlertView()
                 alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha adicionada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
             })
 
         case .Atualizar:
-            RealmParse.update(record: record, formValues: self.form.values(includeHidden: false),
-                preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayUpdate())
+            RealmParse.auSurgery(record, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
+
             let alertView = SCLAlertView()
             alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Ficha atualizada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
             self.form.setValues(self.form.values(includeHidden: false))
@@ -205,7 +202,6 @@ class AUFichaVC: FormViewController{
                         for image in self.record.image {
                             if Int(image.imageType) == ImageTypes.Front.hashValue {
                                 if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!)  {
-                                    print("ESSA MERDA")
                                     RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
                                     RealmParse.deleteImage(image: image)
                                     boo = true
@@ -354,8 +350,19 @@ class AUFichaVC: FormViewController{
         
         form +++
             
-            Section("Dados do Paciente")
+            Section(header: "", footer: "Aqui você pode colocar o nome da cirurgia, por ex.")
+            <<< NameRow("description") {
+                $0.title = "Nome da Ficha:"
+            }
             
+            +++ Section("Dados do Paciente")
+            
+            <<< ButtonRow("btn_recover_patient") { (row: ButtonRow) -> Void in
+                row.title = "Recuperar Paciente:"
+                row.hidden = contentToDisplay == .Atualizar ? true : false
+                row.presentationMode = PresentationMode.SegueName(segueName: "RecoverPatientSegue", completionCallback: nil)
+            }
+        
             <<< NameRow("name") {
                 $0.title = "Nome:"
             }
@@ -422,7 +429,7 @@ class AUFichaVC: FormViewController{
             
             +++ Section("Notas")
             
-            <<< TextAreaRow("note") { $0.placeholder = "Este paciente..." }
+            <<< TextAreaRow("note") { $0.placeholder = "Esta cirurgia..." }
     }
     
     //--------------------
@@ -440,7 +447,7 @@ class AUFichaVC: FormViewController{
         
         let messageLabel:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         
-        messageLabel.text = "Clique em uma ficha para carregar os dados. "
+        messageLabel.text = "Clique em uma cirrurgia para carregar os dados. "
         messageLabel.textColor = UIColor.blackColor()
         messageLabel.numberOfLines = 5
         messageLabel.textAlignment = NSTextAlignment.Center
@@ -465,36 +472,14 @@ class AUFichaVC: FormViewController{
     
     //--------------------
     func setButtons() {
-        self.btnFront.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnProfileRight.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnNasal.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnFront.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnProfileRight.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnNasal.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
-        self.btnObliqueLeft.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnProfileLeft.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.btnObliqueRight.addTarget(self, action: #selector(AUFichaVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnObliqueLeft.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnProfileLeft.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.btnObliqueRight.addTarget(self, action: #selector(SurgeryDetailsVC.showOptions(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
-    
-//    @IBAction func btnFrontal(sender: AnyObject) {
-//        imageTypesSelected = .Frontal
-//        self.showOptions(btn_imagem_frontal)
-//        let bonus = (sender is UITapGestureRecognizer ? true : false)
-//        if !bonus {
-//            if sender.state == UIGestureRecognizerState.Began{
-//                if btn_imagem_frontal.currentImage != nil {
-//                    //showOptions(btn_imagem_frontal)
-//                }else{
-//                    performSegueWithIdentifier("SegueCamera", sender: nil)
-//                }
-//            }
-//        }else {
-//            if btn_imagem_frontal.currentImage != nil {
-//                performSegueWithIdentifier("SegueShowImage", sender: nil)
-//            }else{
-//                performSegueWithIdentifier("SegueCamera", sender: nil)
-//            }
-//        }
-//    }
-
     
     func showOptions(sender: UIButton!) {
         
@@ -614,10 +599,7 @@ class AUFichaVC: FormViewController{
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    // MARK: - Navigation
-    
-    
-    
+    // MARK: - Navigation    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == (Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue"){
@@ -656,7 +638,7 @@ class AUFichaVC: FormViewController{
         }
         
         if segue.identifier == "SurgeryPlanSegue"{
-            let controller = segue.destinationViewController as! ProcedimentosCirurgicosVC
+            let controller = segue.destinationViewController as! SurgicalPlanVC
             
             controller.delegate = self
             
@@ -673,7 +655,7 @@ class AUFichaVC: FormViewController{
         
     }
 }
-extension AUFichaVC: RecordImageDelegate{
+extension SurgeryDetailsVC: RecordImageDelegate{
     func updateData(image image: UIImage, ImageType: ImageTypes) {
         switch imageType {
         case .Front:        self.btnFront.setImage(image, forState: UIControlState.Normal)
@@ -691,7 +673,7 @@ extension AUFichaVC: RecordImageDelegate{
         }
     }
 }
-extension AUFichaVC: RecordPointsDelegate{
+extension SurgeryDetailsVC: RecordPointsDelegate{
     func updateData(points points: [String : NSValue]?, ImageType: ImageTypes) {
         print(points)
         switch imageType {
@@ -711,7 +693,7 @@ extension AUFichaVC: RecordPointsDelegate{
     }
 }
 
-extension AUFichaVC: ProcedimentoCirurgico{
+extension SurgeryDetailsVC: ProcedimentoCirurgico{
     func updateSurgicalPlanning(surgicalPlanningForm: [String : Any?], SurgicalPlanningType: SurgicalPlanningTypes) {
         
         switch SurgicalPlanningType {

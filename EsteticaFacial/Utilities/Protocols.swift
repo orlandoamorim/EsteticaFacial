@@ -16,33 +16,24 @@ protocol RecordImageDelegate{
 protocol RecordPointsDelegate{
     func updateData(points points:[String:NSValue]?, ImageType:ImageTypes)
 }
-//Nao pode mudar a ordem!!
-public enum ImageTypes {
-    case Front, ProfileRight, Nasal, ObliqueLeft, ObliqueRight, ProfileLeft
-}
+
 
 protocol ProcedimentoCirurgico{
     func updateSurgicalPlanning(surgicalPlanningForm:[String : Any?], SurgicalPlanningType: SurgicalPlanningTypes)
 }
 
-enum ImageVerificationType {
-    case Ok, Retake
+protocol RecoverPatient {
+    func recoverPatient(patient:Patient?)
 }
+
 
 protocol ImageVerification{
     func imageVerification(image image: UIImage?, ImageVerify : ImageVerificationType)
 }
 
-enum SurgicalPlanningTypes {
-    case PreSurgical, PostSurgical
-}
 
 protocol CameraViewDelegate{
     func marcar_pontos(dic : [String:NSValue])
-}
-
-enum contentTypes {
-    case Adicionar, Atualizar, Nil
 }
 
 struct ImageRowSourceTypes : OptionSetType {
@@ -59,13 +50,5 @@ struct ImageRowSourceTypes : OptionSetType {
     static let All: ImageRowSourceTypes = [Camera, PhotoLibrary, SavedPhotosAlbum]
 }
 
-enum ImageShowAction {
-    case No
-    case Yes(style: UIAlertActionStyle)
-}
 
-enum ImageClearAction {
-    case No
-    case Yes(style: UIAlertActionStyle)
-}
 

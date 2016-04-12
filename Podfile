@@ -12,8 +12,9 @@ target 'EsteticaFacial' do
     pod 'GPUImage', :git => 'https://github.com/BradLarson/GPUImage', :branch => 'master'
     pod 'TOCropViewController'
     
+    pod 'PasscodeLock'
     pod 'DeviceKit', '~> 0.3.1'
-    
+    pod 'AcknowList'
     pod 'SCLAlertView', :git => 'https://github.com/vikmeup/SCLAlertView-Swift', :branch => 'master'
 end
 

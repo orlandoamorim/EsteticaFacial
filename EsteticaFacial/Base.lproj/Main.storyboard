@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Pacientes TableVC-->
+        <!--SurgeriesTableVC-->
         <scene sceneID="1Ge-ka-IZQ">
             <objects>
-                <tableViewController id="ghm-n5-Tl9" customClass="PacientesTableVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SurgeriesTableVC" title="SurgeriesTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ghm-n5-Tl9" customClass="SurgeriesTableVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="axC-Sl-BW1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PacienteCell" textLabel="1Sb-Hp-kta" detailTextLabel="6Ly-km-X8z" imageView="Bzi-wi-vj0" rowHeight="80" style="IBUITableViewCellStyleSubtitle" id="dM3-xb-E1N">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurgeryCell" textLabel="1Sb-Hp-kta" detailTextLabel="6Ly-km-X8z" imageView="Bzi-wi-vj0" rowHeight="80" style="IBUITableViewCellStyleSubtitle" id="dM3-xb-E1N">
                                 <rect key="frame" x="0.0" y="136" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dM3-xb-E1N" id="6OV-K2-nwz">
@@ -64,16 +64,25 @@
                         <outlet property="searchBar" destination="6Rc-94-EWa" id="WI8-Qu-lJG"/>
                         <segue destination="rFl-TG-Dfu" kind="showDetail" identifier="UpdateSegue" id="d3Y-0V-2WP"/>
                         <segue destination="rFl-TG-Dfu" kind="presentation" identifier="AddSegue" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="wFd-Dn-OWh"/>
+                        <segue destination="mMs-Vf-k7l" kind="show" identifier="SettingsSegue" id="m2X-Qo-hsk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0D-xu-mm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964" y="474"/>
         </scene>
-        <!--FichaVC-->
+        <!--SettingsTableVC-->
+        <scene sceneID="N1c-P6-iJH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsTableVC" id="mMs-Vf-k7l" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5IR-Bw-61e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1490.5" y="474"/>
+        </scene>
+        <!--Surgery DetailsVC-->
         <scene sceneID="2K7-eF-cgP">
             <objects>
-                <viewController id="BDg-fg-0Yt" customClass="AUFichaVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SurgeryDetailsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BDg-fg-0Yt" customClass="SurgeryDetailsVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bU9-Ah-ZIh"/>
                         <viewControllerLayoutGuide type="bottom" id="UFk-rF-G6X"/>
@@ -239,36 +248,28 @@
                         <segue destination="asl-qs-5Lg" kind="presentation" identifier="ShowImageSegue" id="x1z-yB-rsu"/>
                         <segue destination="pIi-7w-vwa" kind="presentation" identifier="iPadCameraSegue" id="jTR-pN-e4O"/>
                         <segue destination="rZ6-4F-E91" kind="presentation" identifier="iPhoneCameraSegue" id="u4M-Ld-fGw"/>
-                        <segue destination="vgg-tC-QiF" kind="show" identifier="SurgeryPlanSegue" id="6hc-km-NfF"/>
+                        <segue destination="Pwp-ai-6nj" kind="show" identifier="SurgeryPlanSegue" id="mDA-QW-GgO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="1257"/>
-        </scene>
-        <!--SurgeryPlan-->
-        <scene sceneID="U6R-CN-SjS">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SurgeryData" referencedIdentifier="SurgeryPlan" id="vgg-tC-QiF" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="24C-Eo-YCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1634" y="1832"/>
+            <point key="canvasLocation" x="1697" y="1253"/>
         </scene>
         <!--iPadCamera-->
         <scene sceneID="ZcK-hm-Km3">
             <objects>
-                <viewControllerPlaceholder storyboardName="CameraScreen" referencedIdentifier="iPadCamera" id="pIi-7w-vwa" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Camera" referencedIdentifier="iPadCamera" id="pIi-7w-vwa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDa-sm-7Kq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2123.5" y="1307"/>
+            <point key="canvasLocation" x="2186.5" y="1303"/>
         </scene>
         <!--iPhoneCamera-->
         <scene sceneID="zwg-C4-IHX">
             <objects>
-                <viewControllerPlaceholder storyboardName="CameraScreen" referencedIdentifier="iPhoneCamera" id="rZ6-4F-E91" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Camera" referencedIdentifier="iPhoneCamera" id="rZ6-4F-E91" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yq-Ta-B59" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2131" y="1181"/>
+            <point key="canvasLocation" x="2194" y="1177"/>
         </scene>
         <!--Process ImageVC-->
         <scene sceneID="tDc-sS-FzT">
@@ -301,12 +302,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-Iy-oDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2349" y="2035"/>
+            <point key="canvasLocation" x="2380" y="2037"/>
         </scene>
-        <!--Item-->
+        <!--Surgeries Navigation-->
         <scene sceneID="Urn-A6-DYk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EO8-by-FS0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SurgeriesNavTableVC" title="Surgeries Navigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EO8-by-FS0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="alL-No-h3U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rpx-Rn-PSQ">
@@ -354,10 +355,10 @@
             </objects>
             <point key="canvasLocation" x="-513" y="474"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--SurgeryDetails Navigation-->
         <scene sceneID="64f-sF-hqR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rFl-TG-Dfu" sceneMemberID="viewController">
+                <navigationController title="SurgeryDetails Navigation" automaticallyAdjustsScrollViewInsets="NO" id="rFl-TG-Dfu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vep-ac-e7z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -370,7 +371,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fhg-Z3-vUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="1257"/>
+            <point key="canvasLocation" x="964" y="1253"/>
+        </scene>
+        <!--Surgical PlanVC-->
+        <scene sceneID="zDi-8k-DnE">
+            <objects>
+                <viewController storyboardIdentifier="SurgicalPlanVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pwp-ai-6nj" customClass="SurgicalPlanVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pep-Xe-3hv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y4y-nL-lej"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hev-HU-KQ3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="od6-KT-6Qv">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pwp-ai-6nj" id="yGr-Br-iXy"/>
+                                    <outlet property="delegate" destination="Pwp-ai-6nj" id="pSb-7O-5vw"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="od6-KT-6Qv" firstAttribute="top" secondItem="hev-HU-KQ3" secondAttribute="top" id="NSQ-fD-4Cb"/>
+                            <constraint firstItem="od6-KT-6Qv" firstAttribute="leading" secondItem="hev-HU-KQ3" secondAttribute="leading" id="T5Y-0N-4lt"/>
+                            <constraint firstAttribute="trailing" secondItem="od6-KT-6Qv" secondAttribute="trailing" id="WKL-ab-l1s"/>
+                            <constraint firstItem="od6-KT-6Qv" firstAttribute="bottom" secondItem="Y4y-nL-lej" secondAttribute="top" id="veu-Ii-PaZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tiK-vb-yNd"/>
+                    <connections>
+                        <outlet property="tableView" destination="od6-KT-6Qv" id="EgY-Df-Jbs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m7s-6S-21d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1697" y="2037"/>
         </scene>
     </scenes>
     <resources>

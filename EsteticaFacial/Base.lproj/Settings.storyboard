@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iBZ-qS-XCy">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Settings TableVC-->
+        <scene sceneID="gsC-wi-i1b">
+            <objects>
+                <viewController storyboardIdentifier="SettingsTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iBZ-qS-XCy" customClass="SettingsTableVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PbZ-0b-Twr"/>
+                        <viewControllerLayoutGuide type="bottom" id="sG8-Do-Yje"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sxe-Hv-IGm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-GV-alI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="iBZ-qS-XCy" id="v9I-n0-H7h"/>
+                                    <outlet property="delegate" destination="iBZ-qS-XCy" id="zYN-lJ-NmQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Tjo-GV-alI" secondAttribute="trailing" id="1tZ-Oj-Zf0"/>
+                            <constraint firstItem="Tjo-GV-alI" firstAttribute="leading" secondItem="Sxe-Hv-IGm" secondAttribute="leading" id="Te3-ls-xHc"/>
+                            <constraint firstItem="Tjo-GV-alI" firstAttribute="top" secondItem="Sxe-Hv-IGm" secondAttribute="top" id="YHP-og-e89"/>
+                            <constraint firstItem="Tjo-GV-alI" firstAttribute="bottom" secondItem="sG8-Do-Yje" secondAttribute="top" id="yhB-Mh-rHy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Tjo-GV-alI" id="msz-lb-9bZ"/>
+                        <segue destination="5Jm-Vu-kPk" kind="show" identifier="PacientsSegue" id="V7d-xr-ZeF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hYx-4d-KkM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="418" y="356"/>
+        </scene>
+        <!--PatientsNavTableVC-->
+        <scene sceneID="OXx-id-U8V">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsNavTableVC" id="5Jm-Vu-kPk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-vm-N8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="356"/>
+        </scene>
+    </scenes>
+</document>

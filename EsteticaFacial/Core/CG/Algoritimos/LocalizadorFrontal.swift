@@ -35,8 +35,8 @@ class LocalizadorFrontal: NSObject {
         self.matrix = Array(count: self.height, repeatedValue: Array(count: self.width, repeatedValue: 0))
         self.img = image
         
-        for var i:Int=0 ; i<self.height ; i++ {
-            for var j:Int=0 ; j<self.width ; j++ {
+        for  i in 0..<self.height {
+            for j in 0..<self.width {
                 self.matrix![i][j] = (Int(raw[i*self.width + j].r) + Int(raw[i*self.width + j].g) + Int(raw[i*self.width + j].b))/3
             }
         }
@@ -66,8 +66,8 @@ class LocalizadorFrontal: NSObject {
         let edges = TecnicasPDI.canny(self.img!, lower: 0.05, upper: 0.15)
         
         var mat = Array(count: self.height, repeatedValue: Array(count: self.width, repeatedValue: 0))
-        for var i:Int=0;i<self.height;i++ {
-            for var j:Int=0;j<self.width;j++ {
+        for  i in 0..<self.height {
+            for j in 0..<self.width {
                 mat[i][j] = Int(edges[i*width+j].r)
             }
         }

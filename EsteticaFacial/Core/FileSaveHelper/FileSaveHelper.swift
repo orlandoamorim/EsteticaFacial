@@ -205,24 +205,21 @@ class FileSaveHelper {
         throw FileErrors.JsonNotSerialized
     }
     
-    
+    // MARK:- Delete File Method
     
     /**
-     Delete the image file.
-     
-     :param: image UIImage
-     */
+     Delete the file.
+    */
     func deleteFile() throws {
+        
+        guard fileExists else {
+            throw FileErrors.FileNotFound
+        }
         
         do {
             try fileManager.removeItemAtPath(fullyQualifiedPath)
-        }
-        catch  {
+        }catch  {
             throw FileErrors.FileNotDeleted
         }
     }
-    
-    
-    
-    
 }

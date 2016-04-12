@@ -15,7 +15,7 @@ class Image: Object {
     dynamic var patientId = ""
     dynamic var imageType = ""
     dynamic var name = ""
-    dynamic var create_at:NSDate? = nil
+    dynamic var create_at = NSDate()
     dynamic var update_at = NSDate()
     dynamic var points: NSData? = nil
 

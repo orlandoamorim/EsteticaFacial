@@ -9,9 +9,9 @@
 import UIKit
 import RealmSwift
 
-class RealmParse{
+class RealmParseHelper{
     
-    static func auSurgery(record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],
+    static func au(record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],
                    preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],
                    images:[ ImageTypes :(UIImage,[String:NSValue]?)]?=nil){
         
@@ -21,13 +21,13 @@ class RealmParse{
         if record != nil {
             id = record!.id
         }
-        let formValues = RealmParse.convertAnyToAnyObject(formValues)
+        let formValues = RealmParseHelper.convertAnyToAnyObject(formValues)
         print("************* Patient Data **************")
-        let patient = RealmParse.patient(formValues, uPatient: record?.patient == nil ? patient : record?.patient)
+        let patient = RealmParseHelper.patient(formValues, uPatient: record?.patient == nil ? patient : record?.patient)
         print("********* Pre Surgical Planning *********")
-        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: id, surgicalPlanning: preSugicalPlaningForm)
+        let preSugicalPlaning = RealmParseHelper.surgicalPlanning(false, id: id, surgicalPlanning: preSugicalPlaningForm)
         print("********* Post Surgical Planning ********")
-        let postSugicalPlaning = RealmParse.surgicalPlanning(true, id: id, surgicalPlanning: postSugicalPlaningForm)
+        let postSugicalPlaning = RealmParseHelper.surgicalPlanning(true, id: id, surgicalPlanning: postSugicalPlaningForm)
         print("**************** Images *****************")
         
         var imagesArray:[Image] = [Image]()
@@ -36,17 +36,17 @@ class RealmParse{
             
             switch imageType {
             case .Front:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "Front-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "Front-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             case .ProfileRight:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ProfileRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "ProfileRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             case .Nasal:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "Nasal-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "Nasal-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             case .ObliqueLeft:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ObliqueLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "ObliqueLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             case .ProfileLeft:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ProfileLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "ProfileLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             case .ObliqueRight:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ObliqueRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
+                imagesArray.append(RealmParseHelper.image(id, imageType: imageType.hashValue, fileName: "ObliqueRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
             }
         }
         
@@ -74,16 +74,6 @@ class RealmParse{
 
     }
 
-    static func auPatient(patient: Patient?=nil, formValues:[String : Any?]){
-        let formValues = RealmParse.convertAnyToAnyObject(formValues)
-        let patient = RealmParse.patient(formValues, uPatient: patient != nil ? patient : nil)
-        
-        let realm = try! Realm()
-
-        try! realm.write {
-            realm.add(patient, update: true)
-        }
-    }
     
     
     static func patient(patient: [String:AnyObject], uPatient:Patient?=nil) -> Patient {
@@ -212,8 +202,8 @@ class RealmParse{
         let realm = try! Realm()
         
         for record in realm.objects(Patient) {
-            
             let name = record.name
+            
             
             let char = name.lowercaseString[name.lowercaseString.startIndex]
             
@@ -569,7 +559,7 @@ class RealmParse{
     
     private static func deleteRecordImages(record: Record){
         for image in record.image {
-            RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+            RealmParseHelper.deleteFile(fileName: image.name, fileExtension: .JPG)
         }
     }
     
