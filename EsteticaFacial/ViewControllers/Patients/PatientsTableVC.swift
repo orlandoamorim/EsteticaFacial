@@ -45,8 +45,6 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
 //            self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
 //        }
 
-        
-        
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(update), forControlEvents: UIControlEvents.ValueChanged)
@@ -57,9 +55,7 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
         // BarButtonItem Right
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(add))
-        
-        print(Realm.Configuration.defaultConfiguration.path!)
-
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -189,7 +185,8 @@ extension PatientsTableVC {
         let record = recordsDicAtoZ[key]!
         
         cell.textLabel!.text = record[indexPath.row].name
-        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].date_of_birth))
+//        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].date_of_birth))
+        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].update_at)
 
         if patientShow == .Patient {
             cell.accessoryType = record[indexPath.row].records.count > 0 ? .DetailDisclosureButton : .DisclosureIndicator

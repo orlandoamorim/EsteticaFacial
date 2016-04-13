@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passcodeLockPresenter.presentPasscodeLock()
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
                 migration.enumerate(Patient.className()) { oldObject, newObject in
                     if oldSchemaVersion < 1 {
@@ -40,6 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if oldSchemaVersion < 2 {
                         newObject?["surgeryDescription"] = ""
                     }
+                    if oldSchemaVersion < 3 {
+                        newObject?["create_at"] = NSDate()
+                        newObject?["update_at"] = NSDate()
+                    }
+                    
                 })
         })
         

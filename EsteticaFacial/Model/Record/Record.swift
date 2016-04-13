@@ -20,6 +20,9 @@ class Record: Object {
     dynamic var date_of_surgery: NSDate? = nil
     dynamic var note: String? = nil
     
+    dynamic var create_at = NSDate()
+    dynamic var update_at = NSDate()
+    
     override static func primaryKey() -> String? {
         return "id"
     }

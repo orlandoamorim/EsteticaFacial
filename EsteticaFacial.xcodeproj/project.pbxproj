@@ -58,6 +58,7 @@
 		B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A761BC344AE002A306F /* EsteticaFacialTests.swift */; };
 		B81B4A821BC344AE002A306F /* EsteticaFacialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */; };
 		B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */; };
+		DF94B5741CBEA83E007D5EC4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94B5731CBEA83E007D5EC4 /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsteticaFacialUITests.swift; sourceTree = "<group>"; };
 		B81B4A831BC344AE002A306F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DF94B5731CBEA83E007D5EC4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Core/Date/Date.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 		18126CF01CACC58A002D26F7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DF94B5721CBEA821007D5EC4 /* Date */,
 				1859C07F1CB58A2000FD15F5 /* FileSaveHelper */,
 				B829B8C51BE26881009909C0 /* CG */,
 				1859C07E1CB58A1700FD15F5 /* CameraManager */,
@@ -466,6 +469,14 @@
 			name = Algoritmos;
 			sourceTree = "<group>";
 		};
+		DF94B5721CBEA821007D5EC4 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				DF94B5731CBEA83E007D5EC4 /* Date.swift */,
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -675,6 +686,7 @@
 				18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */,
 				18774F341CBC8C8B00CA2D64 /* LocalizadorFrontal.swift in Sources */,
 				18774F1A1CBC896500CA2D64 /* PatientsTableVC.swift in Sources */,
+				DF94B5741CBEA83E007D5EC4 /* Date.swift in Sources */,
 				18774F2C1CBC8C5700CA2D64 /* PasscodeLockConfiguration.swift in Sources */,
 				18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */,
 				18774F241CBC8C0800CA2D64 /* CameraVC.swift in Sources */,

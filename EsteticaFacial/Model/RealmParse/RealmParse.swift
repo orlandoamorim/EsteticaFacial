@@ -55,17 +55,14 @@ class RealmParse{
         let recordAU = Record()
         recordAU.id = id
         recordAU.surgeryDescription = formValues["surgeryDescription"] as! String
-        print(formValues["surgeryDescription"] as! String)
         recordAU.patient = patient
-//        for image in imagesArray {
-//            recordAU.image.append(image)
-//        }
-        print(formValues["surgeryRealized"] as! Bool)
         recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
-//        recordAU.surgicalPlanning.append(preSugicalPlaning)
-//        recordAU.surgicalPlanning.append(postSugicalPlaning)
+
         recordAU.date_of_surgery = formValues["date_of_surgery"] as? NSDate
         recordAU.note = formValues["note"] as? String
+        if record != nil {
+            recordAU.create_at = record!.create_at
+        }
         
         print("*****************************************")
 //        patient.records.append(recordAU)

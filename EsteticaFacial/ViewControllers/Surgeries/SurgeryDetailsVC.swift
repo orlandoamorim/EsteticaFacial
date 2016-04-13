@@ -420,7 +420,7 @@ class SurgeryDetailsVC: FormViewController{
                 row.presentationMode = PresentationMode.SegueName(segueName: "RecoverPatientSegue", completionCallback: nil)
             }
             
-            <<< LabelRow ("changePassword") {
+            <<< LabelRow ("cleanPatient") {
                 $0.title = "Limpar Paciente"
                 $0.hidden = "$btn_recover_patient != 'true'"
                 }.onCellSelection({ (_, _) in
@@ -440,11 +440,12 @@ class SurgeryDetailsVC: FormViewController{
 
                 })
             
-            <<< ButtonRow("btn_edit_recover_patient") { (row: ButtonRow) -> Void in
-                row.title = "Editar Paciente:"
-                row.hidden = "$btn_recover_patient != 'true'"
-                row.presentationMode = PresentationMode.SegueName(segueName: "EditRecoverPatientSegue", completionCallback: nil)
-            }
+
+//            <<< ButtonRow("btn_edit_recover_patient") { (row: ButtonRow) -> Void in
+//                row.title = "Editar Paciente:"
+//                row.hidden = "$btn_recover_patient != 'true'"
+//                row.presentationMode = PresentationMode.SegueName(segueName: "EditRecoverPatientSegue", completionCallback: nil)
+//            }
             
             +++ Section("Dados do Paciente"){
                 $0.tag = "patient_data"
