@@ -6,11 +6,11 @@ PODS:
   - FLEX (2.3.0)
   - GPUImage (0.1.7)
   - PasscodeLock (1.0.2)
-  - Realm (0.98.6):
-    - Realm/Headers (= 0.98.6)
-  - Realm/Headers (0.98.6)
-  - RealmSwift (0.98.6):
-    - Realm (= 0.98.6)
+  - Realm (0.98.7):
+    - Realm/Headers (= 0.98.7)
+  - Realm/Headers (0.98.7)
+  - RealmSwift (0.98.7):
+    - Realm (= 0.98.7)
   - SCLAlertView (0.5.1)
   - SwiftyDropbox (3.0.0):
     - Alamofire (~> 3.1)
@@ -52,8 +52,8 @@ SPEC CHECKSUMS:
   FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
   GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
   PasscodeLock: 4ae42c094224a01de3773fcd69ae33886394d959
-  Realm: 44803f35418c5d89b27825a564247fcd190de37e
-  RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
+  Realm: 46df2178359b6b57812e6cf957956febaba513a5
+  RealmSwift: 3056e6d7ad30ed50dd866185a615fccea73db5f5
   SCLAlertView: 3ac39a863d3e10fc165662b1228b03402297aea9
   SwiftyDropbox: e0d4aa3166082ec07ed942e94edb8c732b3376e4
   TOCropViewController: 0857ca3e78e549218b09f2583ff3a326e81ea766

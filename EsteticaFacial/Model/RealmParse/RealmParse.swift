@@ -204,8 +204,8 @@ class RealmParse{
         let realm = try! Realm()
         
         for record in realm.objects(Record) {
-            let name = record.patient?.name
             
+            let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
             
             let char = name!.lowercaseString[name!.lowercaseString.startIndex]
             

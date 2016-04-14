@@ -67,6 +67,7 @@
 		136ECC84FEE6A6228783C949ED4612B5 /* FLEXLibrariesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AF505AC2F46DADA7E4DDEC8D044FBA /* FLEXLibrariesTableViewController.m */; };
 		13B6B83101E99925630722DCE7F3EA7C /* FLEXManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 326C06B2F30F7CCB860A63F31E3A1CEF /* FLEXManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1460C78FD505F29821F2FC9D518433E0 /* GPUImageCropFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 064912B3ED16D1AB551A68280E52AD67 /* GPUImageCropFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		147B34AD4C7DA247FDD045B61DA2D29A /* RLMResults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F0C058117EBBE1133E878E7DC8CE046 /* RLMResults.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		14B5596F0F7BC5D2A39492B9A5FD7A89 /* Realm-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 90661B49050612E0153A9874A48B69E6 /* Realm-dummy.m */; };
 		1515C1B2FBAD399794B9AD7EFB1CE2C6 /* GPUImageFalseColorFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C45318C41421CAE531C55ECE02AB9919 /* GPUImageFalseColorFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		16102E4E35FAA0FC4161282FECE56469 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF4B3C172C41464C076501F3BF9A6E6 /* Timeline.swift */; };
@@ -92,9 +93,9 @@
 		1CDA60CDEF926183008EB21A413C83CC /* GPUImageCGAColorspaceFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 226330894132D7942144B7F0BDFE8E13 /* GPUImageCGAColorspaceFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D791C166B0D74AE3BAA5F119B2201A5 /* AlertRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A958AB986977418EC07667C7D9D380 /* AlertRow.swift */; };
 		1E0A4D8DFFFBD6A97ECC18F1FE06F246 /* FLEXKeyboardShortcutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 775744013C9D197A8B0653AAFFCD0835 /* FLEXKeyboardShortcutManager.m */; };
-		1EFAD74C7525A188D4363254AF3DC729 /* object_store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11916FE9162F6FF29C6EE44E110A5D12 /* object_store.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		1F3C32768FAEEA6790A6918722B5CE7F /* FLEXArgumentInputTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = ECDC782A518F6E5E45C164BE00956398 /* FLEXArgumentInputTextView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1F3FE7DB2CBD17AB747A5E38C7AE3599 /* FLEXWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA1674432ED7FE7C6E17A6AB805E47 /* FLEXWebViewController.m */; };
+		1F6288D74F9DCFB5A6F0A072773CDB5E /* RLMRealm.mm in Sources */ = {isa = PBXBuildFile; fileRef = F9896DECD4EFE1247F63E525CA19F813 /* RLMRealm.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		202B52E08D9E935EE828BF5B0D9970F8 /* GPUImageExposureFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A09DB19BAE4E679C01F960E6F13021D /* GPUImageExposureFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		2088F5D61D602833EFC07B090E45E60D /* GPUImage3x3TextureSamplingFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 162FB542C9D089A6BF4FE70FAE343AF7 /* GPUImage3x3TextureSamplingFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		215701A47F3AB3702A8659B89D11C15B /* GPUImagePoissonBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = FB3E243DB818E6537106BA1AA6D2D840 /* GPUImagePoissonBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -102,7 +103,6 @@
 		21AE1771EC35D81133591DD085525201 /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1039BD322E4FDA512268B151326416D9 /* zh-Hant.lproj */; };
 		21B1A5FB9FBA5E4F1570275047D28EA2 /* GPUImageDilationFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E722A1737573598FA1C314D0F61F3EF7 /* GPUImageDilationFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		21B90F60D01C71E3CF4C411B0D0D7347 /* FLEXInstancesTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E19B3B510AD148799F324485A1A3D3D /* FLEXInstancesTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		23340A8427208A287C434C02B53D4E1B /* RLMRealm.mm in Sources */ = {isa = PBXBuildFile; fileRef = F9896DECD4EFE1247F63E525CA19F813 /* RLMRealm.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		23800D26D8026903D49CE4AF865C29F6 /* FLEXRuntimeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCD53BD6947F9789D5BF28CE84C1F9 /* FLEXRuntimeUtility.m */; };
 		243E1CDA6A6A813FA43EC6BE00B09C27 /* GPUImageVignetteFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8128A8E2362C99191C203695944C8E /* GPUImageVignetteFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		248043059A69279C13EAC0608032597D /* FLEXArgumentInputSwitchView.h in Headers */ = {isa = PBXBuildFile; fileRef = 21E6249EB4BDC59D34800D2BA5E7147B /* FLEXArgumentInputSwitchView.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -113,11 +113,9 @@
 		26A12D7F60A8B36A225A1631C638A3BC /* GPUImageSolarizeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FBD557AF293844B816936726BDF77A /* GPUImageSolarizeFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		26D793AFA742B3726301755A1B872366 /* FLEXArgumentInputFontView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BA8D75C04ADD4A6B7881D08C2E6A12 /* FLEXArgumentInputFontView.m */; };
 		26E7742999C6605C77973AC9DDB56C8F /* RLMObjectSchema.h in Headers */ = {isa = PBXBuildFile; fileRef = 059DB171560D18018DD2231A52E98EE0 /* RLMObjectSchema.h */; };
-		26F453B9EB8FAE824A84F26EA11ED923 /* transact_log_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFBA2064DB7369C01DA151184918876 /* transact_log_handler.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		273AA2A4430FA6CF7125184AE9953839 /* GPUImageLuminosityBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5C37E295FFF3D76EFC10F2FACCB6E8 /* GPUImageLuminosityBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		278DEEC84BA7C44B6F0E9D71FE5E2DF9 /* GPUImageContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D67D3389C9930328306244CF5C6B2F2 /* GPUImageContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28936E9FB851960333C5BC97C6AAAE32 /* GPUImageSolidColorGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C26C04C411D9FC839E48FDF9293218BF /* GPUImageSolidColorGenerator.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		28BBA7B63DA3549CF9132CC63611BB1A /* shared_realm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C01022600B2AA762DD5CCE18DEC9A24 /* shared_realm.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		294DEDC3D90C79BC2574ACC5B6F6E41A /* GPUImageFASTCornerDetectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFA792F515BF06E576CDC2FD91D6C68 /* GPUImageFASTCornerDetectionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		294F4B5A53336D13813B6F6AE34CBB14 /* GPUImageHueBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F15783024FB78EE614BEE28FF92BBD9 /* GPUImageHueBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		297FBE32E46F4A18EA2246EACDBBBC40 /* FLEXGlobalsTableViewControllerEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 83890C4B71B9A9EB4285662ADCEDABE4 /* FLEXGlobalsTableViewControllerEntry.m */; };
@@ -130,6 +128,7 @@
 		2B230B5D306B54ED3C02CD41EF5E34A4 /* RLMArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D59234869372EA2552CF5C04C4E656C /* RLMArray.h */; };
 		2B39ECCB86A47383CD4FFE8078445CC4 /* SharingRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA2F02E306D986A29035FA4AED26BD /* SharingRoutes.swift */; };
 		2B5745F08814B6B927590B72D0BCD010 /* GPUImageLuminosity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4810B2B84DD51A03DB60CAEEC850E9 /* GPUImageLuminosity.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2B79202707CF8278D8088C46A3EB1173 /* external_commit_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 370538479BBA2CA6C102681398C97A09 /* external_commit_helper.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		2B9C7E13D530D8421605F766B65673AB /* GPUImageAmatorkaFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D2D75FA97F5CBF79A7D39B73436CEC /* GPUImageAmatorkaFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2BCDCC7E70367A8E66FE63131935FD94 /* GPUImageHistogramEqualizationFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 02638745D594F5944C9305D9A4323850 /* GPUImageHistogramEqualizationFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2BE98A6FCB4F6D82705839BBD86A3F4A /* BabelSerializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABC3C3B9A6C87464CDA3AA403BF7553 /* BabelSerializers.swift */; };
@@ -145,14 +144,12 @@
 		2E9BD8576A638AF6B391CC6BC383B6DD /* RLMRealm_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = DC553E4B7555984B1272EFB1A5ACAFC8 /* RLMRealm_Private.h */; };
 		2EA350F6E6F5DD7F758E6A85E23D15D9 /* GPUImageTwoInputFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F53BEBBCC56A73829976B87F672E557 /* GPUImageTwoInputFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2F18AA2CC3416AEA6B7CAFBCEA74F58D /* PasscodeLockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83383DEB6D1488DE69111B5E97A04FFF /* PasscodeLockType.swift */; };
-		2F1CCE40F4BCA2FE96619905C4291F6C /* RLMObjectSchema.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14E1D57DDBA5E4971770D9D6BED6ED43 /* RLMObjectSchema.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
-		2F1F75208E27D8BE2E8826B85D7BABE9 /* results.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD10112CF1B3ECCD5B758722A676125A /* results.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		2F939CF983F67EB2902CC7E05CC26D78 /* EnterPasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546ACD5D35B845B7FFF3B8070991709F /* EnterPasscodeState.swift */; };
 		2FF064A8900F4906454B97F4D1D4DA11 /* DeviceKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C448292DF19AA11C97DB279DF54A09 /* DeviceKit-dummy.m */; };
 		317214C4B3E24A84DA779D8CB9529118 /* RLMSchema_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5659E4E5C4E792E7BA0638AC4AD27A0A /* RLMSchema_Private.h */; };
 		3195976E31E0D2C58403CC74DB232F54 /* FLEXManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CDBD7553D97C14790A04CD90E2D9E0EE /* FLEXManager+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		32199B369084900268ACBF4CFADE79D0 /* AcknowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7E878A14271498B83944AE44EFF11 /* AcknowViewController.swift */; };
-		327A7337B57717AAC82548E2BF8815B5 /* RLMResults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F0C058117EBBE1133E878E7DC8CE046 /* RLMResults.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
+		3246597017F666A3804E2361417FAF07 /* results.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD10112CF1B3ECCD5B758722A676125A /* results.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		32872BE9321F2721047725A033480A51 /* RealmSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 77BCD05EE2B4F69961B2D4D7F1B0F07A /* RealmSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		32F02638208E0F575F92714845FE293D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		334A9756025DE4855188F1751E7EBDF5 /* DateInlineRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D39A1C9016FC8D0745B6530FBC7C2 /* DateInlineRow.swift */; };
@@ -184,10 +181,10 @@
 		391B0C0E7FB7331109F99DFACC4D5923 /* FLEXIvarEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4F42A676DCD7AD3530340ED8F506B3 /* FLEXIvarEditorViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		39CCA2B2A04A3882694960FD51FDB1D3 /* FLEXFieldEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C6645A34A91C5FE6A5FD4B7AE2821072 /* FLEXFieldEditorViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3A03C4BC06BE558FCBD5270582C8D250 /* GPUImageFramebufferCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1302469C923F4D13D7C19E80E54A8421 /* GPUImageFramebufferCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3A185DCC6972BEB97FC99D6643938A59 /* RLMObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D246C867CECF0E2404BF5CB117956 /* RLMObject.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		3A1AC3F6EED010020FD7B598D26B44A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		3A649A1ABCAF2000DBDD7ABC1D12BF00 /* GPUImageCrosshatchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0871A8F82A46F1B9A7106FE3DEE81658 /* GPUImageCrosshatchFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		3AE38A1A2E17D3569E8935C8CCC7F220 /* GPUImageFourInputFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = B6DF568332CCBC37E4BC88C322C09347 /* GPUImageFourInputFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFC9185BF2AD260CF019B423BDEA721 /* realm_coordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20230F9107A16BC802BB5ED3DFDE994 /* realm_coordinator.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		3B286F86DA70E44D0564140C511B0F86 /* FLEXArgumentInputNotSupportedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13E18B12FC3D9D7EE52A1F7DDB9006 /* FLEXArgumentInputNotSupportedView.m */; };
 		3B39846DF9E393C34F2BE36CFE02A11B /* GPUImageCrosshatchFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D6D1DB019F1D88C035262EB3922593C8 /* GPUImageCrosshatchFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B9F3B2AE9DDB8F03D2867243C32DD94 /* GPUImageExclusionBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F15D45FFBB8CD3606349BC1F845EA1A1 /* GPUImageExclusionBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -196,7 +193,7 @@
 		3C4C33EC37DEA4A9D59B7D3D48E2FE8E /* TOCropToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 643436871175BF10E8081B6706639183 /* TOCropToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C6F28290B618EA236A9DFB2395DCEA3 /* FLEXDictionaryExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3318B082133DFDD84D4EF24AE1D264 /* FLEXDictionaryExplorerViewController.m */; };
 		3C81A234FBC7466F8A45FA132BC0CC42 /* GPUImageExposureFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0A2C89A2F20D695AE90B5920B036CD /* GPUImageExposureFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CFD4D5819D9AD5797FE2286872F0BE1 /* external_commit_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 370538479BBA2CA6C102681398C97A09 /* external_commit_helper.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
+		3D2BF7CF874DCDEF95CF3CDF1D800EAF /* RLMMigration.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1A9B3462EC313EEB201C0D8DDDCC209 /* RLMMigration.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		3D338BCEBFF6BCA48D9A0708A6C93DF3 /* GPUImage3x3ConvolutionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE5951C86CAC03BAE7D984A06AEB3EE2 /* GPUImage3x3ConvolutionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D63DF37E5639D3786A453B4C7D00E90 /* GPUImageFASTCornerDetectionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 291EA1E9756AB4EE56FAD3E236D751A4 /* GPUImageFASTCornerDetectionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D699451119772057270E3EB16F9A228 /* FLEXNetworkTransactionDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A381763FB3D167AFD222EA2725DC5E /* FLEXNetworkTransactionDetailTableViewController.m */; };
@@ -205,12 +202,10 @@
 		3EA8F215C9C1432D74E5CCA4834AA8C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A5CFFBC601D4205E51B0AD8782B4 /* ResponseSerialization.swift */; };
 		3EC38DBEF3DB7129F7FA1AB314D1AEE1 /* GPUImageKuwaharaRadius3Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 677FA2EB7C44083B220CD3BC6B781071 /* GPUImageKuwaharaRadius3Filter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		3EC483A5CCC8FD5609748EBF44BB5345 /* GPUImageVibranceFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCE89C80A278C190A7A882F177A689D /* GPUImageVibranceFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F6AB162FED9A9DE8C6070FC368DC09F /* RLMArray.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B362622EAF7400A861088314170852C /* RLMArray.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		3F776BA28409AED8F7522E6AFB723B8C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0141221736DB9F63486607245F0621 /* List.swift */; };
 		3F9B4775A2FB87C1C9EF16378AAE9848 /* GPUImageAmatorkaFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E06F9E88C90C17B556F08191370C /* GPUImageAmatorkaFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		3FAF707DCDC4E26A0419876440C8736B /* GPUImageGaussianBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 371B234D1083435BF81D269D3E1AEC27 /* GPUImageGaussianBlurFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		3FD6801B747D3993A827FA7692EF08CE /* GPUImageSaturationFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ED9DBD781DB907FB36C8817332750F9 /* GPUImageSaturationFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		40591FA562615F2BB53D3D4560F6C527 /* RLMSchema.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE6660A2A59C7E165CA62CAC97BEEA /* RLMSchema.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		4081EA628AF0B73AC51FFB9D7AB3B89E /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F51384B878AD8CF9EB03F45505547 /* Manager.swift */; };
 		40EA84E37BC32CC240361B8465BD72FD /* RLMArray_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 2E89AE462C4CB2AD5F1D0631DFD99965 /* RLMArray_Private.h */; };
 		40F7055F9D83E9FBC53ABFA0CFEF46AE /* FLEXToolbarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 929BE84A34D3F5F1AE5AA688EE417A41 /* FLEXToolbarItem.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -234,8 +229,8 @@
 		479E868AEB9115548653B9102B45ABF8 /* GPUImagePicture.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7669611779CB62D9090EFE0AD0D6E4 /* GPUImagePicture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47E07774D31426C703C757C416A7F182 /* FLEXHierarchyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE93D197AA1F5A10170F312F9B2C8D /* FLEXHierarchyTableViewCell.m */; };
 		48308ACC7A29A106CBA255AF46E8A74A /* PostalAddressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E975D54C5939B6FD44756BD353C81 /* PostalAddressRow.swift */; };
+		48952E0E84B57EB64A7C472A123EA280 /* RLMSwiftSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D2CD22758B04EFEB17A59FC3EE9D10 /* RLMSwiftSupport.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		492E7D1054DE0A0ED8566B8431586DFA /* GPUImageDirectionalSobelEdgeDetectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1355935623C13C55042065AC83E8E7 /* GPUImageDirectionalSobelEdgeDetectionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		49BBC86BBFBFE20E5CAF66F0253A3EFE /* RLMUpdateChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = EB79D8BEBD1A67DB4ACB9CB55333A1E3 /* RLMUpdateChecker.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		4A441FDE6D3DC95050AF20CBD3B93216 /* GPUImageRGBClosingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E6A1A3F622A423C994617ED6A49D9E /* GPUImageRGBClosingFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4A4B5DF490814BC11E107D96CC0D9D48 /* GPUImagePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3F3636DCB79676DDFAC676543545DA /* GPUImagePicture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4A66F00C4CEDF140E3CEA262AA45A21B /* RLMProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 263DE99A32D0717E369F7680943C6704 /* RLMProperty.h */; };
@@ -270,6 +265,7 @@
 		5358676224BFB14CC382DEC7A2FBDB54 /* GPUImageGlassSphereFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E08C570C6EB8EABC5DE00ED09BC70524 /* GPUImageGlassSphereFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53A100F69B2CAA86C47308148BB551E1 /* GPUImageAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D03EFFCF39C461380D035F23734F439A /* GPUImageAlphaBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		54267705F658CA8ACC5ACDC717348948 /* GPUImageColourFASTFeatureDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = B1C58BA8FEE8635204C87F228A92FBB2 /* GPUImageColourFASTFeatureDetector.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		55511EB2CF1318F03F306F4F71D5DACF /* RLMArrayLinkView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D6B565432B10B5A3AB235E89BB98A2 /* RLMArrayLinkView.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		559EB13DA99573070AD6D02340F75C4C /* RLMConstants.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 964734227E9DC5512B51846FB23913A8 /* RLMConstants.h */; };
 		55A274B59744A200B0CDFC7F3D1926F9 /* TOCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B4447602F6FD1B600C09DCF8251CA8 /* TOCropOverlayView.m */; };
 		55AAB064D1F445A7FA58AAF9CA22B205 /* GPUImageNobleCornerDetectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 739E5BCA5D0D1301A4B87565353AFEEA /* GPUImageNobleCornerDetectionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -324,21 +320,17 @@
 		5FC4325E3FA68008E240E466020B4BE1 /* GPUImageVoronoiConsumerFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D451EA17E428A1B2273EEF9FF692F1 /* GPUImageVoronoiConsumerFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FC91E77874CD2813F2324B0DC2E0204 /* GPUImageThresholdEdgeDetectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF199D3839782C68CFB8D5DAE96A2FB6 /* GPUImageThresholdEdgeDetectionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		6069067AC7518045A2476C359ABEC902 /* GPUImageLuminosityBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 194CAA5650A31828171A55A89099670F /* GPUImageLuminosityBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		608838AEE9870590747FB9F20E32E75A /* RLMOptionalBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4804BAEA25579414A0B029FF2187477 /* RLMOptionalBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		6092713F42E7F9BBBABE332678A815F5 /* GPUImageMedianFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = B4FEF4FFEE9864F1F962CBB3AB1FFCC6 /* GPUImageMedianFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		609973D7B07F27F38DD7D22D964CF6DB /* RLMQueryUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 63226BBDC328C7B84E51A9977F1967B8 /* RLMQueryUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		6135FEC3EEE49CA0E0C084109ECA7EEF /* FLEXNetworkTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DB33677BE51D6A8F34B811C2C95BF2A /* FLEXNetworkTransaction.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		61DDAEB1F0BBC4FBBA65CD71D7D92C0A /* RLMRealm.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 3FA5BF40BF38E809C08F29C82786CEEF /* RLMRealm.h */; };
 		621BEB99F2E4916A0A910494FA2DD976 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		622C7E00D8F2A8C097815FC934796DE5 /* GPUImageColorDodgeBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = CDBB9024E2A1BF2CC79A318CD67AC41F /* GPUImageColorDodgeBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62E8346F03C03E7F4D631361F325689E /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1948609316CEAC67C6756CC4A166C4A1 /* Response.swift */; };
 		6395E51ED21435B86CDF7203003DBD03 /* FLEXFileBrowserFileOperationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 76381DE61A6502D7403209CC3984C6BD /* FLEXFileBrowserFileOperationController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		63DED553B5A233D00FDC0771E20676C8 /* schema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45ED6D7F5C3C01BF13FE1C58CAB0F9A1 /* schema.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		63E106F6E7F4B96ECB4EF025FAFEFBA8 /* GPUImageBulgeDistortionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FEA9CD6A03582D39D6DA7B3769B7 /* GPUImageBulgeDistortionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		643E8A33CDB464D1801B04DE2367685C /* GPUImageSaturationFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C031C3302D6E7BEEDFCE97D6B76D7E /* GPUImageSaturationFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		64A73543D5779CF7A2DE2D02380B0061 /* GPUImageHSBFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F327C6BFA7D9E207D0B7EB441CCB450 /* GPUImageHSBFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		64E0CCED3A278F66CA760B090AD487AF /* GPUImageColorBurnBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBBE980CACBCBAC53214E8B9456112D /* GPUImageColorBurnBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		6536806CE6CF2913F2EB2E87E8A7068B /* RLMListBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 35441CB52A2CE39C4D73A91640C1FD5C /* RLMListBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		654E1692DF4968D197D26534A3F1A5AC /* FLEXLayerExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9199BCA0D4D6D4D16F0669C1DBBBCD52 /* FLEXLayerExplorerViewController.m */; };
 		65A20C9C550DBC813998AEF6ABE6E8FC /* GPUImageRGBFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = EB584FF10F32787109BB46B6BC62AC2B /* GPUImageRGBFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65DDAC8FFB21EDDEEAE61531382CEAD5 /* FLEXNetworkHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC3552DA555342E672D6E0E3B3CBE2F /* FLEXNetworkHistoryTableViewController.m */; };
@@ -348,13 +340,13 @@
 		66725502CC56A4A5F865A5FF31850C9D /* GPUImageHighPassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 363F565A86D645E7864A671DB6EBF97E /* GPUImageHighPassFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		6675DC238D3363CCDCA9504CA2C631FA /* GPUImageHistogramGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = F6289B6327EA513770503C41F9ECEF04 /* GPUImageHistogramGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6682A1ADD6CF6228F053D86C65039B9F /* GPUImageThreeInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FFBDFF6CE93B42E755BC9201DD9339 /* GPUImageThreeInputFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		66A8E1374398C96520BF44162C08C0A5 /* RLMProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28576CC923A4253E6656B2A0E2BD13BB /* RLMProperty.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		66BA84FA17E9724A17EB44F2F33BD256 /* RLMObjectSchema.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 059DB171560D18018DD2231A52E98EE0 /* RLMObjectSchema.h */; };
 		66C0CA66D87E4FD84CC90D59654004B2 /* GPUImageSubtractBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADA1E8E6128E1F314778CFA5AD0B7CA /* GPUImageSubtractBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		66D1D50B14124CDD2E0C76FC7484CA2D /* GPUImageSkinToneFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2913880DB82CC2519CF76B08C47B748F /* GPUImageSkinToneFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6773F47F13B51E2C11C4E2F16177C64E /* FLEXViewControllerExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4093E03778ADA443267582DF7AED01 /* FLEXViewControllerExplorerViewController.m */; };
 		68A1F3B4983D24D5F58ED1CBD8D2F77D /* SegmentedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80466BE2591EE98E3A0C7F414C20BF /* SegmentedRow.swift */; };
 		68D4F584B9B6664AFEE5957EC8914ACC /* FLEXImageExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5612E00546B77790C5962CD73529AA4E /* FLEXImageExplorerViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6915D5B85BEC8964D8F4991E1F888D42 /* RLMUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECDF64989B7040849B911821845CCE50 /* RLMUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		69F6EE1861D4BB4949A26E1E5FACA794 /* GPUImageSketchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF47BE7A5229B54AB39C8F68D8686493 /* GPUImageSketchFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		6A0013882B5BD5F0EB3FDC9A69E64FB7 /* RLMPlatform.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 825F654653250ABDD7E6644F00761D37 /* RLMPlatform.h */; };
 		6A5D6D9A05B8087E46D32125BB5762B1 /* GPUImageHazeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = DE732CA34CD1B600E56FFEBE834E9BF2 /* GPUImageHazeFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -369,11 +361,13 @@
 		6CB0DC169E4DBA6B6EFE32A6278B4CA6 /* FLEXClassesTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 97D97CE2DB0CDDA3623F6E238DBE1AE8 /* FLEXClassesTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6CB3A7206FEC59F0430D3C898EED03C0 /* FLEXFileBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A5B6BB47FAE69DCBB2C3424572F2DB /* FLEXFileBrowserTableViewController.m */; };
 		6D68E8242C15D6DE5082ED430445791D /* GPUImageHalftoneFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 72B88C5781D76980F3DA2D2456746437 /* GPUImageHalftoneFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DAF89FDFE7E482BED8A7C5F8AB31660 /* object_store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11916FE9162F6FF29C6EE44E110A5D12 /* object_store.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		6DBA9EF3B2926F014D275E52EF36C5FC /* RLMRealmConfiguration_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 60E926B5E138B4FCDB222D4B1D2546DE /* RLMRealmConfiguration_Private.h */; };
 		6E0AA1F234DEF011D609D735B547598D /* DeviceKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0597BC10AEBCBECF586A72F7DAC24EBA /* DeviceKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E5A1D1EE738F61E7D30D173B6A21DBB /* GPUImageHighlightShadowTintFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = CC3D253BBD8409D49618B4647D4B617D /* GPUImageHighlightShadowTintFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EDB380414B0E5EF1258D480A0C8B701 /* ChangePasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B6CC1ECBD74672E68D14D15CF4079A /* ChangePasscodeState.swift */; };
 		6EEC3B667BDE0DFC222AD714D50B8281 /* TOCroppedImageAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = D57E00E2E4062B20285043D800CAEA13 /* TOCroppedImageAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F63E4F855D5950BBB01316AFF12B8D9 /* RLMObjectStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B3004F926EE67700BBCD878514C77F9 /* RLMObjectStore.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		6F9065C27AA5B9EB0B5E4E05ECBEF32A /* GPUImageDirectionalNonMaximumSuppressionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E881E121956AB89BAC6C81D5F04175 /* GPUImageDirectionalNonMaximumSuppressionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		6FAA62547F7B84119DAE6E85C0621864 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		6FB1B7F2B90B738B5AE4FFAB71DCF7F9 /* GPUImageHighlightShadowFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 220DC8974FEE92CF150BBA7C9EF56647 /* GPUImageHighlightShadowFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -383,7 +377,6 @@
 		70332B3077787A417B3A7820990678AB /* GPUImageColourFASTFeatureDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = C576398693212D6098CF21047F81A9DE /* GPUImageColourFASTFeatureDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7035FD612279C08688FBC2885822B7F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7B6960338319FB3EF59B5809C94D36 /* UIKit.framework */; };
 		704BD001F03221B812DC69233C85FA46 /* RowProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B081143D329F42F7F2D52720D98169 /* RowProtocols.swift */; };
-		71176884FD3C8FBF7367A570C0D94329 /* RLMPredicateUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = DAA2F23B044E59914FFD174A5903EECF /* RLMPredicateUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		7207C7388266B052F1E07373EF0A9E5B /* GPUImagePixellateFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF25AEB15E4CBA514BCF077F92A58EB /* GPUImagePixellateFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		720D2FB8BBA3EEF9E552A1FF5E0FCDFA /* GPUImageLanczosResamplingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2299B86ABEF82A3E315F6BF7765FA20B /* GPUImageLanczosResamplingFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		720E76D78DAF01537462E22F26D3268E /* GPUImageStretchDistortionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67378D646BAD893CED4DA2814407F61D /* GPUImageStretchDistortionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -394,6 +387,7 @@
 		72CACFA88261D4B1DDB6153564E628AF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BF2EF6C92EE5ED9DC39BFF50C95594 /* Realm.swift */; };
 		72CDADEE4842ED9DC9E10F5A3A411D5F /* GPUImageHighlightShadowFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 019A7816514CB2E0788D76CAAC54513C /* GPUImageHighlightShadowFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72F3966D392B5529E59214AADE7D871F /* GPUImageVignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EA5094E96FC5EA1FDF2C1548552A49 /* GPUImageVignetteFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		733CED05DFDDAE5D2273E15F37E79BC4 /* RLMOptionalBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4804BAEA25579414A0B029FF2187477 /* RLMOptionalBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		737B759F70AB0644FC500E09EC2E171F /* RLMObjectBase_Dynamic.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = B5AEA3172337B6951A7E36F82EF8D192 /* RLMObjectBase_Dynamic.h */; };
 		73B3E76EBA2D875E4F73AF22221FF31A /* FLEXDefaultEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF18E9F64693C75552DE9FC75BF53EC /* FLEXDefaultEditorViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		73BB615AF81DED17AAEAAEF2C75B199A /* FieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459AE9B43452F1326F05C143085F44DB /* FieldRow.swift */; };
@@ -423,6 +417,7 @@
 		7B9541BAC6A4E5B45F96E02656FA68B9 /* GPUImageSaturationBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E631A8DEB807F7907BC761F5B3558961 /* GPUImageSaturationBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9823FE5F9A3B8AE608959219FD0EA8 /* GPUImageSoftLightBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F18E44E405BBFF8E5FD21410240D33 /* GPUImageSoftLightBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		7BA049A8A530320D26A5FED8582518B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
+		7C7B2473821BFBA0D91B32C642522A78 /* transact_log_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFBA2064DB7369C01DA151184918876 /* transact_log_handler.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		7D06689A9B22736BE9CEBD412086BFE1 /* GPUImageTextureInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E14FB434C649134D5AA65800F16333 /* GPUImageTextureInput.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		7DA408C337CA2A1F3494221B1FB775C6 /* DateFieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B986095253DBD470B31A93F7C501643 /* DateFieldRow.swift */; };
 		7DEDFBF7C3CB18D2E7D1F2FF9CEFBDB7 /* FLEXObjectExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5120B0229139ACF877471A75B124C0 /* FLEXObjectExplorerViewController.m */; };
@@ -448,6 +443,7 @@
 		84E53FFA117919DD98B296AE749D27F5 /* RLMObject.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = AE43610FEF66BDD1B274385E3E315E6B /* RLMObject.h */; };
 		856D45D1E1F8EDCC77D11E758A51C9A4 /* GPUImageSobelEdgeDetectionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = DD762469A56F35EC2B36B0465B1F2439 /* GPUImageSobelEdgeDetectionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85C7B1C46E91A5B9BAEB5FA672F88A25 /* GPUImageWhiteBalanceFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD95D7BECE255BA51D8ACB257D8001C /* GPUImageWhiteBalanceFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85C918B0EA89D428639CECE221C03AE0 /* RLMObjectSchema.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14E1D57DDBA5E4971770D9D6BED6ED43 /* RLMObjectSchema.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		85DEAA52EE67B6F20156C9B77A873D51 /* RLMMigration.h in Headers */ = {isa = PBXBuildFile; fileRef = 019EDC087A92D0BFC9D402A9403CD49F /* RLMMigration.h */; };
 		8630A1FB84E4E6F4CBA533A6715353A3 /* RLMRealm_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = DC553E4B7555984B1272EFB1A5ACAFC8 /* RLMRealm_Private.h */; };
 		8641EE23094D250AD9FB3BC6E7FE439A /* GPUImageOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = B39D4A7FAC1262812787D99152A90D2B /* GPUImageOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -457,27 +453,25 @@
 		87317456D02C33CA673DA81DD951599A /* GPUImageRGBFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA994B970E537DE17CE203106D9EDBF /* GPUImageRGBFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		878C9216AE04131E5E9CA98B63D0DC40 /* GPUImageHSBFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CB2E620A603438A0A53F3934723AEE2 /* GPUImageHSBFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87AA926E610FA69216BA152492F5F0C7 /* SliderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C232B58B98E370120EF00E379A21CCC1 /* SliderRow.swift */; };
-		8814EF99153CF7416A8731E9ED005ED6 /* RLMRealmConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0FC436EFFD5CDA496C93A7AD3B1BE16F /* RLMRealmConfiguration.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		883EA6DF8D594B0AA7DDA917FB45B183 /* FLEXFileBrowserTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D3E051AF92A575742ED69CA61B6997D3 /* FLEXFileBrowserTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		885B57A965AC352F006F4AEF0020413B /* RLMAccessor.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 9ED2570EECFF55D03A6F3FDBA3352F21 /* RLMAccessor.h */; };
+		8882EC0578B68AA3C30C9FEBBE775387 /* RLMPredicateUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = DAA2F23B044E59914FFD174A5903EECF /* RLMPredicateUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		88846984962FC36739BDACC4247B1FD9 /* FLEXClassExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3657044F75A8050EBCC663BAEDC162 /* FLEXClassExplorerViewController.m */; };
 		88E2FE0B96B8A10371D2A6D49577E74D /* Realm.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E80BF1AF5DA329463963A02CDBDEBE6 /* Realm.h */; };
 		89B5E89438E6A522062765D30CC1FF92 /* FLEXArgumentInputFontsPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0155BE97D1A4B178002B4A237130F451 /* FLEXArgumentInputFontsPickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8A67A9E8FA2D2276C03A2C94DF952D24 /* TOCropScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3469772785460ABFAD45ACBECBACF169 /* TOCropScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A88228D84749DF0D67A46D2ED511F9B /* RLMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9E3C05702E75B02A718869007FE056 /* RLMConstants.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		8A8AA77E2DE1568C8E7704BD59514E1A /* FLEXLiveObjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0337214BBFE0DC1DADF7B9246C90181 /* FLEXLiveObjectsTableViewController.m */; };
 		8A9EB5B5262426F3BE31F241436C2691 /* GPUImageSolidColorGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = A4D0C69CADC7F2C6286A130EB21AF362 /* GPUImageSolidColorGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AA608CC6A73D28B4F024455DABDEE8E /* GPUImageUnsharpMaskFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FA02D7BA96AA6C4B4767FE0F24D435B /* GPUImageUnsharpMaskFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AB42B02E5CD1A10DB5C93DB7133DCA2 /* GPUImageGaussianBlurPositionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 29EDC54CFC21BF786A68038F75CBF558 /* GPUImageGaussianBlurPositionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AE115582D2AF57981CAEA0A68974A15 /* FLEXInstancesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8F2F9BEDC1A89844B5FC67151D3A9 /* FLEXInstancesTableViewController.m */; };
+		8C50CEFF6CFB06E95EF1A499E0A55AFB /* RLMSchema.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE6660A2A59C7E165CA62CAC97BEEA /* RLMSchema.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		8C5106BBD327A4E7F6DF282C961D9EC5 /* GPUImageFilterGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 49A30865ACB1AAE760949B9D17EFA86C /* GPUImageFilterGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8CAE71639399FB6B87AFAC322268013B /* cached_realm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 822A6A1B9808F00BFF170DCCF42EFAF5 /* cached_realm.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		8D2CE2B8E24C25BC9FC0E586C1850BEC /* FLEXSetExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F51E7BAA181836551C853E52CCDB52BB /* FLEXSetExplorerViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8D3FDAFE95FFD2981A3F83411B5BEE26 /* GPUImagePinchDistortionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7018E37B1E18B112137A6E1CEEE44B26 /* GPUImagePinchDistortionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DBE83946E74121C1446D56F15000E22 /* GPUImageRGBOpeningFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 65FBBA2A6F1CF62886DCBC62ECF7350A /* GPUImageRGBOpeningFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E81A82CEBA1FA2013D017F7293416F1 /* FLEXFieldEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A9466A6B2C44180F87C9EA51D7E180 /* FLEXFieldEditorViewController.m */; };
 		8EB11202167FCDDF1257AAAB1D1FB244 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778BE7FC668FD4647F5B1062A6ADCF49 /* Alamofire.swift */; };
-		8EF49B9AB0C5670781FD3E5169C51EFF /* RLMObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC7EE28EB68E3A355EA4647863F1FFD6 /* RLMObservation.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		8F1E513450848103CF744FD7845C0FD5 /* FLEXCookiesTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6A657547328B7AA87259D8814E081D /* FLEXCookiesTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8F28332EE267AE9C83BB66F3ACEE6E35 /* GPUImageJFAVoronoiFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A894EFFE377FF0AEF12EE0B08C469F /* GPUImageJFAVoronoiFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F29E2C86E7434AE963FB3B4739E5449 /* GPUImageAverageColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 07E3E7A72BF6D306B548A8D132E46CF2 /* GPUImageAverageColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -490,6 +484,7 @@
 		90CAFF414E22B7EA10418F98EB99D862 /* FLEXWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 5448E3CFEC61E0B2490AA323EB36DD65 /* FLEXWindow.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		916D27E09AD2DF1BEDF751CF6BC97FAE /* AcknowList-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6362B6A21D4BCCA41F7BBFD8839A307 /* AcknowList-dummy.m */; };
 		921B80D6C8234396335778E70903293A /* GPUImage3x3TextureSamplingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DB65A911E9A3065DD931E30DFB1966B2 /* GPUImage3x3TextureSamplingFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		922FDD3A0D19DB430F9219FCD41A32C6 /* RLMProperty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28576CC923A4253E6656B2A0E2BD13BB /* RLMProperty.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		92C63D10A9184D9779BD2ABAF72FA2F0 /* FLEXArgumentInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B08807BBF9697A1CC7DEA071826A2C8 /* FLEXArgumentInputView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		92EA90493D166E6EB863823123ADDA6C /* FLEXExplorerToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FA229C06574CDFAAAF00D75686E89B /* FLEXExplorerToolbar.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		93221051BDEF170C084DBCA33930D941 /* RealmSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BF95CC6AFF34B7AFF995AF30655CD9 /* RealmSwift-dummy.m */; };
@@ -511,7 +506,6 @@
 		96C9D295C4F7D5F17BB2E5B316CC9DB9 /* GPUImageBulgeDistortionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB6411BA163C8661EA99651F6199C94 /* GPUImageBulgeDistortionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA2E0DAD308DEC66D8CF78A69CA2D7 /* Eureka-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D4A95BD450DAF5E6167348753D6D8D /* Eureka-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		970A85D0011E91E75189F2C71B10A04A /* FLEXNetworkSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C5B872BE54746559175811BB0A47B2 /* FLEXNetworkSettingsTableViewController.m */; };
-		970DC88BCFA7108E335D4B96F819905F /* async_query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8674EBCF77F6EAF21710E1A81CB1A5D /* async_query.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		9727D2C2DD8660DB2367EDCE088384CD /* GPUImageMultiplyBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE6B61E8B3695F48586548E286F8B84 /* GPUImageMultiplyBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		974E86BD17F6C7732D36429EBD2B9091 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05324CF4C187FA424AB8629D2CCCD0 /* GLProgram.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		97EB4BA4B8F50285C70456309F54E60A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB6D1161BA3C4A432F7374999730A6 /* Error.swift */; };
@@ -523,6 +517,7 @@
 		9ACF9E9D2BBF7CC75FB7D8CCDDAE7F74 /* NavigationAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F260D75E36AECAF064610D656B014 /* NavigationAccessoryView.swift */; };
 		9B10B7F003498F950CC3512C906E19CD /* GPUImageOpacityFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2172323F5F3E5833DBE8BF95430F494 /* GPUImageOpacityFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9BB50BBF70887F33138B102F498DF964 /* FLEXSystemLogMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = FC29BFF3E50D6DC641D3C30BA748FB4C /* FLEXSystemLogMessage.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9C569F7FDAD8E31C6A44C24C7629BC24 /* RLMAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69798206E3A938DF8EB4C29B59A62105 /* RLMAnalytics.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		9C8C51AAB338FF8F78A5E9F83467D600 /* GPUImagePerlinNoiseFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7F289F60CA328835D280D1BE41FC /* GPUImagePerlinNoiseFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9CA354F6C604A8494ECB38F8E1E10043 /* FLEXClassExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C95DBDE9DCFBB195C236C01B88AB2C4A /* FLEXClassExplorerViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9DF90A0E0BC50E9ADCEA8AF00A071367 /* GPUImageThresholdedNonMaximumSuppressionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = CF73B49DE4E76D9089B18A99CEE3B435 /* GPUImageThresholdedNonMaximumSuppressionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -532,10 +527,13 @@
 		9F2DC51EDB2D9ACDB1F17B5F616A6339 /* FLEXResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF858A3EECBD224A8FB577679654FA7 /* FLEXResources.m */; };
 		9F34D8CB129F64B44D3702F646136033 /* GPUImageGrayscaleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A526602D4E98B69D7418683C75E0D12 /* GPUImageGrayscaleFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9F534FBF36722246BCAEBAD9BC7976DE /* GPUImageRawDataOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2D8E3E7EF958EDC4B21B88334A93DC /* GPUImageRawDataOutput.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9F56DE0D83C3EBE677E9FFFCDE3D453C /* RLMQueryUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 63226BBDC328C7B84E51A9977F1967B8 /* RLMQueryUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
+		A0FD79CE6DD7C0B3C7D4E96EE42BD11E /* RLMObservation.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC7EE28EB68E3A355EA4647863F1FFD6 /* RLMObservation.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		A1087DD40BAEDC5D07879A2E8EC1D0AC /* GPUImageGammaFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C0C5E1F2414184921F16C0D5E59AEB /* GPUImageGammaFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1C559F792827DC669AEEC2B2B516B66 /* GenericMultipleSelectorRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344A3590CBE7CB88C8268FDB3C7333D /* GenericMultipleSelectorRow.swift */; };
 		A23DE4BE818FA455D38B98B2876DAFE2 /* GPUImageMissEtikateFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FEC7E25BF532D9E1206AE21D21A358 /* GPUImageMissEtikateFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		A264C7CE0430FF7C0CE8BC95C20F352C /* lookup_soft_elegance_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 121B6CE956B16B2A92FF2B5A57A1997E /* lookup_soft_elegance_2.png */; };
+		A264F16B4AAEEEA31CE7CC339FB1C8D6 /* RLMArray.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B362622EAF7400A861088314170852C /* RLMArray.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		A2B8EC46F97D797314B1B79922E15AD0 /* GPUImageLinearBurnBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BF4230FA1BD0EC68845CDC1648AA497 /* GPUImageLinearBurnBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2BD2A6D00D372326EED87CEE3A61725 /* FLEXFieldEditorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D2A0F7F7F5686FDDF613C56BD4F22B7 /* FLEXFieldEditorView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A335AAABB6ADE381339FE60BFCE5938E /* GPUImageBoxBlurFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE9AF000F63B787E2FF4DD63EF2C261 /* GPUImageBoxBlurFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -550,6 +548,7 @@
 		A77189E3CD72AE6ABD60B7BE06477A0E /* FLEXArrayExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7748D6A28A817AE651BFB54188900185 /* FLEXArrayExplorerViewController.m */; };
 		A784806FD475BEAC093FB6E700A96941 /* RLMOptionalBase.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = ABD3E81D928F097725C773CB83C87A00 /* RLMOptionalBase.h */; };
 		A7975FB391D751BFECC0650A37371B84 /* GPUImageAlphaBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8AB8CB536F7938E2C794A7CCFB8ABCE /* GPUImageAlphaBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7DB1DFE7859642CFF9FB1D9FE6BBF51 /* RLMObjectBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 812DB6CB03E8D345343166FF3D78ED5A /* RLMObjectBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		A84372146AFCF890585E83962072D7C5 /* GPUImageCGAColorspaceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9499FB1B4E3296CFE1BC41789D3D0 /* GPUImageCGAColorspaceFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		A88294C415AF15F1AA4383A31FD94476 /* GPUImageHoughTransformLineDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = A1751E0A4B3DB2D6CCEF5CCED879909D /* GPUImageHoughTransformLineDetector.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		A9C36280B97EB96D49D4E506DB25211E /* SecurityUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = F0A21D4F30DB221627CF728A50C33062 /* SecurityUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -566,17 +565,19 @@
 		AD1051A348C8C7B8247D76E5E289E3D5 /* GPUImageMonochromeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = EEA21E8A61D03DDA61CB9C381CC6DA3F /* GPUImageMonochromeFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD59B73337B2F0589757F4D1E4275994 /* FLEXArgumentInputStructView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5877770D20C0BFDCA7F7137EE9DC7A9F /* FLEXArgumentInputStructView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		ADF19C953CE2A7D0B72EC93A81FCCC26 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 189AF55D56EAF4FE56F54CCABFD8713B /* Alamofire-dummy.m */; };
+		AE27D7F536433F3C28545457CB66C117 /* index_set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE0D48506ADED8A81231EFBBA9A6E08 /* index_set.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		AE4CF87C02C042DF13ED5B21C4FDC1E0 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4850026B79B6B47DBCCDA083D2DFB581 /* Stream.swift */; };
 		AE5A55E823E8DE8AEF8047D53AAD66A3 /* RLMSchema_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 5659E4E5C4E792E7BA0638AC4AD27A0A /* RLMSchema_Private.h */; };
 		AE6CBAB7FAF028D5534FE13C694B4151 /* GPUImageNormalBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = ECE8357054C5C74B8B6520C571D9361D /* GPUImageNormalBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AED90DF5DC769962498BC36422785FF3 /* RLMObjectBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 812DB6CB03E8D345343166FF3D78ED5A /* RLMObjectBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
-		AF16BD5DC188D12DDB3FC8E26359E782 /* index_set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE0D48506ADED8A81231EFBBA9A6E08 /* index_set.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		AFC246427D215A36D9D7366582E4ED1F /* GPUImageChromaKeyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C72766ED2518F9E8818E57B801DCC /* GPUImageChromaKeyFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B0C81E8E9CCFD7FEA2FA1E2415EFB1CC /* RLMRealmConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0FC436EFFD5CDA496C93A7AD3B1BE16F /* RLMRealmConfiguration.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
+		B29DB134578AAC5F23566324F593541F /* object_schema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E412F4D33298A9E1E63522343A24D84 /* object_schema.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
+		B2B1F7FE4C1DE80454EDE846EC5657A7 /* RLMAccessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04ED4520E0378886078C67AF4E21F897 /* RLMAccessor.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		B3408C5D4AB656ABDDFB5324EE4C2831 /* GPUImageLookupFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60BBC6912AB2C241667CAB72CDF1CA4A /* GPUImageLookupFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B387995458AF0B6A16629D5743A37059 /* PasscodeLockStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614AF24B959A90ADE0EE70720B3D4031 /* PasscodeLockStateType.swift */; };
 		B3AEE7B1FCF63477ECB441677CB017B5 /* TOActivityCroppedImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB67ECAABDBA207FB0B82F1355DA147 /* TOActivityCroppedImageProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3B0840A5CCEE3B76DE2755706349FF7 /* RLMUpdateChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = EB79D8BEBD1A67DB4ACB9CB55333A1E3 /* RLMUpdateChecker.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		B3F3FCE7801896B161E0D29C4C2AFA2D /* RLMObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AE43610FEF66BDD1B274385E3E315E6B /* RLMObject.h */; };
-		B3F406E69BAF42703ECEDD576FA01BDD /* RLMObjectStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B3004F926EE67700BBCD878514C77F9 /* RLMObjectStore.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		B41D820154EB83CC6EFADEFE79E2D51C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		B436074454B747F28C4BD972122B85F0 /* GPUImageVideoCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = FD488ED204B7024D03775E72A1819AD8 /* GPUImageVideoCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B47E2A22C9621F85AC82A2AEC165DC1A /* FLEXPropertyEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6948055FAA3728CA0821CE2F480FE1D8 /* FLEXPropertyEditorViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -601,10 +602,8 @@
 		B9809B82CFA6F5A4F4ABE6F9C0B6E49E /* GPUImageDarkenBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DF9F16836663D7D060371991A91D01F4 /* GPUImageDarkenBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		BA410706C3FF481E4639CEDD86B31C9D /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = B897EA4F5F6E8E5D6A50CA1CCE500080 /* TOCropView.m */; };
 		BA91452B1CC69E8099635614BFACEEAC /* GPUImageTwoInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0555A722F1BEBBC63BC024E309B52 /* GPUImageTwoInputFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BAA85B9F83A59BCB90B9621E7FAE89EB /* object_schema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E412F4D33298A9E1E63522343A24D84 /* object_schema.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		BAFE8DF82F950837089F64E9783101E9 /* FLEXNetworkTransactionDetailTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC38A64E57AF907CE305D545FD85344C /* FLEXNetworkTransactionDetailTableViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BB0095D8458F42266F5C26641A9E8631 /* GPUImageMultiplyBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A24289BE1348F59C3F61EC5217AF4C19 /* GPUImageMultiplyBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BC52DF5FCE7A7E1DF9791AA51F614E13 /* RLMAccessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04ED4520E0378886078C67AF4E21F897 /* RLMAccessor.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		BC5C66093B6322DBE1CEBB53D9A0FD8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08522EC410044339778DCFA51F57661F /* Foundation.framework */; };
 		BD06F1DCBD62339963D13F9226F5AA45 /* GPUImageOpeningFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECDFD948A077CBD5A2562954329E24E /* GPUImageOpeningFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD5CEF8C4093A3C9AAF8E3E6D2230677 /* DateInlineFieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C15E64ACC4793C7D92F71176F7CA8 /* DateInlineFieldRow.swift */; };
@@ -614,7 +613,6 @@
 		C06A86296149EC27F48DB75E4F7FAD5F /* GPUImagePixellatePositionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A32D0BAE739FFB981D3E4577B3ADBFFD /* GPUImagePixellatePositionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C07E9D8C48305E8A048C6A4C64CC1DA0 /* Realm.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 5E80BF1AF5DA329463963A02CDBDEBE6 /* Realm.h */; };
 		C0A8795B4FDD6CED38E17D7F5D7EF77C /* FLEX-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D38CF258143743AED1B69B02E3C9CB25 /* FLEX-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0B5A5CB38F8AD59F66497C7B891943F /* RLMAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69798206E3A938DF8EB4C29B59A62105 /* RLMAnalytics.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		C0DB70AB368765DC64BFB5FEA75E0696 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6240C6E5C714447389E71FB28CA9DBF /* ParameterEncoding.swift */; };
 		C122525F69C5FF51695B5D1B482820D3 /* GPUImagePixellateFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D9F0C7E0F12F27A76BB09CB0221E6303 /* GPUImagePixellateFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C164C6D78AA4341585E03ED540466AA0 /* RLMMigration_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = DD3DF34441D9CE4C7B676D56D2FF0581 /* RLMMigration_Private.h */; };
@@ -637,6 +635,8 @@
 		C4F3B9512C6E30102EDF699770D9A976 /* FLEXWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A76F47D7C2DC8E9E70AC758D5D7D54D9 /* FLEXWindow.m */; };
 		C5247A96E4C211FCAD3432CF7AEF93D0 /* GPUImageColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = D02AAE0BA87EABACB1486E6A2EC0E6B0 /* GPUImageColorConversion.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		C535F977A8F9FC01E67E7DF69B9F53C3 /* FLEXHierarchyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D291B4F2F81E9F0957423FA2029FF00C /* FLEXHierarchyTableViewController.m */; };
+		C54DFFC9662B2A6A5FB77A74A7CB07E4 /* shared_realm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C01022600B2AA762DD5CCE18DEC9A24 /* shared_realm.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
+		C5DE856D535EA385CD0FEA06623F8A33 /* cached_realm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 822A6A1B9808F00BFF170DCCF42EFAF5 /* cached_realm.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		C68F1F9E67F937098997ACEB402BABC9 /* FLEXSystemLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563FCB637BBE55E325519E159F38FDD /* FLEXSystemLogTableViewController.m */; };
 		C69CB534C3B6890BAF9A74ECF16B47BF /* OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE3B67478F2774D8E7AC25EDA2B3899 /* OAuth.swift */; };
 		C6B3E6FF74BE0A798B2590A764471B72 /* GPUImagePixellatePositionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8F241658C5708DD2DADA5E16AEEDE3 /* GPUImagePixellatePositionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -649,7 +649,6 @@
 		C825D78884BD348FD4C23B2C2E86F651 /* GPUImageLinearBurnBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3405DD262DE6C68148080987A8FD0729 /* GPUImageLinearBurnBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		C845132FF71AB9A8F31DADD91BFD6CA1 /* GPUImagePosterizeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6222976D7130D3A2A083F0B0CC2A81C0 /* GPUImagePosterizeFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		C858170843782E976B41A09DAFA74849 /* GPUImageTiltShiftFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E08A6C1B15C8600040112D41A0656155 /* GPUImageTiltShiftFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C8C4D6BEF27B43A7A77BF967B0FAD165 /* RLMObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D246C867CECF0E2404BF5CB117956 /* RLMObject.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		C90FDBB701AC4FDA1277EAADD4C7BFED /* FLEXDefaultsExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 15D966F36946EF81505F5F6D0646940D /* FLEXDefaultsExplorerViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C924163B156CA1ADF756CC9CF73A4F68 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E0E5F6B631C52A62C375C575AD742F /* Optional.swift */; };
 		C95C579C7D5C2B84344C2EDE01D84C34 /* FLEXImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D424FE951B759ABE9FB05E94F10A9E4D /* FLEXImagePreviewViewController.m */; };
@@ -662,11 +661,13 @@
 		CB6FC009640129A9D2A8F9064972151D /* GPUImageSourceOverBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF81264E48C3D4AA0C6BCC7E03F6E23F /* GPUImageSourceOverBlendFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		CC08D2604AEA817A92339A5BF5F1E115 /* GPUImageHarrisCornerDetectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FE19C37CBAC54B0CE13E2071F10E48 /* GPUImageHarrisCornerDetectionFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		CC3ADA0C2803977EECF3D386B54A97DC /* GPUImageDivideBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 54BC0E1A4A173142042790EBD36C72F5 /* GPUImageDivideBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC4E3394AD84A8BD2E08A15FC8092C1E /* RLMListBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 35441CB52A2CE39C4D73A91640C1FD5C /* RLMListBase.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		CE1608FDFC8299D1BAB2CD51C395AC18 /* GPUImageNonMaximumSuppressionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6536F3E2F6CD20A08DE999DBCCF0CEA0 /* GPUImageNonMaximumSuppressionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE78783F69F4E6107FC9C9D5F2B9E118 /* RLMCollection.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = ECD4423C54BFCE5DA3724178FC2AB092 /* RLMCollection.h */; };
 		CEA1D17AF74294C147873117013AD313 /* GPUImageDissolveBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 32E6FA34E618942058AA130D1BCF9BBA /* GPUImageDissolveBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEB97392779EA4E99885353B5AA5D204 /* FLEXArgumentInputStringView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D73E57FF8AA6F3813297FF9D4FB23B /* FLEXArgumentInputStringView.m */; };
 		CEBE19583BCE70DEC66CDA164F6C3C17 /* GPUImageLuminanceRangeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B51D2F27A99A80FD7BF5C2D7834A64 /* GPUImageLuminanceRangeFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF16558D3431786211BF481CD7C8C939 /* realm_coordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20230F9107A16BC802BB5ED3DFDE994 /* realm_coordinator.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		D06B250CBCDA51C350D1B7FF658FAD35 /* TOCropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A6C83870F4A526BD5781CD0216B4C1F /* TOCropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D077DC7100AF9A8D2D79F72CB208785A /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BAF11376BA5E3A637E3ADE075F7A03 /* DateRow.swift */; };
 		D08E4D8614E9C75E8A807AD46EE9B7EE /* TOCropViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CE985DF44243B71D0B539BE093A0771B /* TOCropViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -681,7 +682,6 @@
 		D371ABF8F9AA2B73B93EC3062369F954 /* GPUImageTwoInputCrossTextureSamplingFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 54872A5323E00E16A91816DBA45905D2 /* GPUImageTwoInputCrossTextureSamplingFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D388DA9FD734A64DF44A6107BAFDD727 /* GPUImageBrightnessFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 03970E0BB3F136D9BBC36FCDB3FA07E7 /* GPUImageBrightnessFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		D3E7049D82D07AB0B1E48E1B5A870B70 /* ko.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F2A944C96398AC119F240FD217303506 /* ko.lproj */; };
-		D3EA7DF61C0AA01CC399B0A5954CEC21 /* RLMMigration.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1A9B3462EC313EEB201C0D8DDDCC209 /* RLMMigration.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		D41408D50D38FD3869709F28049DF8E7 /* GPUImageRGBDilationFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0211A540DE6D68BE78F3C4C10AEF3DB5 /* GPUImageRGBDilationFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4163FD43DC959DEF69BB74235CB0F48 /* GPUImageToonFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = AC62445E918865D2C9E02CB07F9DC0A7 /* GPUImageToonFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D44359E1036EA2A9BA7FE47DF352F21F /* RLMMigration_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = DD3DF34441D9CE4C7B676D56D2FF0581 /* RLMMigration_Private.h */; };
@@ -700,13 +700,13 @@
 		D6B5CBDB277442632CBBD71A47C7BA71 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724C7B9355AB59C6BE972F09DE55418 /* TOActivityCroppedImageProvider.m */; };
 		D7BB442EAE0AAB66EE689FA19783C5B0 /* FLEXHeapEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DD187166C0DB94F8065F5E4782CC9BD2 /* FLEXHeapEnumerator.m */; };
 		D7D35852B7CD0A11731E856461B319F2 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 3A79F54540FA80A8A63020C654003B31 /* en.lproj */; };
+		D814CE410885720A362507279BC5CFEE /* RLMRealmUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA72800ABE20D311C8CD8F60E021D3F0 /* RLMRealmUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		D81A7627A2E01B1288CEC0E9B995CAF1 /* FLEXArgumentInputFontView.h in Headers */ = {isa = PBXBuildFile; fileRef = 82AD292727D0F61A3B89BF5BD80230FD /* FLEXArgumentInputFontView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D844159858D9D6B27343F6F1CF0823B6 /* GPUImageColorMatrixFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE8A2D037BBB8D08B4EC67D79B8FDE /* GPUImageColorMatrixFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D878E52986A50B4B03F980DB10440F0D /* RLMConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 964734227E9DC5512B51846FB23913A8 /* RLMConstants.h */; };
 		D8823FAC4A8FCEC2827E7EFDC20541A5 /* RLMOptionalBase.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = ABD3E81D928F097725C773CB83C87A00 /* RLMOptionalBase.h */; };
 		D8C179185472199B1825A443E2CE6AAA /* GPUImageUIElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B5621A6757D381080AA959E13CD93D46 /* GPUImageUIElement.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		D8C70F13D04328D43DCCBD26F772A09A /* FieldsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68022C71E95C1E021A1E71C5C81315E7 /* FieldsRow.swift */; };
-		D9519595011D5F54279E7F5D2EA730C8 /* RLMSwiftSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D2CD22758B04EFEB17A59FC3EE9D10 /* RLMSwiftSupport.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		D9EBBD248B4C990230C7790C29F3DAA3 /* FLEXSetExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C588202BD3395D2EDC848644FA32AA /* FLEXSetExplorerViewController.m */; };
 		D9FE382B58E26B7CD5BCDAA2DB4E4ED9 /* GPUImageDifferenceBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A46F27F4C01F05C63A3D9270E756D6D /* GPUImageDifferenceBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA83040D5DF4129E5B66C0C0CD412130 /* GPUImageTextureOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 09F7CB38562E81AABEF342E84DB7B39E /* GPUImageTextureOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -731,7 +731,6 @@
 		E0CA6DCA901FCEF37DB8668C9B5B6A27 /* GPUImageVideoCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAD20E6743311563B93C4A7ED73A376 /* GPUImageVideoCamera.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		E19BE7B267E9EF91EA02D3D86F0026CA /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C32BE76F9FEED4756A6FA245D6760C /* SCLAlertView.swift */; };
 		E19EF93ED8B02C5D9E032FD187D41FFC /* GPUImageTransformFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA75FC960E8BBE798CF0FC7A493EBE7 /* GPUImageTransformFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E1E2EBC38D0B6391EE01429D9444AAD1 /* RLMRealmUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA72800ABE20D311C8CD8F60E021D3F0 /* RLMRealmUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		E2355C8C4B71015212B356AEE27E2521 /* GPUImageOpacityFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 35EDDB53698C007FED0339DCA69BD65E /* GPUImageOpacityFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2A82DC1987D5A4C61A91204245D8428 /* GPUImageSourceOverBlendFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = F193832B3A4CB1658A527276A3C7A863 /* GPUImageSourceOverBlendFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2D5F74FDDB9A981F66D1EFF2E4F295A /* RLMResults.h in Headers */ = {isa = PBXBuildFile; fileRef = 15114C78789536E2F4A5C6501051478E /* RLMResults.h */; };
@@ -753,6 +752,7 @@
 		E81D9647D45E3D0233BA7F493DFB6B72 /* GPUImageMovieComposition.h in Headers */ = {isa = PBXBuildFile; fileRef = AE27C84018EA13F98433254641D18E85 /* GPUImageMovieComposition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E858D4ABDB33695527874107EC4B54EA /* FLEXObjectExplorerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D93124A726ACDFB7571C134999D5A3 /* FLEXObjectExplorerFactory.m */; };
 		E8B2532284B6B0F25BC74838376059F7 /* RLMObjectSchema_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 0BC332E5BFE8FCFF2E17308080E58E33 /* RLMObjectSchema_Private.h */; };
+		E8F7F26643A3AA3C17126FC4C94E5823 /* schema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45ED6D7F5C3C01BF13FE1C58CAB0F9A1 /* schema.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		EA44040A1AE68649B81006D58E8AD7AC /* PickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789871D4096DC8164767F6A498DB9510 /* PickerRow.swift */; };
 		EB4247EDCFFEE780BCA147302354C805 /* FLEXExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF3A12E16F46A69D88B20485B8950C4 /* FLEXExplorerViewController.m */; };
 		EBB27297B388332902AEF989DECEA22B /* ar.lproj in Resources */ = {isa = PBXBuildFile; fileRef = DE140888E75233DD95AB35B5FCA1C721 /* ar.lproj */; };
@@ -782,6 +782,7 @@
 		F1E66038537D98993633DB3320F8F5A1 /* PasscodeSignPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DD30F26E76F990035BC363C66F50D /* PasscodeSignPlaceholderView.swift */; };
 		F24DBBE4A092C120CAAF3BE1FFB95FA2 /* GPUImageWeakPixelInclusionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A2308B08456A6C8F8B58AF5C13EFCC9B /* GPUImageWeakPixelInclusionFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F268B342C2FAEB525E567859D8419DC4 /* GPUImageToneCurveFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BEDE98D6D3D02C28B4CC68C1AD1A60 /* GPUImageToneCurveFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F2CC6667E441DC0B4C99ED7481A792FB /* RLMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9E3C05702E75B02A718869007FE056 /* RLMConstants.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		F305A684D9A94BA4870D2DD2879AE68E /* SwiftVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD83B60E677C997B9ABFB62A667A7581 /* SwiftVersion.swift */; };
 		F325AEB8882ABD8B83D132ED871B7E76 /* RLMObjectBase_Dynamic.h in Headers */ = {isa = PBXBuildFile; fileRef = B5AEA3172337B6951A7E36F82EF8D192 /* RLMObjectBase_Dynamic.h */; };
 		F34397DCCD8941B1572ED47FE841DC84 /* GPUImageRGBClosingFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 513D99841B1FA87384C3B5E7E6C00B74 /* GPUImageRGBClosingFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -809,10 +810,9 @@
 		F85CDC2196D6AA24A461B9583C7FA867 /* OptionsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22730CA809E11AE3D1F0C245BCD689 /* OptionsRow.swift */; };
 		F8948F9C516CAA625B0A87648B97E9B0 /* FLEXSystemLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DDA460E9ED1DDF5200557FA2ECADE /* FLEXSystemLogTableViewCell.m */; };
 		F8AD1F1BBEDFECE930E8111742448863 /* TextAreaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765D619BBD41002C8873AB17FFDE416 /* TextAreaRow.swift */; };
-		F8BB67D912F207071D00DA49D4DC5007 /* RLMUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECDF64989B7040849B911821845CCE50 /* RLMUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		F8DEA8FB46972A682426534DA3CD4E5F /* Acknow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA6FCCC3D71FDB414BCD12DA92B4E52 /* Acknow.swift */; };
+		F964364F06EE06DD9619A050F858F835 /* async_query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8674EBCF77F6EAF21710E1A81CB1A5D /* async_query.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.7\"' -D__ASSERTMACROS__"; }; };
 		F9749D1068AE57DF51AF538A97CD9D90 /* GPUImageLuminosity.h in Headers */ = {isa = PBXBuildFile; fileRef = 878A60A1E928F25BE2A715E316819FE6 /* GPUImageLuminosity.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA432B927DF49BDB369E1EFC2EAC1CF2 /* RLMArrayLinkView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D6B565432B10B5A3AB235E89BB98A2 /* RLMArrayLinkView.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"0.98.6\"' -D__ASSERTMACROS__"; }; };
 		FA5922ACD8079C4C4D14CB074DFE5FA6 /* GPUImagePicture+TextureSubimage.h in Headers */ = {isa = PBXBuildFile; fileRef = B1548D3152D753A9FDE535BC7F7D7D94 /* GPUImagePicture+TextureSubimage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA607ABA16A37B823BADA110D20A39F6 /* InlineRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8169E38CC25F71F7598B5A5671E69 /* InlineRowType.swift */; };
 		FABFA1E4ED643571D392348A151BADFC /* GPUImageRawDataOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 00694F151848FE7347E2C965633B7CCE /* GPUImageRawDataOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -4072,42 +4072,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				970DC88BCFA7108E335D4B96F819905F /* async_query.cpp in Sources */,
-				8CAE71639399FB6B87AFAC322268013B /* cached_realm.cpp in Sources */,
-				3CFD4D5819D9AD5797FE2286872F0BE1 /* external_commit_helper.cpp in Sources */,
-				AF16BD5DC188D12DDB3FC8E26359E782 /* index_set.cpp in Sources */,
-				BAA85B9F83A59BCB90B9621E7FAE89EB /* object_schema.cpp in Sources */,
-				1EFAD74C7525A188D4363254AF3DC729 /* object_store.cpp in Sources */,
+				F964364F06EE06DD9619A050F858F835 /* async_query.cpp in Sources */,
+				C5DE856D535EA385CD0FEA06623F8A33 /* cached_realm.cpp in Sources */,
+				2B79202707CF8278D8088C46A3EB1173 /* external_commit_helper.cpp in Sources */,
+				AE27D7F536433F3C28545457CB66C117 /* index_set.cpp in Sources */,
+				B29DB134578AAC5F23566324F593541F /* object_schema.cpp in Sources */,
+				6DAF89FDFE7E482BED8A7C5F8AB31660 /* object_store.cpp in Sources */,
 				14B5596F0F7BC5D2A39492B9A5FD7A89 /* Realm-dummy.m in Sources */,
-				3AFC9185BF2AD260CF019B423BDEA721 /* realm_coordinator.cpp in Sources */,
-				2F1F75208E27D8BE2E8826B85D7BABE9 /* results.cpp in Sources */,
-				BC52DF5FCE7A7E1DF9791AA51F614E13 /* RLMAccessor.mm in Sources */,
-				C0B5A5CB38F8AD59F66497C7B891943F /* RLMAnalytics.mm in Sources */,
-				3F6AB162FED9A9DE8C6070FC368DC09F /* RLMArray.mm in Sources */,
-				FA432B927DF49BDB369E1EFC2EAC1CF2 /* RLMArrayLinkView.mm in Sources */,
-				8A88228D84749DF0D67A46D2ED511F9B /* RLMConstants.m in Sources */,
-				6536806CE6CF2913F2EB2E87E8A7068B /* RLMListBase.mm in Sources */,
-				D3EA7DF61C0AA01CC399B0A5954CEC21 /* RLMMigration.mm in Sources */,
-				C8C4D6BEF27B43A7A77BF967B0FAD165 /* RLMObject.mm in Sources */,
-				AED90DF5DC769962498BC36422785FF3 /* RLMObjectBase.mm in Sources */,
-				2F1CCE40F4BCA2FE96619905C4291F6C /* RLMObjectSchema.mm in Sources */,
-				B3F406E69BAF42703ECEDD576FA01BDD /* RLMObjectStore.mm in Sources */,
-				8EF49B9AB0C5670781FD3E5169C51EFF /* RLMObservation.mm in Sources */,
-				608838AEE9870590747FB9F20E32E75A /* RLMOptionalBase.mm in Sources */,
-				71176884FD3C8FBF7367A570C0D94329 /* RLMPredicateUtil.mm in Sources */,
-				66A8E1374398C96520BF44162C08C0A5 /* RLMProperty.mm in Sources */,
-				609973D7B07F27F38DD7D22D964CF6DB /* RLMQueryUtil.mm in Sources */,
-				23340A8427208A287C434C02B53D4E1B /* RLMRealm.mm in Sources */,
-				8814EF99153CF7416A8731E9ED005ED6 /* RLMRealmConfiguration.mm in Sources */,
-				E1E2EBC38D0B6391EE01429D9444AAD1 /* RLMRealmUtil.mm in Sources */,
-				327A7337B57717AAC82548E2BF8815B5 /* RLMResults.mm in Sources */,
-				40591FA562615F2BB53D3D4560F6C527 /* RLMSchema.mm in Sources */,
-				D9519595011D5F54279E7F5D2EA730C8 /* RLMSwiftSupport.m in Sources */,
-				49BBC86BBFBFE20E5CAF66F0253A3EFE /* RLMUpdateChecker.mm in Sources */,
-				F8BB67D912F207071D00DA49D4DC5007 /* RLMUtil.mm in Sources */,
-				63DED553B5A233D00FDC0771E20676C8 /* schema.cpp in Sources */,
-				28BBA7B63DA3549CF9132CC63611BB1A /* shared_realm.cpp in Sources */,
-				26F453B9EB8FAE824A84F26EA11ED923 /* transact_log_handler.cpp in Sources */,
+				CF16558D3431786211BF481CD7C8C939 /* realm_coordinator.cpp in Sources */,
+				3246597017F666A3804E2361417FAF07 /* results.cpp in Sources */,
+				B2B1F7FE4C1DE80454EDE846EC5657A7 /* RLMAccessor.mm in Sources */,
+				9C569F7FDAD8E31C6A44C24C7629BC24 /* RLMAnalytics.mm in Sources */,
+				A264F16B4AAEEEA31CE7CC339FB1C8D6 /* RLMArray.mm in Sources */,
+				55511EB2CF1318F03F306F4F71D5DACF /* RLMArrayLinkView.mm in Sources */,
+				F2CC6667E441DC0B4C99ED7481A792FB /* RLMConstants.m in Sources */,
+				CC4E3394AD84A8BD2E08A15FC8092C1E /* RLMListBase.mm in Sources */,
+				3D2BF7CF874DCDEF95CF3CDF1D800EAF /* RLMMigration.mm in Sources */,
+				3A185DCC6972BEB97FC99D6643938A59 /* RLMObject.mm in Sources */,
+				A7DB1DFE7859642CFF9FB1D9FE6BBF51 /* RLMObjectBase.mm in Sources */,
+				85C918B0EA89D428639CECE221C03AE0 /* RLMObjectSchema.mm in Sources */,
+				6F63E4F855D5950BBB01316AFF12B8D9 /* RLMObjectStore.mm in Sources */,
+				A0FD79CE6DD7C0B3C7D4E96EE42BD11E /* RLMObservation.mm in Sources */,
+				733CED05DFDDAE5D2273E15F37E79BC4 /* RLMOptionalBase.mm in Sources */,
+				8882EC0578B68AA3C30C9FEBBE775387 /* RLMPredicateUtil.mm in Sources */,
+				922FDD3A0D19DB430F9219FCD41A32C6 /* RLMProperty.mm in Sources */,
+				9F56DE0D83C3EBE677E9FFFCDE3D453C /* RLMQueryUtil.mm in Sources */,
+				1F6288D74F9DCFB5A6F0A072773CDB5E /* RLMRealm.mm in Sources */,
+				B0C81E8E9CCFD7FEA2FA1E2415EFB1CC /* RLMRealmConfiguration.mm in Sources */,
+				D814CE410885720A362507279BC5CFEE /* RLMRealmUtil.mm in Sources */,
+				147B34AD4C7DA247FDD045B61DA2D29A /* RLMResults.mm in Sources */,
+				8C50CEFF6CFB06E95EF1A499E0A55AFB /* RLMSchema.mm in Sources */,
+				48952E0E84B57EB64A7C472A123EA280 /* RLMSwiftSupport.m in Sources */,
+				B3B0840A5CCEE3B76DE2755706349FF7 /* RLMUpdateChecker.mm in Sources */,
+				6915D5B85BEC8964D8F4991E1F888D42 /* RLMUtil.mm in Sources */,
+				E8F7F26643A3AA3C17126FC4C94E5823 /* schema.cpp in Sources */,
+				C54DFFC9662B2A6A5FB77A74A7CB07E4 /* shared_realm.cpp in Sources */,
+				7C7B2473821BFBA0D91B32C642522A78 /* transact_log_handler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

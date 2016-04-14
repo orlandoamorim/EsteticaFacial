@@ -18,48 +18,48 @@ func dateTimeAgo(date: NSDate) -> String {
         return "Just now"
     }
     if (deltaSeconds < 60) {
-        return String(deltaSeconds) + " seconds ago"
+        return String(deltaSeconds) + " segundos atrás"
     }
     if (deltaSeconds < 120) {
-        return "A minute ago"
+        return "Há um minuto"
     }
     if (deltaMinutes < 60) {
-        return String(Int(deltaMinutes)) + " minutes ago"
+        return String(Int(deltaMinutes)) + " minutos atrás"
     }
     if (deltaMinutes < 120) {
-        return "An hour ago"
+        return "Há uma hora"
     }
     if (deltaMinutes < (24 * 60)) {
         let hours = flooredString(deltaMinutes, dividedBy: 60)
-        return hours + " hours ago"
+        return hours + " horas atrás"
     }
     if (deltaMinutes < (24 * 60 * 2)) {
-        return "Yesterday";
+        return "Ontem"
     }
     if (deltaMinutes < (24 * 60 * 7)) {
         let days = flooredString(deltaMinutes, dividedBy: (60 * 24))
-        return days + " days ago"
+        return days + " dias atrás"
     }
     if (deltaMinutes < (24 * 60 * 14)) {
-        return "Last week";
+        return "Semana passada"
     }
     if (deltaMinutes < (24 * 60 * 31)) {
         let weeks = flooredString(deltaMinutes, dividedBy: (60 * 24 * 7))
-        return weeks + " weeks ago"
+        return weeks + " semanas atrás"
     }
     if (deltaMinutes < (24 * 60 * 61)) {
-        return "Last month";
+        return "Mês passado"
     }
     if (deltaMinutes < (24 * 60 * 365.25)) {
         let months = flooredString(deltaMinutes, dividedBy: (60 * 24 * 30))
-        return months + " months ago"
+        return months + " meses atrás"
     }
     if (deltaMinutes < (24 * 60 * 731)) {
-        return "Last year";
+        return "Ano passado"
     }
     
     let years = flooredString(deltaMinutes, dividedBy: (60 * 24 * 365))
-    return years + " years ago"
+    return years + " anos atrás"
 }
 
 private func secondsFrom(date:NSDate) -> Int {

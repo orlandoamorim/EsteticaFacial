@@ -14,7 +14,8 @@ import PasscodeLock
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let version:String = "0.2.3"
+    
     lazy var passcodeLockPresenter: PasscodeLockPresenter = {
         
         let configuration = PasscodeLockConfiguration()
@@ -81,25 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         //self.saveContext()
     }
-    
-//    @available(iOS 9.0, *)
-//    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
-//        if shortcutItem.type == "com.UFPI.addCirurgia" {
-//
-//            let root = UIApplication.sharedApplication().keyWindow?.rootViewController
-//            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryDetailsVC") as! SurgeryDetailsVC
-//
-////            root?.navigationController?.pushViewController(controller, animated: true)
-//            root?.navigationController?.presentViewController(controller, animated: false, completion: { () -> Void in
-//                completionHandler(true)
-//            })
-////            root?.presentViewController(controller, animated: false, completion: { () -> Void in
-////                completionHandler(true)
-////            })
-//            
-//            
-//        }
-//    }
     
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void)

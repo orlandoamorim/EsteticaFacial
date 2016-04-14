@@ -150,6 +150,17 @@ class SettingsTableVC: FormViewController {
                     bgColorView.backgroundColor = UIColor.clearColor()
                     cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
                     cell.selectedBackgroundView = bgColorView
+            }
+            
+            <<< ButtonRow() { (row: ButtonRow) -> Void in
+                row.title = "Versão \(AppDelegate().version)"
+                row.disabled = true
+                }.cellSetup() {cell, row in
+                    cell.backgroundColor = UIColor.clearColor()
+                    cell.tintColor = UIColor(hexString: "#4C6B94")
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = UIColor.clearColor()
+                    cell.selectedBackgroundView = bgColorView
         }
         
     }

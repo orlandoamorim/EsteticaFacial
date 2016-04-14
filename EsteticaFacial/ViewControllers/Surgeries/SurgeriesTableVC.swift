@@ -59,7 +59,7 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(add))
         
-//        print(Realm.Configuration.defaultConfiguration.path!)
+        print(Realm.Configuration.defaultConfiguration.path!)
         
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
@@ -199,7 +199,7 @@ extension SurgeriesTableVC {
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
         let record = recordsDicAtoZ[key]!
         
-        cell.textLabel!.text = record[indexPath.row].surgeryDescription
+        cell.textLabel!.text = record[indexPath.row].surgeryDescription != "" ? record[indexPath.row].surgeryDescription : record[indexPath.row].patient?.name 
         cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
 //        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].date_of_surgery!)
         cell.imageView!.image = UIImage(named: "modelo_frontal")
