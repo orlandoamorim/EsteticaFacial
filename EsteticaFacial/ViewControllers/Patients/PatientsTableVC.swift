@@ -223,8 +223,7 @@ extension PatientsTableVC {
     }
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("SurgeriesTableVC") as! SurgeriesTableVC
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeriesTableVC") as! SurgeriesTableVC
         controller.surgeryShow = .Patient
         
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]

@@ -16,6 +16,8 @@ target 'EsteticaFacial' do
     pod 'DeviceKit', '~> 0.3.1'
     pod 'AcknowList'
     pod 'SCLAlertView', :git => 'https://github.com/vikmeup/SCLAlertView-Swift', :branch => 'master'
+    
+    pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 end
 
 target 'EsteticaFacialTests' do

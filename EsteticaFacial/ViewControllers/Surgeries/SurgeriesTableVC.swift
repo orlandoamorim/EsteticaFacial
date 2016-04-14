@@ -19,7 +19,8 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
     
     var surgeryShow:SurgeryShow = .Surgery
     var patient:Patient?
-
+    var touchedCell: (cell: UITableViewCell, indexPath: NSIndexPath)?
+    
     var token: NotificationToken?
     
     deinit {
@@ -39,7 +40,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         self.update()
         
         if patient == nil {
-        //Adição para funcionar melhor no iPad
             self.splitViewController!.delegate = self
             self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         }
@@ -60,6 +60,14 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(add))
         
 //        print(Realm.Configuration.defaultConfiguration.path!)
+        
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                self.registerForPreviewingWithDelegate(self, sourceView: self.tableView)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
         
     }
     
@@ -192,8 +200,8 @@ extension SurgeriesTableVC {
         let record = recordsDicAtoZ[key]!
         
         cell.textLabel!.text = record[indexPath.row].surgeryDescription
-//        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
-        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].date_of_surgery!)
+        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
+//        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].date_of_surgery!)
         cell.imageView!.image = UIImage(named: "modelo_frontal")
         for image in record[indexPath.row].image {
             if image.name != "" {
@@ -252,3 +260,59 @@ extension SurgeriesTableVC {
     }
 }
 
+extension SurgeriesTableVC: UIViewControllerPreviewingDelegate {
+    
+    
+    // PEEK
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = tableView.indexPathForRowAtPoint(location),
+            cell = tableView.cellForRowAtIndexPath(indexPath) else {return nil}
+        
+        guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryDetailsVC") as? SurgeryDetailsVC else {return nil}
+        
+        touchedCell = (cell,indexPath)
+        let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
+        let record = recordsDicAtoZ[key]!
+        controller.record = record[indexPath.row]
+        controller.patient = patient
+        controller.contentToDisplay = .Atualizar
+        
+        controller.preferredContentSize = CGSize(width: 0, height: 0)
+        
+        previewingContext.sourceRect = cell.frame
+
+        
+        
+        return controller
+    }
+    
+    // POP
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryDetailsVC") as? SurgeryDetailsVC {
+            let key = Array(recordsDicAtoZ.keys.sort())[touchedCell!.indexPath.section]
+            let record = recordsDicAtoZ[key]!
+            controller.record = record[touchedCell!.indexPath.row]
+            controller.patient = patient
+            controller.contentToDisplay = .Atualizar
+            showViewController(controller, sender: self)
+        }
+    }
+    
+    @available(iOS 9.0, *)
+    override func previewActionItems() -> [UIPreviewActionItem] {
+        let regularAction = UIPreviewAction(title: "Regular", style: .Default) { (action: UIPreviewAction, vc: UIViewController) -> Void in
+            
+        }
+        
+        let destructiveAction = UIPreviewAction(title: "Destructive", style: .Destructive) { (action: UIPreviewAction, vc: UIViewController) -> Void in
+            
+        }
+        
+        let actionGroup = UIPreviewActionGroup(title: "Group...", style: .Default, actions: [regularAction, destructiveAction])
+        
+        return [regularAction, destructiveAction, actionGroup]
+    }
+}

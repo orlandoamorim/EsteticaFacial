@@ -46,6 +46,7 @@ class SurgeryDetailsVC: FormViewController{
     
     var alertViewResponder: SCLAlertViewResponder?
     
+    var handleShortcut:Bool = false
     //--------------------
     
     override func viewDidLoad() {
@@ -67,6 +68,10 @@ class SurgeryDetailsVC: FormViewController{
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(getConfirmation))
             if patient != nil {
                 ajustToPacient("Adicionando")
+            }
+            
+            if handleShortcut {
+                handleShortcutItem()
             }
             
         case .Atualizar:
@@ -119,6 +124,15 @@ class SurgeryDetailsVC: FormViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func handleShortcutItem(){
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            self.imageType = .Front
+            self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
+        }
+    }
+    
+    
     //-------------------
     
     func editBarBtn(){
@@ -755,12 +769,7 @@ class SurgeryDetailsVC: FormViewController{
         }
         
         if segue.identifier == "EditRecoverPatientSegue"{
-//            let controller = (segue.destinationViewController as! UINavigationController).topViewController as! PatientDetailsVC
             let controller = segue.destinationViewController as! PatientDetailsVC
-
-//            let nav = segue.destinationViewController as! UINavigationController
-//            let controller = nav.viewControllers[0] as! PatientDetailsVC
-            //            controller.delegate = self
             if let test = sender as? ButtonRow {
                 if test.tag == "btn_edit_recover_patient"{
                     //                    controller.patientShow = .CheckPatient

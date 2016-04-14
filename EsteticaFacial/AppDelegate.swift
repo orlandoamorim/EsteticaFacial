@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 })
         })
+        print(NSBundle.mainBundle().bundleIdentifier!)
         
         return true
     }
@@ -62,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         passcodeLockPresenter.presentPasscodeLock()
+        self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -78,5 +81,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         //self.saveContext()
     }
+    
+//    @available(iOS 9.0, *)
+//    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+//        if shortcutItem.type == "com.UFPI.addCirurgia" {
+//
+//            let root = UIApplication.sharedApplication().keyWindow?.rootViewController
+//            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryDetailsVC") as! SurgeryDetailsVC
+//
+////            root?.navigationController?.pushViewController(controller, animated: true)
+//            root?.navigationController?.presentViewController(controller, animated: false, completion: { () -> Void in
+//                completionHandler(true)
+//            })
+////            root?.presentViewController(controller, animated: false, completion: { () -> Void in
+////                completionHandler(true)
+////            })
+//            
+//            
+//        }
+//    }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void)
+    {
+        let handledShhortcutItem = self.handleShortcutItem(shortcutItem)
+        completionHandler(handledShhortcutItem)
+        
+    }
+    
+    
+    enum ShortcutIdentifier: String
+    {
+        case First
+        case Second
+        
+        init?(fullType: String)
+        {
+            guard let last = fullType.componentsSeparatedByString(".").last else {return nil}
+            self.init(rawValue: last)
+        }
+        
+        var type: String
+        {
+            return NSBundle.mainBundle().bundleIdentifier! + ".\(self.rawValue)"
+        }
+        
+//        echo 'com.UFPI.EsteticaFacial.First' | nc 127.0.0.1 8000
+    }
+    
+    @available(iOS 9.0, *)
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool
+    {
+        var handled = false
+        
+        guard ShortcutIdentifier(fullType: shortcutItem.type) != nil else { return false }
+        guard let shortcutType = shortcutItem.type as String? else { return false }
+        
+        switch (shortcutType)
+        {
+        case ShortcutIdentifier.First.type:
+            handled = true
+
+            let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryNavDetailsVC") as! UINavigationController
+            let controller = navVC.viewControllers[0] as! SurgeryDetailsVC
+            controller.contentToDisplay = .Adicionar
+            self.window?.rootViewController?.presentViewController(navVC, animated: true, completion: nil)
+            
+            break
+        case ShortcutIdentifier.Second.type:
+            handled = true
+            
+            let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SurgeryNavDetailsVC") as! UINavigationController
+            let controller = navVC.viewControllers[0] as! SurgeryDetailsVC
+            controller.contentToDisplay = .Adicionar
+            controller.handleShortcut = true
+            self.window?.rootViewController?.presentViewController(navVC, animated: true, completion: nil)
+            break
+        default:
+            break
+        }
+        
+        return handled
+        
+    }
+    
 }
 
