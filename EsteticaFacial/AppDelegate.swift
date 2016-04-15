@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let version:String = "0.2.3"
-    
+    var trelloCard:String = "https://trello.com/c/UA35uWzZ/27-versao-0-2-3#"
+    var trelloBoard:String = "https://trello.com/b/YfRp2cch"
+
     lazy var passcodeLockPresenter: PasscodeLockPresenter = {
         
         let configuration = PasscodeLockConfiguration()
@@ -29,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passcodeLockPresenter.presentPasscodeLock()
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 migration.enumerate(Patient.className()) { oldObject, newObject in
                     if oldSchemaVersion < 1 {
@@ -38,10 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 migration.enumerate(Record.className(), { (oldObject, newObject) in
-                    if oldSchemaVersion < 2 {
+                    if oldSchemaVersion < 1 {
                         newObject?["surgeryDescription"] = ""
-                    }
-                    if oldSchemaVersion < 3 {
+
                         newObject?["create_at"] = NSDate()
                         newObject?["update_at"] = NSDate()
                     }

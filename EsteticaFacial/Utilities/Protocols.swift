@@ -17,23 +17,18 @@ protocol RecordPointsDelegate{
     func updateData(points points:[String:NSValue]?, ImageType:ImageTypes)
 }
 
-
-protocol ProcedimentoCirurgico{
+///Implement the method of this protocol when you need to update SurgicalPlan basead in SurgicalPlanningType enum.
+protocol SurgicalPlan{
     func updateSurgicalPlanning(surgicalPlanningForm:[String : Any?], SurgicalPlanningType: SurgicalPlanningTypes)
 }
 
+///Implement the method of this protocol when you need to recover an Pacient Object.
 protocol RecoverPatient {
     func recoverPatient(patient:Patient?)
 }
 
-
 protocol ImageVerification{
     func imageVerification(image image: UIImage?, ImageVerify : ImageVerificationType)
-}
-
-
-protocol CameraViewDelegate{
-    func marcar_pontos(dic : [String:NSValue])
 }
 
 struct ImageRowSourceTypes : OptionSetType {

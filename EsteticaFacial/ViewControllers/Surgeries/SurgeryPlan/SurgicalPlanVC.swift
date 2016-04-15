@@ -11,7 +11,7 @@ import Eureka
 
 class SurgicalPlanVC:FormViewController {
     
-    var delegate: ProcedimentoCirurgico! = nil
+    var delegate: SurgicalPlan! = nil
 
     var dicFormValues:[String : Any?] = [String : Any?]()
     var dicFormValuesAtual:[String : Any?] = [String : Any?]()

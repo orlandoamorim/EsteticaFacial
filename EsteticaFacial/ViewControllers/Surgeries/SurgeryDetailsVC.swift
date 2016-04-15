@@ -15,9 +15,9 @@ class SurgeryDetailsVC: FormViewController{
     
     var record:Record!
     var patient:Patient?
+    var tapBGGesture: UITapGestureRecognizer!
     
     @IBOutlet weak var header: UIView!
-    
     
     @IBOutlet weak var btnFront: UIButton!
     @IBOutlet weak var btnProfileRight: UIButton!
@@ -782,7 +782,7 @@ class SurgeryDetailsVC: FormViewController{
         
     }
 }
-extension SurgeryDetailsVC:RecoverPatient {
+extension SurgeryDetailsVC: RecoverPatient {
     func recoverPatient(patient: Patient?) {
         self.patient = nil
         let section: Section?  = form.sectionByTag("recover_patient")
@@ -791,7 +791,6 @@ extension SurgeryDetailsVC:RecoverPatient {
         if patient != nil {
             self.patient = patient
             section!.header = HeaderFooterView(title: "\(patient!.name)")
-//            self.form.sectionByTag("recover_patient")?.header?.title = patient!.name
             self.form.rowByTag("btn_recover_patient")?.baseValue = "true"
         }
         section?.reload()
@@ -837,7 +836,7 @@ extension SurgeryDetailsVC: RecordPointsDelegate{
     }
 }
 
-extension SurgeryDetailsVC: ProcedimentoCirurgico{
+extension SurgeryDetailsVC: SurgicalPlan{
     func updateSurgicalPlanning(surgicalPlanningForm: [String : Any?], SurgicalPlanningType: SurgicalPlanningTypes) {
         
         switch SurgicalPlanningType {
@@ -850,16 +849,30 @@ extension SurgeryDetailsVC: ProcedimentoCirurgico{
     }
 }
 
-extension UIImage {
+extension SurgeryDetailsVC: UIGestureRecognizerDelegate {
     
-    func isEqualToImage(image: UIImage) -> Bool {
-        guard let data1 = UIImagePNGRepresentation(self),
-            data2 = UIImagePNGRepresentation(image)
-            else { return false }
-        return data1.isEqualToData(data2)
+    override func viewDidAppear(animated: Bool) {
+        tapBGGesture = UITapGestureRecognizer(target: self, action: #selector(SurgeryDetailsVC.settingsBGTapped(_:)))
+        tapBGGesture.delegate = self
+        tapBGGesture.numberOfTapsRequired = 1
+        tapBGGesture.cancelsTouchesInView = false
+        self.view.window!.addGestureRecognizer(tapBGGesture)
+    }
+    func settingsBGTapped(sender: UITapGestureRecognizer){
+        if sender.state == UIGestureRecognizerState.Ended{
+            guard let presentedView = presentedViewController?.view else {
+                return
+            }
+            if !CGRectContainsPoint(presentedView.bounds, sender.locationInView(presentedView)) {
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                })
+            }
+        }
+    }
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    override func viewWillDisappear(animated: Bool) {
+        self.view.window!.removeGestureRecognizer(tapBGGesture)
     }
 }
-
-
-
-

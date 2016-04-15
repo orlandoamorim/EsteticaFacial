@@ -12,7 +12,8 @@ import DeviceKit
 
 class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
+    var resultSearchController: UISearchController!
     
     var recordsSearch: [AnyObject] = [AnyObject]()
     var recordsDicAtoZ:[String : [Record]] = [String : [Record]]()
@@ -43,6 +44,21 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
             self.splitViewController!.delegate = self
             self.splitViewController!.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         }
+    
+        self.resultSearchController = ({
+            let searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.searchBar.sizeToFit()
+            return searchController
+        })()
+        
+        switch surgeryShow {
+        case .Surgery: self.tableView.tableHeaderView = self.resultSearchController.searchBar
+        case .Patient: self.tableView.tableHeaderView = nil
+        }
+        
+        
         // UIRefreshControl
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(update), forControlEvents: UIControlEvents.ValueChanged)
@@ -199,9 +215,9 @@ extension SurgeriesTableVC {
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
         let record = recordsDicAtoZ[key]!
         
-        cell.textLabel!.text = record[indexPath.row].surgeryDescription != "" ? record[indexPath.row].surgeryDescription : record[indexPath.row].patient?.name 
+        cell.textLabel!.text = record[indexPath.row].surgeryDescription != "" ? record[indexPath.row].surgeryDescription : record[indexPath.row].patient?.name
         cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
-//        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].date_of_surgery!)
+        
         cell.imageView!.image = UIImage(named: "modelo_frontal")
         for image in record[indexPath.row].image {
             if image.name != "" {
@@ -232,12 +248,8 @@ extension SurgeriesTableVC {
         
         
         let delete = UITableViewRowAction(style: .Destructive, title: "\u{1F5D1}\n Deletar") { action, index in
-            print("more button tapped")
-            
-            //Criando um objeto do tipo NSNOtitcationCenter
             
             let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-            //ENVIANDO os dados por Object
             centroDeNotificacao.postNotificationName("noData", object: nil)
             
             let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
@@ -314,5 +326,21 @@ extension SurgeriesTableVC: UIViewControllerPreviewingDelegate {
         let actionGroup = UIPreviewActionGroup(title: "Group...", style: .Default, actions: [regularAction, destructiveAction])
         
         return [regularAction, destructiveAction, actionGroup]
+    }
+}
+
+extension SurgeriesTableVC : UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.recordsDicAtoZ.removeAll()
+        
+        let predicate = NSPredicate(format: "patient.name CONTAINS[c] %@ OR patient.sex CONTAINS[c] %@ OR patient.mail CONTAINS[c] %@ OR patient.phone CONTAINS[c] %@ OR patient.ethnic CONTAINS[c] %@ OR note CONTAINS[c] %@", searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!)
+        
+        switch surgeryShow {
+        case .Surgery: self.recordsDicAtoZ = RealmParse.querySurgeries(predicate)
+        case .Patient: self.recordsDicAtoZ = RealmParse.queryPatientSurgeries(patient!, with: predicate)
+        }
+        
+        self.tableView.reloadData()
+        
     }
 }

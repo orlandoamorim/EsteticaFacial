@@ -10,11 +10,14 @@ import UIKit
 import Eureka
 import PasscodeLock
 import AcknowList
+import SafariServices
 
 class SettingsTableVC: FormViewController {
 
-    var ativada:Int = Int()
+    var passcodeActivated:Bool = Bool()
+    var notificationActivated:Int = Int()
     var appVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+    
     
     private let configuration: PasscodeLockConfigurationType
 
@@ -76,11 +79,14 @@ class SettingsTableVC: FormViewController {
                     var passcodeVC: PasscodeLockViewController?
                     if $0.value == true {
                         if self!.configuration.repository.hasPasscode {
+                            self!.passcodeActivated = true
                             return
                         }
                         passcodeVC = PasscodeLockViewController(state: .SetPasscode, configuration: self!.configuration)
+
                     } else if $0.value == false {
                         if !self!.configuration.repository.hasPasscode {
+                            self!.passcodeActivated = false
                             return
                         }
                         passcodeVC = PasscodeLockViewController(state: .RemovePasscode, configuration: self!.configuration)
@@ -91,9 +97,15 @@ class SettingsTableVC: FormViewController {
                     
                     passcodeVC!.dismissCompletionCallback = { [weak self] in
                         if self!.configuration.repository.hasPasscode{
+                            if self!.passcodeActivated {
+                                return
+                            }
                             self?.form.rowByTag("password")?.baseValue = true
                             self?.form.rowByTag("password")?.updateCell()
                         } else {
+                            if !self!.passcodeActivated {
+                                return
+                            }
                             self?.form.rowByTag("password")?.baseValue = false
                             self?.form.rowByTag("password")?.updateCell()
                         }
@@ -130,13 +142,12 @@ class SettingsTableVC: FormViewController {
                     cell.imageView?.image = UIImage(named: "Beta")
             }
             +++ Section()
-            
             <<< ButtonRow() { (row: ButtonRow) -> Void in
-                if #available(iOS 9.2, *) {
-                    row.title = "We 🤗 Open Source Software"
-                } else {
-                    row.title = "We ❤️ Open Source Software"
-                }
+                    if #available(iOS 9.2, *) {
+                        row.title = "We 🤗 Open Source Software"
+                    } else {
+                        row.title = "We ❤️ Open Source Software"
+                    }
                 }.onCellSelection({ (cell, row) in
                     let path = NSBundle.mainBundle().pathForResource("Pods-EsteticaFacial-acknowledgements", ofType: "plist")
                     let viewController = AcknowListViewController(acknowledgementsPlistPath: path)
@@ -146,6 +157,39 @@ class SettingsTableVC: FormViewController {
                 }).cellSetup() {cell, row in
                     cell.backgroundColor = UIColor.clearColor()
                     cell.tintColor = UIColor(hexString: "#4BCAD1")
+                    
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = UIColor.clearColor()
+                    cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
+                    cell.selectedBackgroundView = bgColorView
+
+//                    let indent_large_enought_to_hidden:CGFloat = 10000
+//                    cell.separatorInset = UIEdgeInsetsMake(0, indent_large_enought_to_hidden, 0, 0) // indent large engough for separator(including cell' content) to hidden separator
+//                    cell.indentationWidth = indent_large_enought_to_hidden * -1 // adjust the cell's content to show normally
+//                    cell.indentationLevel = 1 // must add this, otherwise default is 0, now actual indentation = indentationWidth * indentationLevel = 10000 * 1 = -10000
+            }
+            
+            +++ Section()
+            <<< ButtonRow() { (row: ButtonRow) -> Void in
+                
+                if #available(iOS 9.3, *) {
+                    row.title = "Relatar Bug 🐛"
+                } else {
+                    row.title = "Relatar Bug"
+                }
+                
+                }.onCellSelection({ (cell, row) in
+                    if #available(iOS 9.0, *) {
+                        let svc = SFSafariViewController(URL: NSURL(string: AppDelegate().trelloCard)!, entersReaderIfAvailable: true)
+                        self.presentViewController(svc, animated: true, completion: nil)
+                    } else {
+                        let url = NSURL(string: AppDelegate().trelloCard)!
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }).cellSetup() {cell, row in
+                    cell.backgroundColor = UIColor.clearColor()
+                    cell.tintColor = UIColor(hexString: "#4BCAD1")
+                    
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = UIColor.clearColor()
                     cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
@@ -153,16 +197,43 @@ class SettingsTableVC: FormViewController {
             }
             
             <<< ButtonRow() { (row: ButtonRow) -> Void in
+                row.title = "Saiba mais sobre o projeto"
+                
+                }.onCellSelection({ (cell, row) in
+                    if #available(iOS 9.0, *) {
+                        let svc = SFSafariViewController(URL: NSURL(string: AppDelegate().trelloBoard)!, entersReaderIfAvailable: true)
+                        self.presentViewController(svc, animated: true, completion: nil)
+                    } else {
+                        let url = NSURL(string: AppDelegate().trelloBoard)!
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }).cellSetup() {cell, row in
+                    cell.backgroundColor = UIColor.clearColor()
+                    cell.tintColor = UIColor(hexString: "#4BCAD1")
+                    
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = UIColor.clearColor()
+                    cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
+                    cell.selectedBackgroundView = bgColorView
+            }
+            
+            +++ Section()
+            
+            <<< ButtonRow() { (row: ButtonRow) -> Void in
                 row.title = "Versão \(AppDelegate().version)"
                 row.disabled = true
+
                 }.cellSetup() {cell, row in
                     cell.backgroundColor = UIColor.clearColor()
                     cell.tintColor = UIColor(hexString: "#4C6B94")
+                    
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = UIColor.clearColor()
+                    cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
                     cell.selectedBackgroundView = bgColorView
+                    cell.selected = true
+                    
         }
-        
     }
     
     
@@ -173,10 +244,10 @@ class SettingsTableVC: FormViewController {
         let settings: UIUserNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()!
         
         if settings.types != UIUserNotificationType.None {
-            self.ativada = 1
+            self.notificationActivated = 1
         }else {
             //"Desativadas"
-            self.ativada = 0
+            self.notificationActivated = 0
         }
     }
     
@@ -195,34 +266,6 @@ class SettingsTableVC: FormViewController {
     }
     
     
-}
-
-extension UIColor {
-    // Creates a UIColor from a Hex string.
-    convenience init(hexString: String) {
-        var cString: String = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
-        
-        if (cString.hasPrefix("#")) {
-            cString = (cString as NSString).substringFromIndex(1)
-        }
-        
-        if (cString.characters.count != 6) {
-            self.init(white: 0.5, alpha: 1.0)
-        } else {
-            let rString: String = (cString as NSString).substringToIndex(2)
-            let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-            let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
-            
-            var r: CUnsignedInt = 0, g: CUnsignedInt = 0, b: CUnsignedInt = 0;
-            NSScanner(string: rString).scanHexInt(&r)
-            NSScanner(string: gString).scanHexInt(&g)
-            NSScanner(string: bString).scanHexInt(&b)
-            
-            self.init(red: CGFloat(r) / CGFloat(255.0), green: CGFloat(g) / CGFloat(255.0), blue: CGFloat(b) / CGFloat(255.0), alpha: CGFloat(1))
-        }
-        
-        
-    }
 }
 
 

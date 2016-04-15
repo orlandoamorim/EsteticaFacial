@@ -197,13 +197,16 @@ class RealmParse{
     /**
      Return all Surgery objects in Record.
      */
-    static func querySurgeries() -> [String : [Record]]{
+    static func querySurgeries(predicate: NSPredicate?=nil) -> [String : [Record]]{
         var recordsHeader: [String] = [String]()
         var recordsDicAtoZ:[String : [Record]] = [String : [Record]]()
         
         let realm = try! Realm()
         
-        for record in realm.objects(Record) {
+        
+        let records = predicate != nil ? realm.objects(Record).filter(predicate!) : realm.objects(Record)
+        
+        for record in records {
             
             let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
             
@@ -235,13 +238,15 @@ class RealmParse{
     /**
      Return all Surgery objects in Record.
      */
-    static func queryPatients() -> [String : [Patient]]{
+    static func queryPatients(predicate: NSPredicate?=nil) -> [String : [Patient]]{
         var recordsHeader: [String] = [String]()
         var recordsDicAtoZ:[String : [Patient]] = [String : [Patient]]()
         
         let realm = try! Realm()
         
-        for record in realm.objects(Patient) {
+        let records = predicate != nil ? realm.objects(Patient).filter(predicate!) : realm.objects(Patient)
+        
+        for record in records {
             
             let name = record.name
             
@@ -274,7 +279,7 @@ class RealmParse{
     /**
      Return all Surgery objects in an patient object passed.
      */
-    static func queryPatientSurgeries(patient: Patient) -> [String : [Record]]{
+    static func queryPatientSurgeries(patient: Patient,with predicate: NSPredicate?=nil) -> [String : [Record]]{
         var recordsHeader: [String] = [String]()
         var recordsDicAtoZ:[String : [Record]] = [String : [Record]]()
         

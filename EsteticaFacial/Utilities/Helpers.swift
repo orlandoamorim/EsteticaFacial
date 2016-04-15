@@ -11,7 +11,7 @@ import AssetsLibrary
 import DeviceKit
 
 /**
- # Conjunto de Funções necessarios para todas as classes.
+ # Conjunto de Funções necessárias para todas as classes.
 
  São elas:
  * **dataFormatter**: Formatador de NSDate.
@@ -179,6 +179,11 @@ class Helpers: NSObject{
         return anyToAnyDict
     }
     
+    /// Used to transform an NSSet to NSArray
+    private static func getArrayFromSet(set:NSSet)-> NSArray {
+        return set.map ({ String($0) })
+    }
+    
     /**
     Verifica se algum valor obrigatio da ficha esta vazio.
     
@@ -199,7 +204,7 @@ class Helpers: NSObject{
                 verifyFormValues[key] = bool
             }else if let data = anyDict[key]! as? NSDate {
                 verifyFormValues[key] = data
-            }else if key == "btn_recover_patient" || key == "btn_show_surgeries" || key == "cleanPatient" || key == "btn_edit_recover_patient" || key == "changePassword" || key ==  "mail" || key ==  "phone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key ==  "surgeryRealized" || key == "note"{
+            }else if key == "surgeryDescription" || key == "btn_recover_patient" || key == "btn_show_surgeries" || key == "cleanPatient" || key == "btn_edit_recover_patient" || key == "changePassword" || key ==  "mail" || key ==  "phone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key ==  "surgeryRealized" || key == "note" {
                 continue
             }else{
                 return (false,key)
@@ -210,13 +215,13 @@ class Helpers: NSObject{
     }
     
     /**
-     Retorna um formulario padrao para os Planos Cirurgicos
+     Retorna um formulario padrao para os Planos Cirurgicos.
      
      - Returns:  **[String : Any?]**.
      */
     
     static func surgicalPlanningForm() -> [String : Any?] {
-//        let dicFormValues:[String : AnyObject] = ["enxerto_de_sheen": ["Tipo I Esmagado"], "suturas": ["Intradomal"], "raiz": ["Reducao Raspa"], "osso": ["Raspa"], "dorso": ["Nao Tocado"], "incisoes": ["Inter"], "transversa": ["Nenhum Transversa"], "abordagem": false, "lateral": ["Nenhum Lateral"], "medial": ["Nenhum Medial"], "enxerto_de_ponta": ["Tampao"], "liberacao": ["Resseccao Cefalica"], "cartilagem": ["Abaixada"],"abordagem_opcoes": "Retrograda"]
+
         let dicFormValues:[String : AnyObject] = ["abordagem": false]
         
         var formArray: [String : Any?] = [String : Any?]()
@@ -239,9 +244,9 @@ class Helpers: NSObject{
     // MARK: - Dicionarios
     
     /**
-    Retorna os diconarios dos pontos frontais, perfis, nasais e do plano cirurgico.
+    Retorna uma tupla com diconarios dos pontos frontais, perfis, nasais.
     
-    - Returns:  **[String:NSValue]?** Diconario dos pontos Frontais.  **[String:NSValue]?** Diconario dos pontos  de Perfis.  **[String:NSValue]?** Diconario dos pontos Nasais.  **[String : Any?]** Diconario padrão do Plano Cirurgico, necessario para evitar consumo exarcebado de banda.
+    - Returns:  **[String:NSValue]?** Diconario dos pontos Frontais.  **[String:NSValue]?** Diconario dos pontos  de Perfis.  **[String:NSValue]?** Diconario dos pontos Nasais.
 
     */
     
@@ -304,34 +309,7 @@ class Helpers: NSObject{
     }
     
     /**
-     Vaerifica qual tipo de conteudo o usuario deseja mostrar na tableview
-     
-     - Returns:  **String**.
-     */
-    
-    static func verificaSwitch()->String{
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if (userDefaults.valueForKey("switchCT") != nil) {
-            let switchCT = userDefaults.valueForKey("switchCT")
-            
-            if switchCT as! String == "realizadas" {
-                return "realizadas"
-            }else if switchCT as! String == "nao_realizadas" {
-                return "nao_realizadas"
-            }else if switchCT as! String == "todas" {
-                return "todas"
-            }
-        }else {
-            userDefaults.setValue("Todas", forKey: "switchCT")
-            userDefaults.synchronize()
-            return "todas"
-        }
-        
-        return "todas"
-    }
-    
-    /**
-     Retorna a ultima foto da galeria.
+     Returns the last image in library
      
      - Returns:  **[UIImage]**.
      */
@@ -381,6 +359,9 @@ class Helpers: NSObject{
         })
     }
     
+    /**
+     Remove from superview an UIImageView
+     */
     static func removeImageView(view:UIView){
         view.subviews.forEach ({
             if $0 is UIImageView {
@@ -389,14 +370,15 @@ class Helpers: NSObject{
         })
     }
     
-
+    /**
+     Add in subview an UIImageView
+     */
+    
     static func inicializeImageView(type type:Bool, view: UIView, imageTypes:ImageTypes, cropBoxFrame: CGRect? = nil) {
         var imageViewObject :UIImageView!
         
         if type {
-            print(cropBoxFrame!)
             imageViewObject = UIImageView(frame:cropBoxFrame!)
-
         }else{
             imageViewObject = inicializeImageViewFrame()
         }
@@ -420,7 +402,8 @@ class Helpers: NSObject{
         
     }
     
-    static private func inicializeImageViewFrame() -> UIImageView {
+    ///Used when the user don't pass the CGRect to **func inicializeImageView**
+    private static func inicializeImageViewFrame() -> UIImageView {
         let device = Device()
         if device == .iPhone4 || device == .iPhone4s {
             switch UIDevice.currentDevice().orientation{
@@ -472,11 +455,7 @@ class Helpers: NSObject{
         return UIImageView(frame:CGRectMake(14.0, 116.0, 292.0, 292.0))
     }
     
-    
-    static func getArrayFromSet(set:NSSet)-> NSArray {
-        return set.map ({ String($0) })
-    }
-    
+    ///Returns an UIView with title and subtitle to be inserts in UINavigationController
     static func setTitle(title:String, subtitle:String) -> UIView {
         //Create a label programmatically and give it its property's
         let titleLabel = UILabel(frame: CGRectMake(0, 0, 0, 0)) //x, y, width, height where y is to offset from the view center
@@ -513,15 +492,4 @@ class Helpers: NSObject{
         
         return titleView
     }
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-//    let getImage =  UIImage(data: NSData(contentsOfURL: NSURL(string: self.remoteImage)))
-//    UIImageJPEGRepresentation(getImage, 100).writeToFile(imagePath, atomically: true)
-//    
-//    dispatch_async(dispatch_get_main_queue()) {
-//    self.image?.image = getImage
-//    return
-//    }
-//    }    
-    
 }

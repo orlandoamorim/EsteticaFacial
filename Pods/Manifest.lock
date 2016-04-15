@@ -1,10 +1,13 @@
 PODS:
   - AcknowList (0.2.2)
   - Alamofire (3.3.1)
+  - Bolts/Tasks (1.7.0)
   - DeviceKit (0.3.2)
   - Eureka (1.5.0)
   - FLEX (2.3.0)
   - GPUImage (0.1.7)
+  - Parse (1.13.0):
+    - Bolts/Tasks (~> 1.6)
   - PasscodeLock (1.0.2)
   - Realm (0.98.7):
     - Realm/Headers (= 0.98.7)
@@ -14,7 +17,7 @@ PODS:
   - SCLAlertView (0.5.1)
   - SwiftyDropbox (3.0.0):
     - Alamofire (~> 3.1)
-  - TOCropViewController (1.3.1)
+  - TOCropViewController (1.3.3)
 
 DEPENDENCIES:
   - AcknowList
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - Eureka (~> 1.3)
   - FLEX (~> 2.0)
   - GPUImage (from `https://github.com/BradLarson/GPUImage`, branch `master`)
+  - Parse
   - PasscodeLock
   - RealmSwift
   - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift`, branch `master`)
@@ -47,17 +51,19 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AcknowList: 00d912fe6d2a169f950b91f80de2342532377662
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   DeviceKit: 79182140c0aa8daaf4f4b3920e0b079f5fa9db79
   Eureka: 2fb37bb50569c62ee3284689d5b7aca694b040e0
   FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
   GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
+  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   PasscodeLock: 4ae42c094224a01de3773fcd69ae33886394d959
   Realm: 46df2178359b6b57812e6cf957956febaba513a5
   RealmSwift: 3056e6d7ad30ed50dd866185a615fccea73db5f5
   SCLAlertView: 3ac39a863d3e10fc165662b1228b03402297aea9
   SwiftyDropbox: e0d4aa3166082ec07ed942e94edb8c732b3376e4
-  TOCropViewController: 0857ca3e78e549218b09f2583ff3a326e81ea766
+  TOCropViewController: 9c0ede06e1ff92f3814049ae6e693496cefa624b
 
-PODFILE CHECKSUM: d8594967fb917a3103e8cb409c249059237266b2
+PODFILE CHECKSUM: ca3f5d7eba94ad81554a8c61aa9daf7ee01f9383
 
 COCOAPODS: 1.0.0.beta.5

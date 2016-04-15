@@ -50,6 +50,7 @@
 		18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
+		18D149181CC11C31007D7353 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D149171CC11C31007D7353 /* Extensions.swift */; };
 		9DC2B26F02A87D8215BD62D3 /* Pods_EsteticaFacialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE4404B4BB03E532D0D16E7 /* Pods_EsteticaFacialUITests.framework */; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
@@ -118,6 +119,7 @@
 		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
 		18BAB9F51C9BA67D00BD575B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Model/Record/Record.swift; sourceTree = "<group>"; };
 		18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostrarCirurgiasVC.swift; sourceTree = "<group>"; };
+		18D149171CC11C31007D7353 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Utilities/Extensions.swift; sourceTree = "<group>"; };
 		37538D4876F85EBD147C437F /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43610EA9EDC3F6217CA6F5A4 /* Pods-EsteticaFacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.debug.xcconfig"; sourceTree = "<group>"; };
 		53653E2A50E4F67A2539C919 /* Pods-EsteticaFacialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			children = (
 				18774F3B1CBC8D0800CA2D64 /* Protocols.swift */,
 				18774F451CBC946000CA2D64 /* Enums.swift */,
+				18D149171CC11C31007D7353 /* Extensions.swift */,
 				18774F3C1CBC8D0800CA2D64 /* Helpers.swift */,
 				18774F3D1CBC8D0800CA2D64 /* Teste.swift */,
 				18774F3F1CBC8D0800CA2D64 /* VSReachability.swift */,
@@ -779,6 +782,7 @@
 				18774F371CBC8C8B00CA2D64 /* PontoView.swift in Sources */,
 				18774F421CBC8D0800CA2D64 /* Teste.swift in Sources */,
 				181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */,
+				18D149181CC11C31007D7353 /* Extensions.swift in Sources */,
 				18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */,
 				18774F341CBC8C8B00CA2D64 /* LocalizadorFrontal.swift in Sources */,
 				18774F1A1CBC896500CA2D64 /* PatientsTableVC.swift in Sources */,
