@@ -173,10 +173,10 @@ class RealmParse{
      
      */
     
-    static func image(id:String, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
+    static func image(patientId:String, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
         
         let img = Image()
-        img.patientId = id
+        img.patientId = patientId
         img.imageType = "\(imageType)"
         img.name = fileName
         //If already exists an Image() object.

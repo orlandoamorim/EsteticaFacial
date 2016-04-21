@@ -64,3 +64,45 @@ extension UIImage {
         return data1.isEqualToData(data2)
     }
 }
+
+extension UINavigationController {
+    
+    func progress(progressView: UIProgressView) {
+        self.view.addSubview(progressView)
+        let navBar = self.navigationBar
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[navBar]-0-[progressView]", options: .DirectionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView, "navBar" : navBar]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[progressView]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView]))
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if progressView.progress == 1.0 {
+            progressView.hidden = true
+        }
+    }
+}
+
+extension UIAlertController {
+    
+    class func alertControllerWithTitle(title:String, message:String) -> UIAlertController {
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        controller.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        return controller
+    }
+    
+    class func alertControllerWithNumberInput(title:String, message:String, buttonTitle:String, handler:(Int?)->Void) -> UIAlertController {
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        controller.addTextFieldWithConfigurationHandler { $0.keyboardType = .NumberPad }
+        
+        controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        controller.addAction(UIAlertAction(title: buttonTitle, style: .Default) { action in
+            let textFields = controller.textFields! as [UITextField]
+            let value = Int(textFields[0].text!)
+            handler(value)
+            } )
+        
+        return controller
+    }
+}

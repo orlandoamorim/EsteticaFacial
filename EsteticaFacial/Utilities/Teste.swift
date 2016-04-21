@@ -211,3 +211,10 @@
 //    return rotation
 //}
 //
+//
+//if SyncType as! String == "LabInCloud" {
+//}else if SyncType as! String == "iCloud" {
+//}else if SyncType as! String == "Dropbox" {
+//}else if SyncType as! String == "GoogleDrive" {
+//}else if SyncType as! String == "OneDrive" {
+//}

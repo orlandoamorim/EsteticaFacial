@@ -10,6 +10,9 @@ import UIKit
 import RealmSwift
 import PasscodeLock
 
+import Parse
+import Bolts
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let version:String = "0.2.3"
     var trelloCard:String = "https://trello.com/c/UA35uWzZ/27-versao-0-2-3#"
     var trelloBoard:String = "https://trello.com/b/YfRp2cch"
+    
 
     lazy var passcodeLockPresenter: PasscodeLockPresenter = {
         
@@ -29,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         passcodeLockPresenter.presentPasscodeLock()
+        
+        print(Realm.Configuration.defaultConfiguration.schemaVersion)
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             schemaVersion: 1,
@@ -49,8 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 })
         })
-        print(NSBundle.mainBundle().bundleIdentifier!)
-        
+
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "5aa6JqGqhC7iw8bG6CXC4imvXlCZ63i7j9bC9Ace"
+//            $0.server = "http://YOUR_PARSE_SERVER:1337/parse"
+            $0.clientKey = "0G40jdCQrAVB8cyzhEGrwDDLUMk0tiSQFh7WshCN"
+        }
+        Parse.initializeWithConfiguration(configuration)
         return true
     }
     

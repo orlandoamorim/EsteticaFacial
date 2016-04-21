@@ -43,8 +43,6 @@ class SettingsTableVC: FormViewController {
 
         initializeForm()
         
-        verificaNotificacao()
-        
         //PacientSegue
     }
     
@@ -62,11 +60,10 @@ class SettingsTableVC: FormViewController {
             Section()
             
             <<< ButtonRow("btn_show_cloud") { (row: ButtonRow) -> Void in
-                row.title = "Sync"
-                row.disabled = true
+                row.title = verifySync().0
                 row.presentationMode = PresentationMode.SegueName(segueName: "Sync", completionCallback: nil)
                 }.cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "cloud")
+                    cell.imageView?.image = UIImage(named: self.verifySync().1)
             }
             
             +++ Section(header: "", footer: "Adiciomanos isto para dar mais segurança ao app.")
@@ -237,9 +234,32 @@ class SettingsTableVC: FormViewController {
     }
     
     
+    private func verifySync() -> (String, String) {
+        var SyncType, SyncImage:AnyObject?
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.valueForKey("SyncType") != nil {
+            SyncType = userDefaults.valueForKey("SyncType")
+        }else if userDefaults.valueForKey("SyncType") == nil {
+            SyncType = "Sync"
+            userDefaults.setValue("Sync", forKey: "SyncType")
+            userDefaults.synchronize()
+        }
+        
+        if userDefaults.valueForKey("SyncImage") != nil {
+            SyncImage = userDefaults.valueForKey("SyncImage")
+        }else if userDefaults.valueForKey("SyncImage") == nil {
+            SyncImage = "SyncImage"
+            userDefaults.setValue("CloudStorage", forKey: "SyncImage")
+            userDefaults.synchronize()
+        }
+        
+        return (SyncType as! String, SyncImage as! String)
+    }
+    
     
     //MARK: - Verifica Notificacao
-    private func verificaNotificacao() {
+    private func verifyNotification() {
         
         let settings: UIUserNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()!
         
@@ -264,8 +284,6 @@ class SettingsTableVC: FormViewController {
             app.openURL(url)
         }
     }
-    
-    
 }
 
 

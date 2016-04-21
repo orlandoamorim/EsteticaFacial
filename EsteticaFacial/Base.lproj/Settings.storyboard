@@ -19,7 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-GV-alI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iBZ-qS-XCy" id="v9I-n0-H7h"/>
                                     <outlet property="delegate" destination="iBZ-qS-XCy" id="zYN-lJ-NmQ"/>
@@ -38,6 +38,7 @@
                     <connections>
                         <outlet property="tableView" destination="Tjo-GV-alI" id="msz-lb-9bZ"/>
                         <segue destination="5Jm-Vu-kPk" kind="show" identifier="PacientsSegue" id="V7d-xr-ZeF"/>
+                        <segue destination="B5K-bI-rEr" kind="show" identifier="Sync" id="4Jr-lL-A1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYx-4d-KkM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -50,7 +51,40 @@
                 <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsTableVC" id="5Jm-Vu-kPk" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yL-vm-N8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631.5" y="356"/>
+            <point key="canvasLocation" x="1607.5" y="-70"/>
+        </scene>
+        <!--SyncVC-->
+        <scene sceneID="4Nv-Np-924">
+            <objects>
+                <viewController id="B5K-bI-rEr" customClass="SyncVC" customModule="EsteticaFacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N3N-Rp-eCP"/>
+                        <viewControllerLayoutGuide type="bottom" id="I14-bX-JOK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g3U-d4-dUH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9uP-Vk-RgH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9uP-Vk-RgH" firstAttribute="bottom" secondItem="I14-bX-JOK" secondAttribute="top" id="Pms-KZ-KR2"/>
+                            <constraint firstItem="9uP-Vk-RgH" firstAttribute="top" secondItem="g3U-d4-dUH" secondAttribute="top" id="qYH-A3-g80"/>
+                            <constraint firstAttribute="trailing" secondItem="9uP-Vk-RgH" secondAttribute="trailing" id="rVn-0L-3FI"/>
+                            <constraint firstItem="9uP-Vk-RgH" firstAttribute="leading" secondItem="g3U-d4-dUH" secondAttribute="leading" id="z2s-rL-L7H"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="9uP-Vk-RgH" id="xwF-y0-z59"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jAS-Ny-OvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1900" y="356"/>
         </scene>
     </scenes>
 </document>
