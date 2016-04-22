@@ -441,7 +441,7 @@ class SurgeryDetailsVC: FormViewController{
         
         form +++
             
-            Section(header: "", footer: "Aqui você pode colocar o nome da cirurgia, por ex.")
+            Section(header: "", footer: "Aqui você pode colocar o nome da cirurgia, por ex. \rObs: Esta opção passará a ser obrigatória em futuras atualizações.")
             <<< NameRow("surgeryDescription") {
                 $0.title = "Nome da Cirurgia:"
             }
@@ -480,13 +480,6 @@ class SurgeryDetailsVC: FormViewController{
                     
 
                 })
-            
-
-//            <<< ButtonRow("btn_edit_recover_patient") { (row: ButtonRow) -> Void in
-//                row.title = "Editar Paciente:"
-//                row.hidden = "$btn_recover_patient != 'true'"
-//                row.presentationMode = PresentationMode.SegueName(segueName: "EditRecoverPatientSegue", completionCallback: nil)
-//            }
             
             +++ Section("Dados do Paciente"){
                 $0.tag = "patient_data"
@@ -894,33 +887,5 @@ extension SurgeryDetailsVC: SurgicalPlan{
             self.postSurgicalPlanningForm = surgicalPlanningForm
         }
         
-    }
-}
-
-extension SurgeryDetailsVC: UIGestureRecognizerDelegate {
-    
-    override func viewDidAppear(animated: Bool) {
-        tapBGGesture = UITapGestureRecognizer(target: self, action: #selector(SurgeryDetailsVC.settingsBGTapped(_:)))
-        tapBGGesture.delegate = self
-        tapBGGesture.numberOfTapsRequired = 1
-        tapBGGesture.cancelsTouchesInView = false
-        self.view.window!.addGestureRecognizer(tapBGGesture)
-    }
-    func settingsBGTapped(sender: UITapGestureRecognizer){
-        if sender.state == UIGestureRecognizerState.Ended{
-            guard let presentedView = presentedViewController?.view else {
-                return
-            }
-            if !CGRectContainsPoint(presentedView.bounds, sender.locationInView(presentedView)) {
-                self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                })
-            }
-        }
-    }
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    override func viewWillDisappear(animated: Bool) {
-        self.view.window!.removeGestureRecognizer(tapBGGesture)
     }
 }

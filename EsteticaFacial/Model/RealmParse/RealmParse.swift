@@ -199,12 +199,9 @@ class RealmParse{
         
         let realm = try! Realm()
         
-        
-        let records = predicate != nil ? realm.objects(Record).filter(predicate!) : realm.objects(Record)
-        
+        let records = predicate != nil ? realm.objects(Record).filter(predicate!) : realm.objects(Record).sorted("surgeryDescription")
         
         for record in records {
-            
             let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
             let char = name!.uppercaseString[name!.uppercaseString.startIndex]
             if recordsDicAtoZ[String(char)] != nil {

@@ -232,3 +232,80 @@
 //                        }
 //                    })
 //                }
+
+//
+//let sortedKeys = dicRec.keys.sort({ (firstKey, secondKey) -> Bool in
+//    return dicRec[firstKey] < dicRec[secondKey]
+//})
+//
+//let sortedKeys2 = (dicRec as NSDictionary).keysSortedByValueUsingSelector(#selector(NSNumber.compare(_:)))
+//
+//print(sortedKeys)
+//print(sortedKeys2)
+
+//var dicRec: [String : String] = [String : String]()
+//for record in records {
+//    dicRec.updateValue(record.patient!.name, forKey: record.id)
+//}
+//
+//let sortedKeys = dicRec.keys.sort({ (firstKey, secondKey) -> Bool in
+//    return dicRec[firstKey] < dicRec[secondKey]
+//})
+//
+//
+//for key in sortedKeys {
+//    for record in records {
+//        if record.id == key {
+//            let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
+//            let char = name!.uppercaseString[name!.uppercaseString.startIndex]
+//            if recordsDicAtoZ[String(char)] != nil {
+//                if !recordsHeader.contains(String(char)) {
+//                    recordsHeader.append(String(char))
+//                }
+//                
+//                var fichas = recordsDicAtoZ[String(char)]!
+//                fichas.append(record)
+//                
+//                recordsDicAtoZ.updateValue(fichas, forKey: String(char))
+//            }else {
+//                if !recordsHeader.contains(String(char)) {
+//                    recordsHeader.append(String(char))
+//                }
+//                
+//                var records:[Record] = [Record]()
+//                records.append(record)
+//                recordsDicAtoZ.updateValue(records, forKey: String(char))
+//            }
+//        }
+//    }
+//}
+
+
+//extension SurgeryDetailsVC: UIGestureRecognizerDelegate {
+//    
+//    override func viewDidAppear(animated: Bool) {
+//        tapBGGesture = UITapGestureRecognizer(target: self, action: #selector(SurgeryDetailsVC.settingsBGTapped(_:)))
+//        tapBGGesture.delegate = self
+//        tapBGGesture.numberOfTapsRequired = 1
+//        tapBGGesture.cancelsTouchesInView = false
+//        self.view.window!.addGestureRecognizer(tapBGGesture)
+//    }
+//    func settingsBGTapped(sender: UITapGestureRecognizer){
+//        if sender.state == UIGestureRecognizerState.Ended{
+//            guard let presentedView = presentedViewController?.view else {
+//                return
+//            }
+//            if !CGRectContainsPoint(presentedView.bounds, sender.locationInView(presentedView)) {
+//                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+//                })
+//            }
+//        }
+//    }
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+//    override func viewWillDisappear(animated: Bool) {
+//        self.view.window!.removeGestureRecognizer(tapBGGesture)
+//    }
+//}
+

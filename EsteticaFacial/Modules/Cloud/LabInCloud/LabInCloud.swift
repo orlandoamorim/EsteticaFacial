@@ -48,7 +48,7 @@ class LabInCloud:NSObject{
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: { (cancel) in
             let sync = view as! SyncVC
-            sync.form.rowByTag("LabInCloud")?.baseValue = true
+            sync.form.rowByTag("LabInCloud")?.baseValue = false
             sync.form.rowByTag("LabInCloud")?.updateCell()
         }))
         
