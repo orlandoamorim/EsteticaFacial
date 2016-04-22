@@ -218,3 +218,17 @@
 //}else if SyncType as! String == "GoogleDrive" {
 //}else if SyncType as! String == "OneDrive" {
 //}
+
+
+//                if let pontos_nasal = object.objectForKey("pontos_nasal") as? PFFile{
+//
+//                    pontos_nasal.getDataInBackgroundWithBlock({ (data, error) -> Void in
+//                        if error == nil {
+//                            print("nasal")
+//                            print(NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? [String : NSValue])
+//                            try! realm.write {
+//                                realm.create(Image.self, value: ["id": nasalID, "points": data!], update: true)
+//                            }
+//                        }
+//                    })
+//                }

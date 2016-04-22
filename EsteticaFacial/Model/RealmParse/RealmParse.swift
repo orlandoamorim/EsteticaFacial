@@ -54,7 +54,7 @@ class RealmParse{
         print("***************** Record ****************")
         let recordAU = Record()
         recordAU.id = id
-        recordAU.surgeryDescription = formValues["surgeryDescription"] as! String
+        recordAU.surgeryDescription = formValues["surgeryDescription"] != nil ? formValues["surgeryDescription"] as! String : ""
         recordAU.patient = patient
         recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
 
@@ -63,10 +63,6 @@ class RealmParse{
         if record != nil {
             recordAU.create_at = record!.create_at
         }
-        
-        print("*****************************************")
-//        patient.records.append(recordAU)
-        print("*****************************************")
 
         try! realm.write {
             for image in imagesArray {
@@ -206,12 +202,11 @@ class RealmParse{
         
         let records = predicate != nil ? realm.objects(Record).filter(predicate!) : realm.objects(Record)
         
+        
         for record in records {
             
             let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
-            
-            let char = name!.lowercaseString[name!.lowercaseString.startIndex]
-            
+            let char = name!.uppercaseString[name!.uppercaseString.startIndex]
             if recordsDicAtoZ[String(char)] != nil {
                 if !recordsHeader.contains(String(char)) {
                     recordsHeader.append(String(char))

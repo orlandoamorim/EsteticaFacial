@@ -122,9 +122,9 @@ class SyncVC: FormViewController {
     }
     
     private func labInCloud(){
-//        let progressView = UIProgressView(progressViewStyle: .Bar)
-//        progressView.setProgress(1.0, animated: true)
-//        self.navigationController?.progress(progressView)
+        let progressView = UIProgressView(progressViewStyle: .Bar)
+        progressView.setProgress(1.0, animated: true)
+        self.navigationController?.progress(progressView)
         
         
         let alert = UIAlertController(title: "LabInCloud", message: "Efetue login na sua conta.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -145,11 +145,10 @@ class SyncVC: FormViewController {
             if username.text == "" || password.text == "" {
                 self.labInCloud()
             }else{
-                LabInCloudVC.login(username.text!, password: password.text!, view: self)
+                LabInCloud.login(username.text!, password: password.text!, view: self)
             }
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)
-
     }
 }

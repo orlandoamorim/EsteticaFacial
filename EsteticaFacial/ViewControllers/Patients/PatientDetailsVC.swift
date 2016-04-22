@@ -37,6 +37,28 @@ class PatientDetailsVC: FormViewController {
             if patientDetailShow == .PatientDetail {
                 self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
+                
+                form.last! <<< ButtonRow() { (row: ButtonRow) -> Void in
+                    if patient != nil {
+                        if patient!.create_at == patient!.update_at {
+                            row.title = "Adicionado(a) \(dateTimeAgo(patient!.create_at))"
+                        }else{
+                            row.title = "Atualizado(a) \(dateTimeAgo(patient!.update_at))"
+                        }
+                    }
+                    row.disabled = true
+                    
+                    }.cellSetup() {cell, row in
+                        cell.backgroundColor = UIColor.clearColor()
+                        cell.tintColor = UIColor(hexString: "#4C6B94")
+                        
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = UIColor.clearColor()
+                        cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
+                        cell.selectedBackgroundView = bgColorView
+                        cell.selected = true
+                        
+                }
             }else if patientDetailShow == .CheckPatient {
             
             }
@@ -122,14 +144,6 @@ class PatientDetailsVC: FormViewController {
             <<< PhoneRow("phone") {
                 $0.title = "Telefone:"
             }
-        
-//          +++ Section(header: "", footer: "Leva você à cirurgias deste paciente.")
-//            <<< ButtonRow("btn_show_surgeries") { (row: ButtonRow) -> Void in
-//                row.title = "Cirurgias:"
-//                row.hidden = patient?.records.count > 0 ? false : true
-//                row.presentationMode = PresentationMode.SegueName(segueName: "RecoverPatientSegue", completionCallback: nil)
-//            }
-        
         
         }
     

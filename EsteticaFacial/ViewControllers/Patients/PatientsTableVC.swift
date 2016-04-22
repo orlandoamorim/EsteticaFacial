@@ -182,18 +182,28 @@ extension PatientsTableVC {
         let cell = tableView.dequeueReusableCellWithIdentifier("PatientCell", forIndexPath: indexPath)
         
         let key = Array(recordsDicAtoZ.keys.sort())[indexPath.section]
-        let record = recordsDicAtoZ[key]!
+        let patient = recordsDicAtoZ[key]!
         
-        cell.textLabel!.text = record[indexPath.row].name
+        cell.textLabel!.text = patient[indexPath.row].name
 //        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].date_of_birth))
-        cell.detailTextLabel!.text = dateTimeAgo(record[indexPath.row].update_at)
-
+        cell.detailTextLabel!.text = dateTimeAgo(patient[indexPath.row].update_at)
+        cell.imageView!.image = nil
+        for record in patient[indexPath.row].records {
+            for image in record.image {
+                if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
+                    cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                    break
+                }
+            }
+        }
+        cell.accessoryType = .None
         if patientShow == .Patient {
-            cell.accessoryType = record[indexPath.row].records.count > 0 ? .DetailDisclosureButton : .DisclosureIndicator
+            cell.accessoryType = patient[indexPath.row].records.count > 0 ? .DetailDisclosureButton : .DisclosureIndicator
         }else if patientShow == .CheckPatient {
-            if record[indexPath.row] == patient {
+            if patient[indexPath.row].id == self.patient?.id {
                 cell.accessoryType = .Checkmark
             }
+
         }
 
         
@@ -236,21 +246,26 @@ extension PatientsTableVC {
         
         
         let delete = UITableViewRowAction(style: .Destructive, title: "\u{1F5D1}\n Deletar") { action, index in
-            print("more button tapped")
             
             //Criando um objeto do tipo NSNOtitcationCenter
             
             let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
             //ENVIANDO os dados por Object
-            centroDeNotificacao.postNotificationName("noData", object: nil)
-            
+            if self.patientShow != .CheckPatient{
+                centroDeNotificacao.postNotificationName("noData", object: nil)
+            }
+
             let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
-            let record = self.recordsDicAtoZ[key]!
+            let patient = self.recordsDicAtoZ[key]!
             
-            let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "Realmente deseja apagar o paciente \(record[indexPath.row].name)? Ao fazer isto, você tambem remove todas as cirurgias referentes a este paciente.", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
+            let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "Realmente deseja apagar o paciente \(patient[indexPath.row].name)? Ao fazer isto, você tambem remove todas as cirurgias referentes a este paciente.", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
             
             alert.addAction(UIAlertAction(title: "Apagar", style: UIAlertActionStyle.Destructive, handler: { (delete) -> Void in
-                RealmParse.deletePatient(patient: record[indexPath.row])
+                if patient[indexPath.row].id == self.patient?.id {
+                    self.patient = nil
+                }
+                RealmParse.deletePatient(patient: patient[indexPath.row])
+//                self.tableView.reloadData()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -260,8 +275,13 @@ extension PatientsTableVC {
         }
         delete.backgroundColor = UIColor.redColor()
         
+
         return [delete]
     }
+    
+//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return patientShow == .CheckPatient ? false : true
+//    }
 }
 
 

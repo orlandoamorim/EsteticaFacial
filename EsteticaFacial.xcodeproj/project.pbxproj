@@ -16,8 +16,8 @@
 		181C55A51C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */; };
 		181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
 		181C55AE1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
+		18314CB11CC98D14005D9AF9 /* LabInCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18314CB01CC98D14005D9AF9 /* LabInCloud.swift */; };
 		186D22171CC3325700CBED7B /* SyncVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D22161CC3325700CBED7B /* SyncVC.swift */; };
-		186D221A1CC33DC400CBED7B /* LabInCloudVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D22191CC33DC400CBED7B /* LabInCloudVC.swift */; };
 		18774F0B1CBC6A1900CA2D64 /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18774F091CBC6A1900CA2D64 /* Patient.storyboard */; };
 		18774F101CBC760400CA2D64 /* Pods-EsteticaFacial-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18774F0F1CBC760400CA2D64 /* Pods-EsteticaFacial-acknowledgements.plist */; };
 		18774F1A1CBC896500CA2D64 /* PatientsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F191CBC896500CA2D64 /* PatientsTableVC.swift */; };
@@ -44,7 +44,6 @@
 		18774F461CBC946000CA2D64 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F451CBC946000CA2D64 /* Enums.swift */; };
 		18774F481CBC9DAE00CA2D64 /* PatientDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F471CBC9DAE00CA2D64 /* PatientDetailsVC.swift */; };
 		18AFDB4B1CBB007E0052EBDA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AFDB491CBB007E0052EBDA /* Settings.storyboard */; };
-		18AFDB4D1CBB0D230052EBDA /* RealmParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFDB4C1CBB0D230052EBDA /* RealmParseHelper.swift */; };
 		18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
 		18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
 		18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
@@ -90,8 +89,8 @@
 		181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningKey.swift; path = "Model/Surgical Planning/SurgicalPlanningKey/SurgicalPlanningKey.swift"; sourceTree = "<group>"; };
 		181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningValue.swift; path = "Model/Surgical Planning/SurgicalPlanningValue/SurgicalPlanningValue.swift"; sourceTree = "<group>"; };
 		181C55AC1C9C43A400BC35AD /* RealmParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmParse.swift; path = Model/RealmParse/RealmParse.swift; sourceTree = "<group>"; };
+		18314CB01CC98D14005D9AF9 /* LabInCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabInCloud.swift; path = Modules/Cloud/LabInCloud/LabInCloud.swift; sourceTree = "<group>"; };
 		186D22161CC3325700CBED7B /* SyncVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncVC.swift; path = ViewControllers/Settings/Sync/SyncVC.swift; sourceTree = "<group>"; };
-		186D22191CC33DC400CBED7B /* LabInCloudVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabInCloudVC.swift; path = ViewControllers/Settings/Sync/LabInCloudVC/LabInCloudVC.swift; sourceTree = "<group>"; };
 		18774F0A1CBC6A1900CA2D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Patient.storyboard; sourceTree = "<group>"; };
 		18774F0F1CBC760400CA2D64 /* Pods-EsteticaFacial-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-EsteticaFacial-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-acknowledgements.plist"; sourceTree = "<group>"; };
 		18774F191CBC896500CA2D64 /* PatientsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PatientsTableVC.swift; path = ViewControllers/Patients/PatientsTableVC.swift; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		18774F451CBC946000CA2D64 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = Utilities/Enums.swift; sourceTree = "<group>"; };
 		18774F471CBC9DAE00CA2D64 /* PatientDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PatientDetailsVC.swift; path = ViewControllers/Patients/PatientDetailsVC.swift; sourceTree = "<group>"; };
 		18AFDB4A1CBB007E0052EBDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		18AFDB4C1CBB0D230052EBDA /* RealmParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmParseHelper.swift; path = Model/Test/RealmParseHelper.swift; sourceTree = "<group>"; };
 		18BAB9EC1C9B983E00BD575B /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Patient.swift; path = Model/Patient/Patient.swift; sourceTree = "<group>"; };
 		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
 		18BAB9F51C9BA67D00BD575B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Model/Record/Record.swift; sourceTree = "<group>"; };
@@ -200,6 +198,7 @@
 		18126CF81CACF9CD002D26F7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				18314CAD1CC98C72005D9AF9 /* Cloud */,
 				18774F111CBC815300CA2D64 /* Password */,
 			);
 			name = Modules;
@@ -264,6 +263,14 @@
 			name = Record;
 			sourceTree = "<group>";
 		};
+		18314CAD1CC98C72005D9AF9 /* Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				186D22181CC33D7B00CBED7B /* LabInCloud */,
+			);
+			name = Cloud;
+			sourceTree = "<group>";
+		};
 		183D2F4C1BD9E68D0033BDA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				186D22161CC3325700CBED7B /* SyncVC.swift */,
-				186D22181CC33D7B00CBED7B /* LabInCloud */,
 			);
 			name = Sync;
 			sourceTree = "<group>";
@@ -302,7 +308,7 @@
 		186D22181CC33D7B00CBED7B /* LabInCloud */ = {
 			isa = PBXGroup;
 			children = (
-				186D22191CC33DC400CBED7B /* LabInCloudVC.swift */,
+				18314CB01CC98D14005D9AF9 /* LabInCloud.swift */,
 			);
 			name = LabInCloud;
 			sourceTree = "<group>";
@@ -400,7 +406,6 @@
 		18BAB9EB1C9B895700BD575B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18AFDB4C1CBB0D230052EBDA /* RealmParseHelper.swift */,
 				181C55AC1C9C43A400BC35AD /* RealmParse.swift */,
 				181C55AB1C9C40BC00BC35AD /* Record */,
 				181C55AA1C9C40B300BC35AD /* Patient */,
@@ -785,14 +790,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
-				186D221A1CC33DC400CBED7B /* LabInCloudVC.swift in Sources */,
 				18774F1C1CBC8A1F00CA2D64 /* SurgeryDetailsVC.swift in Sources */,
 				18774F261CBC8C1200CA2D64 /* VerifyImageVC.swift in Sources */,
 				18774F1E1CBC8AC600CA2D64 /* SurgeriesTableVC.swift in Sources */,
 				18774F3A1CBC8CA200CA2D64 /* CameraManager.swift in Sources */,
 				18774F381CBC8C8B00CA2D64 /* TratamentoEntrada.swift in Sources */,
 				18774F2E1CBC8C7200CA2D64 /* FileSaveHelper.swift in Sources */,
-				18AFDB4D1CBB0D230052EBDA /* RealmParseHelper.swift in Sources */,
 				18774F481CBC9DAE00CA2D64 /* PatientDetailsVC.swift in Sources */,
 				18774F221CBC8B3900CA2D64 /* SurgicalPlanVC.swift in Sources */,
 				18774F201CBC8B2200CA2D64 /* ProcessImageVC.swift in Sources */,
@@ -821,6 +824,7 @@
 				18774F401CBC8D0800CA2D64 /* Protocols.swift in Sources */,
 				181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
 				181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
+				18314CB11CC98D14005D9AF9 /* LabInCloud.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -58,7 +58,7 @@ class SurgeryDetailsVC: FormViewController{
         postSurgicalPlanningForm = Helpers.surgicalPlanningForm()
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        centroDeNotificacao.addObserver(self, selector: #selector(SurgeryDetailsVC.noData), name: "noData", object: nil)
+        centroDeNotificacao.addObserver(self, selector: #selector(noData), name: "noData", object: nil)
         
         switch contentToDisplay {
         case .Adicionar:
@@ -117,6 +117,28 @@ class SurgeryDetailsVC: FormViewController{
             
             self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
+            
+            form.last! <<< ButtonRow() { (row: ButtonRow) -> Void in
+                if record != nil {
+                    if record!.create_at == record!.update_at {
+                        row.title = "Adicionado(a) \(dateTimeAgo(record!.create_at))"
+                    }else{
+                        row.title = "Atualizado(a) \(dateTimeAgo(record!.update_at))"
+                    }
+                }
+                row.disabled = true
+                
+                }.cellSetup() {cell, row in
+                    cell.backgroundColor = UIColor.clearColor()
+                    cell.tintColor = UIColor(hexString: "#4C6B94")
+                    
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = UIColor.clearColor()
+                    cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
+                    cell.selectedBackgroundView = bgColorView
+                    cell.selected = true
+                    
+            }
         case .Nil : noData()
         }
     }
@@ -443,8 +465,13 @@ class SurgeryDetailsVC: FormViewController{
                     
                     alert.addAction(UIAlertAction(title: "Limpar", style: UIAlertActionStyle.Destructive, handler: { (delete) -> Void in
                         self.patient = nil
+                        self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = nil
+                        self.form.rowByTag("btn_recover_patient")?.title = "Recuperar Paciente:"
                         self.form.rowByTag("btn_recover_patient")?.baseValue = "false"
                         self.form.rowByTag("btn_recover_patient")?.updateCell()
+                        self.form.sectionByTag("recover_patient")?.header?.title = ""
+                        self.form.sectionByTag("recover_patient")?.reload()
+
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -534,6 +561,10 @@ class SurgeryDetailsVC: FormViewController{
             +++ Section("Notas")
             
             <<< TextAreaRow("note") { $0.placeholder = "Esta cirurgia..." }
+        
+//            +++ Section()
+        
+        
     }
     
     //--------------------
@@ -784,16 +815,33 @@ class SurgeryDetailsVC: FormViewController{
 }
 extension SurgeryDetailsVC: RecoverPatient {
     func recoverPatient(patient: Patient?) {
-        self.patient = nil
-        let section: Section?  = form.sectionByTag("recover_patient")
-        section!.header = HeaderFooterView(title: "")
-        self.form.rowByTag("btn_recover_patient")?.baseValue = "false"
+
         if patient != nil {
             self.patient = patient
-            section!.header = HeaderFooterView(title: "\(patient!.name)")
+            for record in patient!.records {
+                for image in record.image {
+                    if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
+                        self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                        break
+                    }
+                }
+            }
+            self.form.rowByTag("btn_recover_patient")?.title = "\(patient!.name)"
             self.form.rowByTag("btn_recover_patient")?.baseValue = "true"
+            self.form.rowByTag("btn_recover_patient")?.updateCell()
+
+            self.form.sectionByTag("recover_patient")?.header?.title = "Paciente"
+            self.form.sectionByTag("recover_patient")?.reload()
+        }else{
+            self.patient = nil
+            self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = nil
+            self.form.rowByTag("btn_recover_patient")?.title = "Recuperar Paciente:"
+            self.form.rowByTag("btn_recover_patient")?.baseValue = "false"
+            self.form.rowByTag("btn_recover_patient")?.updateCell()
+            
+            self.form.sectionByTag("recover_patient")?.header?.title = ""
+            self.form.sectionByTag("recover_patient")?.reload()
         }
-        section?.reload()
 
     }
 }

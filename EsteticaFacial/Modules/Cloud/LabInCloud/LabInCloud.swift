@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import RealmSwift
 
-class LabInCloudVC:NSObject{
+class LabInCloud:NSObject{
     
     ///Makes an *asynchronous* request to log in a user with specified credentials.
     static func login(username: String, password: String, view:UIViewController){
@@ -46,7 +46,11 @@ class LabInCloudVC:NSObject{
                self.login(username.text!, password: password.text!, view: view)
             }
         }))
-        alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: { (cancel) in
+            let sync = view as! SyncVC
+            sync.form.rowByTag("LabInCloud")?.baseValue = true
+            sync.form.rowByTag("LabInCloud")?.updateCell()
+        }))
         
         view.presentViewController(alert, animated: true, completion: nil)
     }
@@ -62,6 +66,7 @@ class LabInCloudVC:NSObject{
         
         let query = PFQuery(className:"Paciente")
         query.whereKey("userID", equalTo: PFUser.currentUser()!.objectId!) //pyxS81NpAc
+//        query.whereKey("userID", equalTo: "pyxS81NpAc") //pyxS81NpAc
         query.orderByAscending("nome")
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
@@ -82,30 +87,36 @@ class LabInCloudVC:NSObject{
         let realm = try! Realm()
         
         for object in objects! {
-            realm.beginWrite()
-
+            let create_at = object.createdAt!
+            let update_at = object.updatedAt!
             let id = NSUUID().UUIDString
+
+            realm.beginWrite()
             
+            let patientID = Helpers.generateUUID()
+
             let patient = Patient()
-            
+            patient.id = patientID
             patient.name = object.objectForKey("nome") as! String
             patient.sex = object.objectForKey("sexo") as! String
             patient.ethnic = object.objectForKey("etnia") as! String
             patient.date_of_birth = Helpers.dataFormatter(dateFormat: "dd/MM/yyyy", dateStyle: NSDateFormatterStyle.ShortStyle).dateFromString(object.objectForKey("data_nascimento") as! String)!
             patient.phone = object.objectForKey("telefone") as? String
-            
+            patient.create_at = create_at
+            patient.update_at = update_at
             var note:String = String()
             if object.objectForKey("notas") as? String != nil {
                 note = object.objectForKey("notas") as! String
             }
             
-            let create_at = object.createdAt!
-            let update_at = object.updatedAt!
+
             
             var imagesArray:[Image] = [Image]()
             
             if let img_frontal = object.objectForKey("img_frontal") as? PFFile{
                 let front = Image()
+                let frontID = Helpers.generateUUID()
+                front.id = frontID
                 front.patientId = id
                 front.imageType = "\(ImageTypes.Front.hashValue)"
                 front.name = "Front-\(id)"
@@ -121,6 +132,8 @@ class LabInCloudVC:NSObject{
             
             if let img_perfil = object.objectForKey("img_perfil") as? PFFile{
                 let profileRight = Image()
+                let profileID = Helpers.generateUUID()
+                profileRight.id = profileID
                 profileRight.patientId = id
                 profileRight.imageType = "\(ImageTypes.ProfileRight.hashValue)"
                 profileRight.name = "ProfileRight-\(id)"
@@ -133,9 +146,11 @@ class LabInCloudVC:NSObject{
                     }
                 })
             }
-            
+        
             if let img_nasal = object.objectForKey("img_nasal") as? PFFile{
                 let nasal = Image()
+                let nasalID = Helpers.generateUUID()
+                nasal.id = nasalID
                 nasal.patientId = id
                 nasal.imageType = "\(ImageTypes.Nasal.hashValue)"
                 nasal.name = "Nasal-\(id)"
@@ -147,13 +162,32 @@ class LabInCloudVC:NSObject{
                         RealmParse.saveFile(fileName: "Nasal-\(id)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
                     }
                 })
+                
             }
             
-            realm.create(Record.self, value: ["id": id, "surgeryDescription" : "", "patient": patient,"image": imagesArray, "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at ], update: true)
-
+            if let dic_plano_cirurgico = object.objectForKey("dic_plano_cirurgico") as? PFFile{
+                
+                dic_plano_cirurgico.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        let dados = NSKeyedUnarchiver.unarchiveObjectWithData(data!)! as! [String:AnyObject]
+                        let preSugicalPlaningForm = Helpers.convertAnyObjectToAny(dados)
+                        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: id, surgicalPlanning: preSugicalPlaningForm)
+                        try! realm.write {
+                            realm.create(Record.self, value: ["id": id, "surgicalPlanning": [preSugicalPlaning]], update: true)
+                        }
+                    }
+                    
+                })
+            }
+            
+            let record = Record(value: ["id": id, "surgeryDescription" : "", "patient": patient,"image": imagesArray, "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at ])
+            
+            realm.create(Record.self, value: record, update: true)
+            
+            realm.create(Patient.self, value: ["id": patientID, "records": [record]], update: true)
             try! realm.commitWrite()
         }
-        view.presentViewController(UIAlertController.alertControllerWithTitle("Atenção", message: "Os seus dados contidos no servidor estão salvos, *mas as imagens das cirurgias irão aparecer assim que o download for concluído*."), animated: true, completion: nil)
+        view.presentViewController(UIAlertController.alertControllerWithTitle("Atenção", message: "Os seus dados contidos no servidor estão salvos, mas as imagens das cirurgias e dados dos planos cirurgicos irão aparecer assim que o download for concluído.\r Obs: alguns dados dos planos cirurgicos de alguns pacientes podem não aparecer devido a mudanças na infraestrutura da aplicação."), animated: true, completion: nil)
         
 
     }

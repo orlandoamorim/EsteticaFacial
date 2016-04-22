@@ -492,4 +492,8 @@ class Helpers: NSObject{
         
         return titleView
     }
+    
+    static func generateUUID() -> String{
+       return NSUUID().UUIDString
+    }
 }
