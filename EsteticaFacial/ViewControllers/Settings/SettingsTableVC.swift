@@ -66,7 +66,7 @@ class SettingsTableVC: FormViewController {
                     cell.imageView?.image = UIImage(named: self.verifySync().1)
             }
             
-            +++ Section(header: "", footer: "Adiciomanos isto para dar mais segurança ao app.")
+            +++ Section(header: "", footer: "Atenção! Não é posivel recuperar a senha.")
             
             <<< SwitchRow("password") {
                 $0.title = "Password"
@@ -89,31 +89,34 @@ class SettingsTableVC: FormViewController {
                         passcodeVC = PasscodeLockViewController(state: .RemovePasscode, configuration: self!.configuration)
                         passcodeVC!.successCallback = { lock in
                             lock.repository.deletePasscode()
+                            self?.form.rowByTag("password")?.baseCell.imageView?.image = UIImage(named: "Unlock")
+                            self?.form.rowByTag("password")?.baseValue = false
+                            self?.form.rowByTag("password")?.updateCell()
                         }
                     }
                     
                     passcodeVC!.dismissCompletionCallback = { [weak self] in
                         if self!.configuration.repository.hasPasscode{
-                            if self!.passcodeActivated {
-                                return
-                            }
+                            self?.form.rowByTag("password")?.baseCell.imageView?.image = UIImage(named: "Lock")
                             self?.form.rowByTag("password")?.baseValue = true
                             self?.form.rowByTag("password")?.updateCell()
                         } else {
-                            if !self!.passcodeActivated {
-                                return
-                            }
+                            self?.form.rowByTag("password")?.baseCell.imageView?.image = UIImage(named: "Unlock")
                             self?.form.rowByTag("password")?.baseValue = false
                             self?.form.rowByTag("password")?.updateCell()
                         }
 
                     }
 
-                    
+                    //ChangePincode
                     self!.presentViewController(passcodeVC!, animated: true, completion: nil)
 
                 }.cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "Beta")
+                    if self.configuration.repository.hasPasscode {
+                        cell.imageView?.image = UIImage(named: "Lock")
+                    }else{
+                        cell.imageView?.image = UIImage(named: "Unlock")
+                    }
             }
         
             <<< LabelRow ("changePassword") {
@@ -128,7 +131,7 @@ class SettingsTableVC: FormViewController {
                     
                     self.presentViewController(passcodeLock, animated: true, completion: nil)
                 }).cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "Beta")
+                    cell.imageView?.image = UIImage(named: "ChangePincode")
             }
             +++ Section(header: "", footer: "Beta para proximas atualizações.")
             

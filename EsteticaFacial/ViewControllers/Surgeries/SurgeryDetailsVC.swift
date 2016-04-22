@@ -441,7 +441,7 @@ class SurgeryDetailsVC: FormViewController{
         
         form +++
             
-            Section(header: "", footer: "Aqui você pode colocar o nome da cirurgia, por ex. \rObs: Esta opção passará a ser obrigatória em futuras atualizações.")
+            Section(header: "", footer: "Aqui você pode colocar do que se trata a cirurgia, a especificação, por ex. \rObs: Esta opção passará a ser obrigatória em futuras atualizações.")
             <<< NameRow("surgeryDescription") {
                 $0.title = "Nome da Cirurgia:"
             }
