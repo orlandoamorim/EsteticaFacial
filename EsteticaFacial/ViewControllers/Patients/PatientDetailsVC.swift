@@ -16,13 +16,14 @@ class PatientDetailsVC: FormViewController {
     var patient:Patient?
     var contentToDisplay:contentTypes = .Nil
     var patientDetailShow:PatientDetailShow = .PatientDetail
+    var typeInfo:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeForm()
         
         let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        centroDeNotificacao.addObserver(self, selector: #selector(SurgeryDetailsVC.noData), name: "noData", object: nil)
+        centroDeNotificacao.addObserver(self, selector: #selector(noData), name: "noData", object: nil)
         
         switch contentToDisplay {
         case .Adicionar :
@@ -35,7 +36,7 @@ class PatientDetailsVC: FormViewController {
             self.form.setValues(RealmParse.convertRealmPatientForm(patient!))
             self.tableView?.reloadData()
             if patientDetailShow == .PatientDetail {
-                self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+                self.navigationItem.leftBarButtonItem = (Device().isPad && typeInfo == false) ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
                 
                 form.last! <<< ButtonRow() { (row: ButtonRow) -> Void in
@@ -86,7 +87,7 @@ class PatientDetailsVC: FormViewController {
         self.title = "Paciente \(patient!.name)"
         self.form.setValues(RealmParse.convertRealmPatientForm(patient!))
         
-        self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+        self.navigationItem.leftBarButtonItem = (Device().isPad && typeInfo == false) ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
         self.tableView?.reloadData()
     }
@@ -198,7 +199,7 @@ class PatientDetailsVC: FormViewController {
             
             self.title = "Paciente \(patient!.name)"
             
-            self.navigationItem.leftBarButtonItem = Device().isPad ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
+            self.navigationItem.leftBarButtonItem = (Device().isPad && typeInfo == false) ? UIBarButtonItem(title: "Fechar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(noData)) : nil
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Editar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(editBarBtn))
             
             self.tableView?.reloadData()

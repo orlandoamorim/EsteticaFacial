@@ -552,12 +552,7 @@ class SurgeryDetailsVC: FormViewController{
             }
             
             +++ Section("Notas")
-            
             <<< TextAreaRow("note") { $0.placeholder = "Esta cirurgia..." }
-        
-//            +++ Section()
-        
-        
     }
     
     //--------------------

@@ -275,13 +275,23 @@ extension PatientsTableVC {
         }
         delete.backgroundColor = UIColor.redColor()
         
+        
+        
+        let info = UITableViewRowAction(style: .Default, title: "\u{1F6C8}\n Info") { action, index in
+            let controller = UIStoryboard(name: "Patient", bundle: nil).instantiateViewControllerWithIdentifier("PatientDetailsVC") as! PatientDetailsVC
+            controller.contentToDisplay = .Atualizar
+            let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
+            let record = self.recordsDicAtoZ[key]!
+            controller.patient = record[indexPath.row]
+            controller.typeInfo = true
+            
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        info.backgroundColor = UIColor.blueColor()
+        
 
-        return [delete]
+        return patientShow == .Patient ? [delete] : [delete, info]
     }
-    
-//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        return patientShow == .CheckPatient ? false : true
-//    }
 }
 
 
