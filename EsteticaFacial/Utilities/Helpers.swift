@@ -204,7 +204,7 @@ class Helpers: NSObject{
                 verifyFormValues[key] = bool
             }else if let data = anyDict[key]! as? NSDate {
                 verifyFormValues[key] = data
-            }else if key == "surgeryDescription" || key == "btn_recover_patient" || key == "btn_show_surgeries" || key == "cleanPatient" || key == "btn_edit_recover_patient" || key == "changePassword" || key ==  "mail" || key ==  "phone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key ==  "surgeryRealized" || key == "note" {
+            }else if key == "surgeryDescription" || key == "btn_compare_images" || key == "btn_recover_patient" || key == "btn_show_surgeries" || key == "cleanPatient" || key == "btn_edit_recover_patient" || key == "changePassword" || key ==  "mail" || key ==  "phone" || key ==  "btn_plano_cirurgico" || key ==  "btn_cirurgia_realizada" || key ==  "surgeryRealized" || key == "note" {
                 continue
             }else{
                 return (false,key)

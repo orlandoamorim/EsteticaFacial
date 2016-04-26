@@ -24,9 +24,8 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
     var token: NotificationToken?
     
     deinit {
-        let realm = try! Realm()
         if let token = token {
-            realm.removeNotification(token)
+            token.stop()
         }
     }
     
@@ -189,10 +188,12 @@ extension PatientsTableVC {
         cell.detailTextLabel!.text = dateTimeAgo(patient[indexPath.row].update_at)
         cell.imageView!.image = nil
         for record in patient[indexPath.row].records {
-            for image in record.image {
-                if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
-                    cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
-                    break
+            for compareImage in record.compareImage{
+                for image in compareImage.image {
+                    if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
+                        cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                        break
+                    }
                 }
             }
         }
@@ -265,7 +266,6 @@ extension PatientsTableVC {
                     self.patient = nil
                 }
                 RealmParse.deletePatient(patient: patient[indexPath.row])
-//                self.tableView.reloadData()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))

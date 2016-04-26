@@ -242,6 +242,7 @@
                         <segue destination="Pwp-ai-6nj" kind="show" identifier="SurgeryPlanSegue" id="mDA-QW-GgO"/>
                         <segue destination="9WN-j7-Kir" kind="showDetail" identifier="RecoverPatientSegue" action="showViewController:sender:" id="uwD-Kz-jti"/>
                         <segue destination="yCy-3S-Wpx" kind="showDetail" identifier="EditRecoverPatientSegue" id="f2M-XH-d2S"/>
+                        <segue destination="r3I-kl-S4e" kind="showDetail" identifier="CompareImagesSegue" id="eDA-3z-bFj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng3-9z-QrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -262,7 +263,7 @@
                 <viewControllerPlaceholder storyboardName="Patient" referencedIdentifier="PatientsTableVC" id="9WN-j7-Kir" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3LY-mV-Ot0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2216.5" y="1414"/>
+            <point key="canvasLocation" x="2199.5" y="1414"/>
         </scene>
         <!--PatientDetailsVC-->
         <scene sceneID="BEj-Do-sJB">
@@ -273,6 +274,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feW-it-rLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2201" y="1511"/>
+        </scene>
+        <!--CompareImagesVC-->
+        <scene sceneID="IeW-PQ-A1l">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CompareImage" referencedIdentifier="CompareImagesVC" id="r3I-kl-S4e" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z80-Ma-Zzc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2208" y="1034"/>
         </scene>
         <!--iPhoneCamera-->
         <scene sceneID="zwg-C4-IHX">
@@ -313,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-Iy-oDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="2037"/>
+            <point key="canvasLocation" x="2374" y="2037"/>
         </scene>
         <!--Surgeries Navigation-->
         <scene sceneID="Urn-A6-DYk">

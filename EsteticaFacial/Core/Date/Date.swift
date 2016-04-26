@@ -69,3 +69,103 @@ private func secondsFrom(date:NSDate) -> Int {
 private func flooredString(delta: Double, dividedBy: Double) -> String {
     return String(Int(floor(delta/dividedBy)))
 }
+
+
+typealias Time = Int
+
+extension Time {
+    var years: Time {
+        return self * 365.days
+    }
+    var year: Time { return years }
+    
+    var days: Time {
+        return self * 24.hours
+    }
+    var day: Time { return days }
+    
+    var hours: Time {
+        return self * 60.minutes
+    }
+    var hour: Time { return hours }
+    
+    var minutes: Time {
+        return self * 60.seconds
+    }
+    var minute: Time { return minutes }
+    
+    
+    var seconds: Time {
+        return self
+    }
+    var second: Time { return seconds }
+    
+    var ago: Time {
+        return NSDate(timeIntervalSinceNow: NSTimeInterval(-self)).asTime
+    }
+    
+    static var minTime: Time {
+        return NSDate.minTime
+    }
+    
+    static var now: Time {
+        return NSDate().asTime
+    }
+}
+
+extension NSDate {
+    var asTime: Time {
+        return Time(timeIntervalSince1970)
+    }
+    
+    class var minTime: Time {
+        return distantPast().asTime
+    }
+    
+    class var maxTime: Time {
+        return distantFuture().asTime
+    }
+    
+    func equalToDate(date: NSDate) -> Bool {
+        
+        return self.compare(date) == NSComparisonResult.OrderedSame
+    }
+    
+    func greaterThan(date: NSDate) -> Bool {
+        return self.compare(date) == NSComparisonResult.OrderedDescending
+    }
+    
+    func lessThan(date: NSDate) -> Bool {
+        return self.compare(date) == NSComparisonResult.OrderedAscending
+    }
+    
+    func toString() -> String{
+        return String(self)
+    }
+}
+
+public func < (first: NSDate, second: NSDate) -> Bool {
+    return first.compare(second) == .OrderedAscending
+}
+
+public func > (first: NSDate, second: NSDate) -> Bool {
+    return first.compare(second) == .OrderedDescending
+}
+
+public func <= (first: NSDate, second: NSDate) -> Bool {
+    let cmp = first.compare(second)
+    return cmp == .OrderedAscending || cmp == .OrderedSame
+}
+
+public func >= (first: NSDate, second: NSDate) -> Bool {
+    let cmp = first.compare(second)
+    return cmp == .OrderedDescending || cmp == .OrderedSame
+}
+
+public func == (first: NSDate, second: NSDate) -> Bool {
+    return first.compare(second) == .OrderedSame
+}
+
+extension NSDate: Comparable {
+    // Makes it Comparable so we can use (min(dateA, dateB), max(dateA, dateB), ...)
+}

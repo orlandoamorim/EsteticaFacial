@@ -39,6 +39,10 @@ class SurgeryDetailsVC: FormViewController{
     //Procedimentos Cirurgicos
     var preSurgicalPlanningForm:[String : Any?] = [String : Any?]()
     var postSurgicalPlanningForm:[String : Any?] = [String : Any?]()
+    
+//    var images: [ Int : [ImageTypes:(UIImage,[String:NSValue]?)]] = [ Int : [ImageTypes:(UIImage,[String:NSValue]?)]]()
+    var recordID:String = NSUUID().UUIDString
+    var compareImages:[CompareImage] = [CompareImage]()
 
     var imageType:ImageTypes = .Front
     var contentToDisplay:contentTypes = .Nil
@@ -75,6 +79,8 @@ class SurgeryDetailsVC: FormViewController{
             }
             
         case .Atualizar:
+            recordID = record.id
+            
             for surgicalPlanning in record.surgicalPlanning {
                 if surgicalPlanning.type ==  false {
                     self.preSurgicalPlanningForm = RealmParse.convertRealmSurgicalPlanningForm(surgicalPlanning)
@@ -82,26 +88,29 @@ class SurgeryDetailsVC: FormViewController{
                     self.postSurgicalPlanningForm = RealmParse.convertRealmSurgicalPlanningForm(surgicalPlanning)
                 }
             }
-            
-            for image in record.image {
-                switch Int(image.imageType)! {
-                case ImageTypes.Front.hashValue :
-                    self.btnFront.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                    self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
-                    
-                case ImageTypes.ProfileRight.hashValue :
-                    self.btnProfileRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                    self.profileRightPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
-                    
-                case ImageTypes.Nasal.hashValue :
-                    self.btnNasal.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                    self.nasalPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+            for compareImage in record.compareImage {
+                if compareImage.reference == 0.toString() {
+                    for image in compareImage.image {
+                        switch Int(image.imageType)! {
+                        case ImageTypes.Front.hashValue :
+                            self.btnFront.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                            self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                        
+                        case ImageTypes.ProfileRight.hashValue :
+                            self.btnProfileRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                            self.profileRightPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                        
+                        case ImageTypes.Nasal.hashValue :
+                            self.btnNasal.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                            self.nasalPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
 
-                case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                        case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                        case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                        case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
 
-                default:   print("ERRO")
+                        default:   continue
+                        }
+                    }
                 }
             }
             
@@ -213,9 +222,8 @@ class SurgeryDetailsVC: FormViewController{
             alertView.addButton("Atualizar") { () -> Void in
                 self.getFormValues()
             }
-            alertView.addButton("Cancelar") { () -> Void in
-                print("cancelar")
-            }
+            alertView.addButton("Cancelar") { () -> Void in }
+            
             alertView.showCloseButton = false
             
             alertView.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
@@ -229,7 +237,7 @@ class SurgeryDetailsVC: FormViewController{
     func getFormValues(){
         switch contentToDisplay {
         case .Adicionar:
-            RealmParse.auSurgery(nil,patient: patient, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
+            RealmParse.auSurgery(id: recordID, record: nil, patient: patient, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, compareImages: getImages())
             
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 let alertView = SCLAlertView()
@@ -237,7 +245,7 @@ class SurgeryDetailsVC: FormViewController{
             })
 
         case .Atualizar:
-            RealmParse.auSurgery(record, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, images: mountArrayAdd())
+            RealmParse.auSurgery(id: recordID, record: record, formValues: self.form.values(includeHidden: false), preSugicalPlaningForm: self.preSurgicalPlanningForm, postSugicalPlaningForm: self.postSurgicalPlanningForm, compareImages: getImages())
 
             let alertView = SCLAlertView()
             alertView.showSuccess("🎉🎉🎉🎉", subTitle: "Cirurgia atualizada com sucesso!", closeButtonTitle: "OK", colorStyle: 0x4C6B94, colorTextButton: 0xFFFFFF)
@@ -258,179 +266,48 @@ class SurgeryDetailsVC: FormViewController{
         }
     }
     
-    func mountArrayAdd() -> [ImageTypes:(UIImage,[String:NSValue]?)]{
+    func getImages() -> [CompareImage]{
+        var compareImages:[CompareImage] = [CompareImage]()
         let btnArray = [self.btnFront, self.btnProfileRight, self.btnNasal, self.btnObliqueLeft, self.btnProfileLeft, self.btnObliqueRight]
-        var imageArray:[ImageTypes:(UIImage,[String:NSValue]?)] = [ImageTypes:(UIImage,[String:NSValue]?)]()
-        
-        for btn in btnArray {
-            if btn.currentImage != nil {
-                switch btn {
-                case self.btnFront:         imageArray.updateValue((btn.currentImage!, frontPoints != nil ? frontPoints : nil), forKey: .Front)
-                case self.btnProfileRight:  imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? frontPoints : nil), forKey: .ProfileRight)
-                case self.btnNasal:         imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? frontPoints : nil), forKey: .Nasal)
-                case self.btnObliqueLeft:   imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
-                case self.btnProfileLeft:   imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
-                case self.btnObliqueRight:  imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
-                default: print("ERRO mountArrayAdd()")
+        let compareImage = CompareImage()
+        compareImage.recordID = recordID
+        compareImage.reference = 0.toString()
+        if record != nil {
+            for comapareImg in record.compareImage {
+                if comapareImg.reference == 0.toString() {
+                    compareImage.create_at = comapareImg.create_at
+                    compareImage.date = comapareImg.date
                 }
             }
         }
-        
-        return imageArray
-        
-    }
-    
-    func mountArrayUpdate() -> [ImageTypes:(UIImage?,[String:NSValue]?)]{
-        let btnArray = [self.btnFront, self.btnProfileRight, self.btnNasal, self.btnObliqueLeft, self.btnProfileLeft, self.btnObliqueRight]
-        var imageArray:[ImageTypes:(UIImage?,[String:NSValue]?)] = [ImageTypes:(UIImage?,[String:NSValue]?)]()
         
         for btn in btnArray {
             if btn.currentImage != nil {
                 switch btn {
                 case self.btnFront:
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.Front.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!)  {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage, frontPoints != nil ? frontPoints : nil), forKey: .Front)
-                                }else{
-                                    boo = true
-                                    imageArray.updateValue((nil, frontPoints != nil ? frontPoints : nil), forKey: .Front)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage, frontPoints != nil ? frontPoints : nil), forKey: .Front)
-                        }
-                    }
-
-                    
-                    
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.Front.hashValue, fileName: "[\(0)]Front-\(recordID)", image: btn.currentImage!, points: frontPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
                 case self.btnProfileRight:
-                    
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.ProfileRight.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
-                                }else{
-                                    boo = true
-                                    imageArray.updateValue((nil, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage!, profileRightPoints != nil ? profileRightPoints : nil), forKey: .ProfileRight)
-                        }
-                    }
-                
-                    
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ProfileRight.hashValue, fileName: "[\(0)]ProfileRight-\(recordID)", image: btn.currentImage!, points: profileRightPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
                 case self.btnNasal:
-                    
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.Nasal.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
-                                }else{
-                                    boo = true
-                                    imageArray.updateValue((nil, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage!, nasalPoints != nil ? nasalPoints : nil), forKey: .Nasal)
-                        }
-                    }
-                    
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.Nasal.hashValue, fileName: "[\(0)]Nasal-\(recordID)", image: btn.currentImage!, points: nasalPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
                 case self.btnObliqueLeft:
-                    
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.ObliqueLeft.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueLeft)
-                        }
-                    }
-                    
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ObliqueLeft.hashValue, fileName: "[\(0)]ObliqueLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
                 case self.btnProfileLeft:
-                    
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.ProfileLeft.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ProfileLeft)
-                        }
-                    }
-                    
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ProfileLeft.hashValue, fileName: "[\(0)]ProfileLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
                 case self.btnObliqueRight:
-                    
-                    if self.record != nil{
-                        var boo:Bool? = false
-                        for image in self.record.image {
-                            if Int(image.imageType) == ImageTypes.ObliqueRight.hashValue {
-                                if !(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage)!.isEqualToImage(btn.currentImage!) {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
-                                    boo = true
-                                    imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
-                                }
-                            }
-                        }
-                        if boo == false {
-                            imageArray.updateValue((btn.currentImage!, nil), forKey: .ObliqueRight)
-                        }
-                    }
-                    
-                default: print("ERRO mountArrayUpdate()")
+                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ObliqueRight.hashValue, fileName: "[\(0)]ObliqueRight-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                default: continue
                 }
             }
         }
         
-        return imageArray
-    }
-
-    func verifyAndRemoveImage(imageType: ImageTypes){
-        if self.record != nil{
-            for image in self.record.image {
-                if Int(image.imageType) == imageType.hashValue {
-                    if RealmParse.fileExists(fileName: image.name, fileExtension: .JPG){
-                        RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                        RealmParse.deleteImage(image: image)
-                    }
-                }
-            }
+        compareImages.append(compareImage)
+        
+        for compareImg in self.compareImages {
+            compareImages.append(compareImg)
         }
+        
+        return compareImages
     }
     
     //--------------------
@@ -521,6 +398,16 @@ class SurgeryDetailsVC: FormViewController{
             <<< PhoneRow("phone") {
                 $0.title = "Telefone:"
             }
+            
+//            +++ Section(){
+////                $0.tag = "compareImages"
+//                $0.hidden = contentToDisplay == .Atualizar ? false : true
+//            }
+            ///Ira servir para compara as imagens futuramente
+//            <<< ButtonRow("btn_compare_images") { (row: ButtonRow) -> Void in
+//                row.title = "Imagens"
+//                row.presentationMode = PresentationMode.SegueName(segueName: "CompareImagesSegue", completionCallback: nil)
+//            }
             
             +++ Section("Dados da Cirurgia")
             
@@ -673,10 +560,15 @@ class SurgeryDetailsVC: FormViewController{
                     let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Apagar Imagem", comment: ""), style: style, handler: { (_) in
                         sender.setImage(nil, forState: UIControlState.Normal)
                         if self.record != nil{
-                            for image in self.record.image {
-                                if Int(image.imageType) == self.imageType.hashValue {
-                                    RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                    RealmParse.deleteImage(image: image)
+                            for compImg in self.record.compareImage {
+                                if compImg.reference == 0.toString() {
+                                    for image in compImg.image {
+                                        if Int(image.imageType) == self.imageType.hashValue {
+                                            RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+                                            RealmParse.deleteImage(image)
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -787,14 +679,14 @@ class SurgeryDetailsVC: FormViewController{
             }
         }
         
-        if segue.identifier == "EditRecoverPatientSegue"{
-            let controller = segue.destinationViewController as! PatientDetailsVC
-            if let test = sender as? ButtonRow {
-                if test.tag == "btn_edit_recover_patient"{
-                    //                    controller.patientShow = .CheckPatient
-                    controller.patient = patient
-                    controller.contentToDisplay = .Atualizar
-                    controller.patientDetailShow = .CheckPatient
+        if segue.identifier == "CompareImagesSegue"{
+//            let nav = segue.destinationViewController as! UINavigationController
+//            let controller = nav.viewControllers[0] as! CompareImagesVC
+            let controller = segue.destinationViewController as! CompareImagesVC
+//            controller.delegate = self
+            if let btn_compare_images = sender as? ButtonRow {
+                if btn_compare_images.tag == "btn_compare_images"{
+                    controller.compareImages = self.getImages()
                 }
             }
         }
@@ -807,10 +699,14 @@ extension SurgeryDetailsVC: RecoverPatient {
         if patient != nil {
             self.patient = patient
             for record in patient!.records {
-                for image in record.image {
-                    if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
-                        self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
-                        break
+                for compareImage in record.compareImage {
+                    if compareImage.reference == 0.toString() {
+                        for image in compareImage.image {
+                            if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
+                                self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                                break
+                            }
+                        }
                     }
                 }
             }
@@ -854,7 +750,6 @@ extension SurgeryDetailsVC: RecordImageDelegate{
 }
 extension SurgeryDetailsVC: RecordPointsDelegate{
     func updateData(points points: [String : NSValue]?, ImageType: ImageTypes) {
-        print(points)
         switch imageType {
         case .Front:        self.frontPoints = points
             

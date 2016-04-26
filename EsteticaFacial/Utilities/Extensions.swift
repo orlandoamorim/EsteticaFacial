@@ -9,6 +9,25 @@
 import Foundation
 import UIKit
 
+extension String {
+    func toInt() -> Int {
+        return Int(self)!
+    }
+
+    func toDate() -> NSDate {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale.currentLocale()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.dateFromString(self)!
+    }
+}
+
+extension Int{
+    func toString() -> String{
+        return String(self)
+    }
+}
+
 extension UIButton {
     func selectedButton(title:String, iconName: String, widthConstraints: NSLayoutConstraint){
         self.backgroundColor = UIColor(red: 0, green: 118/255, blue: 254/255, alpha: 1)

@@ -15,6 +15,7 @@ class Record: Object {
     dynamic var surgeryDescription = ""
     dynamic var patient: Patient?
     let image = List<Image>()
+    let compareImage = List<CompareImage>()
     dynamic var surgeryRealized = false
     let surgicalPlanning = List<SurgicalPlanning>()
     dynamic var date_of_surgery: NSDate? = nil

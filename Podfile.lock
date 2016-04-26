@@ -9,12 +9,12 @@ PODS:
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
   - PasscodeLock (1.0.2)
-  - Realm (0.98.8):
-    - Realm/Headers (= 0.98.8)
-  - Realm/Headers (0.98.8)
-  - RealmSwift (0.98.8):
-    - Realm (= 0.98.8)
-  - SCLAlertView (0.5.3)
+  - Realm (0.99.0):
+    - Realm/Headers (= 0.99.0)
+  - Realm/Headers (0.99.0)
+  - RealmSwift (0.99.0):
+    - Realm (= 0.99.0)
+  - SCLAlertView (0.5.4)
   - SwiftyDropbox (3.0.0):
     - Alamofire (~> 3.1)
   - TOCropViewController (1.3.3)
@@ -28,7 +28,7 @@ DEPENDENCIES:
   - Parse
   - PasscodeLock
   - RealmSwift
-  - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift`, branch `master`)
+  - SCLAlertView
   - SwiftyDropbox
   - TOCropViewController
 
@@ -36,17 +36,11 @@ EXTERNAL SOURCES:
   GPUImage:
     :branch: master
     :git: https://github.com/BradLarson/GPUImage
-  SCLAlertView:
-    :branch: master
-    :git: https://github.com/vikmeup/SCLAlertView-Swift
 
 CHECKOUT OPTIONS:
   GPUImage:
     :commit: 4a72158e6bc70b97d0e884afa96c8378f1a5d07a
     :git: https://github.com/BradLarson/GPUImage
-  SCLAlertView:
-    :commit: 079d4a21277adcbc2d30e90fa16f8013625c95d5
-    :git: https://github.com/vikmeup/SCLAlertView-Swift
 
 SPEC CHECKSUMS:
   AcknowList: 6b8181aac778f1bfafd94b99a3db152399865406
@@ -58,12 +52,10 @@ SPEC CHECKSUMS:
   GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   PasscodeLock: 4ae42c094224a01de3773fcd69ae33886394d959
-  Realm: 0e293bb62999730599efc3048896bbd4f2e43bcd
-  RealmSwift: 064262d38113f23ff3508fb20a0a922e696bec01
-  SCLAlertView: dcd89117943cd804208645e0702a913397e5b352
+  Realm: cf275f109b94e5399896960c90285a043edb3d56
+  RealmSwift: f40e5634bbc74f063163561d02acc4aa040d40a5
+  SCLAlertView: 081f824b17b7cf41057159535591f4d6fc8acde3
   SwiftyDropbox: e0d4aa3166082ec07ed942e94edb8c732b3376e4
   TOCropViewController: 9c0ede06e1ff92f3814049ae6e693496cefa624b
 
-PODFILE CHECKSUM: ca3f5d7eba94ad81554a8c61aa9daf7ee01f9383
-
-COCOAPODS: 1.0.0.beta.5
+COCOAPODS: 0.39.0

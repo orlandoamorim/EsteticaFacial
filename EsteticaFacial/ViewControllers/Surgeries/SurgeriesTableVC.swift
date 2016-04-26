@@ -25,15 +25,18 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
     var token: NotificationToken?
     
     deinit {
-        let realm = try! Realm()
         if let token = token {
-            realm.removeNotification(token)
+            token.stop()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        RealmParse.deleteAllRecords()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.valueForKey("Migration-0.2.3") == nil {
+            RealmParse.migrateImageToCompareImage()
+        }
+        
         let realm = try! Realm()
         token = realm.addNotificationBlock { [weak self] notification, realm in
             self?.update()
@@ -74,8 +77,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         // BarButtonItem Right
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(add))
-        
-        print(Realm.Configuration.defaultConfiguration.path!)
         
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
@@ -154,7 +155,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
     }
-    
 }
 
 // MARK: - UISplitViewControllerDelegate
@@ -219,9 +219,13 @@ extension SurgeriesTableVC {
         cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
         
         cell.imageView!.image = UIImage(named: "modelo_frontal")
-        for image in record[indexPath.row].image {
-            if image.name != "" {
-                cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+        for compareImage in record[indexPath.row].compareImage {
+            if compareImage.reference == 0.toString() {
+                for image in compareImage.image {
+                    if image.name != "" {
+                        cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                    }
+                }
             }
         }
         
@@ -333,7 +337,7 @@ extension SurgeriesTableVC : UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.recordsDicAtoZ.removeAll()
         
-        let predicate = NSPredicate(format: "patient.name CONTAINS[c] %@ OR patient.sex CONTAINS[c] %@ OR patient.mail CONTAINS[c] %@ OR patient.phone CONTAINS[c] %@ OR patient.ethnic CONTAINS[c] %@ OR note CONTAINS[c] %@", searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!)
+        let predicate = NSPredicate(format: "patient.name CONTAINS[c] %@ OR patient.sex CONTAINS[c] %@ OR patient.mail CONTAINS[c] %@ OR patient.phone CONTAINS[c] %@ OR patient.ethnic CONTAINS[c] %@ OR note CONTAINS[c] %@ OR surgeryDescription CONTAINS[c] %@", searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!, searchController.searchBar.text!)
         
         switch surgeryShow {
         case .Surgery: self.recordsDicAtoZ = RealmParse.querySurgeries(predicate)

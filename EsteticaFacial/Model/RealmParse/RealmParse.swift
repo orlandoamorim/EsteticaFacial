@@ -9,51 +9,26 @@
 import UIKit
 import RealmSwift
 
+/// It offers a set necessary functions to manage the model
 class RealmParse{
+
+    // ----------------------------------- Saving and Updating Surgery and Patient
+    // MARK: - Saving and Updating Surgery and Patient
     
-    static func auSurgery(record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],
-                   preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],
-                   images:[ ImageTypes :(UIImage,[String:NSValue]?)]?=nil){
+    ///Used to add and update SurgeryRecord
+    static func auSurgery(id id: String?=NSUUID().UUIDString,record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],compareImages: [CompareImage]){
         
-        let realm = try! Realm()
-        var id = NSUUID().UUIDString
-        
-        if record != nil {
-            id = record!.id
-        }
+        let realm = try! Realm()        
         let formValues = RealmParse.convertAnyToAnyObject(formValues)
         print("************* Patient Data **************")
         let patient = RealmParse.patient(formValues, uPatient: record?.patient == nil ? patient : record?.patient)
         print("********* Pre Surgical Planning *********")
-        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: id, surgicalPlanning: preSugicalPlaningForm)
+        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: id!, surgicalPlanning: preSugicalPlaningForm)
         print("********* Post Surgical Planning ********")
-        let postSugicalPlaning = RealmParse.surgicalPlanning(true, id: id, surgicalPlanning: postSugicalPlaningForm)
-        print("**************** Images *****************")
-        
-        var imagesArray:[Image] = [Image]()
-        
-        for (imageType,(image, points)) in images! {
-            
-            switch imageType {
-            case .Front:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "Front-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            case .ProfileRight:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ProfileRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            case .Nasal:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "Nasal-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            case .ObliqueLeft:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ObliqueLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            case .ProfileLeft:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ProfileLeft-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            case .ObliqueRight:
-                imagesArray.append(RealmParse.image(id, imageType: imageType.hashValue, fileName: "ObliqueRight-\(id)", image: image, points: points, uImage: imageObject(record?.image, imageTypeHashValue: imageType.hashValue)))
-            }
-        }
-        
-        
+        let postSugicalPlaning = RealmParse.surgicalPlanning(true, id: id!, surgicalPlanning: postSugicalPlaningForm)
         print("***************** Record ****************")
         let recordAU = Record()
-        recordAU.id = id
+        recordAU.id = id!
         recordAU.surgeryDescription = formValues["surgeryDescription"] != nil ? formValues["surgeryDescription"] as! String : ""
         recordAU.patient = patient
         recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
@@ -65,8 +40,8 @@ class RealmParse{
         }
 
         try! realm.write {
-            for image in imagesArray {
-                recordAU.image.append(image)
+            for compareImage in compareImages {
+                recordAU.compareImage.append(compareImage)
             }
             recordAU.surgicalPlanning.append(preSugicalPlaning)
             recordAU.surgicalPlanning.append(postSugicalPlaning)
@@ -88,7 +63,8 @@ class RealmParse{
         }
 
     }
-
+    
+    ///Used to add and update Patient
     static func auPatient(patient: Patient?=nil, formValues:[String : Any?]){
         let formValues = RealmParse.convertAnyToAnyObject(formValues)
         let patient = RealmParse.patient(formValues, uPatient: patient != nil ? patient : nil)
@@ -100,8 +76,11 @@ class RealmParse{
         }
     }
     
+    // ----------------------------------- Mounting an Object
+    // MARK: - Mounting an Object
     
-    static func patient(patient: [String:AnyObject], uPatient:Patient?=nil) -> Patient {
+    /// Returns an Patient Object
+    private static func patient(patient: [String:AnyObject], uPatient:Patient?=nil) -> Patient {
         let patientA = Patient()
         if !patient.keys.contains("name") && !patient.keys.contains("sex") {
             return uPatient!
@@ -124,6 +103,7 @@ class RealmParse{
         return patientA
     }
     
+    ///Verify if to Patient Objectes are equals
     private static func pacientEqual(patient: [String:AnyObject], isEqual uPatient:Patient) -> Bool {
         
         if uPatient.name == patient["name"] as! String && uPatient.sex == patient["sex"] as! String && uPatient.ethnic == patient["ethnic"] as! String && uPatient.date_of_birth == patient["date_of_birth"] as! NSDate && uPatient.mail == patient["mail"] as? String && uPatient.phone == patient["phone"] as? String {
@@ -133,6 +113,7 @@ class RealmParse{
         return false
     }
     
+    /// Used to create an SurgicalPlanning Object
     static func surgicalPlanning(type:Bool,id:String,surgicalPlanning:[String : Any?]) -> SurgicalPlanning {
         let sugicalPlaning  = SurgicalPlanning()
         sugicalPlaning.id = id
@@ -145,11 +126,14 @@ class RealmParse{
         return sugicalPlaning
     }
     
-    private static func imageObject(images: List<Image>?, imageTypeHashValue: Int) -> Image?{
-        if images != nil {
-            for image in images! {
-                if image.imageType == "\(imageTypeHashValue)"{
-                    return image
+    /// Returns an Image Object from an List<CompareImage> using reference and imageTypeHashValue to compare
+    static func imageObject(reference: Int, compareImages: List<CompareImage>?, imageTypeHashValue: Int) -> Image?{
+        if compareImages != nil {
+            for compareImage in compareImages! {
+                for image in compareImage.image {
+                    if image.imageType == "\(imageTypeHashValue)"{
+                        return image
+                    }
                 }
             }
         }
@@ -164,15 +148,17 @@ class RealmParse{
      - Parameter  fileName: String
      - Parameter     image: UIImage?
      - Parameter    points: [String : NSValue]?
+     - Parameter    uImage: Image?=nil
      
      - Returns: **Image**
      
      */
     
-    static func image(patientId:String, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
+    static func image(recordID:String, imageRef: Int, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
         
         let img = Image()
-        img.patientId = patientId
+        img.recordID = recordID
+        img.imageRef = "\(imageRef)"
         img.imageType = "\(imageType)"
         img.name = fileName
         //If already exists an Image() object.
@@ -190,6 +176,9 @@ class RealmParse{
         return img
     }
     
+    // ----------------------------------- Queries
+    // MARK: - Queries
+    
     /**
      Return all Surgery objects in Record.
      */
@@ -203,6 +192,9 @@ class RealmParse{
         
         for record in records {
             let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
+            if name == nil {
+                break
+            }
             let char = name!.uppercaseString[name!.uppercaseString.startIndex]
             if recordsDicAtoZ[String(char)] != nil {
                 if !recordsHeader.contains(String(char)) {
@@ -304,7 +296,9 @@ class RealmParse{
         
     }
     
-    
+    // ----------------------------------- Trash
+    // MARK: - Deleting Objects
+
     /**
      Delete an object Record with a transaction.
      
@@ -313,13 +307,10 @@ class RealmParse{
      */
     
     static func deleteRecord(record record: Record){
-        self.deleteRecordImages(record)
+        self.deleteRecordCompareImages(record)
         self.deleteSurgicalPlanning(record)
         let realm = try! Realm()
         try! realm.write {
-            realm.delete(record.image)
-            realm.delete(record.surgicalPlanning)
-
             realm.delete(record)
             
         }
@@ -353,6 +344,16 @@ class RealmParse{
         }
     }
     
+    ///Delete CompareImage Object inside Record Object
+    private static func deleteRecordCompareImages(record: Record) {
+        for compareImage in record.compareImage {
+            for image in compareImage.image {
+                deleteImage(image)
+            }
+            RealmParse.deleteCompareImageObject(compareImage)
+        }
+    }
+    
     /**
      Delete an object Image with a transaction.
      
@@ -360,14 +361,50 @@ class RealmParse{
      
      */
     
-    static func deleteImage(image image: Image){
+    static func deleteCompareImageObject(compareImage: CompareImage){
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(compareImage)
+        }
+    }
+    
+    /**
+     Delete an object Image with a transaction.
+     
+     - Parameter record: Image
+     
+     */
+    static func deleteImage(image: Image){
+        deleteImageFile(image)
         let realm = try! Realm()
         try! realm.write {
             realm.delete(image)
         }
     }
     
+    ///Delete an Image Object
+    private static func deleteImageFile(image: Image){
+        RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
+        
+    }
     
+    ///Delete an SurgicalPlanning from an Record Object
+    private static func deleteSurgicalPlanning(record: Record){
+        let realm = try! Realm()
+
+        realm.beginWrite()
+        for surgicalPlanning in record.surgicalPlanning {
+            for surgicalPlanningKey in surgicalPlanning.surgicalPlanningForm {
+                realm.delete(surgicalPlanningKey.value)
+            }
+            realm.delete(surgicalPlanning.surgicalPlanningForm)
+        }
+        realm.delete(record.surgicalPlanning)
+        try! realm.commitWrite()
+    }
+    
+    // ----------------------------------- Conversions
+    // MARK: - Conversions
     
     /**
      Convert an Set<>  to NSArray.
@@ -552,10 +589,10 @@ class RealmParse{
         return formArray
     }
     
+    // ----------------------------------- File Helpers
     
-    
-    static func saveFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
-                                  directory: NSSearchPathDirectory? = .DocumentDirectory, file:AnyObject){
+    ///Used to save file in NSSearchPathDirectory
+    static func saveFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages", directory: NSSearchPathDirectory? = .DocumentDirectory, file:AnyObject){
         
         let fileSave = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
         
@@ -573,9 +610,8 @@ class RealmParse{
         }
     }
     
-    
-    static func getFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
-                                 directory: NSSearchPathDirectory? = .DocumentDirectory) -> AnyObject? {
+    /// Returns an file saved in NSSearchPathDirectory
+    static func getFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages", directory: NSSearchPathDirectory? = .DocumentDirectory) -> AnyObject? {
         
         let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
         
@@ -593,8 +629,8 @@ class RealmParse{
         return nil
     }
     
-    static func deleteFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
-                                    directory: NSSearchPathDirectory? = .DocumentDirectory) {
+    ///Delete an file saved in NSSearchPathDirectory
+    static func deleteFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages", directory: NSSearchPathDirectory? = .DocumentDirectory) {
         
         let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
         do {
@@ -605,50 +641,45 @@ class RealmParse{
         }
     }
     
-    static func fileExists(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
+    /// Verify if an file exists in NSSearchPathDirectory
+    private static func fileExists(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages",
                                     directory: NSSearchPathDirectory? = .DocumentDirectory) -> Bool {
-        
         return FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!).fileExists
     }
     
-    private static func deleteRecordImages(record: Record){
-        for image in record.image {
-            RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-        }
-    }
+    // ----------------------------------- Migrations
+    // MARK: - Migrations
     
-    private static func deleteSurgicalPlanning(record: Record){
-        
-        var keys:[SurgicalPlanningKey] = [SurgicalPlanningKey]()
-        var values:[SurgicalPlanningValue] = [SurgicalPlanningValue]()
-        
-        for surgicalPlanning in record.surgicalPlanning {
-            if surgicalPlanning.type ==  false {
-                for surgicalPlanningKey in surgicalPlanning.surgicalPlanningForm {
-                    keys.append(surgicalPlanningKey)
-                    for value in surgicalPlanningKey.value {
-                        values.append(value)
-                    }
-                }
-            }else if surgicalPlanning.type ==  true {
-                for surgicalPlanningKey in surgicalPlanning.surgicalPlanningForm {
-                    keys.append(surgicalPlanningKey)
-                    for value in surgicalPlanningKey.value {
-                        values.append(value)
-                    }
-                }
-            }
-        }
-        
+    static func migrateImageToCompareImage(){
         let realm = try! Realm()
-        try! realm.write {
-            for key in keys {
-                realm.delete(key)
+        let records = realm.objects(Record)
+        var images: [Image] = [Image]()
+        for record in records {
+            images.removeAll(keepCapacity: false)
+            for image in record.image {
+                images.append(image)
             }
-            for value in values {
-                realm.delete(value)
+            if !images.isEmpty {
+                realm.beginWrite()
+                let compareImage = CompareImage()
+                compareImage.reference = 0.toString()
+                compareImage.recordID = record.id
+                let image = images.sort({ $0.create_at < $1.create_at }).first
+                compareImage.date = image!.create_at
+                for image in images {
+                    image.recordID = record.id
+                    compareImage.image.append(image)
+                }
+                
+                
+                realm.create(Record.self, value: ["id": record.id, "compareImage": [compareImage]], update: true)
+                try! realm.commitWrite()
+                
             }
         }
-
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setValue("Migration-0.2.3", forKey: "Migration-0.2.3")
+        userDefaults.synchronize()
     }
 }

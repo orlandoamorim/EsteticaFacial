@@ -89,7 +89,7 @@ class LabInCloud:NSObject{
         for object in objects! {
             let create_at = object.createdAt!
             let update_at = object.updatedAt!
-            let id = NSUUID().UUIDString
+            let recordID = NSUUID().UUIDString
 
             realm.beginWrite()
             
@@ -109,23 +109,22 @@ class LabInCloud:NSObject{
                 note = object.objectForKey("notas") as! String
             }
             
-
-            
             var imagesArray:[Image] = [Image]()
             
             if let img_frontal = object.objectForKey("img_frontal") as? PFFile{
                 let front = Image()
                 let frontID = Helpers.generateUUID()
                 front.id = frontID
-                front.patientId = id
+                front.recordID = recordID
+                front.imageRef = 0.toString()
                 front.imageType = "\(ImageTypes.Front.hashValue)"
-                front.name = "Front-\(id)"
+                front.name = "[0]Front-\(recordID)"
                 imagesArray.append(front)
                 
                 img_frontal.getDataInBackgroundWithBlock({ (imgData, error) in
                     
                     if error == nil {
-                        RealmParse.saveFile(fileName: "Front-\(id)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
+                        RealmParse.saveFile(fileName: "[0]Front-\(recordID)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
                     }
                 })
             }
@@ -134,15 +133,16 @@ class LabInCloud:NSObject{
                 let profileRight = Image()
                 let profileID = Helpers.generateUUID()
                 profileRight.id = profileID
-                profileRight.patientId = id
+                profileRight.recordID = recordID
+                profileRight.imageRef = 0.toString()
                 profileRight.imageType = "\(ImageTypes.ProfileRight.hashValue)"
-                profileRight.name = "ProfileRight-\(id)"
+                profileRight.name = "[0]ProfileRight-\(recordID)"
                 imagesArray.append(profileRight)
 
                 img_perfil.getDataInBackgroundWithBlock({ (imgData, error) in
                     
                     if error == nil {
-                        RealmParse.saveFile(fileName: "ProfileRight-\(id)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
+                        RealmParse.saveFile(fileName: "[0]ProfileRight-\(recordID)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
                     }
                 })
             }
@@ -151,15 +151,16 @@ class LabInCloud:NSObject{
                 let nasal = Image()
                 let nasalID = Helpers.generateUUID()
                 nasal.id = nasalID
-                nasal.patientId = id
+                nasal.recordID = recordID
+                nasal.imageRef = 0.toString()
                 nasal.imageType = "\(ImageTypes.Nasal.hashValue)"
-                nasal.name = "Nasal-\(id)"
+                nasal.name = "[0]Nasal-\(recordID)"
                 imagesArray.append(nasal)
 
                 img_nasal.getDataInBackgroundWithBlock({ (imgData, error) in
                     
                     if error == nil {
-                        RealmParse.saveFile(fileName: "Nasal-\(id)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
+                        RealmParse.saveFile(fileName: "[0]Nasal-\(recordID)", fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: imgData!)!)
                     }
                 })
                 
@@ -171,16 +172,25 @@ class LabInCloud:NSObject{
                     if error == nil {
                         let dados = NSKeyedUnarchiver.unarchiveObjectWithData(data!)! as! [String:AnyObject]
                         let preSugicalPlaningForm = Helpers.convertAnyObjectToAny(dados)
-                        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: id, surgicalPlanning: preSugicalPlaningForm)
+                        let preSugicalPlaning = RealmParse.surgicalPlanning(false, id: recordID, surgicalPlanning: preSugicalPlaningForm)
                         try! realm.write {
-                            realm.create(Record.self, value: ["id": id, "surgicalPlanning": [preSugicalPlaning]], update: true)
+                            realm.create(Record.self, value: ["id": recordID, "surgicalPlanning": [preSugicalPlaning]], update: true)
                         }
                     }
                     
                 })
             }
             
-            let record = Record(value: ["id": id, "surgeryDescription" : "", "patient": patient,"image": imagesArray, "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at ])
+            let compareImage = CompareImage()
+            compareImage.reference = 0.toString()
+            compareImage.recordID = patientID
+            let image = imagesArray.sort({ $0.create_at < $1.create_at }).first
+            compareImage.date = image!.create_at
+            for image in imagesArray {
+                compareImage.image.append(image)
+            }
+            
+            let record = Record(value: ["id": recordID, "surgeryDescription" : "", "patient": patient,"compareImage": [compareImage], "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at ])
             
             realm.create(Record.self, value: record, update: true)
             

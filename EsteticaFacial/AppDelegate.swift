@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.schemaVersion)
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 1, //TESTE -> Default [1]
             migrationBlock: { migration, oldSchemaVersion in
                 migration.enumerate(Patient.className()) { oldObject, newObject in
                     if oldSchemaVersion < 1 {
@@ -51,6 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                         newObject?["create_at"] = NSDate()
                         newObject?["update_at"] = NSDate()
+                        newObject?["compareImage"] = nil
+                    }
+                    
+                })
+                //TESTE -> Default [1]
+                migration.enumerate(Image.className(), { (oldObject, newObject) in
+                    if oldSchemaVersion < 1 {
+                        newObject?["imageRef"] = 0.toString()
+                        newObject?["recordID"] = ""
                     }
                     
                 })
