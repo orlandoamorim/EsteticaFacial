@@ -37,7 +37,7 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
             self?.update()
         }
         self.update()
-        
+            
 //        if patientShow == .Patient {
 //            //Adição para funcionar melhor no iPad
 //            self.splitViewController!.delegate = self
@@ -191,7 +191,13 @@ extension PatientsTableVC {
             for compareImage in record.compareImage{
                 for image in compareImage.image {
                     if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
-                        cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                        RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                            if error != nil {
+                                print(error!.description)
+                            }else {
+                                cell.imageView!.image = object as? UIImage
+                            }
+                        })
                         break
                     }
                 }

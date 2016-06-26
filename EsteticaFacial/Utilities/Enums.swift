@@ -47,3 +47,18 @@ public enum PatientShow {
 public enum PatientDetailShow {
     case PatientDetail, CheckPatient
 }
+
+public enum CloudTypes: String {
+    case Dropbox = "Dropbox"
+    case GoogleDrive = "GoogleDrive"
+    case iCloud = "iCloud"
+    case LogOut = "LogOut"
+}
+
+public enum CloudState: String {
+    case Delete = "Delete"
+    case Update = "Update"
+    case Add = "Add"
+    case Ok = "Ok"
+}
+

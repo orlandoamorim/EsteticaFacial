@@ -113,13 +113,20 @@ class Helpers: NSObject{
     */
     
      static func convertAnyObjectToAny(anyObjectDict:[String: AnyObject]) -> [String: Any?] {
+    
+        var formArray: [String : Any?] = [String : Any?]()
         
-        var anyDict = [String: Any?]()
-        
-        for key in anyObjectDict.keys {
-            anyDict.updateValue(anyObjectDict[key], forKey: key)
+        for (key, value) in anyObjectDict {
+            if let string = value as? String {
+                formArray.updateValue(string , forKey: key)
+            }else if let bool = value as? Bool {
+                formArray.updateValue(bool , forKey: key)
+            }else if let stringArray = value as? [String] {
+                let set: NSSet = NSSet(array: stringArray)
+                formArray.updateValue(set as! Set<String>, forKey: key )
+            }
         }
-        return anyDict
+        return formArray
     }
     
     /**
@@ -495,5 +502,17 @@ class Helpers: NSObject{
     
     static func generateUUID() -> String{
        return NSUUID().UUIDString
+    }
+    
+    //http://stackoverflow.com/a/30841417/4642682
+    static func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+            if(background != nil){ background!(); }
+            
+            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+            dispatch_after(popTime, dispatch_get_main_queue()) {
+                if(completion != nil){ completion!(); }
+            }
+        }
     }
 }

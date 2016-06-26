@@ -218,7 +218,6 @@ extension VerifyImageVC:  TOCropViewControllerDelegate {
     
     func updateImageGuiaView(){
         Helpers.removeImageView(cropViewController.cropView)
-        print(self.cropViewController.cropView.cropBoxFrame)
         Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cropBoxFrame: cropViewController.cropView.cropBoxFrame)
     }
     
@@ -226,19 +225,22 @@ extension VerifyImageVC:  TOCropViewControllerDelegate {
     func presentCropViewController(image: UIImage) {
         let cropViewController = TOCropViewController(image: image)
         cropViewController.delegate = self
-        cropViewController.aspectRatioLocked = true
-        cropViewController.defaultAspectRatio =  TOCropViewControllerAspectRatio.RatioSquare
+        cropViewController.aspectRatioLockEnabled = true
+        cropViewController.aspectRatioPickerButtonHidden = true
+        cropViewController.resetAspectRatioEnabled = false
+        cropViewController.aspectRatioPreset = TOCropViewControllerAspectRatioPreset.PresetSquare
         self.cropViewController = cropViewController
         
+        
         presentViewController(self.cropViewController, animated: true, completion: nil)
-        print(self.cropViewController.cropView.cropBoxFrame)
+
         switch helpImageState {
         case .On:
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateImageGuiaView), name: UIDeviceOrientationDidChangeNotification, object: nil)
-                Helpers.inicializeImageView(type: true, view: cropViewController.cropView , imageTypes: imageType, cropBoxFrame: cropViewController.cropView.cropBoxFrame)
-            
-        case .Off: print("")
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateImageGuiaView), name: UIDeviceOrientationDidChangeNotification, object: nil)
+            Helpers.inicializeImageView(type: true, view: self.cropViewController.cropView , imageTypes: imageType, cropBoxFrame: self.cropViewController.cropView.cropBoxFrame)
+        case .Off: print("Not Set")
         }
+        
     }
     
     func cropViewController(cropViewController: TOCropViewController!, didCropToImage image: UIImage!, withRect cropRect: CGRect, angle: Int) {
@@ -247,6 +249,16 @@ extension VerifyImageVC:  TOCropViewControllerDelegate {
             self.croppedImage = image
             self.imageView.image = image
             self.undo.hidden = false
+        }
+    }
+    
+    func cropViewController(cropViewController: TOCropViewController!, didFinishCancelled cancelled: Bool) {
+        if cancelled {
+            if helpImageState == .On {
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                Helpers.removeImageView(cropViewController.cropView)
+            }
+            cropViewController.dismissViewControllerAnimated(true, completion: nil)
         }
     }
 }

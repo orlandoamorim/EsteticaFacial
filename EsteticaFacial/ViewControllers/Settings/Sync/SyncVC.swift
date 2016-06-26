@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import SwiftyDropbox
 
 class SyncVC: FormViewController {
 
@@ -65,10 +66,26 @@ class SyncVC: FormViewController {
             
             <<< SwitchRow("Dropbox") {
                 $0.title = "Dropbox"
-                $0.disabled = true
+                $0.disabled = false
                 }.cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "Dropbox")
-            }
+                    if Dropbox.authorizedClient != nil {
+                        row.baseValue = true
+                    }else{
+                        row.baseValue = false
+                    }
+                    
+                }.onChange({ (switchRow) in
+                    if switchRow.value == true {
+                        if Dropbox.authorizedClient == nil {
+                            Dropbox.authorizeFromController(self)
+                        }
+                    }else if switchRow.value == false {
+                        if Dropbox.authorizedClient != nil {
+                            Dropbox.unlinkClient()
+                        }
+                    }
+                })
         
             +++ Section(header: "", footer: "")
             

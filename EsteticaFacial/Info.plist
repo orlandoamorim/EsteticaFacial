@@ -18,8 +18,24 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>db-ldu83a9eu7wtje1</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>dbapi-2</string>
+		<string>dbapi-8-emm</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,10 +45,6 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -56,6 +68,10 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Second</string>
 		</dict>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

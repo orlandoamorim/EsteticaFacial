@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 extension String {
     func toInt() -> Int {
@@ -99,6 +100,22 @@ extension UINavigationController {
             progressView.hidden = true
         }
     }
+    
+    func progressQuant(count: Int) {
+        let progressView = UIProgressView()
+        
+        self.view.addSubview(progressView)
+        let navBar = self.navigationBar
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[navBar]-0-[progressView]", options: .DirectionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView, "navBar" : navBar]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[progressView]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["progressView" : progressView]))
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if progressView.progress == 1.0 {
+            progressView.hidden = true
+        }
+    }
 }
 
 extension UIAlertController {
@@ -125,3 +142,47 @@ extension UIAlertController {
         return controller
     }
 }
+
+extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(presented)
+        }
+        return base
+    }
+}
+
+extension NSValue {
+    func toString() -> String{
+        return String(self)
+    }
+}
+
+extension Array where Element : Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func removeObject(object : Generator.Element) {
+        if let index = self.indexOf(object) {
+            self.removeAtIndex(index)
+        }
+    }
+}
+
+//Swift 3
+//extension Array where Element: Equatable {
+//    
+//    // Remove first collection element that is equal to the given `object`:
+//    mutating func removeObject(object: Element) {
+//        if let index = index(of: object) {
+//            remove(at: index)
+//        }
+//    }
+//}

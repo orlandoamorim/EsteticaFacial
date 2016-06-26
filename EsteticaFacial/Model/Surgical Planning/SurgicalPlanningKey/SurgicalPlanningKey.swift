@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class SurgicalPlanningKey: Object {
+public class SurgicalPlanningKey: Object {
     dynamic var id = ""
     dynamic var key = ""
     var value = List<SurgicalPlanningValue>()

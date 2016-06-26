@@ -6,9 +6,12 @@
 //  Copyright © 2015 Orlando Amorim. All rights reserved.
 //
 
+// TESTANDO AGORA COM DELETE INCLUSO
+
 import UIKit
 import RealmSwift
 import PasscodeLock
+import SwiftyDropbox
 
 import Parse
 import Bolts
@@ -52,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject?["create_at"] = NSDate()
                         newObject?["update_at"] = NSDate()
                         newObject?["compareImage"] = nil
+                        newObject?["cloudState"] = CloudState.Ok.rawValue
+
                     }
                     
                 })
@@ -60,6 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if oldSchemaVersion < 1 {
                         newObject?["imageRef"] = 0.toString()
                         newObject?["recordID"] = ""
+                        newObject?["cloudState"] = CloudState.Ok.rawValue
+                        newObject?["compareImageID"] = ""
                     }
                     
                 })
@@ -71,7 +78,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.clientKey = "0G40jdCQrAVB8cyzhEGrwDDLUMk0tiSQFh7WshCN"
         }
         Parse.initializeWithConfiguration(configuration)
+        
+        Dropbox.setupWithAppKey("ldu83a9eu7wtje1")
+        
+        
         return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        if let authResult = Dropbox.handleRedirectURL(url) {
+            switch authResult {
+            case .Success(let token):
+                print("Success! User is logged into Dropbox with token: \(token)")
+            case .Error(let error, let description):
+                print("Error \(error): \(description)")
+            }
+        }
+        
+        return false
     }
     
 

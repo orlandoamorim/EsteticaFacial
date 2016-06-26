@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FileSaveHelper {
+public class FileSaveHelper {
     
     // MARK:- Error Types
     
@@ -23,7 +23,7 @@ class FileSaveHelper {
     }
     
     // MARK:- File Extension Types
-    enum FileExtension:String {
+    public enum FileExtension:String {
         case TXT = ".txt"
         case JPG = ".jpg"
         case JSON = ".json"

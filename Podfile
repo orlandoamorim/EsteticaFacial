@@ -16,6 +16,7 @@ target 'EsteticaFacial' do
     pod 'DeviceKit', '~> 0.3.1'
     pod 'AcknowList'
     pod 'SCLAlertView'
+    pod 'SwiftyJSON'
     
     pod 'Parse'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug']

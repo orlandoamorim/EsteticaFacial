@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10D1ABD44CCD9484F0346B21 /* Pods_EsteticaFacialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78B544829B6D3FDB97B7F06 /* Pods_EsteticaFacialTests.framework */; };
 		18126CF51CACD9AD002D26F7 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18126CF31CACD9AD002D26F7 /* Camera.storyboard */; };
 		181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */; };
 		181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */; };
@@ -16,6 +17,9 @@
 		181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
 		181C55AE1C9C43A400BC35AD /* RealmParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C55AC1C9C43A400BC35AD /* RealmParse.swift */; };
 		18314CB11CC98D14005D9AF9 /* LabInCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18314CB01CC98D14005D9AF9 /* LabInCloud.swift */; };
+		183F60A31D1830120086D2C1 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94B5731CBEA83E007D5EC4 /* Date.swift */; };
+		183F60A51D1856940086D2C1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F60A41D1856940086D2C1 /* Reachability.swift */; };
+		183F60A61D1856940086D2C1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183F60A41D1856940086D2C1 /* Reachability.swift */; };
 		184657701CCB244B0015447F /* CompareImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1846576E1CCB244B0015447F /* CompareImage.storyboard */; };
 		1851321E1CCEFEB7009BDC06 /* CompareImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE00B41CCD37FB00A72FBF /* CompareImage.swift */; };
 		186D22171CC3325700CBED7B /* SyncVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D22161CC3325700CBED7B /* SyncVC.swift */; };
@@ -56,9 +60,21 @@
 		18BAB9F31C9BA4C400BD575B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
 		18BAB9F61C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
 		18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F51C9BA67D00BD575B /* Record.swift */; };
+		18CE58A41D163FEA0002C604 /* Ave3DTouchSimulatorSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CE58A31D163FEA0002C604 /* Ave3DTouchSimulatorSupport.m */; };
+		18CE58A61D1640B40002C604 /* RealmCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE58A51D1640B40002C604 /* RealmCloud.swift */; };
+		18CE58A71D1640BD0002C604 /* RealmCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE58A51D1640B40002C604 /* RealmCloud.swift */; };
 		18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */; };
 		18D149181CC11C31007D7353 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D149171CC11C31007D7353 /* Extensions.swift */; };
-		9DC2B26F02A87D8215BD62D3 /* Pods_EsteticaFacialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE4404B4BB03E532D0D16E7 /* Pods_EsteticaFacialUITests.framework */; };
+		18D326E11D08E75100ED6582 /* DropboxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D326E01D08E75100ED6582 /* DropboxHelper.swift */; };
+		18E9579F1D0B2FC300AEBE49 /* DropboxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D326E01D08E75100ED6582 /* DropboxHelper.swift */; };
+		18E957A01D0DDD9C00AEBE49 /* SurgicalPlanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */; };
+		18E957A11D0DDDB000AEBE49 /* FileSaveHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F2D1CBC8C7200CA2D64 /* FileSaveHelper.swift */; };
+		18E957A21D0DDDC400AEBE49 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F3C1CBC8D0800CA2D64 /* Helpers.swift */; };
+		18E957A31D0DDDC700AEBE49 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D149171CC11C31007D7353 /* Extensions.swift */; };
+		18E957A41D0DDDC900AEBE49 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F451CBC946000CA2D64 /* Enums.swift */; };
+		18E957A51D0DDDCB00AEBE49 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18774F3B1CBC8D0800CA2D64 /* Protocols.swift */; };
+		3A19D76A54B551E8FF0D2A16 /* Pods_EsteticaFacialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E181085127682D16BDBE176 /* Pods_EsteticaFacialUITests.framework */; };
+		4D42F108BC013F55873A3E6A /* Pods_EsteticaFacial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967C853F0908B1A294AC9CFA /* Pods_EsteticaFacial.framework */; };
 		B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A5E1BC344AE002A306F /* AppDelegate.swift */; };
 		B81B4A641BC344AE002A306F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A621BC344AE002A306F /* Main.storyboard */; };
 		B81B4A691BC344AE002A306F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B81B4A681BC344AE002A306F /* Assets.xcassets */; };
@@ -66,8 +82,6 @@
 		B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A761BC344AE002A306F /* EsteticaFacialTests.swift */; };
 		B81B4A821BC344AE002A306F /* EsteticaFacialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */; };
 		B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */; };
-		CE38EE82792693649CB15526 /* Pods_EsteticaFacialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719922DD1A1A691B6375AFA6 /* Pods_EsteticaFacialTests.framework */; };
-		CEAD2B2DABA27E4BE6FD043A /* Pods_EsteticaFacial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37538D4876F85EBD147C437F /* Pods_EsteticaFacial.framework */; };
 		DF94B5741CBEA83E007D5EC4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94B5731CBEA83E007D5EC4 /* Date.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,13 +103,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1086089AA7556C1160375570 /* Pods-EsteticaFacialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests.debug.xcconfig"; sourceTree = "<group>"; };
 		18126CF41CACD9AD002D26F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
 		181C559C1C9C37AB00BC35AD /* SurgicalPlanning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanning.swift; path = "Model/Surgical Planning/SurgicalPlanning.swift"; sourceTree = "<group>"; };
 		181C559F1C9C406900BC35AD /* SurgicalPlanningKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningKey.swift; path = "Model/Surgical Planning/SurgicalPlanningKey/SurgicalPlanningKey.swift"; sourceTree = "<group>"; };
 		181C55A31C9C408600BC35AD /* SurgicalPlanningValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurgicalPlanningValue.swift; path = "Model/Surgical Planning/SurgicalPlanningValue/SurgicalPlanningValue.swift"; sourceTree = "<group>"; };
 		181C55AC1C9C43A400BC35AD /* RealmParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmParse.swift; path = Model/RealmParse/RealmParse.swift; sourceTree = "<group>"; };
 		18314CB01CC98D14005D9AF9 /* LabInCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabInCloud.swift; path = Modules/Cloud/LabInCloud/LabInCloud.swift; sourceTree = "<group>"; };
+		183F60A41D1856940086D2C1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1846576F1CCB244B0015447F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CompareImage.storyboard; sourceTree = "<group>"; };
 		186D22161CC3325700CBED7B /* SyncVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncVC.swift; path = ViewControllers/Settings/Sync/SyncVC.swift; sourceTree = "<group>"; };
 		18774F0A1CBC6A1900CA2D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Patient.storyboard; sourceTree = "<group>"; };
@@ -132,15 +146,18 @@
 		18BAB9EC1C9B983E00BD575B /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Patient.swift; path = Model/Patient/Patient.swift; sourceTree = "<group>"; };
 		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
 		18BAB9F51C9BA67D00BD575B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Model/Record/Record.swift; sourceTree = "<group>"; };
+		18CE58A31D163FEA0002C604 /* Ave3DTouchSimulatorSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ave3DTouchSimulatorSupport.m; sourceTree = "<group>"; };
+		18CE58A51D1640B40002C604 /* RealmCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmCloud.swift; path = Modules/Cloud/RealmCloud.swift; sourceTree = "<group>"; };
 		18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostrarCirurgiasVC.swift; sourceTree = "<group>"; };
 		18D149171CC11C31007D7353 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Utilities/Extensions.swift; sourceTree = "<group>"; };
-		37538D4876F85EBD147C437F /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		43610EA9EDC3F6217CA6F5A4 /* Pods-EsteticaFacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.debug.xcconfig"; sourceTree = "<group>"; };
-		53653E2A50E4F67A2539C919 /* Pods-EsteticaFacialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		719922DD1A1A691B6375AFA6 /* Pods_EsteticaFacialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		721892CEC6EAF08FCE08546B /* Pods-EsteticaFacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.release.xcconfig"; sourceTree = "<group>"; };
-		7EE4404B4BB03E532D0D16E7 /* Pods_EsteticaFacialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB177C1647E285E5D7A3343F /* Pods-EsteticaFacialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests.release.xcconfig"; sourceTree = "<group>"; };
+		18D326E01D08E75100ED6582 /* DropboxHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxHelper.swift; path = Modules/Cloud/Dropbox/DropboxHelper.swift; sourceTree = "<group>"; };
+		198FC3A2965D92543CBA88CC /* Pods-EsteticaFacialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6A45634671BDEB351FA42C3B /* Pods-EsteticaFacialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E181085127682D16BDBE176 /* Pods_EsteticaFacialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E95D2E168C111122885C474 /* Pods-EsteticaFacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.debug.xcconfig"; sourceTree = "<group>"; };
+		738B1DC39B6E3392CF45EA7C /* Pods-EsteticaFacialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests.release.xcconfig"; sourceTree = "<group>"; };
+		8F7E7493A7B7A1FA858B4A09 /* Pods-EsteticaFacialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		967C853F0908B1A294AC9CFA /* Pods_EsteticaFacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5B1BC344AE002A306F /* EsteticaFacial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsteticaFacial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81B4A5E1BC344AE002A306F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B81B4A631BC344AE002A306F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -154,8 +171,9 @@
 		B81B4A811BC344AE002A306F /* EsteticaFacialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsteticaFacialUITests.swift; sourceTree = "<group>"; };
 		B81B4A831BC344AE002A306F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D7A0B2A590A729C7B4F5BEE1 /* Pods-EsteticaFacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial.release.xcconfig"; sourceTree = "<group>"; };
 		DF94B5731CBEA83E007D5EC4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Core/Date/Date.swift; sourceTree = "<group>"; };
-		E8B04F790CC7AF3D45293D02 /* Pods-EsteticaFacialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsteticaFacialUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E78B544829B6D3FDB97B7F06 /* Pods_EsteticaFacialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsteticaFacialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8F7E0E11BD5415F0053B948 /* CoreVideo.framework in Frameworks */,
-				CEAD2B2DABA27E4BE6FD043A /* Pods_EsteticaFacial.framework in Frameworks */,
+				4D42F108BC013F55873A3E6A /* Pods_EsteticaFacial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE38EE82792693649CB15526 /* Pods_EsteticaFacialTests.framework in Frameworks */,
+				10D1ABD44CCD9484F0346B21 /* Pods_EsteticaFacialTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,13 +198,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DC2B26F02A87D8215BD62D3 /* Pods_EsteticaFacialUITests.framework in Frameworks */,
+				3A19D76A54B551E8FF0D2A16 /* Pods_EsteticaFacialUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		104CABB74A6198AE3030FBAE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E95D2E168C111122885C474 /* Pods-EsteticaFacial.debug.xcconfig */,
+				D7A0B2A590A729C7B4F5BEE1 /* Pods-EsteticaFacial.release.xcconfig */,
+				6A45634671BDEB351FA42C3B /* Pods-EsteticaFacialTests.debug.xcconfig */,
+				738B1DC39B6E3392CF45EA7C /* Pods-EsteticaFacialTests.release.xcconfig */,
+				8F7E7493A7B7A1FA858B4A09 /* Pods-EsteticaFacialUITests.debug.xcconfig */,
+				198FC3A2965D92543CBA88CC /* Pods-EsteticaFacialUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		18126CDC1CAACC6B002D26F7 /* Patients */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,7 +311,9 @@
 		18314CAD1CC98C72005D9AF9 /* Cloud */ = {
 			isa = PBXGroup;
 			children = (
+				18D326DF1D08E73A00ED6582 /* Dropbox */,
 				186D22181CC33D7B00CBED7B /* LabInCloud */,
+				18CE58A51D1640B40002C604 /* RealmCloud.swift */,
 			);
 			name = Cloud;
 			sourceTree = "<group>";
@@ -288,6 +321,7 @@
 		183D2F4C1BD9E68D0033BDA3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				18CE58A31D163FEA0002C604 /* Ave3DTouchSimulatorSupport.m */,
 				B81B4A681BC344AE002A306F /* Assets.xcassets */,
 				B81B4A6D1BC344AE002A306F /* Info.plist */,
 			);
@@ -405,6 +439,7 @@
 				18774F3C1CBC8D0800CA2D64 /* Helpers.swift */,
 				18774F3D1CBC8D0800CA2D64 /* Teste.swift */,
 				18774F3F1CBC8D0800CA2D64 /* VSReachability.swift */,
+				183F60A41D1856940086D2C1 /* Reachability.swift */,
 				18CEB07A1BFE561900AF5198 /* MostrarCirurgiasVC.swift */,
 			);
 			name = Utilities;
@@ -449,13 +484,21 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		18D326DF1D08E73A00ED6582 /* Dropbox */ = {
+			isa = PBXGroup;
+			children = (
+				18D326E01D08E75100ED6582 /* DropboxHelper.swift */,
+			);
+			name = Dropbox;
+			sourceTree = "<group>";
+		};
 		5B6EEE5922A447A0B8B835E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				B8F7E0E01BD5415F0053B948 /* CoreVideo.framework */,
-				37538D4876F85EBD147C437F /* Pods_EsteticaFacial.framework */,
-				719922DD1A1A691B6375AFA6 /* Pods_EsteticaFacialTests.framework */,
-				7EE4404B4BB03E532D0D16E7 /* Pods_EsteticaFacialUITests.framework */,
+				967C853F0908B1A294AC9CFA /* Pods_EsteticaFacial.framework */,
+				E78B544829B6D3FDB97B7F06 /* Pods_EsteticaFacialTests.framework */,
+				6E181085127682D16BDBE176 /* Pods_EsteticaFacialUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -470,7 +513,7 @@
 				B81B4A801BC344AE002A306F /* EsteticaFacialUITests */,
 				B81B4A5C1BC344AE002A306F /* Products */,
 				5B6EEE5922A447A0B8B835E0 /* Frameworks */,
-				BB72CB21B9B04499AD108CE4 /* Pods */,
+				104CABB74A6198AE3030FBAE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -536,19 +579,6 @@
 			name = Algoritmos;
 			sourceTree = "<group>";
 		};
-		BB72CB21B9B04499AD108CE4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				43610EA9EDC3F6217CA6F5A4 /* Pods-EsteticaFacial.debug.xcconfig */,
-				721892CEC6EAF08FCE08546B /* Pods-EsteticaFacial.release.xcconfig */,
-				1086089AA7556C1160375570 /* Pods-EsteticaFacialTests.debug.xcconfig */,
-				AB177C1647E285E5D7A3343F /* Pods-EsteticaFacialTests.release.xcconfig */,
-				53653E2A50E4F67A2539C919 /* Pods-EsteticaFacialUITests.debug.xcconfig */,
-				E8B04F790CC7AF3D45293D02 /* Pods-EsteticaFacialUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		DF94B5721CBEA821007D5EC4 /* Date */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,13 +594,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B81B4A861BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacial" */;
 			buildPhases = (
-				DC57DD80CC26768AD0B4BFDC /* 📦 Check Pods Manifest.lock */,
+				5841CA6C1860DB6D52D7F1E8 /* [CP] Check Pods Manifest.lock */,
 				B81B4A571BC344AE002A306F /* Sources */,
 				B81B4A581BC344AE002A306F /* Frameworks */,
 				B81B4A591BC344AE002A306F /* Resources */,
-				B7B1020C3D04CD116DFBEF92 /* 📦 Embed Pods Frameworks */,
-				0E5B5F07B8D08BDA07AC89B9 /* 📦 Copy Pods Resources */,
-				2379D9FBE6BE5375837FB8EA /* Embed Pods Frameworks */,
+				489DDBC359D8E0AB9900A479 /* [CP] Embed Pods Frameworks */,
+				5B179D35AA5FC82347271AE4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -585,12 +614,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B81B4A891BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacialTests" */;
 			buildPhases = (
-				FA37CEF472CA256FB8FADF1B /* 📦 Check Pods Manifest.lock */,
+				EF291D070BE06912BE5F89AB /* [CP] Check Pods Manifest.lock */,
 				B81B4A6E1BC344AE002A306F /* Sources */,
 				B81B4A6F1BC344AE002A306F /* Frameworks */,
 				B81B4A701BC344AE002A306F /* Resources */,
-				4E4DED865AAF3FFFD891A791 /* 📦 Embed Pods Frameworks */,
-				E31D4456E0D1B02C1CD854B8 /* 📦 Copy Pods Resources */,
+				9551422B3C5DEDD466E2B48B /* [CP] Embed Pods Frameworks */,
+				4E59EE62BE3F728B93A60AD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -606,11 +635,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B81B4A8C1BC344AE002A306F /* Build configuration list for PBXNativeTarget "EsteticaFacialUITests" */;
 			buildPhases = (
-				15419E2D791EDF9548292CC1 /* 📦 Check Pods Manifest.lock */,
+				402F9D66A824061571A6F159 /* [CP] Check Pods Manifest.lock */,
 				B81B4A791BC344AE002A306F /* Sources */,
 				B81B4A7A1BC344AE002A306F /* Frameworks */,
 				B81B4A7B1BC344AE002A306F /* Resources */,
-				3778A4C9B15ADE1BEFBC4C08 /* 📦 Copy Pods Resources */,
+				D8293B2BB35A1C00741D1390 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -628,6 +657,7 @@
 		B81B4A531BC344AE002A306F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Orlando Amorim";
 				TargetAttributes = {
@@ -698,29 +728,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E5B5F07B8D08BDA07AC89B9 /* 📦 Copy Pods Resources */ = {
+		402F9D66A824061571A6F159 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		15419E2D791EDF9548292CC1 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,14 +743,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		2379D9FBE6BE5375837FB8EA /* Embed Pods Frameworks */ = {
+		489DDBC359D8E0AB9900A479 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,74 +758,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3778A4C9B15ADE1BEFBC4C08 /* 📦 Copy Pods Resources */ = {
+		4E59EE62BE3F728B93A60AD8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4E4DED865AAF3FFFD891A791 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7B1020C3D04CD116DFBEF92 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC57DD80CC26768AD0B4BFDC /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E31D4456E0D1B02C1CD854B8 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -818,14 +773,74 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FA37CEF472CA256FB8FADF1B /* 📦 Check Pods Manifest.lock */ = {
+		5841CA6C1860DB6D52D7F1E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5B179D35AA5FC82347271AE4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacial/Pods-EsteticaFacial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9551422B3C5DEDD466E2B48B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacialTests/Pods-EsteticaFacialTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8293B2BB35A1C00741D1390 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsteticaFacialUITests/Pods-EsteticaFacialUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF291D070BE06912BE5F89AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,12 +870,15 @@
 				18774F201CBC8B2200CA2D64 /* ProcessImageVC.swift in Sources */,
 				18774F461CBC946000CA2D64 /* Enums.swift in Sources */,
 				18CEB07B1BFE561900AF5198 /* MostrarCirurgiasVC.swift in Sources */,
+				18CE58A61D1640B40002C604 /* RealmCloud.swift in Sources */,
 				18774F2B1CBC8C5700CA2D64 /* UserDefaultsPasscodeRepository.swift in Sources */,
 				18774F361CBC8C8B00CA2D64 /* TecnicasPDI.swift in Sources */,
 				181C55AD1C9C43A400BC35AD /* RealmParse.swift in Sources */,
 				18774F351CBC8C8B00CA2D64 /* VisaoComputacional.swift in Sources */,
+				18CE58A41D163FEA0002C604 /* Ave3DTouchSimulatorSupport.m in Sources */,
 				18774F371CBC8C8B00CA2D64 /* PontoView.swift in Sources */,
 				18774F421CBC8D0800CA2D64 /* Teste.swift in Sources */,
+				183F60A51D1856940086D2C1 /* Reachability.swift in Sources */,
 				181C559D1C9C37AB00BC35AD /* SurgicalPlanning.swift in Sources */,
 				18D149181CC11C31007D7353 /* Extensions.swift in Sources */,
 				18B8C49F1CCC2F8E00C47A40 /* CompareImagesVC.swift in Sources */,
@@ -877,6 +895,7 @@
 				18774F441CBC8D0800CA2D64 /* VSReachability.swift in Sources */,
 				18774F411CBC8D0800CA2D64 /* Helpers.swift in Sources */,
 				18774F401CBC8D0800CA2D64 /* Protocols.swift in Sources */,
+				18D326E11D08E75100ED6582 /* DropboxHelper.swift in Sources */,
 				181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
 				18B8C4981CCC2E9300C47A40 /* ImageRow.swift in Sources */,
 				181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
@@ -888,11 +907,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E957A51D0DDDCB00AEBE49 /* Protocols.swift in Sources */,
+				18E957A11D0DDDB000AEBE49 /* FileSaveHelper.swift in Sources */,
 				B81B4A771BC344AE002A306F /* EsteticaFacialTests.swift in Sources */,
+				18CE58A71D1640BD0002C604 /* RealmCloud.swift in Sources */,
 				188E79F31CCF0A6200A0791C /* Image.swift in Sources */,
 				18BAB9F71C9BA67D00BD575B /* Record.swift in Sources */,
+				183F60A31D1830120086D2C1 /* Date.swift in Sources */,
+				18E957A41D0DDDC900AEBE49 /* Enums.swift in Sources */,
 				181C55A51C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
+				18E9579F1D0B2FC300AEBE49 /* DropboxHelper.swift in Sources */,
 				1851321E1CCEFEB7009BDC06 /* CompareImage.swift in Sources */,
+				18E957A21D0DDDC400AEBE49 /* Helpers.swift in Sources */,
+				18E957A31D0DDDC700AEBE49 /* Extensions.swift in Sources */,
+				18E957A01D0DDD9C00AEBE49 /* SurgicalPlanning.swift in Sources */,
+				183F60A61D1856940086D2C1 /* Reachability.swift in Sources */,
 				18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */,
 				181C55A11C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
 				181C55AE1C9C43A400BC35AD /* RealmParse.swift in Sources */,
@@ -1058,9 +1087,10 @@
 		};
 		B81B4A871BC344AE002A306F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43610EA9EDC3F6217CA6F5A4 /* Pods-EsteticaFacial.debug.xcconfig */;
+			baseConfigurationReference = 6E95D2E168C111122885C474 /* Pods-EsteticaFacial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1070,15 +1100,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.UFPI.EsteticaFacial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		B81B4A881BC344AE002A306F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 721892CEC6EAF08FCE08546B /* Pods-EsteticaFacial.release.xcconfig */;
+			baseConfigurationReference = D7A0B2A590A729C7B4F5BEE1 /* Pods-EsteticaFacial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1093,7 +1125,7 @@
 		};
 		B81B4A8A1BC344AE002A306F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1086089AA7556C1160375570 /* Pods-EsteticaFacialTests.debug.xcconfig */;
+			baseConfigurationReference = 6A45634671BDEB351FA42C3B /* Pods-EsteticaFacialTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = EsteticaFacialTests/Info.plist;
@@ -1106,7 +1138,7 @@
 		};
 		B81B4A8B1BC344AE002A306F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AB177C1647E285E5D7A3343F /* Pods-EsteticaFacialTests.release.xcconfig */;
+			baseConfigurationReference = 738B1DC39B6E3392CF45EA7C /* Pods-EsteticaFacialTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = EsteticaFacialTests/Info.plist;
@@ -1119,7 +1151,7 @@
 		};
 		B81B4A8D1BC344AE002A306F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53653E2A50E4F67A2539C919 /* Pods-EsteticaFacialUITests.debug.xcconfig */;
+			baseConfigurationReference = 8F7E7493A7B7A1FA858B4A09 /* Pods-EsteticaFacialUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = EsteticaFacialUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1132,7 +1164,7 @@
 		};
 		B81B4A8E1BC344AE002A306F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8B04F790CC7AF3D45293D02 /* Pods-EsteticaFacialUITests.release.xcconfig */;
+			baseConfigurationReference = 198FC3A2965D92543CBA88CC /* Pods-EsteticaFacialUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = EsteticaFacialUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

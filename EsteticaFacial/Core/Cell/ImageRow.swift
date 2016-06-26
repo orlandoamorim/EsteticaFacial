@@ -24,7 +24,13 @@ class ImageRow : UITableViewCell {
     func setDic () {
         imageDic.removeAll(keepCapacity: false)
         for image in images! {
-            imageDic.updateValue(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as! UIImage, forKey: image.imageType.toInt())
+            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                if error != nil {
+                    print(error!.description)
+                }else {
+                    self.imageDic.updateValue(object as! UIImage, forKey: image.imageType.toInt())
+                }
+            })
         }
     }
     

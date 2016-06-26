@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class CompareImage: Object {
+public class CompareImage: Object {
     
     dynamic var id = NSUUID().UUIDString
     dynamic var recordID = ""
@@ -20,7 +20,7 @@ class CompareImage: Object {
     dynamic var create_at = NSDate()
     dynamic var update_at = NSDate()
     
-    override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "id"
     }
 }

@@ -162,7 +162,10 @@ class PatientDetailsVC: FormViewController {
         case .Adicionar: self.getFormValues()
         case .Atualizar:
             
-            let alertView = SCLAlertView()
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alertView = SCLAlertView(appearance: appearance)
             
             alertView.addButton("Atualizar") { () -> Void in
                 self.getFormValues()
@@ -170,7 +173,6 @@ class PatientDetailsVC: FormViewController {
             alertView.addButton("Cancelar") { () -> Void in
                 print("cancelar")
             }
-            alertView.showCloseButton = false
             
             alertView.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
             

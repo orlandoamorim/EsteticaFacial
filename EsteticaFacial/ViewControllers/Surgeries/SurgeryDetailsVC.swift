@@ -10,6 +10,8 @@ import UIKit
 import Eureka
 import SCLAlertView
 import DeviceKit
+import SwiftyJSON
+import RealmSwift
 
 class SurgeryDetailsVC: FormViewController{
     
@@ -40,7 +42,6 @@ class SurgeryDetailsVC: FormViewController{
     var preSurgicalPlanningForm:[String : Any?] = [String : Any?]()
     var postSurgicalPlanningForm:[String : Any?] = [String : Any?]()
     
-//    var images: [ Int : [ImageTypes:(UIImage,[String:NSValue]?)]] = [ Int : [ImageTypes:(UIImage,[String:NSValue]?)]]()
     var recordID:String = NSUUID().UUIDString
     var compareImages:[CompareImage] = [CompareImage]()
 
@@ -93,20 +94,89 @@ class SurgeryDetailsVC: FormViewController{
                     for image in compareImage.image {
                         switch Int(image.imageType)! {
                         case ImageTypes.Front.hashValue :
-                            self.btnFront.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                            self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                            print(image.name)
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnFront.enabled = false
+                                    self.btnFront.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnFront.backgroundColor = UIColor.clearColor()
+                                }else {
+                                    self.btnFront.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                    self.frontPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                                }
+                            })
+
                         
                         case ImageTypes.ProfileRight.hashValue :
-                            self.btnProfileRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                            self.profileRightPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
-                        
-                        case ImageTypes.Nasal.hashValue :
-                            self.btnNasal.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                            self.nasalPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnProfileRight.enabled = false
+                                    self.btnProfileRight.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnProfileRight.backgroundColor = UIColor.clearColor()
+                                }else {
+                                    self.btnProfileRight.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                    self.profileRightPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                                }
+                            })
 
-                        case ImageTypes.ObliqueLeft.hashValue : self.btnObliqueLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                        case ImageTypes.ProfileLeft.hashValue : self.btnProfileLeft.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
-                        case ImageTypes.ObliqueRight.hashValue :self.btnObliqueRight.setImage(RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage, forState: UIControlState.Normal)
+                            
+                        case ImageTypes.Nasal.hashValue :
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnNasal.enabled = false
+                                    self.btnNasal.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnNasal.backgroundColor = UIColor.clearColor()
+                                    
+                                }else {
+                                    self.btnNasal.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                    self.nasalPoints = image.points != nil ? (NSKeyedUnarchiver.unarchiveObjectWithData(image.points!) as! [String : NSValue]?) : nil
+                                }
+                            })
+                            
+                        case ImageTypes.ObliqueLeft.hashValue :
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnObliqueLeft.enabled = false
+                                    self.btnObliqueLeft.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnObliqueLeft.backgroundColor = UIColor.clearColor()
+                                    
+                                }else {
+                                    self.btnObliqueLeft.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                }
+                            })
+
+
+                        case ImageTypes.ProfileLeft.hashValue :
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnProfileLeft.enabled = false
+                                    self.btnProfileLeft.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnProfileLeft.backgroundColor = UIColor.clearColor()
+                                    
+                                }else {
+                                    self.btnProfileLeft.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                }
+                            })
+
+
+                        case ImageTypes.ObliqueRight.hashValue :
+                            RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                if error != nil {
+                                    print(error!.description)
+                                    self.btnObliqueRight.enabled = false
+                                    self.btnObliqueRight.setBackgroundImage(UIImage(named: "DropboxError"), forState: UIControlState.Normal)
+                                    self.btnObliqueRight.backgroundColor = UIColor.clearColor()
+                                    
+                                    
+                                }else {
+                                    self.btnObliqueRight.setImage(object as? UIImage, forState: UIControlState.Normal)
+                                }
+                            })
 
                         default:   continue
                         }
@@ -217,15 +287,16 @@ class SurgeryDetailsVC: FormViewController{
         case .Adicionar: self.getFormValues()
         case .Atualizar:
 
-            let alertView = SCLAlertView()
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alertView = SCLAlertView(appearance: appearance)
             
             alertView.addButton("Atualizar") { () -> Void in
                 self.getFormValues()
             }
             alertView.addButton("Cancelar") { () -> Void in }
-            
-            alertView.showCloseButton = false
-            
+                        
             alertView.showWarning("Atenção!", subTitle: "Esta operação nao pode ser desfeita, então proceda com cautela.")
 
         case .Nil: SCLAlertView().showError("Ops...", subTitle: "Ocorreu algum erro :(", closeButtonTitle: "OK")
@@ -269,33 +340,39 @@ class SurgeryDetailsVC: FormViewController{
     func getImages() -> [CompareImage]{
         var compareImages:[CompareImage] = [CompareImage]()
         let btnArray = [self.btnFront, self.btnProfileRight, self.btnNasal, self.btnObliqueLeft, self.btnProfileLeft, self.btnObliqueRight]
+        var images: [Image] = [Image]()
         let compareImage = CompareImage()
         compareImage.recordID = recordID
         compareImage.reference = 0.toString()
+        
         if record != nil {
             for comapareImg in record.compareImage {
                 if comapareImg.reference == 0.toString() {
+                    compareImage.id = comapareImg.id
                     compareImage.create_at = comapareImg.create_at
                     compareImage.date = comapareImg.date
+                    for image in compareImage.image {
+                        images.append(image)
+                    }
                 }
             }
         }
-        
+        //    case Front, ProfileRight, Nasal, ObliqueLeft, ObliqueRight, ProfileLeft
         for btn in btnArray {
             if btn.currentImage != nil {
                 switch btn {
                 case self.btnFront:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.Front.hashValue, fileName: "[\(0)]Front-\(recordID)", image: btn.currentImage!, points: frontPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.Front.hashValue, fileName: "[\(0)]Front-\(recordID)", image: btn.currentImage!, points: frontPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.Front.hashValue)))
                 case self.btnProfileRight:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ProfileRight.hashValue, fileName: "[\(0)]ProfileRight-\(recordID)", image: btn.currentImage!, points: profileRightPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.ProfileRight.hashValue, fileName: "[\(0)]ProfileRight-\(recordID)", image: btn.currentImage!, points: profileRightPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.ProfileRight.hashValue)))
                 case self.btnNasal:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.Nasal.hashValue, fileName: "[\(0)]Nasal-\(recordID)", image: btn.currentImage!, points: nasalPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.Nasal.hashValue, fileName: "[\(0)]Nasal-\(recordID)", image: btn.currentImage!, points: nasalPoints != nil ? frontPoints : nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.Nasal.hashValue)))
                 case self.btnObliqueLeft:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ObliqueLeft.hashValue, fileName: "[\(0)]ObliqueLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.ObliqueLeft.hashValue, fileName: "[\(0)]ObliqueLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.ObliqueLeft.hashValue)))
                 case self.btnProfileLeft:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ProfileLeft.hashValue, fileName: "[\(0)]ProfileLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.ProfileLeft.hashValue, fileName: "[\(0)]ProfileLeft-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.ProfileLeft.hashValue)))
                 case self.btnObliqueRight:
-                    compareImage.image.append(RealmParse.image(recordID, imageRef: 0, imageType: ImageTypes.ObliqueRight.hashValue, fileName: "[\(0)]ObliqueRight-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: imageType.hashValue)))
+                    compareImage.image.append(RealmParse.image(recordID,compareImageID: compareImage.id , imageRef: 0, imageType: ImageTypes.ObliqueRight.hashValue, fileName: "[\(0)]ObliqueRight-\(recordID)", image: btn.currentImage!, points: nil, uImage: RealmParse.imageObject(0, compareImages: record?.compareImage, imageTypeHashValue: ImageTypes.ObliqueRight.hashValue)))
                 default: continue
                 }
             }
@@ -534,12 +611,12 @@ class SurgeryDetailsVC: FormViewController{
                 
             }
             
-            if self.sourceTypes.contains(.Camera) {
+//            if self.sourceTypes.contains(.Camera) {
                 let cameraOption = UIAlertAction(title: NSLocalizedString("Tirar Foto", comment: ""), style: .Default, handler: { (_) in
                     self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
                 })
                 sourceActionSheet.addAction(cameraOption)
-            }
+//            }
     
     
             switch self.showAction {
@@ -559,13 +636,28 @@ class SurgeryDetailsVC: FormViewController{
                 if let _ = sender.currentImage {
                     let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Apagar Imagem", comment: ""), style: style, handler: { (_) in
                         sender.setImage(nil, forState: UIControlState.Normal)
+                        let realm = try! Realm()
                         if self.record != nil{
                             for compImg in self.record.compareImage {
                                 if compImg.reference == 0.toString() {
                                     for image in compImg.image {
                                         if Int(image.imageType) == self.imageType.hashValue {
-                                            RealmParse.deleteFile(fileName: image.name, fileExtension: .JPG)
-                                            RealmParse.deleteImage(image)
+                                            if RealmParse.cloud.isLogIn() != CloudTypes.LogOut {
+
+                                                try! realm.write {
+                                                    
+                                                    //CompareImage
+                                                    compImg.image.removeAtIndex(compImg.image.indexOf(image)!)                                                     
+                                                    //Image
+                                                    image.cloudState = CloudState.Delete.rawValue
+                                                    
+                                                    realm.add(compImg, update: true)
+                                                    realm.add(image, update: true)
+                                                }
+                                                
+                                            }else {
+                                                RealmParse.deleteImage(image)
+                                            }
                                         }
                                     }
 
@@ -703,7 +795,14 @@ extension SurgeryDetailsVC: RecoverPatient {
                     if compareImage.reference == 0.toString() {
                         for image in compareImage.image {
                             if image.name != "" && image.imageType == "\(ImageTypes.Front.hashValue)" {
-                                self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                                RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                                    if error != nil {
+                                        print(error!.description)
+                                    }else {
+                                        self.form.rowByTag("btn_recover_patient")?.baseCell.imageView!.image = object as? UIImage
+                                    }
+                                })
+                                
                                 break
                             }
                         }

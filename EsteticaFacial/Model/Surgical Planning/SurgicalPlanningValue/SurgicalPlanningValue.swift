@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class SurgicalPlanningValue: Object {
+public class SurgicalPlanningValue: Object {
     dynamic var valueString: String? = nil
     let valueBool = RealmOptional<Bool>()
     dynamic var valueDate: NSDate? = nil

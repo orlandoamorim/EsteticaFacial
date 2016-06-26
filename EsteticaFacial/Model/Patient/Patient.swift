@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class Patient: Object {
+public class Patient: Object {
     dynamic var id = NSUUID().UUIDString
     dynamic var create_at = NSDate()
     dynamic var update_at = NSDate()
@@ -22,7 +22,7 @@ class Patient: Object {
     dynamic var phone: String? = nil
     let records = List<Record>()
     
-    override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "id"
     }
 }

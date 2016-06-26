@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import DeviceKit
 
-class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
+class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachability {
     
 //    @IBOutlet weak var searchBar: UISearchBar!
     var resultSearchController: UISearchController!
@@ -71,7 +71,15 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         
         // BarButtonItem Left
         if surgeryShow == .Surgery {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
+            let settingsBtn = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
+            let cloud = UIBarButtonItem(image: UIImage(named: RealmParse.cloud.isLogIn().rawValue), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(verifyCloud))
+            
+            if RealmParse.cloud.isLogIn() != .LogOut {
+                self.navigationItem.leftBarButtonItems = [settingsBtn, cloud]
+                RealmParse.cloud.sync()
+            }else {
+                self.navigationItem.leftBarButtonItem = settingsBtn
+            }
         }
         
         // BarButtonItem Right
@@ -85,7 +93,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         } else {
             // Fallback on earlier versions
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,8 +148,10 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         self.navigationItem.titleView = Helpers.setTitle("Cirurgias", subtitle: "Atualizando...")
         
         self.recordsDicAtoZ.removeAll()
-        switch surgeryShow {
-        case .Surgery: self.recordsDicAtoZ = RealmParse.querySurgeries()
+        switch surgeryShow { //
+        case .Surgery:
+            let predicate = NSPredicate(format: "cloudState != '\(CloudState.Delete.rawValue)'")
+            self.recordsDicAtoZ = RealmParse.querySurgeries(predicate)
         case .Patient: self.recordsDicAtoZ = RealmParse.queryPatientSurgeries(patient!)
         }
         
@@ -154,6 +163,10 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate {
         }
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
+    }
+    
+    func verifyCloud() {
+        RealmParse.cloud.sync(self)
     }
 }
 
@@ -218,12 +231,21 @@ extension SurgeriesTableVC {
         cell.textLabel!.text = record[indexPath.row].surgeryDescription != "" ? record[indexPath.row].surgeryDescription : record[indexPath.row].patient?.name
         cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].patient?.date_of_birth)!)
         
+        
+        
         cell.imageView!.image = UIImage(named: "modelo_frontal")
         for compareImage in record[indexPath.row].compareImage {
             if compareImage.reference == 0.toString() {
                 for image in compareImage.image {
                     if image.name != "" {
-                        cell.imageView!.image = RealmParse.getFile(fileName: image.name, fileExtension: .JPG) as? UIImage
+                        RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                            if error != nil {
+                                print(error!.description)
+                            }else {
+                                cell.imageView!.image = object as? UIImage
+                            }
+                        })
+
                     }
                 }
             }
@@ -252,22 +274,31 @@ extension SurgeriesTableVC {
         
         
         let delete = UITableViewRowAction(style: .Destructive, title: "\u{1F5D1}\n Deletar") { action, index in
+    
+            let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
+            let record = self.recordsDicAtoZ[key]!
             
             let centroDeNotificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
             centroDeNotificacao.postNotificationName("noData", object: nil)
             
-            let key = Array(self.recordsDicAtoZ.keys.sort())[indexPath.section]
-            let record = self.recordsDicAtoZ[key]!
-            
-            let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "Realmente deseja apagar a cirugia de \(record[indexPath.row].patient!.name)?", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
+            let alert:UIAlertController = UIAlertController(title: "Atenção!", message: "", preferredStyle: Device().isPad ? UIAlertControllerStyle.Alert : UIAlertControllerStyle.ActionSheet)
+
+            alert.message = "Realmente deseja apagar a cirugia de \(record[indexPath.row].patient!.name)?"
             
             alert.addAction(UIAlertAction(title: "Apagar", style: UIAlertActionStyle.Destructive, handler: { (delete) -> Void in
-                RealmParse.deleteRecord(record: record[indexPath.row])
+                let realm = try! Realm()
+
+                try! realm.write {
+                    record[indexPath.row].cloudState = CloudState.Delete.rawValue
+                    realm.add(record[indexPath.row], update: true)
+                }
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil))
-            
+
+        
             self.presentViewController(alert, animated: true, completion: nil)
+
             
         }
         delete.backgroundColor = UIColor.redColor()

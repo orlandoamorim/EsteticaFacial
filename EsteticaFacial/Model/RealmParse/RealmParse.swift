@@ -8,17 +8,20 @@
 
 import UIKit
 import RealmSwift
+import SwiftyDropbox
 
 /// It offers a set necessary functions to manage the model
-class RealmParse{
+class RealmParse {
 
     // ----------------------------------- Saving and Updating Surgery and Patient
     // MARK: - Saving and Updating Surgery and Patient
     
+    static let cloud = RealmCloud.self
+    
     ///Used to add and update SurgeryRecord
-    static func auSurgery(id id: String?=NSUUID().UUIDString,record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],compareImages: [CompareImage]){
+    static func auSurgery(id id: String?=NSUUID().UUIDString,record: Record?=nil, patient: Patient?=nil, formValues:[String : Any?],preSugicalPlaningForm:[String : Any?] ,postSugicalPlaningForm:[String : Any?],compareImages: [CompareImage], cloudGet: Bool = false){
         
-        let realm = try! Realm()        
+        let realm = try! Realm()
         let formValues = RealmParse.convertAnyToAnyObject(formValues)
         print("************* Patient Data **************")
         let patient = RealmParse.patient(formValues, uPatient: record?.patient == nil ? patient : record?.patient)
@@ -29,14 +32,30 @@ class RealmParse{
         print("***************** Record ****************")
         let recordAU = Record()
         recordAU.id = id!
-        recordAU.surgeryDescription = formValues["surgeryDescription"] != nil ? formValues["surgeryDescription"] as! String : ""
         recordAU.patient = patient
-        recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
-
-        recordAU.date_of_surgery = formValues["date_of_surgery"] as? NSDate
-        recordAU.note = formValues["note"] as? String
+        
         if record != nil {
             recordAU.create_at = record!.create_at
+            if cloudGet {
+                recordAU.note = record!.note
+                recordAU.date_of_surgery = record!.date_of_surgery
+                recordAU.surgeryDescription = record!.surgeryDescription
+                recordAU.surgeryRealized =  record!.surgeryRealized
+                recordAU.update_at = record!.update_at
+                recordAU.cloudState = CloudState.Ok.rawValue
+            }else {
+                recordAU.note = formValues["note"] as? String
+                recordAU.date_of_surgery = formValues["date_of_surgery"] as? NSDate
+                recordAU.surgeryDescription = formValues["surgeryDescription"] as! String
+                recordAU.surgeryRealized =  formValues["surgeryRealized"] as! Bool
+                recordAU.cloudState = CloudState.Update.rawValue
+            }
+        }else {
+            recordAU.note = formValues["note"] as? String
+            recordAU.date_of_surgery = formValues["date_of_surgery"] as? NSDate
+            recordAU.surgeryDescription = formValues["surgeryDescription"] as! String
+            recordAU.surgeryRealized = formValues["surgeryRealized"] as! Bool
+            recordAU.cloudState = CloudState.Add.rawValue
         }
 
         try! realm.write {
@@ -62,6 +81,7 @@ class RealmParse{
             realm.add(recordAU, update: true)
         }
 
+        
     }
     
     ///Used to add and update Patient
@@ -92,13 +112,14 @@ class RealmParse{
                 patientA.records.append(record)
             }
         }
-        
+        print(patient["name"] as! String)
         patientA.name = patient["name"] as! String
         patientA.sex = patient["sex"] as! String
         patientA.ethnic = patient["ethnic"] as! String
         patientA.date_of_birth = patient["date_of_birth"] as! NSDate
         patientA.mail = patient["mail"] as? String
         patientA.phone = patient["phone"] as? String
+
         
         return patientA
     }
@@ -131,6 +152,9 @@ class RealmParse{
         if compareImages != nil {
             for compareImage in compareImages! {
                 for image in compareImage.image {
+                    print(image.imageType)
+                    print("\(imageTypeHashValue)")
+                    print(image.name)
                     if image.imageType == "\(imageTypeHashValue)"{
                         return image
                     }
@@ -154,22 +178,45 @@ class RealmParse{
      
      */
     
-    static func image(recordID:String, imageRef: Int, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
+    static func image(recordID:String,compareImageID: String, imageRef: Int, imageType: Int, fileName: String, image: UIImage?, points: [String : NSValue]?, uImage:Image?=nil) -> Image{
         
         let img = Image()
         img.recordID = recordID
         img.imageRef = "\(imageRef)"
         img.imageType = "\(imageType)"
         img.name = fileName
+        img.compareImageID = compareImageID
         //If already exists an Image() object.
         if uImage != nil {
             img.id = uImage!.id
             img.create_at = uImage!.create_at
+            img.cloudState = uImage!.cloudState
             img.update_at = NSDate()
         }
         //If image is not nil(image is change), add image im directory.
         if image != nil {
-            RealmParse.saveFile(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: image!)
+            if uImage != nil {
+                getFile(fileName: uImage!.name, fileExtension: .JPG, completionHandler: { (object, error) in
+                    if error != nil {
+                        print(error!)
+                    }else {
+                        if image!.isEqualToImage(object as! UIImage) {
+                            img.cloudState = CloudState.Ok.rawValue
+                            if uImage != nil {
+                                img.update_at = uImage!.update_at
+                            }
+
+                        }else {
+                            RealmParse.saveFile(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: image!)
+                            img.update_at = NSDate()
+                            img.cloudState = CloudState.Update.rawValue
+                        }
+                    }
+                })
+            }else {
+                RealmParse.saveFile(fileName: fileName, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: image!)
+                img.cloudState = CloudState.Add.rawValue
+            }
         }
         img.points = points != nil ? NSKeyedArchiver.archivedDataWithRootObject(points!) : nil
         
@@ -369,7 +416,7 @@ class RealmParse{
     }
     
     /**
-     Delete an object Image with a transaction.
+     Delete an object Image and image file with a transaction.
      
      - Parameter record: Image
      
@@ -389,7 +436,7 @@ class RealmParse{
     }
     
     ///Delete an SurgicalPlanning from an Record Object
-    private static func deleteSurgicalPlanning(record: Record){
+    static func deleteSurgicalPlanning(record: Record){
         let realm = try! Realm()
 
         realm.beginWrite()
@@ -447,6 +494,38 @@ class RealmParse{
         }
         return anyObjectDict
     }
+    
+    /**
+     Convert an dictionary [String:Any?]  to NSMutableDictionary.
+     
+     - Parameter anyDict: [String: Any?]
+     
+     - Returns:  **[String: String]**
+     
+     */
+    
+    static func convertAnytoNSMutableDictionary(anyDict:[String: Any?]) -> NSMutableDictionary {
+        
+        let stringDict:NSMutableDictionary = NSMutableDictionary()
+        
+        for key in anyDict.keys {
+            if let string = anyDict[key]! as? String {
+                stringDict.setValue(string, forKey: key)
+            }else if let bool = anyDict[key]! as? Bool {
+                stringDict.setValue(bool, forKey: key)
+            }else if let data = anyDict[key]! as? NSDate {
+                stringDict.setValue(String(data), forKey: key)
+            }else if let stringArray = anyDict[key]! as? [String]{
+                stringDict.setValue(stringArray, forKey: key)
+            }else if let arrayStrings = anyDict[key]! as? Set<String> {
+                stringDict.setValue(getArrayFromSet(arrayStrings), forKey: key)
+
+//                stringDict[key] = String(getArrayFromSet(arrayStrings))
+            }
+        }
+        return stringDict
+    }
+    
     
     /**
      Return an array of  SurgicalPlanningKey(like an SurgicalPlanningKey contructor).
@@ -519,10 +598,13 @@ class RealmParse{
             }
             
             if type == "String" {
+                print(surgicalPlanningKey.key)
                 if surgicalPlanningKey.key == "outros_ossos" ||
                     surgicalPlanningKey.key == "outros_enxertos_de_ponta" ||
                     surgicalPlanningKey.key == "outras_suturas" ||
-                    surgicalPlanningKey.key == "abordagem_opcoes"{
+                    surgicalPlanningKey.key == "abordagem_opcoes" ||
+                    surgicalPlanningKey.key == "miscelanea_outros" ||
+                    surgicalPlanningKey.key == "outros_enxertos_autologos"{
                     
                     formArray.updateValue(valuesArray[0] as! String, forKey: surgicalPlanningKey.key)
                     
@@ -611,22 +693,19 @@ class RealmParse{
     }
     
     /// Returns an file saved in NSSearchPathDirectory
-    static func getFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages", directory: NSSearchPathDirectory? = .DocumentDirectory) -> AnyObject? {
+    static func getFile(fileName fileName: String,fileExtension: FileSaveHelper.FileExtension , subDirectory: String?="FacialImages", directory: NSSearchPathDirectory? = .DocumentDirectory, completionHandler: (object: AnyObject?, error: NSError?) -> Void) {
         
         let file = FileSaveHelper(fileName: fileName, fileExtension: fileExtension, subDirectory: subDirectory!, directory: directory!)
         
         do {
             switch fileExtension {
-            case .TXT: return try file.getContentsOfFile()
-            case .JPG: return try file.getImage()
-            case .JSON:return try file.getJSONData()
+            case .TXT: completionHandler(object:try file.getContentsOfFile(), error: nil)
+            case .JPG: return completionHandler(object:try file.getImage(), error: nil)
+            case .JSON:return completionHandler(object:try file.getJSONData(), error: nil)
             }
-        }
-        catch {
-            print("There was an error getting the file: \(error)")
-        }
-        
-        return nil
+        } catch {
+            completionHandler(object: nil, error: NSError(domain: "There was an error getting the file: \(error)", code: 100, userInfo: nil))
+        }        
     }
     
     ///Delete an file saved in NSSearchPathDirectory
