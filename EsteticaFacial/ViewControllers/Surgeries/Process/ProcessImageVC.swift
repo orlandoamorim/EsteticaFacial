@@ -38,20 +38,20 @@ class ProcessImageVC: UIViewController {
     // MARK: - @IBOutlets
     @IBOutlet weak var processToolbar: UIToolbar!
     
-    
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         self.setUI()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
     }
     
     func setPoints(){

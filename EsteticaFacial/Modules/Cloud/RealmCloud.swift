@@ -41,8 +41,6 @@ class RealmCloud: RealmParse {
     static func generateJson(record:Record) throws -> NSData {
         
         // ---- Patient
-        let realm = try! Realm()
-
         let paciente: NSMutableDictionary = NSMutableDictionary()
         
         paciente.setValue(record.patient!.id, forKey: "id")

@@ -13,16 +13,7 @@ import RealmSwift
 class DropboxHelper: RealmCloud {
     
     static var modificationsCount: Int = -1 {
-        willSet {
-            // Print current value.
-            print("willSet")
-            print(modificationsCount)
-        }
         didSet {
-            // Print both oldValue and present value.
-            print("didSet")
-            print(oldValue)
-            print(modificationsCount)
             if modificationsCount == 0 {
                 Helpers.backgroundThread(10, completion: { 
                     syncCloudRecords()
@@ -36,9 +27,7 @@ class DropboxHelper: RealmCloud {
         if let client = Dropbox.authorizedClient {
             // List folder
             client.files.listFolder(path: path, recursive: recursive, includeMediaInfo: includeMediaInfo, includeDeleted: includeDeleted).response { response, error in
-                print("*** List folder ***")
                 if let result = response {
-                    print("Folder contents:")
                     var names = [String]()
                     for entry in result.entries {
                         if entry.name != "Entries" {
@@ -72,8 +61,6 @@ class DropboxHelper: RealmCloud {
             client.files.delete(path: path).response { response, error in
                 if let metadata = response {
                     completionHandler(error: nil)
-                    print("*** Delete file ****")
-                    print("Delete file name: \(metadata.name)")
                 }else {
                     completionHandler(error: NSError(domain: "\(error!)", code: 100, userInfo: nil))
                 }
@@ -87,9 +74,6 @@ class DropboxHelper: RealmCloud {
             client.files.upload(path: path, mode: Files.WriteMode.Overwrite , body: data).response { response, error in
                 if let metadata = response {
                     completionHandler(error: nil)
-                    print("*** Upload file ****")
-                    print("Uploaded file name: \(metadata.name)")
-                    print("Uploaded file revision: \(metadata.rev)")
                 }else {
                     completionHandler(error: NSError(domain: "\(error!)", code: 100, userInfo: nil))
                 }
@@ -109,13 +93,8 @@ class DropboxHelper: RealmCloud {
             }
             
             client.files.download(path: path, destination: destination).response { response, error in
-                if let (metadata, url) = response {
-                    print("*** Download file ***")
-                    let data = NSData(contentsOfURL: url)
-                    print("Downloaded file name: \(metadata.name)")
-                    print("Downloaded file url: \(url)")
-                    print("Downloaded file data: \(data)")
-                    completionHandler(data: data, error: nil)
+                if let (_, url) = response {
+                    completionHandler(data: NSData(contentsOfURL: url), error: nil)
                     do {
                         // Delete the file
                         try NSFileManager.defaultManager().removeItemAtURL(url)
@@ -142,14 +121,8 @@ class DropboxHelper: RealmCloud {
             }
             
             client.files.download(path: path, destination: destination).response { response, error in
-                if let (metadata, url) = response {
-                    print("*** Download file ***")
-                    let data = NSData(contentsOfURL: url)
-                    print("Downloaded file name: \(metadata.name)")
-                    print("Downloaded file url: \(url)")
-                    print("Downloaded file data: \(data)")
-                    
-                    RealmParse.saveFile(fileName: name, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: data!)!)
+                if let (_, url) = response {
+                    RealmParse.saveFile(fileName: name, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: NSData(contentsOfURL: url)!)!)
                     
                     do {
                         // Delete the file
@@ -173,10 +146,7 @@ class DropboxHelper: RealmCloud {
         let recordDelete = realm.objects(Record.self).filter("cloudState = '\(CloudState.Delete.rawValue)'")
         
         let compareImageDelete = realm.objects(CompareImage.self)
-        
-        print(recordAdd.count)
-        print(recordUpdate.count)
-        print(recordDelete.count)
+
         modificationsCount = recordAdd.count + recordUpdate.count + recordDelete.count
 
         for rAdd in recordAdd {
@@ -260,17 +230,6 @@ class DropboxHelper: RealmCloud {
                 })
             }
         }
-        
-//        dispatch_async(dispatch_get_global_queue(0, 0)) { 
-//            if modificationsCount > 0 && view != nil {
-//                repeat{
-//                    view?.navigationController?.navigationItem.titleView = Helpers.setTitle("Sync", subtitle: "Atualizando \(modificationsCount) registros")
-//                    
-//                }while modificationsCount > 0
-//            }else if modificationsCount == 0 && view != nil  {
-//                view?.navigationController?.navigationItem.titleView = nil
-//            }
-//        }
     }
     
     private static func uploadImage(compareImage: List<CompareImage>) {
@@ -334,24 +293,20 @@ class DropboxHelper: RealmCloud {
         
         let records = realm.objects(Record.self).filter("cloudState = '\(CloudState.Ok.rawValue)'")
         let recordsID:[String] = records.map { $0.id }
-        print("Locais -> \(recordsID)")
 
         ///Get all Entries records names
         folders("/Entries", recursive: false, includeMediaInfo: true, includeDeleted: false) { (cursor, names, error) in
             if error != nil {
                 print(error!)
             }else {
-                print("All in Cloud -> \(names!)")
 
                 let recordsDelete = records.filter { !names!.contains($0.id) }
-                print("Delete -> \(names!)")
 
                 for rTOd in recordsDelete {
                     RealmParse.deleteRecord(record: rTOd)
                 }
                 
                 let filterAdd = names!.filter { !recordsID.contains($0) }
-                print("Download from Cloud -> \(filterAdd)")
                 
                 for rTOa in filterAdd {
                     
@@ -366,7 +321,6 @@ class DropboxHelper: RealmCloud {
                 }
                 
                 let filterUpdate = names!.filter { recordsID.contains($0) }
-                print("Update from Cloud -> \(filterUpdate)")
                 
                 for rTOu in filterUpdate {
                     
@@ -378,12 +332,7 @@ class DropboxHelper: RealmCloud {
                             print(record.patient!.name)
                             let records = realm.objects(Record.self).filter("id = '\(record.id)'")
                             if records.count > 0 {
-                                print(records[0].update_at)
-                                print(record.update_at)
-                                print(records.count)
-                                if records[0].update_at == record.update_at {
-                                    print("OK")
-                                }else {
+                                if records[0].update_at != record.update_at {
                                     auSurgery(id: record.id, record: record, patient: nil, formValues: ["":""], preSugicalPlaningForm: preSugicalPlaning, postSugicalPlaningForm: postSugicalPlaning, compareImages: compareImage, cloudGet: true)
                                 }
                             }

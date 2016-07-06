@@ -190,7 +190,7 @@ class LabInCloud:NSObject{
                 compareImage.image.append(image)
             }
             
-            let record = Record(value: ["id": recordID, "surgeryDescription" : "", "patient": patient,"compareImage": [compareImage], "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at ])
+            let record = Record(value: ["id": recordID, "surgeryDescription" : "", "patient": patient,"compareImage": [compareImage], "surgeryRealized": false, "note" : note, "create_at": create_at, "update_at": update_at, "cloudState": "Ok" ])
             
             realm.create(Record.self, value: record, update: true)
             

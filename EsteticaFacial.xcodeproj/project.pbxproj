@@ -251,8 +251,8 @@
 		18126CF91CACF9D3002D26F7 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				18774F251CBC8C1200CA2D64 /* VerifyImageVC.swift */,
 				18774F231CBC8C0800CA2D64 /* CameraVC.swift */,
+				18774F251CBC8C1200CA2D64 /* VerifyImageVC.swift */,
 			);
 			name = Camera;
 			sourceTree = "<group>";

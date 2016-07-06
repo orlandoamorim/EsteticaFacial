@@ -10,7 +10,6 @@ import UIKit
 import Eureka
 import SCLAlertView
 import DeviceKit
-import SwiftyJSON
 import RealmSwift
 
 class SurgeryDetailsVC: FormViewController{
@@ -56,6 +55,7 @@ class SurgeryDetailsVC: FormViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         initializeForm()
         setButtons()
         sourceTypes = .All
@@ -581,7 +581,10 @@ class SurgeryDetailsVC: FormViewController{
             default: self.imageType = .Front
             }
             
-            
+            if sender.currentImage == nil {
+                self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
+                return
+            }
             
             var availableSources: ImageRowSourceTypes = []
             
@@ -611,18 +614,18 @@ class SurgeryDetailsVC: FormViewController{
                 
             }
             
-//            if self.sourceTypes.contains(.Camera) {
+            if self.sourceTypes.contains(.Camera) {
                 let cameraOption = UIAlertAction(title: NSLocalizedString("Tirar Foto", comment: ""), style: .Default, handler: { (_) in
                     self.performSegueWithIdentifier(Device().isPad ? "iPadCameraSegue" : "iPhoneCameraSegue", sender: nil)
                 })
                 sourceActionSheet.addAction(cameraOption)
-//            }
+            }
     
     
             switch self.showAction {
             case .Yes(let style):
                 if let _ = sender.currentImage {
-                    let showPhotoOption = UIAlertAction(title: NSLocalizedString("Visualizar Imagem", comment: ""), style: style, handler: { (_) in
+                    let showPhotoOption = UIAlertAction(title: NSLocalizedString("Processar Imagem", comment: ""), style: style, handler: { (_) in
                         self.performSegueWithIdentifier("ShowImageSegue", sender: nil)
                     })
                     sourceActionSheet.addAction(showPhotoOption)

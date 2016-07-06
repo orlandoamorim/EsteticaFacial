@@ -43,6 +43,16 @@ class VerifyImageVC: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+    }
+    
     @IBAction func okBtn(sender: AnyObject) {
         let alert:UIAlertController = UIAlertController(title: NSLocalizedString("", comment:""), message: NSLocalizedString("Agora que você escolheu a imagem correta, vamos recortar a imagem para pegarmos apenas aquilo que nos interessa.", comment:""), preferredStyle: UIAlertControllerStyle.ActionSheet)
         if let popView = alert.popoverPresentationController {

@@ -65,7 +65,7 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         cameraManager.resumeCaptureSession()
         Helpers().getLatestPhotos { (images) -> () in
             self.libraryImages.setBackgroundImage(images[0], forState: UIControlState.Normal)
@@ -78,12 +78,18 @@ class CameraVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             NSNotificationCenter.defaultCenter().removeObserver(self)
         }
         cameraManager.stopCaptureSession()
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     
     func setLayout() {
         if !Device().isPad {

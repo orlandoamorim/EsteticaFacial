@@ -69,23 +69,10 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachabili
         refreshControl.attributedTitle = NSAttributedString(string: "Puxe para Atualizar...")
         self.refreshControl = refreshControl
         
-        // BarButtonItem Left
-        if surgeryShow == .Surgery {
-            let settingsBtn = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
-            let cloud = UIBarButtonItem(image: UIImage(named: RealmParse.cloud.isLogIn().rawValue), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(verifyCloud))
-            
-            if RealmParse.cloud.isLogIn() != .LogOut {
-                self.navigationItem.leftBarButtonItems = [settingsBtn, cloud]
-                RealmParse.cloud.sync()
-            }else {
-                self.navigationItem.leftBarButtonItem = settingsBtn
-            }
-        }
-        
         // BarButtonItem Right
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(add))
         
+        //Registrando o 3D Touch
         if #available(iOS 9.0, *) {
             if traitCollection.forceTouchCapability == .Available {
                 self.registerForPreviewingWithDelegate(self, sourceView: self.tableView)
@@ -97,6 +84,25 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachabili
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // BarButtonItem Left
+        if surgeryShow == .Surgery {
+            let settingsBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))
+            let cloudBarButtonItem = UIBarButtonItem(image: UIImage(named: RealmParse.cloud.isLogIn().rawValue), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(verifyCloud))
+                        
+            if RealmParse.cloud.isLogIn() != .LogOut {
+                self.navigationItem.leftBarButtonItems?.removeAll()
+                self.navigationItem.leftBarButtonItems = [settingsBarButtonItem, cloudBarButtonItem]
+                RealmParse.cloud.sync()
+            }else {
+                self.navigationItem.leftBarButtonItem = nil
+                self.navigationItem.leftBarButtonItem = settingsBarButtonItem
+            }
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

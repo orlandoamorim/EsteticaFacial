@@ -20,7 +20,8 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let version:String = "0.2.3"
+    let version:String = NSBundle.mainBundle().releaseVersionNumber!
+    let build:String = NSBundle.mainBundle().buildVersionNumber!
     var trelloCard:String = "https://trello.com/c/UA35uWzZ/27-versao-0-2-3#"
     var trelloBoard:String = "https://trello.com/b/YfRp2cch"
     

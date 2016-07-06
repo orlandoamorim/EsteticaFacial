@@ -315,7 +315,7 @@ class SurgicalPlanVC:FormViewController {
             +++ Section()
             <<< MultipleSelectorRow<String>("miscelanea") {
                 $0.title = "Miscelânea:"
-                $0.options = ["Ressecção do Septo Nasal", "Turbinectomia", "Mentoplastia", "Outros"]
+                $0.options = ["Septoplastia", "Turbinectomia", "Mentoplastia", "Outros"]
                 $0.selectorTitle = "Lateral"
                 } .onChange { [weak self] row in
                     if row.value!.contains("Mentoplastia") {

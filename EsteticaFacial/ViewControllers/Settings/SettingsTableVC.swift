@@ -16,8 +16,6 @@ class SettingsTableVC: FormViewController {
 
     var passcodeActivated:Bool = Bool()
     var notificationActivated:Int = Int()
-    var appVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
-    
     
     private let configuration: PasscodeLockConfigurationType
 
@@ -220,7 +218,7 @@ class SettingsTableVC: FormViewController {
             +++ Section()
             
             <<< ButtonRow() { (row: ButtonRow) -> Void in
-                row.title = "Versão \(AppDelegate().version)"
+                row.title = "Versão \(AppDelegate().version) - \(AppDelegate().build)"
                 row.disabled = true
 
                 }.cellSetup() {cell, row in

@@ -186,3 +186,17 @@ extension Array where Element : Equatable {
 //        }
 //    }
 //}
+
+
+extension NSBundle {
+    
+    var releaseVersionNumber: String? {
+        return self.infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    
+    var buildVersionNumber: String? {
+        return self.infoDictionary?["CFBundleVersion"] as? String
+    }
+    
+}
+
