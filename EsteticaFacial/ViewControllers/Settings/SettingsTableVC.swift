@@ -160,11 +160,6 @@ class SettingsTableVC: FormViewController {
                     bgColorView.backgroundColor = UIColor.clearColor()
                     cell.textLabel?.highlightedTextColor = UIColor(hexString: "#A8A8A8")
                     cell.selectedBackgroundView = bgColorView
-
-//                    let indent_large_enought_to_hidden:CGFloat = 10000
-//                    cell.separatorInset = UIEdgeInsetsMake(0, indent_large_enought_to_hidden, 0, 0) // indent large engough for separator(including cell' content) to hidden separator
-//                    cell.indentationWidth = indent_large_enought_to_hidden * -1 // adjust the cell's content to show normally
-//                    cell.indentationLevel = 1 // must add this, otherwise default is 0, now actual indentation = indentationWidth * indentationLevel = 10000 * 1 = -10000
             }
             
             +++ Section()

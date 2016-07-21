@@ -275,10 +275,10 @@
             </objects>
             <point key="canvasLocation" x="2201" y="1511"/>
         </scene>
-        <!--CompareImagesVC-->
+        <!--CompareImagesController-->
         <scene sceneID="IeW-PQ-A1l">
             <objects>
-                <viewControllerPlaceholder storyboardName="CompareImage" referencedIdentifier="CompareImagesVC" id="r3I-kl-S4e" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="CompareImage" referencedIdentifier="CompareImagesController" id="r3I-kl-S4e" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z80-Ma-Zzc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2208" y="1034"/>

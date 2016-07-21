@@ -59,7 +59,7 @@ class DropboxHelper: RealmCloud {
     static func deleteFile(path: String, completionHandler: (error: NSError?) -> Void) {
         if let client = Dropbox.authorizedClient {            
             client.files.delete(path: path).response { response, error in
-                if let metadata = response {
+                if response != nil {
                     completionHandler(error: nil)
                 }else {
                     completionHandler(error: NSError(domain: "\(error!)", code: 100, userInfo: nil))
@@ -72,7 +72,7 @@ class DropboxHelper: RealmCloud {
     static func uploadFile(path: String, data:NSData, completionHandler: (error: NSError?) -> Void) {
         if let client = Dropbox.authorizedClient {
             client.files.upload(path: path, mode: Files.WriteMode.Overwrite , body: data).response { response, error in
-                if let metadata = response {
+                if response != nil {
                     completionHandler(error: nil)
                 }else {
                     completionHandler(error: NSError(domain: "\(error!)", code: 100, userInfo: nil))
@@ -119,22 +119,26 @@ class DropboxHelper: RealmCloud {
                 let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
                 return directoryURL.URLByAppendingPathComponent(pathComponent)
             }
-            
-            client.files.download(path: path, destination: destination).response { response, error in
-                if let (_, url) = response {
-                    RealmParse.saveFile(fileName: name, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: NSData(contentsOfURL: url)!)!)
-                    
-                    do {
-                        // Delete the file
-                        try NSFileManager.defaultManager().removeItemAtURL(url)
-                    } catch _ as NSError {
-                        // Do nothing with the error
+            dispatch_async(dispatch_get_global_queue(0, 0), {
+                client.files.download(path: path, destination: destination).response { response, error in
+                    if let (_, url) = response {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            RealmParse.saveFile(fileName: name, fileExtension: .JPG, subDirectory: "FacialImages", directory: .DocumentDirectory, file: UIImage(data: NSData(contentsOfURL: url)!)!)
+                            
+                            do {
+                                // Delete the file
+                                try NSFileManager.defaultManager().removeItemAtURL(url)
+                            } catch _ as NSError {
+                                // Do nothing with the error
+                            }
+                        })
+                    } else {
+                        print(error!)
                     }
-                    
-                } else {
-                    print(error!)
                 }
-            }
+
+
+            })
         }
     }
     

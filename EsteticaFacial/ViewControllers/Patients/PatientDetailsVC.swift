@@ -149,7 +149,7 @@ class PatientDetailsVC: FormViewController {
         }
     
     //--------------------
-    //--------------------
+    
     func getConfirmation(){
         let (verify, keyMissing) = Helpers.verifyFormValues(form.values(includeHidden: false))
         

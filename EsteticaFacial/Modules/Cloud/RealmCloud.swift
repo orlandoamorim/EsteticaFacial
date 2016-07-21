@@ -216,9 +216,6 @@ class RealmCloud: RealmParse {
                             let images = realm.objects(Image.self).filter("id == '\(img["id"] as! String)'")
                             
                             if images.count > 0 {
-                                print(images[0].update_at)
-                                print(image.update_at)
-                                print(images.count)
                                 if images[0].update_at == image.update_at {
                                     print("Imagem OK")
                                 }else {
@@ -226,6 +223,7 @@ class RealmCloud: RealmParse {
                                     DropboxHelper.getImage("/Entries/\(image.recordID)/\(compareImage.id)/\(image.name)", name: image.name)
                                 }
                             }else {
+                                // MARK: - TO DO - Atualizar pra suportar todos os Clouds
                                 DropboxHelper.getImage("/Entries/\(image.recordID)/\(compareImage.id)/\(image.name)", name: image.name)
                             }
                             

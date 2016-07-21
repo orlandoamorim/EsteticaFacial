@@ -174,7 +174,6 @@ extension ProcessImageVC: UIScrollViewDelegate{
                 p.inicializar(nome , posicao: l)
                 //Atualizando
                 self.pointsUpdated?.updateValue(NSValue(CGPoint:l), forKey: nome)
-                
                 self.imageView!.layer.addSublayer(p.layer)
                 self.pointsViews.addObject(p)
                 
@@ -182,7 +181,6 @@ extension ProcessImageVC: UIScrollViewDelegate{
                 let p = PontoView()
                 let l = local
                 p.inicializar(nome , posicao: l.CGPointValue())
-                
                 self.imageView!.layer.addSublayer(p.layer)
                 self.pointsViews.addObject(p)
             }

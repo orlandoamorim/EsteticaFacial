@@ -33,7 +33,6 @@ class SurgeryDetailsVC: FormViewController{
     var nasalPoints : [String:NSValue]?
     
     var sourceTypes: ImageRowSourceTypes = []
-    var imageURL: NSURL?
     var showAction = ImageShowAction.Yes(style: .Default)
     var clearAction = ImageClearAction.Yes(style: .Destructive)
     
@@ -476,15 +475,17 @@ class SurgeryDetailsVC: FormViewController{
                 $0.title = "Telefone:"
             }
             
-//            +++ Section(){
-////                $0.tag = "compareImages"
-//                $0.hidden = contentToDisplay == .Atualizar ? false : true
-//            }
-            ///Ira servir para compara as imagens futuramente
-//            <<< ButtonRow("btn_compare_images") { (row: ButtonRow) -> Void in
-//                row.title = "Imagens"
+            +++ Section(){
+//                $0.tag = "compareImages"
+                $0.hidden = contentToDisplay == .Atualizar ? false : true
+            }
+            //Ira servir para compara as imagens futuramente
+            <<< ButtonRow("btn_compare_images") { (row: ButtonRow) -> Void in
+                row.title = "Imagens"
 //                row.presentationMode = PresentationMode.SegueName(segueName: "CompareImagesSegue", completionCallback: nil)
-//            }
+                row.presentationMode = PresentationMode.SegueName(segueName: "CompareImagesSegue", completionCallback: nil)
+
+            }
             
             +++ Section("Dados da Cirurgia")
             
@@ -696,9 +697,6 @@ class SurgeryDetailsVC: FormViewController{
                 sourceActionSheet.view.layoutIfNeeded()
             })
         }
-        
-        
-
     }
     
     
@@ -775,13 +773,11 @@ class SurgeryDetailsVC: FormViewController{
         }
         
         if segue.identifier == "CompareImagesSegue"{
-//            let nav = segue.destinationViewController as! UINavigationController
-//            let controller = nav.viewControllers[0] as! CompareImagesVC
-            let controller = segue.destinationViewController as! CompareImagesVC
-//            controller.delegate = self
+            let controller = segue.destinationViewController as! CompareImagesController
             if let btn_compare_images = sender as? ButtonRow {
                 if btn_compare_images.tag == "btn_compare_images"{
                     controller.compareImages = self.getImages()
+                    controller.record = record
                 }
             }
         }

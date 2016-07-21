@@ -112,7 +112,6 @@ class RealmParse {
                 patientA.records.append(record)
             }
         }
-        print(patient["name"] as! String)
         patientA.name = patient["name"] as! String
         patientA.sex = patient["sex"] as! String
         patientA.ethnic = patient["ethnic"] as! String

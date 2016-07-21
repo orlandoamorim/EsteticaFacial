@@ -130,18 +130,6 @@ class PatientsTableVC: UITableViewController, UISearchBarDelegate {
     
 }
 
-// MARK: - UISplitViewControllerDelegate
-
-//extension PatientsTableVC: UISplitViewControllerDelegate, UIPopoverPresentationControllerDelegate {
-//    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool{
-//        return true
-//    }
-//    
-//    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-//        return UIModalPresentationStyle.CurrentContext
-//    }
-//}
-
 // MARK: - UITableViewDataSource
 
 extension PatientsTableVC {
@@ -184,7 +172,6 @@ extension PatientsTableVC {
         let patient = recordsDicAtoZ[key]!
         
         cell.textLabel!.text = patient[indexPath.row].name
-//        cell.detailTextLabel!.text = Helpers.dataFormatter(dateFormat:"dd/MM/yyyy" , dateStyle: NSDateFormatterStyle.ShortStyle).stringFromDate((record[indexPath.row].date_of_birth))
         cell.detailTextLabel!.text = dateTimeAgo(patient[indexPath.row].update_at)
         cell.imageView!.image = nil
         for record in patient[indexPath.row].records {
@@ -220,9 +207,6 @@ extension PatientsTableVC {
 }
 // MARK: - UITableViewDelegate
 extension PatientsTableVC {
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 80
-//    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)

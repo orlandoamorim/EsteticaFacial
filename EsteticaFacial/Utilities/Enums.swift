@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //Nao pode mudar a ordem!!
-public enum ImageTypes {
+public enum ImageTypes: Int  {
     case Front, ProfileRight, Nasal, ObliqueLeft, ObliqueRight, ProfileLeft
 }
 
@@ -60,5 +60,14 @@ public enum CloudState: String {
     case Update = "Update"
     case Add = "Add"
     case Ok = "Ok"
+}
+
+public enum ImageType: String {
+    case Front = "Frontal"
+    case ProfileRight = "Perfil Direito"
+    case Nasal = "Nasal"
+    case ObliqueLeft = "Obliquo Esquerdo"
+    case ObliqueRight = "Obliquo Direito"
+    case ProfileLeft = "Perfil Esquerdo"
 }
 

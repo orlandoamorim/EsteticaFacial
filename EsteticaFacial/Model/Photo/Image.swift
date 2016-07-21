@@ -13,7 +13,6 @@ import RealmSwift
 public class Image: Object {
     
     dynamic var id = NSUUID().UUIDString
-//    dynamic var patientId = ""
     dynamic var recordID = ""
     dynamic var compareImageID = ""
     dynamic var imageRef = ""
