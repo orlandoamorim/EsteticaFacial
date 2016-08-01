@@ -93,7 +93,6 @@ class SurgeryDetailsVC: FormViewController{
                     for image in compareImage.image {
                         switch Int(image.imageType)! {
                         case ImageTypes.Front.hashValue :
-                            print(image.name)
                             RealmParse.getFile(fileName: image.name, fileExtension: .JPG, completionHandler: { (object, error) in
                                 if error != nil {
                                     print(error!.description)

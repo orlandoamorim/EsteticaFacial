@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let version:String = NSBundle.mainBundle().releaseVersionNumber!
     let build:String = NSBundle.mainBundle().buildVersionNumber!
-    var trelloCard:String = "https://trello.com/c/UA35uWzZ/27-versao-0-2-3#"
+    var trelloCard:String = "https://trello.com/c/TxP9AFJr"
     var trelloBoard:String = "https://trello.com/b/YfRp2cch"
     
 
@@ -66,7 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if oldSchemaVersion < 1 {
                         newObject?["imageRef"] = 0.toString()
                         newObject?["recordID"] = ""
-                        newObject?["cloudState"] = CloudState.Update.rawValue
+                        if RealmParse.cloud.isLogIn() != .LogOut {
+                            newObject?["cloudState"] = CloudState.Update.rawValue
+                        }else {
+                            newObject?["cloudState"] = CloudState.Ok.rawValue
+                        }
                         newObject?["compareImageID"] = ""
                     }
                     

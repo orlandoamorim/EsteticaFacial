@@ -80,6 +80,10 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachabili
         } else {
             // Fallback on earlier versions
         }
+        
+        if RealmParse.cloud.isLogIn() != .LogOut {
+            RealmParse.cloud.sync()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,7 +100,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachabili
             if RealmParse.cloud.isLogIn() != .LogOut {
                 self.navigationItem.leftBarButtonItems?.removeAll()
                 self.navigationItem.leftBarButtonItems = [settingsBarButtonItem, cloudBarButtonItem]
-                RealmParse.cloud.sync()
             }else {
                 self.navigationItem.leftBarButtonItem = nil
                 self.navigationItem.leftBarButtonItem = settingsBarButtonItem
