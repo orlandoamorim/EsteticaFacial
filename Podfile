@@ -7,7 +7,7 @@
 target 'EsteticaFacial' do
     pod 'RealmSwift'
     pod 'SwiftyDropbox'
-    pod 'Eureka', '~> 1.3'
+    pod 'Eureka', '~> 1.7'
     
     pod 'GPUImage', :git => 'https://github.com/BradLarson/GPUImage', :branch => 'master'
     pod 'TOCropViewController'

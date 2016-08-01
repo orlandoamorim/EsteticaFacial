@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if oldSchemaVersion < 1 {
                         newObject?["imageRef"] = 0.toString()
                         newObject?["recordID"] = ""
-                        newObject?["cloudState"] = CloudState.Ok.rawValue
+                        newObject?["cloudState"] = CloudState.Update.rawValue
                         newObject?["compareImageID"] = ""
                     }
                     

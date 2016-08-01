@@ -241,8 +241,7 @@ class RealmCloud: RealmParse {
 
         
         let surgicalPlanningDelete = realm.objects(Record.self).filter("id == '\(decoded["id"] as! String)'")
-        
-        for surgicalPlanning in  decoded["surgicalPlanning"] as! NSMutableArray {
+        for surgicalPlanning in  decoded["surgicalPlanning"] as! NSArray {
             if let sp = surgicalPlanning as? NSMutableDictionary {
                 if surgicalPlanningDelete.count > 0 {
                     deleteSurgicalPlanning(surgicalPlanningDelete[0])

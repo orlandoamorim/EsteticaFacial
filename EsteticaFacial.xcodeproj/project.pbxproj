@@ -52,8 +52,6 @@
 		188E79F31CCF0A6200A0791C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9F21C9BA4C400BD575B /* Image.swift */; };
 		18AE00B51CCD37FB00A72FBF /* CompareImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE00B41CCD37FB00A72FBF /* CompareImage.swift */; };
 		18AFDB4B1CBB007E0052EBDA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AFDB491CBB007E0052EBDA /* Settings.storyboard */; };
-		18B8C4981CCC2E9300C47A40 /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C4971CCC2E9300C47A40 /* ImageRow.swift */; };
-		18B8C49A1CCC2EC000C47A40 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C4991CCC2EC000C47A40 /* ImageCell.swift */; };
 		18B8C49C1CCC2ED500C47A40 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C49B1CCC2ED500C47A40 /* HeaderCell.swift */; };
 		18BAB9ED1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
 		18BAB9EE1C9B983E00BD575B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BAB9EC1C9B983E00BD575B /* Patient.swift */; };
@@ -141,8 +139,6 @@
 		18774F471CBC9DAE00CA2D64 /* PatientDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PatientDetailsVC.swift; path = ViewControllers/Patients/PatientDetailsVC.swift; sourceTree = "<group>"; };
 		18AE00B41CCD37FB00A72FBF /* CompareImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareImage.swift; path = Model/Photo/CompareImage.swift; sourceTree = "<group>"; };
 		18AFDB4A1CBB007E0052EBDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		18B8C4971CCC2E9300C47A40 /* ImageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageRow.swift; path = Core/Cell/ImageRow.swift; sourceTree = "<group>"; };
-		18B8C4991CCC2EC000C47A40 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCell.swift; path = Core/Cell/ImageCell.swift; sourceTree = "<group>"; };
 		18B8C49B1CCC2ED500C47A40 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCell.swift; path = Core/Cell/HeaderCell.swift; sourceTree = "<group>"; };
 		18BAB9EC1C9B983E00BD575B /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Patient.swift; path = Model/Patient/Patient.swift; sourceTree = "<group>"; };
 		18BAB9F21C9BA4C400BD575B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Model/Photo/Image.swift; sourceTree = "<group>"; };
@@ -460,8 +456,6 @@
 			isa = PBXGroup;
 			children = (
 				1820B5451D2E9CDE004B4876 /* CategoryCell.swift */,
-				18B8C4971CCC2E9300C47A40 /* ImageRow.swift */,
-				18B8C4991CCC2EC000C47A40 /* ImageCell.swift */,
 				18B8C49B1CCC2ED500C47A40 /* HeaderCell.swift */,
 			);
 			name = Cell;
@@ -861,7 +855,6 @@
 				B81B4A5F1BC344AE002A306F /* AppDelegate.swift in Sources */,
 				18774F1C1CBC8A1F00CA2D64 /* SurgeryDetailsVC.swift in Sources */,
 				18774F261CBC8C1200CA2D64 /* VerifyImageVC.swift in Sources */,
-				18B8C49A1CCC2EC000C47A40 /* ImageCell.swift in Sources */,
 				18AE00B51CCD37FB00A72FBF /* CompareImage.swift in Sources */,
 				18B8C49C1CCC2ED500C47A40 /* HeaderCell.swift in Sources */,
 				18774F1E1CBC8AC600CA2D64 /* SurgeriesTableVC.swift in Sources */,
@@ -901,7 +894,6 @@
 				18774F401CBC8D0800CA2D64 /* Protocols.swift in Sources */,
 				18D326E11D08E75100ED6582 /* DropboxHelper.swift in Sources */,
 				181C55A01C9C406900BC35AD /* SurgicalPlanningKey.swift in Sources */,
-				18B8C4981CCC2E9300C47A40 /* ImageRow.swift in Sources */,
 				181C55A41C9C408600BC35AD /* SurgicalPlanningValue.swift in Sources */,
 				18314CB11CC98D14005D9AF9 /* LabInCloud.swift in Sources */,
 			);

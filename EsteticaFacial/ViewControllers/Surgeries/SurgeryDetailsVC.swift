@@ -475,17 +475,15 @@ class SurgeryDetailsVC: FormViewController{
                 $0.title = "Telefone:"
             }
             
-            +++ Section(){
-//                $0.tag = "compareImages"
-                $0.hidden = contentToDisplay == .Atualizar ? false : true
-            }
-            //Ira servir para compara as imagens futuramente
-            <<< ButtonRow("btn_compare_images") { (row: ButtonRow) -> Void in
-                row.title = "Imagens"
+//            +++ Section(){
+//                $0.hidden = contentToDisplay == .Atualizar ? false : true
+//            }
+//            
+//            //Ira servir para compara as imagens futuramente
+//            <<< ButtonRow("btn_compare_images") { (row: ButtonRow) -> Void in
+//                row.title = "Imagens"
 //                row.presentationMode = PresentationMode.SegueName(segueName: "CompareImagesSegue", completionCallback: nil)
-                row.presentationMode = PresentationMode.SegueName(segueName: "CompareImagesSegue", completionCallback: nil)
-
-            }
+//            }
             
             +++ Section("Dados da Cirurgia")
             

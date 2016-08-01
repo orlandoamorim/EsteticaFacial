@@ -1,27 +1,27 @@
 PODS:
   - AcknowList (1.0)
-  - Alamofire (3.4.1)
-  - Bolts/Tasks (1.7.0)
+  - Alamofire (3.3.1)
+  - Bolts/Tasks (1.8.4)
   - DeviceKit (0.3.2)
-  - Eureka (1.6.0)
+  - Eureka (1.7.0)
   - GPUImage (0.1.7)
-  - Parse (1.13.0):
-    - Bolts/Tasks (~> 1.6)
+  - Parse (1.14.2):
+    - Bolts/Tasks (~> 1.8)
   - PasscodeLock (1.0.2)
-  - Realm (1.0.1):
-    - Realm/Headers (= 1.0.1)
-  - Realm/Headers (1.0.1)
-  - RealmSwift (1.0.1):
-    - Realm (= 1.0.1)
+  - Realm (1.0.2):
+    - Realm/Headers (= 1.0.2)
+  - Realm/Headers (1.0.2)
+  - RealmSwift (1.0.2):
+    - Realm (= 1.0.2)
   - SCLAlertView (0.5.9)
-  - SwiftyDropbox (3.0.0):
-    - Alamofire (~> 3.1)
+  - SwiftyDropbox (3.1.0):
+    - Alamofire (~> 3.3.1)
   - TOCropViewController (2.0.7)
 
 DEPENDENCIES:
   - AcknowList
   - DeviceKit (~> 0.3.1)
-  - Eureka (~> 1.3)
+  - Eureka (~> 1.7)
   - GPUImage (from `https://github.com/BradLarson/GPUImage`, branch `master`)
   - Parse
   - PasscodeLock
@@ -42,19 +42,19 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AcknowList: 06a183d117b7e2bb0c6f5654366d2912dc64a6c4
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   DeviceKit: 79182140c0aa8daaf4f4b3920e0b079f5fa9db79
-  Eureka: ef5b9ac93aedeecfe50d98b1ac7678bf09a1fc62
+  Eureka: 2020d9faeef7b7e9adeb9e3d8af779e5931c1897
   GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
-  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
+  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   PasscodeLock: 4ae42c094224a01de3773fcd69ae33886394d959
-  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
-  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
+  RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SCLAlertView: d7c6a48c7d340e60206d4ed0e8ebcbff3b9d2a44
-  SwiftyDropbox: e0d4aa3166082ec07ed942e94edb8c732b3376e4
+  SwiftyDropbox: 30ef3a666c9c9aabd23e6c421b9c3d5b9b335a62
   TOCropViewController: cec24e4385929683b217d08bfdc8791975cddc04
 
-PODFILE CHECKSUM: f62c627eeb42f31f9fa6ae857d2e8c3e8b858908
+PODFILE CHECKSUM: afbd5dcb80603e209bcc7d213581594e421a308c
 
 COCOAPODS: 1.0.1

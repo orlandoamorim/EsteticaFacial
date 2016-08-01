@@ -88,7 +88,6 @@ class SurgeriesTableVC: UITableViewController, UISearchBarDelegate, VSReachabili
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         // BarButtonItem Left
         if surgeryShow == .Surgery {
             let settingsBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings-22"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(settings))

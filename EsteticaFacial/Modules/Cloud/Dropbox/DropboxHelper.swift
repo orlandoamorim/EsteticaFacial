@@ -41,21 +41,7 @@ class DropboxHelper: RealmCloud {
             }
         }
     }
-
-    static func revisions(path: String,limit: UInt64 = 10, completionHandler: (CloudRevisions: CloudRevisions?, error: NSError?) -> Void) {
-        if let client = Dropbox.authorizedClient {
-            client.files.listRevisions(path: path, limit: limit).response { response, error  in
-                if let result = response {
-                    completionHandler(CloudRevisions: CloudRevisions(isDeleted: result.isDeleted , entries: result.entries), error: nil)
-                }else {
-                    completionHandler(CloudRevisions: nil, error: NSError(domain: "Error \(error!)", code: 100, userInfo: nil ))
-                }
-            }
-        }
-    }
     
-
-    //FUNCIONA
     static func deleteFile(path: String, completionHandler: (error: NSError?) -> Void) {
         if let client = Dropbox.authorizedClient {            
             client.files.delete(path: path).response { response, error in
@@ -68,10 +54,10 @@ class DropboxHelper: RealmCloud {
             
         }
     }
-    //FUNCiONA
+
     static func uploadFile(path: String, data:NSData, completionHandler: (error: NSError?) -> Void) {
         if let client = Dropbox.authorizedClient {
-            client.files.upload(path: path, mode: Files.WriteMode.Overwrite , body: data).response { response, error in
+            client.files.upload(path: path, mode: .Overwrite , input: data).response { response, error in
                 if response != nil {
                     completionHandler(error: nil)
                 }else {
@@ -376,33 +362,3 @@ class DropboxHelper: RealmCloud {
     }
     
 }
-
-public class CloudRevisions {
-    /// If the file is deleted.
-    public let isDeleted : Bool
-    /// The revisions for the file. Only non-delete revisions will show up here.
-    public let entries : Array<Files.FileMetadata>
-    public init(isDeleted: Bool, entries: Array<Files.FileMetadata>) {
-        self.isDeleted = isDeleted
-        self.entries = entries
-    }
-}
-
-public class CloudMetadata {
-    /// The last component of the path (including extension). This never contains a slash.
-    public let name : String
-    /// The lowercased full path in the user's Dropbox. This always starts with a slash.
-    public let pathLower : String
-    /// Deprecated. Please use :field:'FileSharingInfo.parent_shared_folder_id' or
-    /// :field:'FolderSharingInfo.parent_shared_folder_id' instead.
-    public let parentSharedFolderId : String?
-    public init(name: String, pathLower: String, parentSharedFolderId: String? = nil) {
-        stringValidator()(value: name)
-        self.name = name
-        stringValidator()(value: pathLower)
-        self.pathLower = pathLower
-        nullableValidator(stringValidator(pattern: "[-_0-9a-zA-Z:]+"))(value: parentSharedFolderId)
-        self.parentSharedFolderId = parentSharedFolderId
-    }
-}
-

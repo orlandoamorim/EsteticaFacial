@@ -92,7 +92,14 @@ class RealmParse {
         let realm = try! Realm()
 
         try! realm.write {
+            if RealmParse.cloud.isLogIn() != .LogOut {
+                for record in patient.records {
+                    record.cloudState = CloudState.Update.rawValue
+                }
+            }
+            
             realm.add(patient, update: true)
+            
         }
     }
     
@@ -369,13 +376,25 @@ class RealmParse {
      */
     
     static func deletePatient(patient patient: Patient){
-        for record in patient.records {
-            deleteRecord(record: record)
+        
+        if RealmParse.cloud.isLogIn() != .LogOut {
+            let realm = try! Realm()
+            try! realm.write {
+                for record in patient.records {
+                    record.cloudState = CloudState.Delete.rawValue
+                }
+                realm.delete(patient)
+            }
+        }else {
+            for record in patient.records {
+                deleteRecord(record: record)
+            }
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(patient)
+            }
         }
-        let realm = try! Realm()
-        try! realm.write {
-            realm.delete(patient)
-        }
+
     }
     
     

@@ -21,7 +21,6 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     var compareImage: CompareImage = CompareImage() {
         didSet {
             nameLabel.text = Helpers.dataFormatter(dateFormat: "dd/MM/yyyy", dateStyle: .ShortStyle).stringFromDate(compareImage.create_at)
-//            getImages()
         }
     }
     
