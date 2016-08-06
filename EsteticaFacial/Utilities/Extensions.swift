@@ -126,6 +126,11 @@ extension UIAlertController {
         return controller
     }
     
+    class func alertControllerWithNoCancel(title:String, message:String) -> UIAlertController {
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        return controller
+    }
+    
     class func alertControllerWithNumberInput(title:String, message:String, buttonTitle:String, handler:(Int?)->Void) -> UIAlertController {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         

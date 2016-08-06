@@ -34,10 +34,6 @@ class RealmCloud: RealmParse {
         return CloudTypes.LogOut
     }
     
-    static func deleteImage(id: String) {
-//        DropboxHelper.deleteFile(id, folderName: "Images")
-    }
-    
     static func generateJson(record:Record) throws -> NSData {
         
         // ---- Patient
@@ -285,6 +281,70 @@ class RealmCloud: RealmParse {
         }
         
         return (record, convertRealmSurgicalPlanningForm(preSugicalPlaning), convertRealmSurgicalPlanningForm(postSugicalPlaning), comparaImg)
+    }
+    
+    
+    
+    static func updateRecordsLogIn(completionHandler: (error: NSError?) -> Void){
+        do {
+            let realm = try Realm()
+            let records = realm.objects(Record.self)
+            
+            try! realm.write {
+
+                for record in records {
+                    record.cloudState = CloudState.Update.rawValue
+                    realm.add(record, update: true)
+                }
+                completionHandler(error: nil)
+            }
+        } catch let error as NSError {
+            completionHandler(error: error)
+        }
+
+    }
+    
+    
+    static func cloudLogOut(dismissCloudUpdated:Bool = false, completionHandler: (cloudUpdated:Bool?, error: NSError?) -> Void){
+        let realm = try! Realm()
+        let records = realm.objects(Record.self).filter("cloudState = 'Update'")
+        let images = realm.objects(Image.self).filter("cloudState = 'Update'")
+        
+        let recordsDelete = realm.objects(Record.self).filter("cloudState = 'Delete'")
+        let imagesDelete = realm.objects(Image.self).filter("cloudState = 'Delete'")
+        
+        print(records.count)
+        print(images.count)
+        if dismissCloudUpdated == false {
+            if records.count != 0 || images.count != 0 || recordsDelete.count != 0 || imagesDelete.count != 0 {
+                completionHandler(cloudUpdated: false, error:  nil)
+            }else{
+                completionHandler(cloudUpdated: true, error:  nil)
+            }
+        }else {
+            try! realm.write {
+                
+                for record in records {
+                    record.cloudState = CloudState.Ok.rawValue
+                    realm.add(record, update: true)
+                }
+                for image in images {
+                    image.cloudState = CloudState.Ok.rawValue
+                    realm.add(image, update: true)
+                }
+                
+                for recordDelete in recordsDelete {
+                    RealmParse.deleteRecord(record: recordDelete)
+                }
+                
+                for imageDelete in imagesDelete {
+                    RealmParse.deleteImage(imageDelete)
+                }
+                
+                completionHandler(cloudUpdated: true, error:  nil)
+            }
+        
+        }
     }
     
 }

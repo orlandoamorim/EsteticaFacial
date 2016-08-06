@@ -1,4 +1,4 @@
-//
+ //
 //  AppDelegate.swift
 //  EsteticaFacial
 //
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.schemaVersion)
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 1, //TESTE -> Default [1]
+            schemaVersion: 1, 
             migrationBlock: { migration, oldSchemaVersion in
                 migration.enumerate(Patient.className()) { oldObject, newObject in
                     if oldSchemaVersion < 1 {
@@ -61,16 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                 })
-                //TESTE -> Default [1]
                 migration.enumerate(Image.className(), { (oldObject, newObject) in
                     if oldSchemaVersion < 1 {
                         newObject?["imageRef"] = 0.toString()
                         newObject?["recordID"] = ""
-                        if RealmParse.cloud.isLogIn() != .LogOut {
-                            newObject?["cloudState"] = CloudState.Update.rawValue
-                        }else {
-                            newObject?["cloudState"] = CloudState.Ok.rawValue
-                        }
+                        newObject?["cloudState"] = CloudState.Ok.rawValue
                         newObject?["compareImageID"] = ""
                     }
                     
@@ -79,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let configuration = ParseClientConfiguration {
             $0.applicationId = "5aa6JqGqhC7iw8bG6CXC4imvXlCZ63i7j9bC9Ace"
-//            $0.server = "http://YOUR_PARSE_SERVER:1337/parse"
             $0.clientKey = "0G40jdCQrAVB8cyzhEGrwDDLUMk0tiSQFh7WshCN"
         }
         Parse.initializeWithConfiguration(configuration)
@@ -94,16 +88,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let authResult = Dropbox.handleRedirectURL(url) {
             switch authResult {
-            case .Success(let token):
-                print("Success! User is logged into Dropbox with token: \(token)")
+            case .Success(_):
+                let alert = UIAlertController.alertControllerWithTitle("Logado com Sucesso", message: "Você se logou com sucesso no Dropbox. \r  Para que seus registros sejam adicionados, atualizados ou deletados no Dropbox, você deve clicar no botão do Dropbox na tela princiapal.")
+                UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            case .Cancel:
+                print("Authorization flow was manually canceled by user.")
             case .Error(let error, let description):
                 print("Error \(error): \(description)")
             }
         }
-        
         return false
     }
     
+//    func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+//        
+//        if let authResult = Dropbox.handleRedirectURL(url) {
+//            switch authResult {
+//            case .Success(let token):
+//                print("Success! User is logged into Dropbox with token: \(token)")
+//            case .Cancel:
+//                print("Authorization flow was manually canceled by user.")
+//            case .Error(let error, let description):
+//                print("Error \(error): \(description)")
+//            }
+//        }
+//        
+//        return false
+//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

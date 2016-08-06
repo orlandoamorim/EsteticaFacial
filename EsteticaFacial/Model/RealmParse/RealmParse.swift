@@ -241,7 +241,7 @@ class RealmParse {
         
         let realm = try! Realm()
         
-        let records = predicate != nil ? realm.objects(Record).filter(predicate!) : realm.objects(Record).sorted("surgeryDescription")
+        let records = predicate != nil ? realm.objects(Record.self).filter(predicate!) : realm.objects(Record.self).sorted("surgeryDescription")
         
         for record in records {
             let name = record.surgeryDescription != "" ? record.surgeryDescription : record.patient?.name
@@ -281,7 +281,7 @@ class RealmParse {
         
         let realm = try! Realm()
         
-        let records = predicate != nil ? realm.objects(Patient).filter(predicate!) : realm.objects(Patient)
+        let records = predicate != nil ? realm.objects(Patient.self).filter(predicate!) : realm.objects(Patient.self)
         
         for record in records {
             

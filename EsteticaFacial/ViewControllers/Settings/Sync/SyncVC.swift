@@ -14,10 +14,11 @@ class SyncVC: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeForm()
         title = "Sync"
         // Do any additional setup after loading the view.
         setSync()
+        self.initializeForm()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,7 +83,46 @@ class SyncVC: FormViewController {
                         }
                     }else if switchRow.value == false {
                         if Dropbox.authorizedClient != nil {
-                            Dropbox.unlinkClient()
+                            RealmParse.cloud.cloudLogOut(completionHandler: { (cloudUpdated, error) in
+                                if error != nil {
+                                    self.form.rowByTag("Dropbox")?.baseValue = true
+                                    self.form.rowByTag("Dropbox")?.updateCell()
+                                }else {
+                                    if cloudUpdated == false {
+                                        let alert = UIAlertController(title: "Atenção" , message: "Verificamos que alguns registros ainda não estão sincronizados com o seu Dropbox. O que deseja fazer?", preferredStyle: .Alert)
+                                        
+                                        alert.addAction(UIAlertAction(title: "Sincronizar com o Dropbox", style: .Default, handler: { (action) in
+                                            RealmParse.cloud.sync()
+                                            self.form.rowByTag("Dropbox")?.baseValue = true
+                                            self.form.rowByTag("Dropbox")?.updateCell()
+                                        }))
+                                        
+                                        alert.addAction(UIAlertAction(title: "Prosseguir sem sincronizar", style: .Default, handler: { (action) in
+                                            RealmParse.cloud.cloudLogOut(true, completionHandler: { (cloudUpdated, error) in
+                                                if error != nil {
+                                                    if cloudUpdated == true {
+                                                        Dropbox.unlinkClient()
+                                                        self.form.rowByTag("Dropbox")?.baseValue = false
+                                                        self.form.rowByTag("Dropbox")?.updateCell()
+                                                    }
+                                                }
+                                            })
+                                            
+                                        }))
+                                        
+                                        alert.addAction(UIAlertAction(title: "Cancelar", style: .Cancel, handler: { (action) in
+                                            self.form.rowByTag("Dropbox")?.baseValue = true
+                                            self.form.rowByTag("Dropbox")?.updateCell()
+                                        }))
+                                        
+                                        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                                    }else {
+                                        Dropbox.unlinkClient()
+                                        let alert = UIAlertController.alertControllerWithTitle("Deslogado com Sucesso", message: "")
+                                        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                                    }
+                                }
+                            })
                         }
                     }
                 })

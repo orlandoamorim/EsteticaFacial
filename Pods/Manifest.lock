@@ -14,7 +14,7 @@ PODS:
   - RealmSwift (1.0.2):
     - Realm (= 1.0.2)
   - SCLAlertView (0.5.9)
-  - SwiftyDropbox (3.1.0):
+  - SwiftyDropbox (3.2.0):
     - Alamofire (~> 3.3.1)
   - TOCropViewController (2.0.7)
 
@@ -52,7 +52,7 @@ SPEC CHECKSUMS:
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SCLAlertView: d7c6a48c7d340e60206d4ed0e8ebcbff3b9d2a44
-  SwiftyDropbox: 30ef3a666c9c9aabd23e6c421b9c3d5b9b335a62
+  SwiftyDropbox: fba9da0b1b72ae51edfeb1ee2a13aaef852ea6d7
   TOCropViewController: cec24e4385929683b217d08bfdc8791975cddc04
 
 PODFILE CHECKSUM: afbd5dcb80603e209bcc7d213581594e421a308c
